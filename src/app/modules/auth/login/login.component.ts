@@ -1,7 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgIf} from "@angular/common";
+import {JsonPipe, NgIf} from "@angular/common";
+import {UserInterface} from '../types/user.interface';
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -9,13 +11,16 @@ import {NgIf} from "@angular/common";
   imports: [
     RouterLink,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    JsonPipe
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   user: FormGroup
+  authService = inject(AuthService)
+  response: any
 
   constructor() {
     this.user = new FormGroup({
@@ -26,7 +31,10 @@ export class LoginComponent {
 
   submit() {
     if (this.user.valid) {
-      console.log(this.user.value)
+      const user: UserInterface = {email: this.user.value.email, password: this.user.value.password}
+      this.response = this.authService.login(user)
+      console.log(this.response)
+
     } else {
       console.log('Not valid')
     }

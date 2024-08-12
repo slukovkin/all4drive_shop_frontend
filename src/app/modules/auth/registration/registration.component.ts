@@ -1,7 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NgIf} from "@angular/common";
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {AuthService} from "../service/auth.service";
+import {UserInterface} from "../types/user.interface";
 
 @Component({
   selector: 'app-registration',
@@ -16,6 +18,7 @@ import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators
 })
 export class RegistrationComponent {
   user: FormGroup
+  authService = inject(AuthService)
 
   constructor() {
     this.user = new FormGroup({
@@ -30,7 +33,8 @@ export class RegistrationComponent {
 
   submit() {
     if (this.user.valid) {
-      console.log(this.user.value)
+      const user: UserInterface = {email: this.user.value.email, password: this.user.value.password}
+      this.authService.registration(user)
     } else {
       console.log('Not valid')
     }
