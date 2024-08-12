@@ -1,28 +1,66 @@
-<form action="" class="flex flex-col w-1/4 mx-auto p-4 rounded border border-slate-500">
+<form [formGroup]="user"
+      (ngSubmit)="submit()"
+      class="flex flex-col w-1/4 mx-auto p-4 rounded border border-slate-500">
   <h1 class="text-center text-xl">Registration</h1>
   <div class="flex flex-col mt-5">
     <label for="email" class="text-slate-400 text-sm mt-2">Email</label>
-    <input type="email" id="email" class="input" placeholder="Enter your email:">
+    <input
+      formControlName="email"
+      required
+      type="email" id="email" class="input" placeholder="Enter your email:">
   </div>
-  <div class="inline-flex #error_msg">
-    <span class="text-red-600 mt-1 text-sm">Error</span>
+  <div class="inline-flex"
+       *ngIf="user.controls['email'].invalid &&
+(user.controls['email'].dirty || user.controls['email'].touched)"
+  >
+    <div class="text-red-600 mt-1 text-sm" *ngIf="user.controls['password'].hasError('required')">
+      Password is required
+    </div>
+    <div class="text-red-600 mt-1 text-sm" *ngIf="user.controls['password'].hasError('minlength')">
+      Password have be more 6 chars
+    </div>
   </div>
   <div class="flex flex-col">
     <label for="password" class="text-slate-400 text-sm mt-2">Password</label>
-    <input type="password" id="password" class="input" placeholder="Enter your password:">
+    <input
+      formControlName="password"
+      required
+      type="password" id="password" class="input" placeholder="Enter your password:">
   </div>
-  <div class="inline-flex #error_msg">
-    <span class="text-red-600 mt-1 text-sm">Error</span>
+  <div class="inline-flex"
+       *ngIf="user.controls['password'].invalid &&
+(user.controls['password'].dirty || user.controls['password'].touched)"
+  >
+    <div class="text-red-600 mt-1 text-sm" *ngIf="user.controls['password'].hasError('required')">
+      Password is required
+    </div>
+    <div class="text-red-600 mt-1 text-sm" *ngIf="user.controls['password'].hasError('minlength')">
+      Password have be more 6 chars
+    </div>
   </div>
   <div class="flex flex-col">
     <label for="confirm" class="text-slate-400 text-sm mt-2">Confirm password</label>
-    <input type="password" id="confirm" class="input" placeholder="Confirm your password:">
+    <input
+      formControlName="confirmPassword"
+      required
+      type="password" id="confirm" class="input" placeholder="Confirm your password:">
   </div>
-  <div class="inline-flex #error_msg">
-    <span class="text-red-600 mt-1 text-sm">Error</span>
+  <div class="inline-flex"
+       *ngIf="user.controls['confirmPassword'].invalid &&
+(user.controls['confirmPassword'].dirty || user.controls['confirmPassword'].touched)"
+  >
+    <div class="text-red-600 mt-1 text-sm" *ngIf="user.controls['confirmPassword'].hasError('required')">
+      Password is required
+    </div>
+    <div class="text-red-600 mt-1 text-sm" *ngIf="user.controls['confirmPassword'].hasError('minlength')">
+      Password have be more 6 chars
+    </div>
+    <ng-template #passMisMatch class="text-red-600 mt-1 text-sm" *ngIf="user.errors?.['mismatch']">
+      Passwords don't match
+    </ng-template>
   </div>
   <div class="flex items-center gap-4 mt-5 justify-center">
-    <button class="btn btn-green px-10">Confirm</button>
+    <button [disabled]="user.invalid" class="btn btn-green px-10">Confirm</button>
     <!--    <button class="btn btn-red">Cancel</button>-->
   </div>
   <div class="flex flex-row mt-3 justify-end">
