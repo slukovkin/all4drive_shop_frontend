@@ -2,7 +2,6 @@ import {Component, inject} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe, NgIf} from "@angular/common";
-import {UserInterface} from '../types/user.interface';
 import {AuthService} from "../service/auth.service";
 
 @Component({
@@ -31,10 +30,8 @@ export class LoginComponent {
 
   submit() {
     if (this.user.valid) {
-      const user: UserInterface = {email: this.user.value.email, password: this.user.value.password}
-      this.response = this.authService.login(user)
-      console.log(this.response)
-
+      // const user: UserInterface = {email: this.user.value.email, password: this.user.value.password}
+      this.response = this.authService.login(this.user.value)
     } else {
       console.log('Not valid')
     }

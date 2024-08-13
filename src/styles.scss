@@ -1,3 +1,5 @@
+@import 'ngx-toastr/toastr';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,7 +33,7 @@ body {
 
 @layer utilities {
   .btn-green {
-    @apply bg-green-800 hover:bg-green-600 rounded-md
+    @apply bg-green-800 hover:bg-green-600 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed;
   }
 
   .btn-red {

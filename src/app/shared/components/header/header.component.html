@@ -1,1 +1,20 @@
-<p>header works!</p>
+<header class="shadow-sm py-2">
+  <div class="container mx-auto grid grid-cols-2 gap-5 justify-between py-4">
+    <a href="#">LOGO</a>
+
+    <nav *ngIf="this.authService.isAuthSig(); else isNotAuth" class="justify-end flex">
+      <ul class="flex items-center gap-5">
+        <li class="text-white/50"><a href="#">Home</a></li>
+        <li class="text-white/50"><a routerLink="products">Product</a></li>
+        <li class="text-white/50"><a (click)="exit()">Exit</a></li>
+      </ul>
+    </nav>
+
+    <ng-template #isNotAuth>
+      <ul class="flex items-center gap-4 ml-auto">
+        <li class="text-white/50"><a href="#">Registration</a></li>
+        <li class="text-white/50"><a href="#">Login</a></li>
+      </ul>
+    </ng-template>
+  </div>
+</header>

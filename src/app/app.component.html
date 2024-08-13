@@ -1,3 +1,6 @@
-<div class="grid text-center mt-10">
+<div class="grid mt-10">
+  <div *ngIf="this.authService.isAuthSig()">
+    <app-header></app-header>
+  </div>
   <router-outlet></router-outlet>
 </div>
