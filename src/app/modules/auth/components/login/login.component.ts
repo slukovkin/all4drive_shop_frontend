@@ -30,7 +30,6 @@ export class LoginComponent {
 
   submit() {
     if (this.user.valid) {
-      // const user: UserInterface = {email: this.user.value.email, password: this.user.value.password}
       this.response = this.authService.login(this.user.value)
     } else {
       console.log('Not valid')
