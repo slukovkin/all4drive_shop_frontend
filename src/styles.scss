@@ -15,9 +15,36 @@
   --light-color: #FFFFFF;
 }
 
-body {
+
+html, body {
+  height: 100%;
   background-color: var(--dark-color);
   color: var(--light-color);
+}
+
+.wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 1fr 80px;
+  grid-gap: 10px 0;
+  //grid-auto-flow: column;
+  grid-template-areas:
+        "header"
+        "cont"
+        "footer"
+}
+
+header {
+  grid-area: header;
+}
+
+main {
+  grid-area: cont;
+}
+
+footer {
+  grid-area: footer;
 }
 
 
@@ -38,5 +65,9 @@ body {
 
   .btn-red {
     @apply bg-red-600 hover:bg-red-700 rounded-md
+  }
+
+  .btn-action {
+    @apply bg-teal-800 hover:bg-teal-600 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed;
   }
 }

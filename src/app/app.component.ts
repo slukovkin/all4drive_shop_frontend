@@ -3,6 +3,7 @@ import {RouterOutlet} from '@angular/router';
 import {HeaderComponent} from "./shared/components/header/header.component";
 import {AuthService} from "./modules/auth/service/auth.service";
 import {NgIf} from "@angular/common";
+import {FooterComponent} from "./shared/components/footer/footer.component";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,8 @@ import {NgIf} from "@angular/common";
   imports: [
     RouterOutlet,
     HeaderComponent,
-    NgIf
+    NgIf,
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

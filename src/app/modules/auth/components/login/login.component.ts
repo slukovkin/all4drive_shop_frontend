@@ -2,7 +2,7 @@ import {Component, inject} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe, NgIf} from "@angular/common";
-import {AuthService} from "../service/auth.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-login',

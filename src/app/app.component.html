@@ -1,6 +1,12 @@
-<div class="grid mt-10">
-  <div *ngIf="this.authService.isAuthSig()">
+<div class="wrapper">
+  <header *ngIf="this.authService.isAuthSig()">
     <app-header></app-header>
-  </div>
-  <router-outlet></router-outlet>
+  </header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <footer *ngIf="this.authService.isAuthSig()">
+    <app-footer></app-footer>
+  </footer>
 </div>
+
