@@ -27,8 +27,9 @@ export class ProductFormComponent {
     this.form = new FormGroup({
       code: new FormControl('',
         [Validators.required,
-          Validators.minLength(7),
-          Validators.maxLength(8)]),
+          Validators.minLength(8),
+          Validators.maxLength(8)
+        ]),
       article: new FormControl('', [Validators.required]),
       title: new FormControl('', [Validators.required]),
       picture: new FormControl('')
@@ -39,8 +40,9 @@ export class ProductFormComponent {
     if (this.form.valid) {
       const product: ProductCreationAttributes = {
         code: Number(this.form.controls['code'].value),
-        article: this.form.controls['article'].value,
-        title: this.form.controls['title'].value,
+        article: this.form.controls['article'].value.toUpperCase(),
+        title: this.form.controls['title'].value.charAt(0).toUpperCase() +
+          this.form.controls['title'].value.slice(1).toLowerCase(),
       }
       this.productService.create(product)
       this.form.reset()

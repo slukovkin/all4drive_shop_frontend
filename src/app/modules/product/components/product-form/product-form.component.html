@@ -19,10 +19,11 @@
       Code is required
     </div>
     <div class="text-red-600 mt-1 text-sm"
-         *ngIf="form.controls['code'].hasError('maxLength')
-         || form.controls['code'].hasError('minLength')">
+         *ngIf="form.controls['code'].hasError('minlength')
+          || form.controls['code'].hasError('maxlength')">
       Code have be 8 chars
     </div>
+
   </div>
 
   <!-- Article product -->
@@ -78,7 +79,7 @@
   <!--      type="text" id="picture" class="input" placeholder="Picture:">-->
   <!--  </div>-->
   <div class="flex items-center gap-4 mt-5 justify-center">
-    <button [disabled]="false" class="btn btn-green" (click)="submit()">Confirm</button>
+    <button [disabled]="this.form.invalid" class="btn btn-green" (click)="submit()">Confirm</button>
     <button class="btn btn-red" (click)="back()">Cancel</button>
   </div>
 </form>

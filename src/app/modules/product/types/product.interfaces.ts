@@ -12,6 +12,7 @@ export interface IProduct {
   code: number,
   article: string,
   title: string,
-  cross: number
-  imageUrl: string
+  cross: number,
+  updatedAt: string,
+  createdAt: string
 }
