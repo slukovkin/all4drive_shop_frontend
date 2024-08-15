@@ -1,0 +1,23 @@
+<footer class="shadow-sm py-2 border-t border-slate-500">
+  <div class="container mx-auto grid grid-cols-1 gap-5 justify-between py-4">
+    <!--    <a href="#">FOOTER</a>-->
+
+    <nav class="justify-center flex">
+      <ul class="flex items-center gap-2">
+        <li class="text-white/50"><a class="btn btn-action" (click)="addProduct()">Добавить товар</a></li>
+        <li class="text-white/50"><a class="btn btn-action">Приход товара</a></li>
+        <li class="text-white/50"><a class="btn btn-action">Расход товара </a></li>
+        <li class="text-white/50"><a class="btn btn-action">Журналы</a></li>
+        <li class="text-white/50"><a class="btn btn-action">Документы</a></li>
+        <li class="text-white/50"><a class="btn btn-action">Отчеты</a></li>
+      </ul>
+    </nav>
+
+    <ng-template #isNotAuth>
+      <ul class="flex items-center gap-4 ml-auto">
+        <li class="text-white/50"><a href="#">Registration</a></li>
+        <li class="text-white/50"><a href="#">Login</a></li>
+      </ul>
+    </ng-template>
+  </div>
+</footer>

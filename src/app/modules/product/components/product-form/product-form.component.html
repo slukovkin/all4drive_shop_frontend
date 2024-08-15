@@ -1,0 +1,85 @@
+<form class="flex flex-col w-1/4 mx-auto p-4 rounded border border-slate-500 mt-10"
+      [formGroup]="form"
+      (ngSubmit)="submit()">
+  <h1 class="text-center text-xl">New Product</h1>
+
+  <!-- Code product -->
+  <div class="flex flex-col mt-5">
+    <label for="code" class="text-slate-400 text-sm mt-2">Code</label>
+    <input
+      formControlName="code"
+      required
+      type="text" id="code" class="input" placeholder="Code:">
+  </div>
+  <div class="inline-flex"
+       *ngIf="form.controls['code'].invalid &&
+    (form.controls['code'].dirty || form.controls['code'].touched)">
+    <div class="text-red-600 mt-1 text-sm"
+         *ngIf="form.controls['code'].hasError('required')">
+      Code is required
+    </div>
+    <div class="text-red-600 mt-1 text-sm"
+         *ngIf="form.controls['code'].hasError('maxLength')
+         || form.controls['code'].hasError('minLength')">
+      Code have be 8 chars
+    </div>
+  </div>
+
+  <!-- Article product -->
+  <div class="flex flex-col">
+    <label for="article" class="text-slate-400 text-sm mt-2">Article</label>
+    <input
+      formControlName="article"
+      required
+      type="text" id="article" class="input" placeholder="Article:">
+  </div>
+  <div class="inline-flex"
+       *ngIf="form.controls['article'].invalid &&
+    (form.controls['article'].dirty || form.controls['article'].touched)">
+
+    <div class="text-red-600 mt-1 text-sm"
+         *ngIf="form.controls['article'].hasError('required')">
+      Article is required
+    </div>
+  </div>
+  <!-- Title product -->
+  <div class="flex flex-col">
+    <label for="title" class="text-slate-400 text-sm mt-2">Title</label>
+    <input
+      formControlName="title"
+      required
+      type="text" id="title" class="input" placeholder="Title:">
+  </div>
+  <div class="inline-flex"
+       *ngIf="form.controls['title'].invalid &&
+    (form.controls['title'].dirty || form.controls['title'].touched)">
+
+    <div class="text-red-600 mt-1 text-sm">
+      <!--         *ngIf="user.controls['title'].hasError('required')"-->
+      Title is required
+    </div>
+  </div>
+
+  <!-- Brand product -->
+  <!--  <div class="flex flex-col">-->
+  <!--    <label for="brand" class="text-slate-400 text-sm mt-2">Brand</label>-->
+  <!--    <input-->
+  <!--      formControlName="brand"-->
+  <!--      required-->
+  <!--      type="text" id="brand" class="input" placeholder="Brand:">-->
+  <!--  </div>-->
+
+
+  <!-- Image product -->
+  <!--  <div class="flex flex-col">-->
+  <!--    <label for="picture" class="text-slate-400 text-sm mt-2">Picture</label>-->
+  <!--    <input-->
+  <!--      formControlName="picture"-->
+  <!--      type="text" id="picture" class="input" placeholder="Picture:">-->
+  <!--  </div>-->
+  <div class="flex items-center gap-4 mt-5 justify-center">
+    <button [disabled]="false" class="btn btn-green" (click)="submit()">Confirm</button>
+    <button class="btn btn-red" (click)="back()">Cancel</button>
+  </div>
+</form>
+
