@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../../../modules/auth/service/auth.service";
 import {NgIf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -15,6 +15,7 @@ import {RouterLink} from "@angular/router";
 })
 export class HeaderComponent {
   constructor(
+    private readonly router: Router,
     public authService: AuthService) {
   }
 

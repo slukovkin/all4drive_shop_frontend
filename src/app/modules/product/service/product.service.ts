@@ -1,21 +1,37 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {BASE_URL} from '../../../shared/constants/constants';
-import {ProductCreationAttributes} from "../types/product.interfaces";
+import {IProduct, ProductCreationAttributes} from "../types/product.interfaces";
+import {ProductResponse} from "../types/product-response.interface";
+import {catchError} from "rxjs";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  constructor(private readonly http: HttpClient) {
+  constructor(
+    private readonly http: HttpClient,
+    private readonly toast: ToastrService) {
   }
 
   getAllProduct() {
-    return this.http.get(`${BASE_URL}/products`)
+    return this.http.get<IProduct[]>(`${BASE_URL}/products`)
   }
 
   create(product: ProductCreationAttributes) {
-    console.log(product)
-    return this.http.post(`${BASE_URL}/products`, product)
+    return this.http.post<ProductResponse>(`${BASE_URL}/products`, product)
+      .pipe(
+        catchError((err) => {
+          this.handleError(err)
+          throw (`Error => ${err.message}`)
+        })
+      ).subscribe(() => {
+        this.toast.success('Product successfully saved')
+      });
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    this.toast.error(err.error.message);
   }
 }

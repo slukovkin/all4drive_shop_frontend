@@ -19,7 +19,6 @@ import {AuthService} from "../../service/auth.service";
 export class LoginComponent {
   user: FormGroup
   authService = inject(AuthService)
-  response: any
 
   constructor() {
     this.user = new FormGroup({
@@ -30,7 +29,7 @@ export class LoginComponent {
 
   submit() {
     if (this.user.valid) {
-      this.response = this.authService.login(this.user.value)
+      this.authService.login(this.user.value)
     } else {
       console.log('Not valid')
     }

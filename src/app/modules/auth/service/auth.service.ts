@@ -35,7 +35,6 @@ export class AuthService {
       })
     ).subscribe(() => {
       this.toast.success('Login successfully')
-      // localStorage.setItem('token',)
       this.router.navigate(['/products'])
     });
   }
@@ -53,7 +52,6 @@ export class AuthService {
         })
       ).subscribe(() => {
         this.toast.success('Registration successfully')
-        // this.router.navigate(['/products'])
       });
   }
 
