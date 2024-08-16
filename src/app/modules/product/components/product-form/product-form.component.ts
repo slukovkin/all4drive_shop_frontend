@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Location, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {ProductService} from "../../service/product.service";
-import {ProductCreationAttributes} from "../../types/product.interfaces";
+import {IProduct, ProductCreationAttributes} from "../../types/product.interfaces";
 
 @Component({
   selector: 'app-product-form',
@@ -18,11 +18,12 @@ import {ProductCreationAttributes} from "../../types/product.interfaces";
   styleUrl: './product-form.component.scss'
 })
 export class ProductFormComponent {
+  @Input() product?: IProduct
   form: FormGroup
 
   constructor(
     private location: Location,
-    private readonly productService: ProductService
+    public readonly productService: ProductService
   ) {
     this.form = new FormGroup({
       code: new FormControl('',

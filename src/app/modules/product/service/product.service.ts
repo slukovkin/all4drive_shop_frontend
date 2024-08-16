@@ -1,6 +1,6 @@
 import {Injectable, signal} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {BASE_URL} from '../../../shared/constants/constants';
+import {Constants} from '../../../shared/constants/constants';
 import {IProduct, ProductCreationAttributes} from "../types/product.interfaces";
 import {catchError} from "rxjs";
 import {ToastrService} from "ngx-toastr";
@@ -18,12 +18,12 @@ export class ProductService {
   }
 
   getAllProduct() {
-    return this.http.get<IProduct[]>(`${BASE_URL}/products`)
+    return this.http.get<IProduct[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_PRODUCTS)
       .subscribe((products) => this.productsSign.set(products))
   }
 
   create(product: ProductCreationAttributes) {
-    return this.http.post<IProduct>(`${BASE_URL}/products`, product)
+    return this.http.post<IProduct>(Constants.BASE_URL + Constants.METHODS.GET_ALL_PRODUCTS, product)
       .pipe(
         catchError((err) => {
           this.handleError(err)
@@ -35,9 +35,12 @@ export class ProductService {
       });
   }
 
+  update(product: IProduct) {
+    this.http.patch(Constants.BASE_URL + Constants.METHODS.UPDATE_PRODUCT_BY_ID + product.id, product)
+  }
+
   remove(id: number) {
-    console.log('Product id => ' + id)
-    this.http.delete(`${BASE_URL}/products/${id}`)
+    this.http.delete(Constants.BASE_URL + Constants.METHODS.DELETE_PRODUCT_BY_ID + id)
       .pipe(
         catchError((err) => {
           this.handleError(err)

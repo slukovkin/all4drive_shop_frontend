@@ -4,7 +4,7 @@
 
     <nav *ngIf="this.authService.isAuthSig(); else isNotAuth" class="justify-end flex">
       <ul class="flex items-center gap-5">
-        <li class="text-white/50"><a href="#">Home</a></li>
+        <li class="text-white/50"><a routerLink="home">Home</a></li>
         <li class="text-white/50"><a routerLink="products">Product</a></li>
         <li class="text-white/50"><a (click)="exit()">Exit</a></li>
       </ul>

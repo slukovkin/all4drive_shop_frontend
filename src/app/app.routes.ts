@@ -4,6 +4,7 @@ import {RegistrationComponent} from "./modules/auth/components/registration/regi
 import {ProductListComponent} from "./modules/product/components/product-list/product-list.component";
 import {authGuard} from "./shared/guards/auth.guard";
 import {ProductFormComponent} from "./modules/product/components/product-form/product-form.component";
+import {HomeComponent} from "./modules/home/components/home/home.component";
 
 export const routes: Routes = [
   {
@@ -23,5 +24,9 @@ export const routes: Routes = [
     path: 'new_product', component: ProductFormComponent,
     title: 'New Product',
     canActivate: [authGuard()]
+  },
+  {
+    path: 'home', component: HomeComponent,
+    title: 'Home'
   }
 ];

@@ -1,7 +1,7 @@
 import {Injectable, signal} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {UserInterface} from "../types/user.interface";
-import {BASE_URL} from '../../../shared/constants/constants';
+import {Constants} from '../../../shared/constants/constants';
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {catchError, tap} from 'rxjs';
@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   login(user: UserInterface) {
-    return this.http.post<IResponseUser>(`${BASE_URL}/auth/login`,
+    return this.http.post<IResponseUser>(Constants.BASE_URL + Constants.METHODS.LOGIN,
       user).pipe(
       tap((response: IResponseUser) => {
         localStorage.setItem('token', response.token)
@@ -35,12 +35,12 @@ export class AuthService {
       })
     ).subscribe(() => {
       this.toast.success('Login successfully')
-      this.router.navigate(['/products'])
+      this.router.navigate(['home'])
     });
   }
 
   registration(user: UserInterface) {
-    return this.http.post(`${BASE_URL}/auth/registration`,
+    return this.http.post(Constants.BASE_URL + Constants.METHODS.REGISTRATION,
       user)
       .pipe(
         tap(() => {

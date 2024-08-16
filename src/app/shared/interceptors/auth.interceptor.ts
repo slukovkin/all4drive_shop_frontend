@@ -1,5 +1,5 @@
 import {HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {BASE_URL} from "../constants/constants";
+import {Constants} from "../constants/constants";
 
 export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
@@ -9,7 +9,7 @@ export class AuthInterceptor implements HttpInterceptor {
         setHeaders: {
           Authorization: `Bearer ${token}`
         },
-        url: `${BASE_URL}/${req.url}`
+        url: Constants.BASE_URL + req.url,
       })
     }
     return next.handle(req)

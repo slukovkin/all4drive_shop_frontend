@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, signal} from '@angular/core';
 import {ProductService} from "../../service/product.service";
+import {IProduct} from "../../types/product.interfaces";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-card',
@@ -9,11 +11,18 @@ import {ProductService} from "../../service/product.service";
   styleUrl: './product-card.component.scss'
 })
 export class ProductCardComponent {
-  @Input() product: any
+  @Input() product!: IProduct
+  productUpdateSign = signal<IProduct>(this.product)
 
   constructor(
-    private readonly productService: ProductService
+    private readonly productService: ProductService,
+    private readonly router: Router,
   ) {
+  }
+
+  update(product: IProduct) {
+    this.productUpdateSign.set(product)
+    this.router.navigate(['new_product'])
   }
 
   remove(id: number) {
