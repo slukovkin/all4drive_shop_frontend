@@ -1,8 +1,8 @@
-import {Component, inject} from '@angular/core';
-import {RouterLink} from "@angular/router";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {JsonPipe, NgIf} from "@angular/common";
-import {AuthService} from "../../service/auth.service";
+import { Component } from '@angular/core'
+import { RouterLink } from '@angular/router'
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { JsonPipe, NgIf } from '@angular/common'
+import { AuthService } from '../../service/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -11,16 +11,15 @@ import {AuthService} from "../../service/auth.service";
     RouterLink,
     ReactiveFormsModule,
     NgIf,
-    JsonPipe
+    JsonPipe,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   user: FormGroup
-  authService = inject(AuthService)
 
-  constructor() {
+  constructor(private readonly authService: AuthService) {
     this.user = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),

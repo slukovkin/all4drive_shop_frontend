@@ -1,9 +1,9 @@
-import {Component, inject} from '@angular/core';
-import {RouterLink} from "@angular/router";
-import {NgIf} from "@angular/common";
-import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AuthService} from "../../service/auth.service";
-import {UserInterface} from "../../types/user.interface";
+import { Component } from '@angular/core'
+import { RouterLink } from '@angular/router'
+import { NgIf } from '@angular/common'
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { AuthService } from '../../service/auth.service'
+import { UserInterface } from '../../types/user.interface'
 
 @Component({
   selector: 'app-registration',
@@ -11,21 +11,22 @@ import {UserInterface} from "../../types/user.interface";
   imports: [
     RouterLink,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './registration.component.html',
-  styleUrl: './registration.component.scss'
+  styleUrl: './registration.component.scss',
 })
 export class RegistrationComponent {
   user: FormGroup
-  authService = inject(AuthService)
 
-  constructor() {
+  constructor(
+    private readonly authService: AuthService,
+  ) {
     this.user = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl('', [
-        Validators.required, Validators.minLength(6)])
+        Validators.required, Validators.minLength(6)]),
     }, {
       validators: this.repeatPasswordValidator.bind(this),
     })
@@ -33,7 +34,8 @@ export class RegistrationComponent {
 
   submit() {
     if (this.user.valid) {
-      const user: UserInterface = {email: this.user.value.email, password: this.user.value.password}
+      console.log(`User: ${this.user.value.email}, ${this.user.value.password}`)
+      const user: UserInterface = { email: this.user.value.email, password: this.user.value.password }
       this.authService.registration(user)
     } else {
       console.log('Not valid')
@@ -43,6 +45,6 @@ export class RegistrationComponent {
   repeatPasswordValidator(control: AbstractControl) {
     return control.get('password')?.value === control.get('confirmPassword')?.value
       ? null
-      : {mismatch: true}
+      : { mismatch: true }
   }
 }
