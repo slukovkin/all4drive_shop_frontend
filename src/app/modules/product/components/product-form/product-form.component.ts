@@ -22,13 +22,13 @@ export class ProductFormComponent implements OnInit {
 
   @Input() id?: number
 
-  form: FormGroup
+  productForm: FormGroup
 
   constructor(
     private location: Location,
     public readonly productService: ProductService,
   ) {
-    this.form = new FormGroup({
+    this.productForm = new FormGroup({
       code: new FormControl('',
         [Validators.required,
           Validators.minLength(8),
@@ -51,20 +51,20 @@ export class ProductFormComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.valid) {
+    if (this.productForm.valid) {
       const product: ProductCreationAttributes = {
-        code: Number(this.form.controls['code'].value),
-        article: this.form.controls['article'].value.toUpperCase(),
-        title: this.form.controls['title'].value.charAt(0).toUpperCase() +
-          this.form.controls['title'].value.slice(1).toLowerCase(),
-        brand: this.form.controls['brand'].value.charAt(0).toUpperCase() +
-          this.form.controls['title'].value.slice(1).toLowerCase(),
-        price: Number(this.form.controls['price'].value),
-        qty: Number(this.form.controls['qty'].value),
-        imageUrl: this.form.controls['picture'].value,
+        code: Number(this.productForm.controls['code'].value),
+        article: this.productForm.controls['article'].value.toUpperCase(),
+        title: this.productForm.controls['title'].value.charAt(0).toUpperCase() +
+          this.productForm.controls['title'].value.slice(1).toLowerCase(),
+        brand: this.productForm.controls['brand'].value.charAt(0).toUpperCase() +
+          this.productForm.controls['title'].value.slice(1).toLowerCase(),
+        price: Number(this.productForm.controls['price'].value),
+        qty: Number(this.productForm.controls['qty'].value),
+        imageUrl: this.productForm.controls['picture'].value,
       }
       this.productService.create(product)
-      this.form.reset()
+      this.productForm.reset()
       this.location.back()
     } else {
       console.log('Not valid')

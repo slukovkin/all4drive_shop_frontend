@@ -1,5 +1,5 @@
 <form class="flex flex-col w-1/4 mx-auto p-4 rounded border border-slate-500 mt-10"
-      [formGroup]="form"
+      [formGroup]="productForm"
       (ngSubmit)="submit()">
   <h4 class="text-center text-xl">New Product</h4>
 
@@ -13,15 +13,15 @@
       type="text" id="code" class="input" placeholder="Code:">
   </div>
   <div class="inline-flex"
-       *ngIf="form.controls['code'].invalid &&
-    (form.controls['code'].dirty || form.controls['code'].touched)">
+       *ngIf="productForm.controls['code'].invalid &&
+    (productForm.controls['code'].dirty || productForm.controls['code'].touched)">
     <div class="text-red-600 mt-1 text-sm"
-         *ngIf="form.controls['code'].hasError('required')">
+         *ngIf="productForm.controls['code'].hasError('required')">
       Code is required
     </div>
     <div class="text-red-600 mt-1 text-sm"
-         *ngIf="form.controls['code'].hasError('minlength')
-          || form.controls['code'].hasError('maxlength')">
+         *ngIf="productForm.controls['code'].hasError('minlength')
+          || productForm.controls['code'].hasError('maxlength')">
       Code have be 8 chars
     </div>
 
@@ -37,11 +37,11 @@
       type="text" id="article" class="input" placeholder="Article:">
   </div>
   <div class="inline-flex"
-       *ngIf="form.controls['article'].invalid &&
-    (form.controls['article'].dirty || form.controls['article'].touched)">
+       *ngIf="productForm.controls['article'].invalid &&
+    (productForm.controls['article'].dirty || productForm.controls['article'].touched)">
 
     <div class="text-red-600 mt-1 text-sm"
-         *ngIf="form.controls['article'].hasError('required')">
+         *ngIf="productForm.controls['article'].hasError('required')">
       Article is required
     </div>
   </div>
@@ -55,8 +55,8 @@
       type="text" id="title" class="input" placeholder="Title:">
   </div>
   <div class="inline-flex"
-       *ngIf="form.controls['title'].invalid &&
-    (form.controls['title'].dirty || form.controls['title'].touched)">
+       *ngIf="productForm.controls['title'].invalid &&
+    (productForm.controls['title'].dirty || productForm.controls['title'].touched)">
 
     <div class="text-red-600 mt-1 text-sm">
       Title is required
@@ -100,7 +100,7 @@
   </div>
 
   <div class="flex items-center gap-4 mt-5 justify-center">
-    <button [disabled]="this.form.invalid" class="btn btn-green" (click)="submit()">Confirm</button>
+    <button [disabled]="this.productForm.invalid" class="btn btn-green" (click)="submit()">Confirm</button>
     <button class="btn btn-red" (click)="back()">Cancel</button>
   </div>
 </form>
