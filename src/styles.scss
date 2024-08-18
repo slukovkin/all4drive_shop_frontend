@@ -17,18 +17,19 @@
 
 
 html, body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   height: 100%;
   background-color: var(--dark-color);
   color: var(--light-color);
 }
 
 .wrapper {
-  height: 100%;
+  //height: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 80px 1fr 80px;
-  //grid-gap: 10px 0;
-  //grid-auto-flow: column;
+  grid-gap: 10px 0;
+  grid-auto-flow: column;
   grid-template-areas:
         "header"
         "cont"
@@ -36,6 +37,11 @@ html, body {
 }
 
 header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: black;
+  z-index: 100;
   grid-area: header;
 }
 
@@ -44,6 +50,11 @@ main {
 }
 
 footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background: black;
+  z-index: 100;
   grid-area: footer;
 }
 
@@ -76,11 +87,3 @@ footer {
   }
 }
 
-html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
