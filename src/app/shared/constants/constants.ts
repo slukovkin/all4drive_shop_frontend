@@ -8,8 +8,9 @@ export const Constants = {
     LOGIN: 'auth/login',
     REGISTRATION: 'auth/registration',
     GET_ALL_PRODUCTS: 'products',
+    GET_PRODUCT_BY_ID: 'products/',
     UPDATE_PRODUCT_BY_ID: 'products/',
     DELETE_PRODUCT_BY_ID: 'products/',
-  }
+  },
 
 }

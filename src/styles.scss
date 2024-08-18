@@ -67,11 +67,20 @@ footer {
     @apply bg-red-600 hover:bg-red-700 rounded-md
   }
 
-  .btn-yellow {
-    @apply bg-yellow-600 hover:bg-yellow-700 rounded-md
+  .btn-orange {
+    @apply bg-orange-600 hover:bg-orange-700 rounded-md
   }
 
   .btn-action {
     @apply bg-teal-800 hover:bg-teal-600 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed;
   }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

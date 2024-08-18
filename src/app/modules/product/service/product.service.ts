@@ -1,12 +1,12 @@
-import {Injectable, signal} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Constants} from '../../../shared/constants/constants';
-import {IProduct, ProductCreationAttributes} from "../types/product.interfaces";
-import {catchError} from "rxjs";
-import {ToastrService} from "ngx-toastr";
+import { Injectable, signal } from '@angular/core'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { Constants } from '../../../shared/constants/constants'
+import { IProduct, ProductCreationAttributes } from '../types/product.interfaces'
+import { catchError } from 'rxjs'
+import { ToastrService } from 'ngx-toastr'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
 
@@ -19,7 +19,10 @@ export class ProductService {
 
   getAllProduct() {
     return this.http.get<IProduct[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_PRODUCTS)
-      .subscribe((products) => this.productsSign.set(products))
+  }
+
+  getProductById(id: number) {
+    return this.http.get<IProduct>(Constants.BASE_URL + Constants.METHODS.GET_PRODUCT_BY_ID + id)
   }
 
   create(product: ProductCreationAttributes) {
@@ -28,11 +31,11 @@ export class ProductService {
         catchError((err) => {
           this.handleError(err)
           throw (`Error => ${err.message}`)
-        })
+        }),
       ).subscribe((product) => {
         this.productsSign.update((products) => [...products, product])
         this.toast.success('Product successfully saved')
-      });
+      })
   }
 
   update(product: IProduct) {
@@ -45,16 +48,16 @@ export class ProductService {
         catchError((err) => {
           this.handleError(err)
           throw (`Error => ${err.message}`)
-        })
+        }),
       ).subscribe(() => {
       this.productsSign.update(products =>
-        products.filter(product => product.id != id)
+        products.filter(product => product.id != id),
       )
       this.toast.success('Product deleted successfully')
-    });
+    })
   }
 
   private handleError(err: HttpErrorResponse) {
-    this.toast.error(err.error.message);
+    this.toast.error(err.error.message)
   }
 }
