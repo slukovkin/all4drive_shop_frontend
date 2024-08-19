@@ -61,7 +61,7 @@ footer {
 
 @layer components {
   .input {
-    @apply mt-3 rounded-md text-sm border-transparent bg-slate-700 p-2 outline-none border focus:border-blue-500;
+    @apply mt-3 rounded-md text-sm border-transparent bg-slate-700 p-3 outline-none border focus:border-blue-500;
   }
 
   .btn {
@@ -87,3 +87,8 @@ footer {
   }
 }
 
+.image-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+}
