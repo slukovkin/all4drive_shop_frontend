@@ -1,20 +1,58 @@
 <header class="shadow-sm py-2 border-b border-slate-500">
-  <div class="container mx-auto grid grid-cols-2 gap-5 justify-between py-4">
-    <a routerLink="home">LOGO</a>
+  <div class="grid grid-cols-6 mx-auto justify-center px-4 py-4 w-full">
 
-    <nav *ngIf="this.authService.isAuthSig(); else isNotAuth" class="justify-end flex">
-      <ul class="flex items-center gap-5">
-        <li class="text-white/50"><a routerLink="home">Home</a></li>
-        <li class="text-white/50"><a routerLink="products">Product</a></li>
-        <li class="text-white/50"><a (click)="exit()">Exit</a></li>
+    <div>
+      <a routerLink="home" class="text-start">LOGO</a>
+    </div>
+
+    <nav *ngIf="this.authService.isAdminSig(); else isNotAdmin" class="justify-end">
+      <ul class="flex items-center gap-2">
+        <!--        <li class="text-white/50">-->
+        <!--          <button routerLink="home" class="btn btn-action">Home</button>-->
+        <!--        </li>-->
+        <li class="text-white/50">
+          <button routerLink="products" class="btn btn-action">Товар</button>
+        </li>
+        <!--        <li class="text-white/50"><a class="btn btn-action" (click)="addProduct()">Добавить товар</a></li>-->
+        <li class="text-white/50">
+          <button class="btn btn-action" [disabled]="true">Приход товара</button>
+        </li>
+        <li class="text-white/50">
+          <button class="btn btn-action" [disabled]="true">Расход товара</button>
+        </li>
+        <li class="text-white/50">
+          <button class="btn btn-action" [disabled]="true">Журналы</button>
+        </li>
+        <li class="text-white/50">
+          <button class="btn btn-action" [disabled]="true">Документы</button>
+        </li>
+        <li class="text-white/50">
+          <button class="btn btn-action" [disabled]="true">Отчеты</button>
+        </li>
+        <li class="text-white/50">
+          <button (click)="exit()" class="btn btn-action">Выход</button>
+        </li>
       </ul>
     </nav>
 
-    <ng-template #isNotAuth>
-      <ul class="flex items-center gap-4 ml-auto">
-        <li class="text-white/50"><a href="#">Registration</a></li>
-        <li class="text-white/50"><a href="#">Login</a></li>
-      </ul>
+    <ng-template #isNotAdmin>
+      <nav class="flex justify-end">
+        <ul class="flex items-center gap-2">
+          <li class="text-white/50">
+            <button routerLink="home" class="btn btn-action">Home</button>
+          </li>
+          <li class="text-white/50">
+            <button routerLink="products" class="btn btn-action">Товар</button>
+          </li>
+          <li class="text-white/50">
+            <button (click)="exit()" class="btn btn-action">Выход</button>
+          </li>
+        </ul>
+      </nav>
+      <!--      <ul class="flex items-center gap-4 ml-auto">-->
+      <!--        <li class="text-white/50"><a href="#">Registration</a></li>-->
+      <!--        <li class="text-white/50"><a href="#">Login</a></li>-->
+      <!--      </ul>-->
     </ng-template>
   </div>
 </header>

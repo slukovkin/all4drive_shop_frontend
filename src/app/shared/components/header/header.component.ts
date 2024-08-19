@@ -1,22 +1,27 @@
-import {Component} from '@angular/core';
-import {AuthService} from "../../../modules/auth/service/auth.service";
-import {NgIf} from "@angular/common";
-import {Router, RouterLink} from "@angular/router";
+import { Component } from '@angular/core'
+import { AuthService } from '../../../modules/auth/service/auth.service'
+import { NgIf } from '@angular/common'
+import { RouterLink } from '@angular/router'
+import { ModalService } from '../../../modules/modal/service/modal.service'
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
     NgIf,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   constructor(
-    private readonly router: Router,
+    public readonly modalService: ModalService,
     public authService: AuthService) {
+  }
+
+  addProduct() {
+    this.modalService.openModal()
   }
 
   exit() {

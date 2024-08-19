@@ -28,7 +28,7 @@ html, body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 80px 1fr 80px;
-  grid-gap: 10px 0;
+  grid-gap: 5px 0;
   grid-auto-flow: column;
   grid-template-areas:
         "header"
@@ -65,7 +65,7 @@ footer {
   }
 
   .btn {
-    @apply text-sm py-1 px-4 rounded-sm text-gray-300 transition-colors
+    @apply w-[150px] text-sm py-1 px-4 rounded-sm text-gray-300 transition-colors
   }
 }
 
