@@ -3,7 +3,7 @@
       (ngSubmit)="submit()">
   <!-- Code product -->
   <div class="flex flex-col">
-    <label for="code" class="text-slate-400 text-sm mt-2">Code</label>
+    <label for="code" class="text-start text-sm mt-2">Code</label>
     <input
       formControlName="code"
       required
@@ -27,7 +27,7 @@
 
   <!-- Article product -->
   <div class="flex flex-col">
-    <label for="article" class="text-slate-400 text-sm mt-2">Article</label>
+    <label for="article" class="text-start  text-sm mt-2">Article</label>
     <input
       formControlName="article"
       required
@@ -45,7 +45,7 @@
   </div>
   <!-- Title product -->
   <div class="flex flex-col">
-    <label for="title" class="text-slate-400 text-sm mt-2">Title</label>
+    <label for="title" class="text-start text-sm mt-2">Title</label>
     <input
       formControlName="title"
       required
@@ -63,7 +63,7 @@
 
   <!--  Brand product-->
   <div class="flex flex-col">
-    <label for="brand" class="text-slate-400 text-sm mt-2">Brand</label>
+    <label for="brand" class="text-start  text-sm mt-2">Brand</label>
     <input
       formControlName="brand"
       required
@@ -72,7 +72,7 @@
 
   <!--  Price-->
   <div class="flex flex-col">
-    <label for="price" class="text-slate-400 text-sm mt-2">Price</label>
+    <label for="price" class="text-start text-sm mt-2">Price</label>
     <input
       formControlName="price"
       required
@@ -81,7 +81,7 @@
 
   <!--  Qty-->
   <div class="flex flex-col">
-    <label for="qty" class="text-slate-400 text-sm mt-2">Qty</label>
+    <label for="qty" class="text-start text-sm mt-2">Qty</label>
     <input
       formControlName="qty"
       required
@@ -91,15 +91,15 @@
 
   <!--  Image product-->
   <div class="flex flex-col">
-    <label for="picture" class="text-slate-400 text-sm mt-2">Picture</label>
+    <label for="picture" class="text-start text-sm mt-2">Picture</label>
     <input
       formControlName="picture"
-      type="text" id="picture" class="input" placeholder="Picture:">
+      type="file" id="picture" class="input" placeholder="Picture:">
   </div>
 
   <div class="flex items-center gap-4 mt-5 justify-center">
-    <button [disabled]="this.productForm.invalid" class="btn btn-green" (click)="submit()">Confirm</button>
-    <button class="btn btn-red" (click)="back()">Cancel</button>
+    <button [disabled]="this.productForm.invalid" class="btn btn-green" type="submit">Confirm</button>
+    <button class="btn btn-red" type="reset">Cancel</button>
   </div>
 </form>
 

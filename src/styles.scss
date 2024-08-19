@@ -41,7 +41,7 @@ header {
   position: fixed;
   top: 0;
   background: black;
-  z-index: 100;
+  z-index: 10;
   grid-area: header;
 }
 
@@ -61,7 +61,7 @@ footer {
 
 @layer components {
   .input {
-    @apply mt-3 rounded-md text-sm border-transparent bg-slate-700 p-3 outline-none border focus:border-blue-500;
+    @apply mt-3 rounded-md text-sm border-transparent bg-white p-3 outline-2 border border-gray-400 focus:border-blue-500;
   }
 
   .btn {
@@ -91,4 +91,9 @@ footer {
   width: 60px;
   height: 60px;
   border-radius: 100px;
+}
+
+input {
+  background: var(--light-color);
+  color: var(--dark-color);
 }

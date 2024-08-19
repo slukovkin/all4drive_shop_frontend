@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { Location, NgIf } from '@angular/common'
+import { NgIf } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import { ProductService } from '../../service/product.service'
 import { IProduct, ProductCreationAttributes } from '../../types/product.interfaces'
+import { ModalService } from '../../../modal/service/modal.service'
+
 
 @Component({
   selector: 'app-product-form',
@@ -25,7 +27,7 @@ export class ProductFormComponent implements OnInit {
   productForm: FormGroup
 
   constructor(
-    private location: Location,
+    private readonly modalService: ModalService,
     public readonly productService: ProductService,
   ) {
     this.productForm = new FormGroup({
@@ -46,7 +48,8 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit() {
     if (this.id) {
-      this.productService.getProductById(this.id).subscribe((product: IProduct) => this.product = product)
+      this.productService.getProductById(this.id)
+        .subscribe((product: IProduct) => this.product = product)
     }
   }
 
@@ -65,13 +68,9 @@ export class ProductFormComponent implements OnInit {
       }
       this.productService.create(product)
       this.productForm.reset()
-      this.location.back()
+      this.modalService.closeModal()
     } else {
       console.log('Not valid')
     }
-  }
-
-  back() {
-    this.location.back()
   }
 }
