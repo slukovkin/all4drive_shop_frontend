@@ -1,9 +1,8 @@
-import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {HeaderComponent} from "./shared/components/header/header.component";
-import {AuthService} from "./modules/auth/service/auth.service";
-import {NgIf} from "@angular/common";
-import {FooterComponent} from "./shared/components/footer/footer.component";
+import { Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { HeaderComponent } from './shared/components/header/header.component'
+import { AuthService } from './modules/auth/service/auth.service'
+import { NgIf } from '@angular/common'
 
 @Component({
   selector: 'app-root',
@@ -12,10 +11,9 @@ import {FooterComponent} from "./shared/components/footer/footer.component";
     RouterOutlet,
     HeaderComponent,
     NgIf,
-    FooterComponent
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   constructor(public authService: AuthService) {
