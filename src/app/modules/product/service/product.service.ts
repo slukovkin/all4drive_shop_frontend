@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, signal } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
 import { IProduct, ProductCreationAttributes } from '../types/product.interfaces'
@@ -10,8 +10,8 @@ import { ToastrService } from 'ngx-toastr'
 })
 export class ProductService {
 
-  // productsSign = signal<IProduct[]>([])
   products: IProduct[] = []
+  searchByArticle = signal<string>('')
 
   constructor(
     private readonly http: HttpClient,

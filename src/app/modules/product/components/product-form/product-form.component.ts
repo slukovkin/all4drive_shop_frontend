@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router'
 import { ProductService } from '../../service/product.service'
 import { IProduct, ProductCreationAttributes } from '../../types/product.interfaces'
 import { ModalService } from '../../../modal/service/modal.service'
+import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
 
 
 @Component({
@@ -48,8 +49,8 @@ export class ProductFormComponent {
       const newProduct: ProductCreationAttributes = {
         code: Number(this.productForm.controls['code'].value),
         article: this.productForm.controls['article'].value.toUpperCase(),
-        title: this.productForm.controls['title'].value,
-        brand: this.productForm.controls['brand'].value,
+        title: firstCharToUpperCase(this.productForm.controls['title'].value),
+        brand: firstCharToUpperCase(this.productForm.controls['brand'].value),
         price: Number(this.productForm.controls['price'].value),
         qty: Number(this.productForm.controls['qty'].value),
         imageUrl: this.productForm.controls['picture'].value,

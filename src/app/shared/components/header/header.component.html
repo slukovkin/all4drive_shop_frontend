@@ -8,6 +8,15 @@
     <nav *ngIf="this.authService.isAdminSig(); else isNotAdmin" class="justify-end">
       <ul class="flex items-center gap-2">
         <li class="text-white/50">
+          <input
+            [(ngModel)]="article"
+            (keydown.enter)="filterByArticle()"
+            type="text"
+            placeholder="Search article..."
+            class="px-2 rounded-md"
+          >
+        </li>
+        <li class="text-white/50">
           <button routerLink="products" class="btn btn-action">Товар</button>
         </li>
         <li class="text-white/50">
@@ -34,6 +43,15 @@
     <ng-template #isNotAdmin>
       <nav class="flex items-center">
         <ul class="flex items-center gap-2">
+          <li class="text-white/50">
+            <input
+              [(ngModel)]="article"
+              (keydown.enter)="filterByArticle()"
+              type="text"
+              placeholder="Search article..."
+              class="px-2 rounded-md"
+            >
+          </li>
           <li class="text-white/50">
             <button routerLink="home" class="btn btn-action">Home</button>
           </li>

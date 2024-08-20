@@ -9,6 +9,7 @@ import { EurToUahPipe } from '../../../../shared/pipes/eur-to-uah.pipe'
 import { UahToEurPipe } from '../../../../shared/pipes/uah-to-eur.pipe'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 import { AuthService } from '../../../auth/service/auth.service'
+import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
 
 @Component({
   selector: 'app-products',
@@ -26,6 +27,7 @@ import { AuthService } from '../../../auth/service/auth.service'
     StopPropagationDirective,
     TitleCasePipe,
     NgClass,
+    FilterPipe,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -41,7 +43,7 @@ export class ProductsComponent {
   ) {
     this.productService.getAllProduct()
   }
-  
+
   delete(id: number) {
     this.productService.remove(id)
   }
