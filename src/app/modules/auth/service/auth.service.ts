@@ -11,7 +11,7 @@ import { IResponseUser } from '../types/response-user.interface'
   providedIn: 'root',
 })
 export class AuthService {
-
+  
   isAuthSig = signal<boolean>(false)
   isAdminSig = signal<boolean>(false)
 
@@ -29,16 +29,20 @@ export class AuthService {
       tap((response: IResponseUser) => {
         if (response.user.roles[0].value === 'ADMIN') {
           this.isAdminSig.set(true)
+          localStorage.setItem('token', response.token)
+          this.isAuthSig.set(true)
+        } else {
+          this.isAdminSig.set(false)
+          localStorage.setItem('token', response.token)
+          this.isAuthSig.set(true)
         }
-        localStorage.setItem('token', response.token)
-        this.isAuthSig.set(true)
       }),
       catchError((err) => {
         this.handleError(err)
         throw new Error(err.error.message)
       }),
     ).subscribe(() => {
-      this.toast.success('Login successfully')
+      this.toast.success('Login successfully', '', { timeOut: 500 })
       this.router.navigate(['products'])
     })
   }
@@ -55,7 +59,7 @@ export class AuthService {
           throw (`Error => ${err.message}`)
         }),
       ).subscribe(() => {
-        this.toast.success('Registration successfully')
+        this.toast.success('Registration successfully', '', { timeOut: 500 })
       })
   }
 
@@ -64,7 +68,7 @@ export class AuthService {
     this.isAuthSig.set(false)
     this.isAdminSig.set(false)
     this.router.navigate([''])
-    this.toast.success('Logout')
+    this.toast.success('Logout', '', { timeOut: 500 })
   }
 
   private handleError(err: HttpErrorResponse) {

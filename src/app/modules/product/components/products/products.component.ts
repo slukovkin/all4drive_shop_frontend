@@ -35,12 +35,14 @@ import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
 export class ProductsComponent {
 
   title = ''
+  isAdmin = false
 
   constructor(
-    public authService: AuthService,
-    public productService: ProductService,
-    public modalService: ModalService,
+    private readonly authService: AuthService,
+    public readonly productService: ProductService,
+    public readonly modalService: ModalService,
   ) {
+    this.isAdmin = this.authService.isAdminSig()
     this.productService.getAllProduct()
   }
 

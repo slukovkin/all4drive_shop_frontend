@@ -5,7 +5,7 @@
       <a routerLink="home" class="text-start">LOGO</a>
     </div>
 
-    <nav *ngIf="this.authService.isAdminSig(); else isNotAdmin" class="justify-end">
+    <nav *ngIf="isAdmin; else isNotAdmin" class="justify-end">
       <ul class="flex items-center gap-2">
         <li class="text-white/50">
           <input

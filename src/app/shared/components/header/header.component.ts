@@ -20,11 +20,13 @@ import { ProductService } from '../../../modules/product/service/product.service
 export class HeaderComponent {
 
   article = ''
+  isAdmin = false
 
   constructor(
-    public productService: ProductService,
+    public readonly productService: ProductService,
     public readonly modalService: ModalService,
-    public authService: AuthService) {
+    private readonly authService: AuthService) {
+    this.isAdmin = this.authService.isAdminSig()
   }
 
   filterByArticle() {
@@ -35,5 +37,4 @@ export class HeaderComponent {
   exit() {
     this.authService.logout()
   }
-
 }

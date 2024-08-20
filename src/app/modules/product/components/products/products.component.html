@@ -1,8 +1,8 @@
 <main>
   <table class="mx-auto w-full" *ngIf="productService.products">
     <tr [ngClass]="{
-      admin_table__header: authService.isAdminSig(),
-      user_table__header: !authService.isAdminSig()
+      admin_table__header: isAdmin,
+      user_table__header: !isAdmin
     }">
       <th>Изображение</th>
       <th>Код</th>
@@ -18,8 +18,8 @@
     <tr stopPropagation *ngFor="let product of productService.products | filter: productService.searchByArticle()"
         (click)="modalService.openModal('Create product')"
         [ngClass]="{
-      admin_table__body: authService.isAdminSig(),
-      user_table__body: !authService.isAdminSig()
+      admin_table__body: isAdmin,
+      user_table__body: !isAdmin
     }"
     >
       <td stopPropagation (click)="modalService.openModal('Image')">
@@ -35,7 +35,7 @@
       <td>{{ product.qty }}</td>
       <td>{{ product.price | uahToEur: 40 | currency: 'EUR ' }}</td>
       <td>
-        <div *ngIf="authService.isAdminSig()">
+        <div *ngIf="isAdmin">
           <button stopPropagation class="btn btn-orange mb-1"
                   (click)="modalService.openModal('Update product', product)">
             update
