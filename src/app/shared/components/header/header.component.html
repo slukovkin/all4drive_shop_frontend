@@ -7,13 +7,9 @@
 
     <nav *ngIf="this.authService.isAdminSig(); else isNotAdmin" class="justify-end">
       <ul class="flex items-center gap-2">
-        <!--        <li class="text-white/50">-->
-        <!--          <button routerLink="home" class="btn btn-action">Home</button>-->
-        <!--        </li>-->
         <li class="text-white/50">
           <button routerLink="products" class="btn btn-action">Товар</button>
         </li>
-        <!--        <li class="text-white/50"><a class="btn btn-action" (click)="addProduct()">Добавить товар</a></li>-->
         <li class="text-white/50">
           <button class="btn btn-action" [disabled]="true">Приход товара</button>
         </li>
@@ -36,7 +32,7 @@
     </nav>
 
     <ng-template #isNotAdmin>
-      <nav class="flex justify-end">
+      <nav class="flex items-center">
         <ul class="flex items-center gap-2">
           <li class="text-white/50">
             <button routerLink="home" class="btn btn-action">Home</button>
@@ -49,10 +45,6 @@
           </li>
         </ul>
       </nav>
-      <!--      <ul class="flex items-center gap-4 ml-auto">-->
-      <!--        <li class="text-white/50"><a href="#">Registration</a></li>-->
-      <!--        <li class="text-white/50"><a href="#">Login</a></li>-->
-      <!--      </ul>-->
     </ng-template>
   </div>
 </header>

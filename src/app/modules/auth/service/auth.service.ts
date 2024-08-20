@@ -13,7 +13,7 @@ import { IResponseUser } from '../types/response-user.interface'
 export class AuthService {
 
   isAuthSig = signal<boolean>(false)
-  isAdminSig = signal<boolean>(true)
+  isAdminSig = signal<boolean>(false)
 
   constructor(
     private readonly http: HttpClient,
@@ -27,6 +27,9 @@ export class AuthService {
     return this.http.post<IResponseUser>(Constants.BASE_URL + Constants.METHODS.LOGIN,
       user).pipe(
       tap((response: IResponseUser) => {
+        if (response.user.email === 'admin@gmail.com') {
+          this.isAdminSig.set(true)
+        }
         localStorage.setItem('token', response.token)
         this.isAuthSig.set(true)
       }),
@@ -59,6 +62,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token')
     this.isAuthSig.set(false)
+    this.isAdminSig.set(false)
     this.router.navigate([''])
     this.toast.success('Logout')
   }

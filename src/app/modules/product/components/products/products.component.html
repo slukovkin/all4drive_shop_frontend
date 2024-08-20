@@ -1,33 +1,49 @@
 <main>
-  <table class="mx-auto w-full">
+  <table class="mx-auto w-full" *ngIf="productService.products">
     <tr
-      class=" w-full bg-black grid grid-cols-6 px-4 py-1 justify-between border border-slate-500 h-[50px] items-center">
-      <th>Image</th>
-      <th>Code</th>
-      <th>Article</th>
-      <th>Title</th>
-      <th>Qty</th>
-      <th>Price</th>
+      class="w-full bg-black grid grid-cols-8 px-4 py-1 justify-between
+      border border-slate-500 h-[50px] items-center">
+      <th>Изображение</th>
+      <th>Код</th>
+      <th>Артикул</th>
+      <th>Наименование</th>
+      <th>Производитель</th>
+      <th>Количество</th>
+      <th>Цена</th>
+      <th></th>
     </tr>
 
 
-    <tr *ngFor="let product of products"
-        (click)="modalService.openModal()"
-        class="grid grid-cols-6 mt-1 px-4 py-1 text-center
-        items-center cursor-pointer select-none border border-slate-500
-      ">
-      <td><img [src]="product.imageUrl" alt="{{product.title}}" class="mx-auto image-circle">
+    <tr stopPropagation *ngFor="let product of productService.products"
+        (click)="modalService.openModal('Create product')"
+        class="grid grid-cols-8 mt-1 px-4 py-1 text-center items-center
+        cursor-pointer select-none border border-slate-500">
+      <td stopPropagation (click)="modalService.openModal('Image')">
+        <!--        // TODO открытие изображения в модальном окне-->
+
+        <img [src]="product.imageUrl" alt="{{product.title}}"
+             class="mx-auto image-circle">
       </td>
       <td>{{ product.code }}</td>
-      <td>{{ product.article }}</td>
-      <td>{{ product.title }}</td>
+      <td>{{ product.article | titlecase }}</td>
+      <td>{{ product.title | titlecase }}</td>
+      <td>{{ product.brand | titlecase }}</td>
       <td>{{ product.qty }}</td>
       <td>{{ product.price | uahToEur: 40 | currency: 'EUR ' }}</td>
+      <td>
+        <div *ngIf="authService.isAdminSig()">
+          <button stopPropagation class="btn btn-orange mb-1"
+                  (click)="modalService.openModal('Update', product)">
+            update
+          </button>
+          <button stopPropagation class="btn btn-red" (click)="delete(product.id)">delete</button>
+        </div>
+      </td>
     </tr>
   </table>
 
   <ng-container *ngIf="modalService.isVisible | async">
-    <app-modal title="Create product">
+    <app-modal [title]="modalService.titleSing()" [product]="modalService.productSign()">
       <app-product-form></app-product-form>
     </app-modal>
   </ng-container>

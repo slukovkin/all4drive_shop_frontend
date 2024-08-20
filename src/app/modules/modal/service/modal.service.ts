@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core'
-import { IProduct } from '../../product/types/product.interfaces'
+import { Injectable, signal } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
+import { AuthService } from '../../auth/service/auth.service'
 
 @Injectable({
   providedIn: 'root',
@@ -8,18 +8,20 @@ import { BehaviorSubject } from 'rxjs'
 export class ModalService {
   isVisible = new BehaviorSubject(false)
 
-  product?: IProduct
+  titleSing = signal<string>('')
+  productSign = signal<any>('')
 
-  constructor() {
+  constructor(
+    private readonly authService: AuthService,
+  ) {
   }
 
-  updateProduct(product: IProduct) {
-    this.product = product
-    this.openModal()
-  }
-
-  openModal() {
-    this.isVisible.next(true)
+  openModal(title: string, params?: any) {
+    if (this.authService.isAdminSig()) {
+      this.titleSing.set(title)
+      this.productSign.set(params)
+      this.isVisible.next(true)
+    }
   }
 
   closeModal() {

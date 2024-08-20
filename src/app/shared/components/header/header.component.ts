@@ -20,9 +20,10 @@ export class HeaderComponent {
     public authService: AuthService) {
   }
 
-  addProduct() {
-    this.modalService.openModal()
-  }
+  //
+  // addProduct() {
+  //   this.modalService.openModal()
+  // }
 
   exit() {
     this.authService.logout()

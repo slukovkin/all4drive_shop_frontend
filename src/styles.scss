@@ -60,6 +60,7 @@ footer {
 
 
 @layer components {
+
   .input {
     @apply mt-3 rounded-md text-sm border-transparent bg-white p-3 outline-2 border border-gray-400 focus:border-blue-500;
   }

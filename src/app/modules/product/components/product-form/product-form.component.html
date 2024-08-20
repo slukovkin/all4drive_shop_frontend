@@ -7,7 +7,8 @@
     <input
       formControlName="code"
       required
-      value="{{product?.code}}"
+      [defaultValue]="product?.code"
+      [readOnly]="product?.id"
       type="text" id="code" class="input" placeholder="Code:">
   </div>
   <div class="inline-flex"
@@ -31,7 +32,7 @@
     <input
       formControlName="article"
       required
-      value="{{product?.article}}"
+      [defaultValue]="product?.article"
       type="text" id="article" class="input" placeholder="Article:">
   </div>
   <div class="inline-flex"
@@ -49,7 +50,7 @@
     <input
       formControlName="title"
       required
-      value="{{product?.title}}"
+      [defaultValue]="product?.title"
       type="text" id="title" class="input" placeholder="Title:">
   </div>
   <div class="inline-flex"
@@ -67,6 +68,7 @@
     <input
       formControlName="brand"
       required
+      [defaultValue]="product?.brand"
       type="text" id="brand" class="input" placeholder="Brand:">
   </div>
 
@@ -76,6 +78,7 @@
     <input
       formControlName="price"
       required
+      [defaultValue]="product?.price"
       type="text" id="price" class="input" placeholder="Price:">
   </div>
 
@@ -85,6 +88,7 @@
     <input
       formControlName="qty"
       required
+      [defaultValue]="product?.qty"
       type="text" id="qty" class="input" placeholder="Qty:">
   </div>
 
@@ -94,12 +98,13 @@
     <label for="picture" class="text-start text-sm mt-2">Picture</label>
     <input
       formControlName="picture"
-      type="file" id="picture" class="input" placeholder="Picture:">
+      [defaultValue]="product?.imageUrl"
+      type="text" id="picture" class="input" placeholder="Picture:">
   </div>
 
   <div class="flex items-center gap-4 mt-5 justify-center">
     <button [disabled]="this.productForm.invalid" class="btn btn-green" type="submit">Confirm</button>
-    <button class="btn btn-red" type="reset">Cancel</button>
+    <button *ngIf="!product?.id" class="btn btn-red" type="reset">Cancel</button>
   </div>
 </form>
 

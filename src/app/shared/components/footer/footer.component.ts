@@ -20,7 +20,7 @@ export class FooterComponent {
     private readonly modalService: ModalService) {
   }
 
-  addProduct() {
-    this.modalService.openModal()
-  }
+  // addProduct() {
+  //   this.modalService.openModal()
+  // }
 }

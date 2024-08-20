@@ -1,3 +1,9 @@
 export interface IResponseUser {
-  token: string;
+  user: IUser
+  token: string
+}
+
+interface IUser {
+  email: string,
+  role: string,
 }
