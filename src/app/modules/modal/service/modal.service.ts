@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
 import { AuthService } from '../../auth/service/auth.service'
+import { IProduct } from '../../product/types/product.interfaces'
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +17,10 @@ export class ModalService {
   ) {
   }
 
-  openModal(title: string, params?: any) {
+  openModal(title: string, product?: IProduct) {
     if (this.authService.isAdminSig()) {
       this.titleSing.set(title)
-      this.productSign.set(params)
+      this.productSign.set(product)
       this.isVisible.next(true)
     }
   }
