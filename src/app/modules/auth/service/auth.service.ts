@@ -27,7 +27,7 @@ export class AuthService {
     return this.http.post<IResponseUser>(Constants.BASE_URL + Constants.METHODS.LOGIN,
       user).pipe(
       tap((response: IResponseUser) => {
-        if (response.user.email === 'admin@gmail.com') {
+        if (response.user.roles[0].value === 'ADMIN') {
           this.isAdminSig.set(true)
         }
         localStorage.setItem('token', response.token)

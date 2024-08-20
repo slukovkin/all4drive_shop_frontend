@@ -5,5 +5,11 @@ export interface IResponseUser {
 
 interface IUser {
   email: string,
-  role: string,
+  roles: IRole[]
+}
+
+interface IRole {
+  id: number
+  value: string
+  description: string
 }
