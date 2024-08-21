@@ -8,6 +8,7 @@ import { HomeComponent } from './modules/home/components/home/home.component'
 import { IncomingInvoiceComponent } from './modules/product/components/incoming-invoice/incoming-invoice.component'
 import { DocumentsComponent } from './modules/documents/components/documents/documents.component'
 import { OutgoingInvoiceComponent } from './modules/product/components/outgoing-invoice/outgoing-invoice.component'
+import { SettingsComponent } from './shared/settings/settings/settings.component'
 
 export const routes: Routes = [
   {
@@ -46,6 +47,11 @@ export const routes: Routes = [
   {
     path: 'documents',
     component: DocumentsComponent,
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
     canActivate: [authGuard()],
   },
   {
