@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms'
 import { NgForOf } from '@angular/common'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { ProductService } from '../../service/product.service'
+import { MatOption } from '@angular/material/core'
+import { MatSelect } from '@angular/material/select'
 
 @Component({
   selector: 'app-outgoing-invoice',
@@ -12,6 +14,8 @@ import { ProductService } from '../../service/product.service'
     FaIconComponent,
     FormsModule,
     NgForOf,
+    MatOption,
+    MatSelect,
   ],
   templateUrl: './outgoing-invoice.component.html',
   styleUrl: './outgoing-invoice.component.scss',

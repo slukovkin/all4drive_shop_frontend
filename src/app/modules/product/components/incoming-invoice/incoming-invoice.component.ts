@@ -4,6 +4,8 @@ import { NgForOf } from '@angular/common'
 import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { ReactiveFormsModule } from '@angular/forms'
+import { MatOption } from '@angular/material/core'
+import { MatSelect } from '@angular/material/select'
 
 @Component({
   selector: 'app-incoming-invoice',
@@ -13,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms'
     FaIconComponent,
     FontAwesomeModule,
     ReactiveFormsModule,
+    MatOption,
+    MatSelect,
   ],
   templateUrl: './incoming-invoice.component.html',
   styleUrl: './incoming-invoice.component.scss',
