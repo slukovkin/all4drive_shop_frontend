@@ -11,9 +11,9 @@ import { IResponseUser } from '../types/response-user.interface'
   providedIn: 'root',
 })
 export class AuthService {
-  
+
   isAuthSig = signal<boolean>(false)
-  isAdminSig = signal<boolean>(false)
+  isAdminSig = signal<boolean>(true)
 
   constructor(
     private readonly http: HttpClient,

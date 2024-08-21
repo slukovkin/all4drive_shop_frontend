@@ -5,6 +5,8 @@ import { ProductsComponent } from './modules/product/components/products/product
 import { authGuard } from './shared/guards/auth.guard'
 import { ProductFormComponent } from './modules/product/components/product-form/product-form.component'
 import { HomeComponent } from './modules/home/components/home/home.component'
+import { InvoiceProductComponent } from './modules/product/components/invoice-product/invoice-product.component'
+import { DocumentsComponent } from './modules/documents/components/documents/documents.component'
 
 export const routes: Routes = [
   {
@@ -31,6 +33,16 @@ export const routes: Routes = [
     canActivate: [authGuard()],
   },
   {
-    path: '**', redirectTo: '', pathMatch: 'full',
+    path: 'invoice',
+    component: InvoiceProductComponent,
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'documents',
+    component: DocumentsComponent,
+    canActivate: [authGuard()],
+  },
+  {
+    path: '**', redirectTo: 'home', pathMatch: 'full',
   },
 ]

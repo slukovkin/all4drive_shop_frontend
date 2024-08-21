@@ -37,7 +37,7 @@
       <td>
         <div *ngIf="isAdmin">
           <button stopPropagation class="btn btn-orange mb-1"
-                  (click)="modalService.openModal('Update product', product)">
+                  (click)="modalService.openModal('Update product',product)">
             update
           </button>
           <button stopPropagation class="btn btn-red" (click)="delete(product.id)">delete</button>
