@@ -5,6 +5,9 @@ import { RouterLink } from '@angular/router'
 import { ModalService } from '../../../modules/modal/service/modal.service'
 import { FormsModule } from '@angular/forms'
 import { ProductService } from '../../../modules/product/service/product.service'
+import { FaIconComponent } from '@fortawesome/angular-fontawesome'
+import { faTruck } from '@fortawesome/free-solid-svg-icons/faTruck'
+import { faArrowsLeftRightToLine } from '@fortawesome/free-solid-svg-icons/faArrowsLeftRightToLine'
 
 @Component({
   selector: 'app-header',
@@ -13,11 +16,15 @@ import { ProductService } from '../../../modules/product/service/product.service
     NgIf,
     RouterLink,
     FormsModule,
+    FaIconComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+
+  productIcon = faTruck
+  invoiceIcon = faArrowsLeftRightToLine
 
   article = ''
   isAdmin = false

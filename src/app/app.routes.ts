@@ -5,8 +5,9 @@ import { ProductsComponent } from './modules/product/components/products/product
 import { authGuard } from './shared/guards/auth.guard'
 import { ProductFormComponent } from './modules/product/components/product-form/product-form.component'
 import { HomeComponent } from './modules/home/components/home/home.component'
-import { InvoiceProductComponent } from './modules/product/components/invoice-product/invoice-product.component'
+import { IncomingInvoiceComponent } from './modules/product/components/incoming-invoice/incoming-invoice.component'
 import { DocumentsComponent } from './modules/documents/components/documents/documents.component'
+import { OutgoingInvoiceComponent } from './modules/product/components/outgoing-invoice/outgoing-invoice.component'
 
 export const routes: Routes = [
   {
@@ -33,8 +34,13 @@ export const routes: Routes = [
     canActivate: [authGuard()],
   },
   {
-    path: 'invoice',
-    component: InvoiceProductComponent,
+    path: 'incoming_invoice',
+    component: IncomingInvoiceComponent,
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'outgoing_invoice',
+    component: OutgoingInvoiceComponent,
     canActivate: [authGuard()],
   },
   {

@@ -1,0 +1,113 @@
+<form class="mx-auto text-center">
+  <div class="mt-2">
+    <h4 class="text-center">Приходная накладная</h4>
+  </div>
+  <div class="grid grid-cols-3 w-full text-center rounded-md px-1">
+    <div class="flex flex-col text-start px-3">
+      <div class="flex flex-col">
+        <label for="number_doc">Номер документа</label>
+        <input type="text" id="number_doc">
+      </div>
+      <div class="flex flex-col text-start">
+        <label for="data_doc">Дата докумета</label>
+        <input type="date" id="data_doc">
+      </div>
+      <div class="flex flex-col text-start">
+        <label for="buyer">Покупатель</label>
+        <input type="text" id="buyer">
+      </div>
+      <div class="flex flex-col text-start">
+        <label for="supplier-select">Поставщик</label>
+        <!--        <input type="text" id="supplier">-->
+        <select id="supplier-select" name="select">
+          <option value="">Выберите поставщика</option>
+          <option value="value1">Поставщик 1</option>
+          <option value="value1">Поставщик 2</option>
+          <option value="value1">Поставщик 3</option>
+          <option value="value1">Поставщик 4</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex flex-col text-start px-3">
+      <div class="flex flex-col text-start">
+        <label for="store">Склад</label>
+        <input type="text" id="store">
+      </div>
+      <div class="flex flex-col text-start">
+        <label for="check">Счет</label>
+        <input type="text" id="check">
+      </div>
+      <div class="flex flex-col text-start">
+        <label for="currency">Валюта</label>
+        <input type="text" id="currency">
+      </div>
+    </div>
+    <div class="flex flex-col text-start px-3">
+      <div class="flex flex-col text-start">
+        <label for="basis">Основание</label>
+        <input type="text" id="basis">
+      </div>
+      <div class="flex flex-col text-start">
+        <label for="note">Примечание</label>
+        <input type="text" id="note">
+      </div>
+      <div class="flex flex-col text-start">
+        <label for="scan_doc">Скан. документа</label>
+        <input type="text" id="scan_doc">
+      </div>
+    </div>
+
+
+  </div>
+  <div class="grid mt-2 w-full px-2 py-2 ">
+    <nav>
+      <div class="w-full mb-2 text-start px-1">
+        <button class="btn btn-action mr-1">Добавить</button>
+        <button class="btn btn-action mr-1">Сохранить</button>
+        <button class="btn btn-action mr-1">Провести</button>
+        <button class="btn btn-red mr-1">Очистить</button>
+      </div>
+    </nav>
+    <table class="grid grid-cols-1 px-1 py-1 w-full justify-center items-center mx-auto">
+
+      <tr class="grid grid-cols-7 justify-between border border-slate-500">
+        <th>Наименование</th>
+        <th>Артикул</th>
+        <th>Единицы</th>
+        <th>Количество</th>
+        <th>Цена</th>
+        <th>Сумма</th>
+        <th></th>
+      </tr>
+
+      <ng-container *ngFor="let product of productService.products">
+        <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-center border border-slate-500">
+          <td>{{ product.title }}</td>
+          <td>{{ product.article }}</td>
+          <td>шт</td>
+          <td>{{ product.qty }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.qty * product.price }}</td>
+          <td>
+            <div>
+              <fa-icon [icon]="editIcon" class="text-amber-500 mr-2"></fa-icon>
+              <fa-icon [icon]="deleteIcon" class="text-red-500"></fa-icon>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+
+      <tr class="grid grid-cols-7  mt-2 px-2 py-2 justify-between text-end border border-slate-500">
+        <td class="col-span-5 text-end">Сумма:</td>
+        <td>0</td>
+      </tr>
+      <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-end border border-slate-500">
+        <td class="col-span-5 text-end">Оплачено:</td>
+        <td>0</td>
+      </tr>
+    </table>
+  </div>
+</form>
+
+
+

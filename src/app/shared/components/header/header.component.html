@@ -17,13 +17,17 @@
           >
         </li>
         <li class="text-white/50">
-          <button routerLink="products" class="btn btn-action">Товар</button>
+          <button routerLink="products" class="btn btn-action">
+            Товар
+          </button>
         </li>
         <li class="text-white/50">
-          <button class="btn btn-action" [disabled]="false" routerLink="invoice">Приход товара</button>
+          <button class="btn btn-action" [disabled]="false" routerLink="incoming_invoice">
+            Приход товара
+          </button>
         </li>
         <li class="text-white/50">
-          <button class="btn btn-action" [disabled]="true">Расход товара</button>
+          <button class="btn btn-action" [disabled]="false" routerLink="outgoing_invoice">Расход товара</button>
         </li>
         <li class="text-white/50">
           <button class="btn btn-action" [disabled]="false" routerLink="documents">Журналы</button>

@@ -36,11 +36,15 @@
       <td>{{ product.price | uahToEur: 40 | currency: 'EUR ' }}</td>
       <td>
         <div *ngIf="isAdmin">
-          <button stopPropagation class="btn btn-orange mb-1"
-                  (click)="modalService.openModal('Update product',product)">
+          <fa-icon stopPropagation class="btn btn-orange mr-2 px-2"
+                   [icon]="editIcon"
+                   (click)="modalService.openModal('Update product',product)">
             update
-          </button>
-          <button stopPropagation class="btn btn-red" (click)="delete(product.id)">delete</button>
+          </fa-icon>
+          <fa-icon stopPropagation class="btn btn-red px-2" (click)="delete(product.id)"
+                   [icon]="deleteIcon"
+          >delete
+          </fa-icon>
         </div>
       </td>
     </tr>

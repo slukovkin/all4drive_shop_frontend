@@ -10,6 +10,8 @@ import { UahToEurPipe } from '../../../../shared/pipes/uah-to-eur.pipe'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 import { AuthService } from '../../../auth/service/auth.service'
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
+import { FaIconComponent } from '@fortawesome/angular-fontawesome'
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-products',
@@ -28,12 +30,15 @@ import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
     TitleCasePipe,
     NgClass,
     FilterPipe,
+    FaIconComponent,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent {
 
+  editIcon = faPenToSquare
+  deleteIcon = faTrash
   title = ''
   isAdmin = false
 
