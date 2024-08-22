@@ -9,23 +9,24 @@
         <input type="text" id="number_doc">
       </div>
       <div class="flex flex-col text-start">
-        <label for="data_doc">Дата докумета</label>
+        <label for="data_doc">Дата документа</label>
         <input type="date" id="data_doc">
       </div>
       <div class="flex flex-col text-start">
-        <label for="buyer">Покупатель</label>
-        <input type="text" id="buyer">
+        <label>Покупатель</label>
+        <mat-select class="py-1 bg-white rounded-md px-2" value="0">
+          <mat-option value="0">Моя фирма</mat-option>
+
+        </mat-select>
       </div>
       <div class="flex flex-col text-start">
         <label for="supplier-select">Поставщик</label>
-        <!--        <input type="text" id="supplier">-->
-        <select id="supplier-select" name="select">
-          <option value="">Выберите поставщика</option>
-          <option value="value1">Поставщик 1</option>
-          <option value="value1">Поставщик 2</option>
-          <option value="value1">Поставщик 3</option>
-          <option value="value1">Поставщик 4</option>
-        </select>
+        <mat-select id="supplier-select" class="py-1 bg-white rounded-md px-2" value="0">
+          <mat-option value="0">Поставщик 1</mat-option>
+          <mat-option value="1">Поставщик 2</mat-option>
+          <mat-option value="2">Поставщик 3</mat-option>
+          <mat-option value="3">Поставщик 4</mat-option>
+        </mat-select>
       </div>
     </div>
     <div class="flex flex-col text-start px-3">
@@ -56,8 +57,6 @@
         <input type="text" id="scan_doc">
       </div>
     </div>
-
-
   </div>
   <div class="grid mt-2 w-full px-2 py-2 ">
     <nav>
@@ -108,6 +107,3 @@
     </table>
   </div>
 </form>
-
-
-
