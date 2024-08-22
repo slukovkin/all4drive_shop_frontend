@@ -1,14 +1,15 @@
-import { Routes } from '@angular/router';
-import { LoginComponent } from './modules/auth/components/login/login.component';
-import { RegistrationComponent } from './modules/auth/components/registration/registration.component';
-import { ProductsComponent } from './modules/product/components/products/products.component';
-import { authGuard } from './shared/guards/auth.guard';
-import { ProductFormComponent } from './modules/product/components/product-form/product-form.component';
-import { HomeComponent } from './modules/home/components/home/home.component';
-import { DocumentsComponent } from './modules/documents/components/documents/documents.component';
-import { SettingsComponent } from './shared/settings/settings/settings.component';
-import { IncomingInvoiceComponent } from './modules/documents/components/incoming-invoice/incoming-invoice.component';
-import { OutgoingInvoiceComponent } from './modules/documents/components/outgoing-invoice/outgoing-invoice.component';
+import { Routes } from '@angular/router'
+import { LoginComponent } from './modules/auth/components/login/login.component'
+import { RegistrationComponent } from './modules/auth/components/registration/registration.component'
+import { ProductsComponent } from './modules/product/components/products/products.component'
+import { authGuard } from './shared/guards/auth.guard'
+import { ProductFormComponent } from './modules/product/components/product-form/product-form.component'
+import { HomeComponent } from './modules/home/components/home/home.component'
+import { DocumentsComponent } from './modules/documents/components/documents/documents.component'
+import { SettingsComponent } from './shared/settings/components/settings/settings.component'
+import { IncomingInvoiceComponent } from './modules/documents/components/incoming-invoice/incoming-invoice.component'
+import { OutgoingInvoiceComponent } from './modules/documents/components/outgoing-invoice/outgoing-invoice.component'
+import { CustomerComponent } from './modules/customer/components/customer/customer.component'
 
 export const routes: Routes = [
   {
@@ -60,8 +61,13 @@ export const routes: Routes = [
     canActivate: [authGuard()],
   },
   {
+    path: 'customer',
+    component: CustomerComponent,
+    canActivate: [authGuard()],
+  },
+  {
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full',
   },
-];
+]

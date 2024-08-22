@@ -11,6 +11,9 @@ export const Constants = {
     GET_PRODUCT_BY_ID: 'products/',
     UPDATE_PRODUCT_BY_ID: 'products/',
     DELETE_PRODUCT_BY_ID: 'products/',
+    GET_ALL_CUSTOMERS: 'customers',
+    CREATE_CUSTOMERS: 'customers',
+    UPDATE_CUSTOMERS_BY_ID: 'customers/',
+    DELETE_CUSTOMERS_BY_ID: 'customers/',
   },
-
 }
