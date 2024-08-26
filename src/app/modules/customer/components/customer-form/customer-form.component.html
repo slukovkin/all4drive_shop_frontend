@@ -1,8 +1,7 @@
 <form (ngSubmit)="submit()" [formGroup]="customerForm">
-  <div class="flex flex-col w-2/3 text-center mx-auto my-6">
-    <h4 class="text-white text-center">Клиент</h4>
+  <div class="flex flex-col text-center mx-auto my-6">
     <div>
-      <div class="grid mx-auto w-1/2 mt-2 text-start">
+      <div class="grid mx-auto mt-2 text-start">
         <label for="name">Имя</label>
         <input
           class="input"
@@ -14,10 +13,10 @@
       <div
         *ngIf="customerForm.controls['name'].hasError('required')
           && customerForm.controls['name'].touched"
-        class="grid mx-auto w-1/2 mt-1 text-start">
+        class="grid mx-auto mt-1 text-start">
         <span class="text-red-600">Required field</span>
       </div>
-      <div class="grid mx-auto w-1/2 mt-2 text-start">
+      <div class="grid mx-auto  mt-2 text-start">
         <label for="surname">Фамилия</label>
         <input
           formControlName="surname"
@@ -25,7 +24,7 @@
           class="input"
           type="text" id="surname" placeholder="Фамилия...">
       </div>
-      <div class="grid mx-auto w-1/2 mt-2 text-start">
+      <div class="grid mx-auto mt-2 text-start">
         <label for="email">Электронная почта</label>
         <input
           formControlName="email"
@@ -37,15 +36,15 @@
       <div
         *ngIf="customerForm.controls['email'].hasError('required')
           && customerForm.controls['email'].touched"
-        class="grid mx-auto w-1/2 mt-1 text-start">
+        class="grid mx-auto mt-1 text-start">
         <span class="text-red-600">Required field</span>
       </div>
       <div
         *ngIf="customerForm.controls['email'].hasError('email')"
-        class="grid mx-auto w-1/2 mt-1 text-start">
+        class="grid mx-auto mt-1 text-start">
         <span class="text-red-600">Enter correctly email</span>
       </div>
-      <div class="grid mx-auto w-1/2 mt-2 text-start">
+      <div class="grid mx-auto mt-2 text-start">
         <label for="phone">Телефон</label>
         <input
           class="input"
@@ -57,17 +56,17 @@
       <div
         *ngIf="customerForm.controls['phone'].hasError('required')
           && customerForm.controls['phone'].touched"
-        class="grid mx-auto w-1/2 mt-1 text-start">
+        class="grid mx-auto  mt-1 text-start">
         <span class="text-red-600">Required field</span>
       </div>
-      <div class="grid mx-auto w-1/2 mt-2 text-start">
+      <div class="grid mx-auto mt-2 text-start">
         <label for="description">Описание</label>
         <textarea
           formControlName="description"
           [defaultValue]="customer?.description"
           placeholder="Введите описание..." id="description" class="rounded-md text-black p-2"></textarea>
       </div>
-      <div class="text-center mt-3 w-1/2 mx-auto">
+      <div class="text-center mt-3 mx-auto">
         <button
           class="btn btn-action my-1 py-3 w-full"
           [disabled]="this.customerForm.invalid"

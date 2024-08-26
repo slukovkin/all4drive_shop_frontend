@@ -6,6 +6,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CustomerService } from '../services/customer.service'
 import { ICustomer } from '../customer/types/customer.interface'
 import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
+import { ModalService } from '../../../modal/service/modal.service'
 
 @Component({
   selector: 'app-customer-form',
@@ -26,9 +27,10 @@ export class CustomerFormComponent {
   customer?: ICustomer
 
   constructor(
+    private readonly modalService: ModalService,
     public readonly customerService: CustomerService,
   ) {
-    this.customer = this.customerService.customerSign()
+    this.customer = this.modalService.itemSign()
     this.customerForm = new FormGroup({
       name: new FormControl(this.customer?.name, [Validators.required]),
       surname: new FormControl(this.customer?.surname),

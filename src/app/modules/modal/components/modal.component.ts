@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { ModalService } from '../service/modal.service'
 import { TitleCasePipe, UpperCasePipe } from '@angular/common'
-import { IProduct } from '../../product/types/product.interfaces'
 
 @Component({
   selector: 'app-modal',
@@ -15,7 +14,8 @@ import { IProduct } from '../../product/types/product.interfaces'
 })
 export class ModalComponent {
   @Input() title?: string
-  @Input() product?: IProduct | null
+
+  // @Input() product?: IProduct | null
 
   constructor(
     public readonly modalService: ModalService,

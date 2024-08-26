@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, signal } from '@angular/core'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { NgIf } from '@angular/common'
 import { RouterLink } from '@angular/router'
@@ -6,6 +6,8 @@ import { ProductService } from '../../service/product.service'
 import { IProduct, ProductCreationAttributes } from '../../types/product.interfaces'
 import { ModalService } from '../../../modal/service/modal.service'
 import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
+import { FaIconComponent } from '@fortawesome/angular-fontawesome'
+import { faCloudUpload } from '@fortawesome/free-solid-svg-icons/faCloudUpload'
 
 
 @Component({
@@ -16,6 +18,7 @@ import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
     NgIf,
     ReactiveFormsModule,
     RouterLink,
+    FaIconComponent,
   ],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
@@ -23,12 +26,15 @@ import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
 export class ProductFormComponent {
   product?: IProduct
   productForm: FormGroup
+  previewImage = signal<string>('')
+
+  uploadIcon = faCloudUpload
 
   constructor(
     public readonly modalService: ModalService,
     public readonly productService: ProductService,
   ) {
-    this.product = this.modalService.productSign()
+    this.product = this.modalService.itemSign()
     this.productForm = new FormGroup({
       code: new FormControl(this.product?.code,
         [Validators.required,
@@ -42,6 +48,16 @@ export class ProductFormComponent {
       qty: new FormControl(this.product?.qty),
       picture: new FormControl(this.product?.imageUrl),
     })
+  }
+
+  fileHandler(event: Event) {
+    const file = (event.target as HTMLInputElement)?.files?.[0]
+    if (!file || !file.type.match('image')) return
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      this.previewImage.set(event.target?.result?.toString() ?? '')
+    }
+    reader.readAsDataURL(file)
   }
 
   submit() {
@@ -73,5 +89,9 @@ export class ProductFormComponent {
     } else {
       console.log('Not valid')
     }
+  }
+
+  resetForm() {
+    this.productForm.reset()
   }
 }

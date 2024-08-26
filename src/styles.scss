@@ -27,13 +27,12 @@ html, body {
   //height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 80px 1fr 80px;
+  grid-template-rows: 80px 1fr;
   grid-gap: 5px 0;
   grid-auto-flow: column;
   grid-template-areas:
         "header"
         "cont"
-        "footer"
 }
 
 header {
@@ -49,14 +48,15 @@ main {
   grid-area: cont;
 }
 
-footer {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  background: black;
-  z-index: 100;
-  grid-area: footer;
-}
+//
+//footer {
+//  width: 100%;
+//  position: fixed;
+//  bottom: 0;
+//  background: black;
+//  z-index: 100;
+//  grid-area: footer;
+//}
 
 input {
   @apply rounded-md text-sm border-transparent bg-white px-3 py-1 outline-1
@@ -83,11 +83,11 @@ input {
   }
 
   .input {
-    @apply rounded-md text-sm border-transparent bg-white p-3 outline-2 border border-gray-400 focus:border-blue-500;
+    @apply rounded-md w-full text-sm border-transparent bg-white p-3 outline-2 border border-gray-400 focus:border-blue-500;
   }
 
   .btn {
-    @apply w-[150px] text-sm py-1 px-4 rounded-sm text-gray-300 transition-colors
+    @apply text-sm py-1 px-4 rounded-sm text-gray-300 transition-colors
   }
 }
 

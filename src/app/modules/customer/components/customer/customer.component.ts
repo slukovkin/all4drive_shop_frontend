@@ -10,6 +10,8 @@ import { StopPropagationDirective } from '../../../../shared/directives/stop-pro
 import { CustomerService } from '../services/customer.service'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { ICustomer } from './types/customer.interface'
+import { ProductFormComponent } from '../../../product/components/product-form/product-form.component'
+import { ModalService } from '../../../modal/service/modal.service'
 
 @Component({
   selector: 'app-customer',
@@ -27,6 +29,7 @@ import { ICustomer } from './types/customer.interface'
     MatSelect,
     NgForOf,
     StopPropagationDirective,
+    ProductFormComponent,
   ],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.scss',
@@ -37,14 +40,16 @@ export class CustomerComponent {
   deleteIcon = faTrash
 
   constructor(
+    public readonly modalService: ModalService,
     public readonly customerService: CustomerService,
   ) {
     this.customerService.getAllCustomers()
   }
 
   update(customer: ICustomer) {
-    this.customerService.customerSign.set(customer)
-    this.customerService.isShowCustomerForm.set(true)
+    // this.customerService.customerSign.set(customer)
+    this.modalService.openModal('Редактирование', customer)
+    // this.customerService.isShowCustomerForm.set(true)
   }
 
   delete(id: number) {
