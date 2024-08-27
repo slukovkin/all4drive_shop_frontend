@@ -118,9 +118,9 @@
     </div>
 
   </div>
-
+  <!--  this.productForm.invalid-->
   <div class="flex items-center gap-4 mt-5 justify-center">
-    <button [disabled]="this.productForm.invalid" class="btn btn-green" type="submit">Confirm</button>
+    <button [disabled]="false" class="btn btn-green" type="submit">Confirm</button>
     <button *ngIf="!product?.id" class="btn btn-red"
             (click)="resetForm()"
     >Cancel

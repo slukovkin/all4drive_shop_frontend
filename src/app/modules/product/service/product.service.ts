@@ -33,7 +33,7 @@ export class ProductService {
   }
 
   create(product: ProductCreationAttributes) {
-    return this.http.post<IProduct>(Constants.BASE_URL + Constants.METHODS.GET_ALL_PRODUCTS, product)
+    return this.http.post<IProduct>(Constants.BASE_URL + Constants.METHODS.CREATE_PRODUCT, product)
       .pipe(
         tap((product) => this.products.push(product)),
         catchError((err) => {

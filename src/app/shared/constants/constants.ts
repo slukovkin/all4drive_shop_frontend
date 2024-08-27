@@ -8,6 +8,7 @@ export const Constants = {
     LOGIN: 'auth/login',
     REGISTRATION: 'auth/registration',
     GET_ALL_PRODUCTS: 'products',
+    CREATE_PRODUCT: 'products',
     GET_PRODUCT_BY_ID: 'products/',
     UPDATE_PRODUCT_BY_ID: 'products/',
     DELETE_PRODUCT_BY_ID: 'products/',
@@ -15,5 +16,7 @@ export const Constants = {
     CREATE_CUSTOMERS: 'customers',
     UPDATE_CUSTOMERS_BY_ID: 'customers/',
     DELETE_CUSTOMERS_BY_ID: 'customers/',
+    UPLOAD_IMAGE: 'storage',
+    GET_IMAGE_BY_FILENAME: 'storage/',
   },
 }

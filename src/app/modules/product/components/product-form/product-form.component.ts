@@ -8,6 +8,7 @@ import { ModalService } from '../../../modal/service/modal.service'
 import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { faCloudUpload } from '@fortawesome/free-solid-svg-icons/faCloudUpload'
+import { HttpClient } from '@angular/common/http'
 
 
 @Component({
@@ -27,10 +28,13 @@ export class ProductFormComponent {
   product?: IProduct
   productForm: FormGroup
   previewImage = signal<string>('')
+  productImage: any
+  pathFile: any
 
   uploadIcon = faCloudUpload
 
   constructor(
+    private readonly http: HttpClient,
     public readonly modalService: ModalService,
     public readonly productService: ProductService,
   ) {
@@ -52,16 +56,32 @@ export class ProductFormComponent {
 
   fileHandler(event: Event) {
     const file = (event.target as HTMLInputElement)?.files?.[0]
+
     if (!file || !file.type.match('image')) return
     const reader = new FileReader()
     reader.onload = (event) => {
+      // @ts-ignore
+      const formData = new FormData()
+      formData.append('file', file)
+      // this.productImage = formData
+      this.http.post('http://localhost:5000/files', formData).subscribe((path) => {
+        this.pathFile = path
+      })
       this.previewImage.set(event.target?.result?.toString() ?? '')
     }
     reader.readAsDataURL(file)
+
   }
+
+  //
+  // getFile(event: Event) {
+  //   // @ts-ignore
+  //   this.productImage = event.target!.files[0]
+  // }
 
   submit() {
     if (this.productForm.valid) {
+
       const newProduct: ProductCreationAttributes = {
         code: Number(this.productForm.controls['code'].value),
         article: this.productForm.controls['article'].value.toUpperCase(),
@@ -69,7 +89,7 @@ export class ProductFormComponent {
         brand: firstCharToUpperCase(this.productForm.controls['brand'].value),
         price: Number(this.productForm.controls['price'].value),
         qty: Number(this.productForm.controls['qty'].value),
-        imageUrl: this.productForm.controls['picture'].value,
+        imageUrl: this.pathFile,
       }
       if (this.product?.id) {
         this.productService.update(
