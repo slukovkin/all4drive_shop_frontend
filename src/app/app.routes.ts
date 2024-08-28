@@ -10,6 +10,7 @@ import { SettingsComponent } from './shared/settings/components/settings/setting
 import { IncomingInvoiceComponent } from './modules/documents/components/incoming-invoice/incoming-invoice.component'
 import { OutgoingInvoiceComponent } from './modules/documents/components/outgoing-invoice/outgoing-invoice.component'
 import { CustomerComponent } from './modules/customer/components/customer/customer.component'
+import { StoresComponent } from './modules/store/components/stores/stores.component'
 
 export const routes: Routes = [
   {
@@ -63,6 +64,11 @@ export const routes: Routes = [
   {
     path: 'customer',
     component: CustomerComponent,
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'stores',
+    component: StoresComponent,
     canActivate: [authGuard()],
   },
   {

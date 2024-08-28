@@ -42,8 +42,13 @@ export class SidebarComponent {
       label: 'Клиенты',
     },
     {
+      routerLink: 'stores',
+      label: 'Склады',
+    },
+    {
       routerLink: 'settings',
       label: 'Настройки',
     },
+
   ]
 }
