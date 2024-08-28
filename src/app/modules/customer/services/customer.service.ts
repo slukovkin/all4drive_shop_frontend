@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { ICustomer } from '../customer/types/customer.interface'
-import { Constants } from '../../../../shared/constants/constants'
+import { ICustomer } from '../components/customer/types/customer.interface'
+import { Constants } from '../../../shared/constants/constants'
 import { catchError, tap } from 'rxjs'
 import { ToastrService } from 'ngx-toastr'
 

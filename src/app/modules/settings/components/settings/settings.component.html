@@ -1,0 +1,82 @@
+<form>
+  <button class="btn btn-action w-full mb-2">Сохранить</button>
+  <div class="grid grid-cols-3 mx-auto w-full text-center h-full gap-2">
+    <div class="border border-slate-500 p-3 rounded-lg card-body">
+      <div class="flex flex-col">
+        <h5>Основные настройки</h5>
+        <label for="title_site" class="text-start my-2">Название сайта</label>
+        <input
+          class="input"
+          type="text" id="title_site" placeholder="Введите название сайта...">
+      </div>
+      <div class="flex flex-col">
+        <label for="select_round" class="text-start my-2">Количество знаков после запятой</label>
+        <mat-select id="select_round" class="py-2 bg-white rounded-md px-2" value="0">
+          <mat-option value="0">без копеек</mat-option>
+          <mat-option value="1">до 1 копейки</mat-option>
+          <mat-option value="2">до 10 копеек</mat-option>
+          <mat-option value="3">до 50 копеек</mat-option>
+        </mat-select>
+      </div>
+      <div class="flex flex-col">
+        <label for="format_date" class="text-start my-2">Формат даты</label>
+        <input type="date" id="format_date" class="input">
+      </div>
+      <div class="flex flex-col">
+        <label for="start_time" class="text-start my-2">Начало робочого дня</label>
+        <input type="time" id="start_time" class="input">
+      </div>
+      <div class="flex flex-col">
+        <label for="end_time" class="text-start my-2">Конец робочого дня</label>
+        <input type="time" id="end_time" class="input">
+      </div>
+
+    </div>
+    <div class="border border-slate-500 p-3 rounded-lg card-body">
+      <h5>Настройка бизнесс-процессов</h5>
+      <div class="flex flex-col card-body p-2">
+        <label>Тип отпускных цен</label>
+        <input type="text" class="input mb-1" id="type_price_1" placeholder="Розничная"
+               title="Согласно введённого значения будет расчитываться отпуская цена. Например: 50% от закупки">
+        <input type="text" class="input mb-1" id="type_price_2" placeholder="Мелкий опт"
+               title="Согласно введённого значения будет расчитываться отпуская цена. Например: 35% от закупки">
+        <input type="text" class="input mb-1" id="type_price_3" placeholder="Опт"
+               title="Согласно введённого значения будет расчитываться отпуская цена. Например: 20% от закупки">
+        <input type="text" class="input mb-1" id="type_price_4" placeholder="Закупочная"
+               title="Согласно введённого значения будет расчитываться отпуская цена. Например: 0% от закупки">
+      </div>
+      <div class="card-body p-2">
+        <div class="flex flex-col my-1">
+          <label for="per_default">Наценка по умолчанию</label>
+          <input type="text" class="input" id="per_default" placeholder="50%">
+        </div>
+        <div class="flex flex-col">
+          <label for="proccess_sale_in">Процес оплаты по ПН</label>
+          <mat-select id="proccess_sale_in" class="py-2 bg-white rounded-md px-2" value="0">
+            <mat-option value="0">По факту</mat-option>
+            <mat-option value="1">Предоплата</mat-option>
+            <mat-option value="2">С отрочкой платежа</mat-option>
+          </mat-select>
+        </div>
+        <div class="flex flex-col">
+          <label for="proccess_sale_out">Процес оплаты по РН</label>
+          <mat-select id="proccess_sale_out" class="py-2 bg-white rounded-md px-2" value="0">
+            <mat-option value="0">По факту</mat-option>
+            <mat-option value="1">Предоплата</mat-option>
+            <mat-option value="2">С отрочкой платежа</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <app-setting-currency></app-setting-currency>
+      </div>
+    </div>
+    <div class="border border-slate-500 p-3 rounded-lg card-body">
+      <h5>Настройка коммуникаций</h5>
+      <div class="col-12  col-md-5 col-xl-4  ">
+        <app-setting-sms></app-setting-sms>
+        <app-setting-telegram></app-setting-telegram>
+      </div>
+    </div>
+  </div>
+</form>
