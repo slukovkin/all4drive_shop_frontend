@@ -17,16 +17,13 @@ import { AuthService } from '../../../auth/service/auth.service'
 })
 export class DocumentsComponent {
 
-
   isAdmin = false
+  currentDate = Date.now()
 
   constructor(
     public readonly modalService: ModalService,
     private readonly authService: AuthService,
   ) {
-    this.isAdmin = authService.isAdminSig()
+    this.isAdmin = this.authService.isAdminSig()
   }
-
-  protected readonly Date = Date
-
 }
