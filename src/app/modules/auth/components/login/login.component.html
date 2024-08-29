@@ -41,9 +41,12 @@
   <div class="flex flex-col mt-4 items-center">
     <button [disabled]="user.invalid" class="btn btn-green py-3 w-full">Авторизация</button>
   </div>
+  <div class="flex flex-col mt-4 items-center">
+    <button class="btn btn-orange py-3 w-full" routerLink="">Отмена</button>
+  </div>
   <div class="flex flex-row mt-3 justify-end">
     <span>
-      <a routerLink="registration" class="text-sm text-gray-500">Создать аккаунт?</a>
+      <a routerLink="/registration" class="text-sm text-gray-500">Создать аккаунт?</a>
     </span>
   </div>
 </form>

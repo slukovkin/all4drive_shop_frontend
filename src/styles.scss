@@ -19,8 +19,26 @@
 html, body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   height: 100%;
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  //background-color: var(--dark-color);
+  //color: var(--light-color);
+}
+
+.header-link {
+  @apply inline-block px-3 py-2 border-b-2 text-gray-500 font-semibold border-transparent hover:text-purple-700 hover:border-purple-800
+}
+
+.header-btn {
+  @apply py-1 px-3 ml-2 border-2 rounded-md border-indigo-600 text-indigo-600 hover:text-white hover:bg-indigo-800
+}
+
+.footer-link {
+  @apply inline-block text-gray-500 py-2 decoration-gray-700 underline-offset-2 hover:underline
+}
+
+@layer components {
+  .pagination-item {
+    @apply inline-block px-3 py-1 border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700
+  }
 }
 
 .wrapper {
@@ -39,7 +57,7 @@ header {
   width: 100%;
   position: fixed;
   top: 0;
-  background: black;
+  //background: black;
   z-index: 10;
   grid-area: header;
 }
@@ -58,20 +76,20 @@ main {
 //  grid-area: footer;
 //}
 
-input {
-  @apply rounded-md text-sm border-transparent bg-white px-3 py-1 outline-1
-  border border-gray-400 focus:border-blue-500;
-}
+//input {
+//  @apply rounded-md text-sm border-transparent bg-white px-3 py-1 outline-1
+//  border border-gray-400 focus:border-blue-500;
+//}
 
 
 @layer components {
 
   .admin_table__header {
-    @apply w-full bg-black grid grid-cols-8 px-4 py-1 justify-between border border-slate-500 h-[50px] items-center
+    @apply w-full grid grid-cols-8 px-4 py-1 justify-between border border-slate-500 h-[50px] items-center
   }
 
   .user_table__header {
-    @apply w-full bg-black grid grid-cols-7 px-4 py-1 justify-between border border-slate-500 h-[50px] items-center
+    @apply w-full grid grid-cols-7 px-4 py-1 justify-between border border-slate-500 h-[50px] items-center
   }
 
   .admin_table__body {
@@ -83,7 +101,7 @@ input {
   }
 
   .input {
-    @apply rounded-md w-full text-sm border-transparent bg-white p-2 outline-2 border border-gray-400 focus:border-blue-500;
+    @apply rounded-md w-full text-sm border-transparent  p-2 outline-2 border border-gray-400 focus:border-blue-500;
   }
 
   .btn {
@@ -115,19 +133,12 @@ input {
   border-radius: 100px;
 }
 
-input {
-  background: var(--light-color);
-  color: var(--dark-color);
-}
+//input {
+//  background: var(--light-color);
+//  color: var(--dark-color);
+//}
 
 .card-body {
-  //width: 100%;
-  //padding: 1.25rem;
-  //border: 1px solid var(--light-color);
-  //border-radius: 10px;
-  //margin-bottom: 1rem;
-  //
-
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -137,7 +148,7 @@ input {
   word-wrap: break-word;
   background-color: inherit;
   background-clip: border-box;
-  border: 1px solid var(--light-color);
+  border: 1px solid teal;
   border-radius: 10px;
   margin-bottom: 1rem;
 }

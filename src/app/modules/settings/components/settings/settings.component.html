@@ -1,6 +1,6 @@
 <form>
-  <button class="btn btn-action w-full mb-2">Сохранить</button>
-  <div class="grid grid-cols-3 mx-auto w-full text-center h-full gap-2">
+  <button class="btn btn-action w-full m-2">Сохранить</button>
+  <div class="grid grid-cols-3 mx-auto w-full text-center h-full gap-2 w-full">
     <div class="border border-slate-500 p-3 rounded-lg card-body">
       <div class="flex flex-col">
         <h5>Основные настройки</h5>
@@ -11,7 +11,7 @@
       </div>
       <div class="flex flex-col">
         <label for="select_round" class="text-start my-2">Количество знаков после запятой</label>
-        <mat-select id="select_round" class="py-2 bg-white rounded-md px-2" value="0">
+        <mat-select id="select_round" class="py-2 border border-gray-400 rounded-md px-2" value="0">
           <mat-option value="0">без копеек</mat-option>
           <mat-option value="1">до 1 копейки</mat-option>
           <mat-option value="2">до 10 копеек</mat-option>
@@ -52,7 +52,7 @@
         </div>
         <div class="flex flex-col">
           <label for="proccess_sale_in">Процес оплаты по ПН</label>
-          <mat-select id="proccess_sale_in" class="py-2 bg-white rounded-md px-2" value="0">
+          <mat-select id="proccess_sale_in" class="py-2 border border-gray-400 rounded-md px-2" value="0">
             <mat-option value="0">По факту</mat-option>
             <mat-option value="1">Предоплата</mat-option>
             <mat-option value="2">С отрочкой платежа</mat-option>
@@ -60,7 +60,7 @@
         </div>
         <div class="flex flex-col">
           <label for="proccess_sale_out">Процес оплаты по РН</label>
-          <mat-select id="proccess_sale_out" class="py-2 bg-white rounded-md px-2" value="0">
+          <mat-select id="proccess_sale_out" class="py-2 border border-gray-400 rounded-md px-2" value="0">
             <mat-option value="0">По факту</mat-option>
             <mat-option value="1">Предоплата</mat-option>
             <mat-option value="2">С отрочкой платежа</mat-option>

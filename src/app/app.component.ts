@@ -7,6 +7,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { MainComponent } from './shared/components/main/main.component'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { BaseComponent } from './client/pages/base/base.component'
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
     SidebarComponent,
     MainComponent,
     FaIconComponent,
+    BaseComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

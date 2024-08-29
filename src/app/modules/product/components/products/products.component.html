@@ -16,7 +16,7 @@
 
 
   <tr stopPropagation *ngFor="let product of productService.products | filter: productService.searchByArticle()"
-      (click)="modalService.openModal('Create product')"
+      (click)="modalService.openModal('Создать')"
       [ngClass]="{
       admin_table__body: isAdmin,
       user_table__body: !isAdmin
@@ -38,7 +38,7 @@
       <div *ngIf="isAdmin">
         <fa-icon stopPropagation class="btn btn-orange mr-2 px-2"
                  [icon]="editIcon"
-                 (click)="modalService.openModal('Update product',product)">
+                 (click)="modalService.openModal('Редактировать',product)">
           update
         </fa-icon>
         <fa-icon stopPropagation class="btn btn-red px-2" (click)="delete(product.id)"

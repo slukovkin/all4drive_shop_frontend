@@ -11,10 +11,16 @@ import { IncomingInvoiceComponent } from './modules/documents/components/incomin
 import { OutgoingInvoiceComponent } from './modules/documents/components/outgoing-invoice/outgoing-invoice.component'
 import { CustomerComponent } from './modules/customer/components/customer/customer.component'
 import { StoresComponent } from './modules/store/components/stores/stores.component'
+import { BaseComponent } from './client/pages/base/base.component'
 
 export const routes: Routes = [
   {
     path: '',
+    component: BaseComponent,
+    title: 'Welcome',
+  },
+  {
+    path: 'login',
     component: LoginComponent,
     title: 'Login',
   },
@@ -73,7 +79,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: '',
     pathMatch: 'full',
   },
 ]

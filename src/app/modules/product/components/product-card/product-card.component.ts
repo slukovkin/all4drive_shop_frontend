@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
+import { IProduct } from '../../types/product.interfaces'
 
 @Component({
   selector: 'app-product-card',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core'
   styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
-
+  @Input() product?: IProduct
 }

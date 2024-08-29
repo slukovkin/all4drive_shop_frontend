@@ -13,7 +13,7 @@ import { IResponseUser } from '../types/response-user.interface'
 export class AuthService {
 
   isAuthSig = signal<boolean>(false)
-  isAdminSig = signal<boolean>(true)
+  isAdminSig = signal<boolean>(false)
 
   constructor(
     private readonly http: HttpClient,
@@ -31,10 +31,12 @@ export class AuthService {
           this.isAdminSig.set(true)
           localStorage.setItem('token', response.token)
           this.isAuthSig.set(true)
+          this.router.navigate(['products'])
         } else {
           this.isAdminSig.set(false)
           localStorage.setItem('token', response.token)
           this.isAuthSig.set(true)
+          this.router.navigate([''])
         }
       }),
       catchError((err) => {
@@ -43,7 +45,6 @@ export class AuthService {
       }),
     ).subscribe(() => {
       this.toast.success('Login successfully', '', { timeOut: 500 })
-      this.router.navigate(['products'])
     })
   }
 
