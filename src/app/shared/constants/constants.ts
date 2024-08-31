@@ -22,5 +22,10 @@ export const Constants = {
     CREATE_STORE: 'stores',
     UPDATE_STORE_BY_ID: 'stores/',
     DELETE_STORE_BY_ID: 'stores/',
+    GET_ALL_CURRENCY: 'currency',
+    GET_CURRENCY_BY_ID: 'currency/',
+    CREATE_CURRENCY: 'currency',
+    UPDATE_CURRENCY_RATE_BY_ID: 'currency/',
+    DELETE_CURRENCY_BY_ID: 'currency/',
   },
 }

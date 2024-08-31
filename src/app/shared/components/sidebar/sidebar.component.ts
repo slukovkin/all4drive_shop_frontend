@@ -46,6 +46,10 @@ export class SidebarComponent {
       label: 'Склады',
     },
     {
+      routerLink: 'currency',
+      label: 'Валюты',
+    },
+    {
       routerLink: 'settings',
       label: 'Настройки',
     },

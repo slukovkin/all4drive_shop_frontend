@@ -55,10 +55,7 @@ export class CustomerFormComponent {
       } else {
         this.customerService.create(customer)
       }
-      this.customerService.customerSign.set('')
-      this.customerForm.reset()
-      this.customerService.isShowCustomerForm.set(false)
-
+      this.exit()
     }
   }
 

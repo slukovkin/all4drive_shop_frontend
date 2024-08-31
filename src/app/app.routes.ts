@@ -12,6 +12,7 @@ import { OutgoingInvoiceComponent } from './modules/documents/components/outgoin
 import { CustomerComponent } from './modules/customer/components/customer/customer.component'
 import { StoresComponent } from './modules/store/components/stores/stores.component'
 import { BaseComponent } from './client/pages/base/base.component'
+import { CurrencyComponent } from './modules/currency/components/currency/currency.component'
 
 export const routes: Routes = [
   {
@@ -75,6 +76,11 @@ export const routes: Routes = [
   {
     path: 'stores',
     component: StoresComponent,
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'currency',
+    component: CurrencyComponent,
     canActivate: [authGuard()],
   },
   {
