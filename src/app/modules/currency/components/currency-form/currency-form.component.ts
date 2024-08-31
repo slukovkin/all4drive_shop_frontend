@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CurrencyService } from '../services/currency.service'
 import { ICurrency } from '../../types/currency.interface'
 import { ModalService } from '../../../modal/service/modal.service'
+import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 
 @Component({
   selector: 'app-currency-form',
@@ -11,6 +12,7 @@ import { ModalService } from '../../../modal/service/modal.service'
   imports: [
     NgIf,
     ReactiveFormsModule,
+    StopPropagationDirective,
   ],
   templateUrl: './currency-form.component.html',
   styleUrl: './currency-form.component.scss',

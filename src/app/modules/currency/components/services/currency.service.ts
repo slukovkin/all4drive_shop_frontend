@@ -29,18 +29,17 @@ export class CurrencyService {
   }
 
   create(currency: ICurrency) {
-    const isCurrency =
-      this.http.post<ICurrency>(Constants.BASE_URL + Constants.METHODS.CREATE_CURRENCY, currency)
-        .pipe(
-          tap((currency) => this.currencies.push(currency)),
-          catchError((err) => {
-            this.handleError(err)
-            throw (`Error => ${err.message}`)
-          }),
-        )
-        .subscribe(() => {
-          this.toast.success('Currency successfully saved')
-        })
+    this.http.post<ICurrency>(Constants.BASE_URL + Constants.METHODS.CREATE_CURRENCY, currency)
+      .pipe(
+        tap((currency) => this.currencies.push(currency)),
+        catchError((err) => {
+          this.handleError(err)
+          throw (`Error => ${err.message}`)
+        }),
+      )
+      .subscribe(() => {
+        this.toast.success('Currency successfully saved')
+      })
   }
 
   update(currency: ICurrency) {
@@ -51,7 +50,7 @@ export class CurrencyService {
           this.handleError(err)
           throw (`Error => ${err.message}`)
         }),
-      ).subscribe((product) => {
+      ).subscribe(() => {
       this.toast.success('Currency updated successfully')
     })
   }
@@ -64,7 +63,7 @@ export class CurrencyService {
           this.handleError(err)
           throw (`Error => ${err.message}`)
         }),
-      ).subscribe((product) => {
+      ).subscribe(() => {
       this.toast.success('Currency deleted successfully')
     })
   }
