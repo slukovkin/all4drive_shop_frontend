@@ -1,4 +1,8 @@
 <!--<main>-->
+<div>
+  <button class="btn btn-action w-full my-1" (click)="modalService.openModal('Новый товар')">Добавить товар
+  </button>
+</div>
 <table class="mx-auto w-full" *ngIf="productService.products">
   <tr [ngClass]="{
       admin_table__header: isAdmin,

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { SettingCurrencyComponent } from '../setting-currency/setting-currency.component'
 import { SettingSmsComponent } from '../setting-sms/setting-sms.component'
 import { SettingTelegramComponent } from '../setting-telegram/setting-telegram.component'
+import { CurrencyService } from '../../../currency/components/services/currency.service'
 
 @Component({
   selector: 'app-settings',
@@ -23,10 +24,12 @@ export class SettingsComponent {
 
   settingForm: FormGroup
 
-  constructor() {
+  constructor(
+    public readonly currencyService: CurrencyService,
+  ) {
+    this.currencyService.getAllCurrencies()
     this.settingForm = new FormGroup({
       title_site: new FormControl('', Validators.required),
-
     })
   }
 

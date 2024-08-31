@@ -5,6 +5,9 @@ import { CurrencyService } from '../services/currency.service'
 import { ICurrency } from '../../types/currency.interface'
 import { ModalService } from '../../../modal/service/modal.service'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
+import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
+import { MatOption } from '@angular/material/core'
+import { MatSelect } from '@angular/material/select'
 
 @Component({
   selector: 'app-currency-form',
@@ -13,6 +16,8 @@ import { StopPropagationDirective } from '../../../../shared/directives/stop-pro
     NgIf,
     ReactiveFormsModule,
     StopPropagationDirective,
+    MatOption,
+    MatSelect,
   ],
   templateUrl: './currency-form.component.html',
   styleUrl: './currency-form.component.scss',
@@ -38,8 +43,8 @@ export class CurrencyFormComponent {
     if (this.currencyForm.value) {
       const currency: ICurrency = {
         id: this.currency?.id,
-        code: this.currencyForm.value.code,
-        name: this.currencyForm.value.name,
+        code: this.currencyForm.value.code.toUpperCase(),
+        name: firstCharToUpperCase(this.currencyForm.value.name),
         rate: this.currencyForm.value.rate,
       }
       if (this.currency?.id) {

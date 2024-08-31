@@ -1,4 +1,4 @@
-<div class="card-body p-2">
+<div class="card-body p-2 text-center">
   <form name="valform">
     <label>Курсы валют</label>
     <table class="table table-sm w-full">
@@ -9,43 +9,26 @@
         <th>Курс</th>
         <th></th>
       </tr>
-      <tr id="vallist_1">
-        <td>
-          <input id="valcode_1" pattern="[A-Z]+" style="width:75px" class="form-control w-full"
-                 required="required" name="valcode_1" value="USD"></td>
-        <td>
-          <input id="valname_1" class="form-control w-full" required="required" name="valname_1"
-                 value="Долар"></td>
-        <td>
-          <input id="valrate_1" pattern="[0-9,\.]+" style="width:75px"
-                 class="form-control w-full" required="required" name="valrate_1" value="42"></td>
 
-      </tr>
-      <tr id="vallist_2">
-        <td>
-          <input id="valcode_2" pattern="[A-Z]+" style="width:75px" class="form-control w-full"
-                 required="required" name="valcode_2" value="EUR"></td>
-        <td>
-          <input id="valname_2" class="form-control w-full" required="required" name="valname_2"
-                 value="Евро"></td>
-        <td>
-          <input id="valrate_2" pattern="[0-9,\.]+" style="width:75px"
-                 class="form-control w-full" required="required" name="valrate_2" value="45"></td>
-
-      </tr>
-      <tr id="vallist_3">
-        <td>
-          <input id="valcode_3" pattern="[A-Z]+" style="width:75px" class="form-control w-full"
-                 required="required"
-                 name="valcode_3" value="UAH"></td>
-        <td>
-          <input id="valname_3" class="form-control w-full" required="required" name="valname_3"
-                 value="Гривня"></td>
-        <td>
-          <input id="valrate_3" pattern="[0-9,\.]+" style="width:75px"
-                 class="form-control w-full" required="required" name="valrate_3" value="1">
-        </td>
-      </tr>
+        @for (currency of currencyService.currencies; track currency.id) {
+          <tr>
+            <td>
+              <input
+                [readOnly]="true"
+                class="input w-full"
+                value="{{currency.code}}"></td>
+            <td>
+              <input
+                [readOnly]="true"
+                class="input w-full"
+                value="{{currency.name}}"></td>
+            <td>
+              <input
+                [readOnly]="true"
+                class="input w-full"
+                value="{{currency.rate}}"></td>
+          </tr>
+        }
       </tbody>
     </table>
   </form>
