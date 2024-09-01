@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { ISetting } from '../types/setting.interface'
 import { Constants } from '../../../shared/constants/constants'
-import { tap } from 'rxjs'
+import { catchError, tap } from 'rxjs'
+import { ToastrService } from 'ngx-toastr'
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class SettingService {
 
   constructor(
     private readonly http: HttpClient,
+    private readonly toast: ToastrService,
   ) {
   }
 
@@ -28,7 +30,12 @@ export class SettingService {
     this.http.get<ISetting[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_SETTINGS)
       .pipe(
         tap((setting) => this.setting = setting[0]),
-      ).subscribe()
+        catchError((err) => {
+          this.handleError(err)
+          throw (`Error => ${err.message}`)
+        }),
+      )
+      .subscribe()
   }
 
   getSettingById(id: number) {
@@ -39,13 +46,30 @@ export class SettingService {
   updateSettingByID(setting: ISetting) {
     this.http.patch<ISetting>(Constants.BASE_URL + Constants.METHODS.UPDATE_SETTING_BY_ID + setting.id, setting)
       .pipe(
-        tap((setting) => this.setting = setting),
-      )
-      .subscribe()
+        tap(() => this.getAllSettings()),
+        catchError((err) => {
+          this.handleError(err)
+          throw (`Error => ${err.message}`)
+        }),
+      ).subscribe(() => {
+      this.toast.success('Setting updated successfully')
+    })
   }
 
   deleteSettingById(id: number) {
     this.http.delete(Constants.BASE_URL + Constants.METHODS.DELETE_SETTING_BY_ID + id)
-      .subscribe()
+      .pipe(
+        tap(() => this.getAllSettings()),
+        catchError((err) => {
+          this.handleError(err)
+          throw (`Error => ${err.message}`)
+        }),
+      ).subscribe(() => {
+      this.toast.success('Setting deleted successfully')
+    })
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    this.toast.error(err.error.message)
   }
 }

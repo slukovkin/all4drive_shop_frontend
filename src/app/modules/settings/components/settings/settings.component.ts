@@ -47,8 +47,8 @@ export class SettingsComponent {
 
     this.settingForm = new FormGroup({
       title: new FormControl(this.setting?.firmName, Validators.required),
-      store: new FormControl(1, Validators.required),
-      currency: new FormControl(2, Validators.required),
+      store: new FormControl(settingService.setting?.storeId, Validators.required),
+      currency: new FormControl(settingService.setting?.currencyId, Validators.required),
       typePriceOne: new FormControl(this.setting?.priceTypeOne),
       typePriceTwo: new FormControl(this.setting?.priceTypeTwo),
       typePriceThree: new FormControl(this.setting?.priceTypeThree),
@@ -70,14 +70,13 @@ export class SettingsComponent {
         employeeId: null,
         telegramKey: '',
       }
-      if (!this.setting?.id) {
-        this.settingService.create(setting)
-      } else {
+      if (this.setting?.id) {
         this.settingService.updateSettingByID(setting)
+      } else {
+        this.settingService.create(setting)
       }
     } else {
       console.log('Form invalid')
-      console.log(this.settingForm.value)
     }
   }
 }
