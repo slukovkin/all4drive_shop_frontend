@@ -63,7 +63,6 @@ export class ProductFormComponent {
       // @ts-ignore
       const formData = new FormData()
       formData.append('file', file)
-      // this.productImage = formData
       this.http.post('http://localhost:5000/files', formData).subscribe((path) => {
         this.pathFile = path
       })
@@ -72,12 +71,6 @@ export class ProductFormComponent {
     reader.readAsDataURL(file)
 
   }
-
-  //
-  // getFile(event: Event) {
-  //   // @ts-ignore
-  //   this.productImage = event.target!.files[0]
-  // }
 
   submit() {
     if (this.productForm.valid) {

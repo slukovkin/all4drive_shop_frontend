@@ -27,5 +27,10 @@ export const Constants = {
     CREATE_CURRENCY: 'currency',
     UPDATE_CURRENCY_RATE_BY_ID: 'currency/',
     DELETE_CURRENCY_BY_ID: 'currency/',
+    CREATE_SETTING: 'settings',
+    GET_ALL_SETTINGS: 'settings',
+    GET_SETTING_BY_ID: 'settings/',
+    UPDATE_SETTING_BY_ID: 'settings/',
+    DELETE_SETTING_BY_ID: 'settings/',
   },
 }

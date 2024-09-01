@@ -1,8 +1,7 @@
 @if (authService.isAdminSig()) {
   <div class="wrapper">
     <header
-      class="flex flex-row h-[80px] items-center justify-between px-4"
-    >
+      class="flex flex-row h-[80px] items-center justify-between px-4">
       <div>
         <button (click)="showSideBar()">
           <fa-icon [icon]="menuIcon" class="px-2"></fa-icon>
@@ -23,7 +22,7 @@
       </nav>
     </header>
     <main>
-      <div class="flex min-w-screen-3xl gap-1">
+      <div class="flex w-screen-xl gap-1">
         @if (isSideBarShow()) {
           <div class="bg-black w-1/6">
             <app-sidebar></app-sidebar>
@@ -46,9 +45,4 @@
 } @else {
   <app-main></app-main>
 }
-
-<!--<div class="h-full">-->
-<!--  &lt;!&ndash;    <app-main></app-main>&ndash;&gt;-->
-<!--  -->
-<!--</div>-->
 

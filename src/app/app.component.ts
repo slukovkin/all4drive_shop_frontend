@@ -8,6 +8,7 @@ import { MainComponent } from './shared/components/main/main.component'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { BaseComponent } from './client/pages/base/base.component'
+import { SettingService } from './modules/settings/service/setting.service'
 
 @Component({
   selector: 'app-root',
@@ -25,11 +26,15 @@ import { BaseComponent } from './client/pages/base/base.component'
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  constructor(public authService: AuthService) {
+  constructor(
+    public authService: AuthService,
+    private settingService: SettingService,
+  ) {
+    this.settingService.getAllSettings()
   }
 
   menuIcon = faBars
-  isSideBarShow = signal<boolean>(false)
+  isSideBarShow = signal<boolean>(true)
 
   showSideBar() {
     this.isSideBarShow.set(!this.isSideBarShow())
