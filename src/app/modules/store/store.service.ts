@@ -43,6 +43,11 @@ export class StoreService {
       .subscribe()
   }
 
+  getStoreById(id: number) {
+    return this.http.get<IStore>(Constants.BASE_URL + Constants.METHODS.GET_STORE_BY_ID + id)
+      .subscribe()
+  }
+
   update(store: IStore) {
     return this.http.patch(Constants.BASE_URL + Constants.METHODS.UPDATE_STORE_BY_ID + store.id, store)
       .pipe(
@@ -51,7 +56,7 @@ export class StoreService {
           this.handleError(err)
           throw (`Error => ${err.message}`)
         }),
-      ).subscribe((product) => {
+      ).subscribe(() => {
         this.toast.success('Store updated successfully')
       })
   }
@@ -64,7 +69,7 @@ export class StoreService {
           this.handleError(err)
           throw (`Error => ${err.message}`)
         }),
-      ).subscribe((product) => {
+      ).subscribe(() => {
         this.toast.success('Store deleted successfully')
       })
   }

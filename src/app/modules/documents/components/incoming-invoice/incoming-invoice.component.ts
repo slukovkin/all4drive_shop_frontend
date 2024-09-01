@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { NgForOf } from '@angular/common';
-import {
-  FaIconComponent,
-  FontAwesomeModule,
-} from '@fortawesome/angular-fontawesome';
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatOption } from '@angular/material/core';
-import { MatSelect } from '@angular/material/select';
-import { ProductService } from '../../../product/service/product.service';
+import { Component } from '@angular/core'
+import { NgForOf } from '@angular/common'
+import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { MatOption } from '@angular/material/core'
+import { MatSelect } from '@angular/material/select'
+import { ProductService } from '../../../product/service/product.service'
+import { SettingService } from '../../../settings/service/setting.service'
+import { StoreService } from '../../../store/store.service'
+import { CurrencyService } from '../../../currency/components/services/currency.service'
 
 @Component({
   selector: 'app-incoming-invoice',
@@ -20,20 +20,39 @@ import { ProductService } from '../../../product/service/product.service';
     ReactiveFormsModule,
     MatOption,
     MatSelect,
+    FormsModule,
   ],
   templateUrl: './incoming-invoice.component.html',
   styleUrl: './incoming-invoice.component.scss',
 })
 export class IncomingInvoiceComponent {
-  editIcon = faPenToSquare;
-  deleteIcon = faTrash;
+  editIcon = faPenToSquare
+  deleteIcon = faTrash
 
-  incomForm = new FormGroup({
-    number_doc: new FormControl(''),
+  incomingForm = new FormGroup({
+    number_doc: new FormControl('ER-'),
     data_doc: new FormControl(Date.now()),
-  });
+    store: new FormControl(1, [Validators.required]),
+    currency: new FormControl(2, [Validators.required]),
+  })
 
-  constructor(public readonly productService: ProductService) {
-    this.productService.getAllProduct();
+  constructor(
+    public readonly productService: ProductService,
+    public readonly settingService: SettingService,
+    public readonly storeService: StoreService,
+    public readonly currencyService: CurrencyService,
+  ) {
+    this.settingService.getAllSettings()
+    this.productService.getAllProduct()
+    this.storeService.getAllStore()
+    this.currencyService.getAllCurrencies()
+  }
+
+  submit() {
+    if (this.incomingForm.valid) {
+      console.log(this.incomingForm.value)
+    } else {
+      console.log('Form invalid')
+    }
   }
 }

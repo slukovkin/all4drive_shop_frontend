@@ -28,8 +28,13 @@ export class CurrencyService {
       .subscribe()
   }
 
+  getCurrencyById(id: number) {
+    return this.http.get<ICurrency>(Constants.BASE_URL + Constants.METHODS.GET_CURRENCY_BY_ID + id)
+      .subscribe()
+  }
+
   create(currency: ICurrency) {
-    this.http.post<ICurrency>(Constants.BASE_URL + Constants.METHODS.CREATE_CURRENCY, currency)
+    return this.http.post<ICurrency>(Constants.BASE_URL + Constants.METHODS.CREATE_CURRENCY, currency)
       .pipe(
         tap((currency) => this.currencies.push(currency)),
         catchError((err) => {
@@ -43,7 +48,7 @@ export class CurrencyService {
   }
 
   update(currency: ICurrency) {
-    this.http.patch(Constants.BASE_URL + Constants.METHODS.UPDATE_CURRENCY_RATE_BY_ID + currency.id, currency)
+    return this.http.patch(Constants.BASE_URL + Constants.METHODS.UPDATE_CURRENCY_RATE_BY_ID + currency.id, currency)
       .pipe(
         tap(() => this.getAllCurrencies()),
         catchError((err) => {
@@ -51,12 +56,12 @@ export class CurrencyService {
           throw (`Error => ${err.message}`)
         }),
       ).subscribe(() => {
-      this.toast.success('Currency updated successfully')
-    })
+        this.toast.success('Currency updated successfully')
+      })
   }
 
   delete(id: number) {
-    this.http.delete(Constants.BASE_URL + Constants.METHODS.DELETE_CURRENCY_BY_ID + id)
+    return this.http.delete(Constants.BASE_URL + Constants.METHODS.DELETE_CURRENCY_BY_ID + id)
       .pipe(
         tap(() => this.getAllCurrencies()),
         catchError((err) => {
@@ -64,8 +69,8 @@ export class CurrencyService {
           throw (`Error => ${err.message}`)
         }),
       ).subscribe(() => {
-      this.toast.success('Currency deleted successfully')
-    })
+        this.toast.success('Currency deleted successfully')
+      })
   }
 
   private handleError(err: HttpErrorResponse) {

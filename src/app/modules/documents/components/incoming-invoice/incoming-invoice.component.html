@@ -1,4 +1,7 @@
-<form class="mx-auto text-center">
+<form class="mx-auto text-center"
+      (ngSubmit)="submit()"
+      [formGroup]="incomingForm"
+>
   <div class="mt-2">
     <h4 class="text-center">Приходная накладная</h4>
   </div>
@@ -6,7 +9,10 @@
     <div class="flex flex-col text-start px-3">
       <div class="flex flex-col">
         <label for="number_doc">Номер документа</label>
-        <input type="text" id="number_doc" class="input">
+        <input
+          formControlName="number_doc"
+          required
+          type="text" id="number_doc" class="input">
       </div>
       <div class="flex flex-col text-start">
         <label for="data_doc">Дата документа</label>
@@ -31,7 +37,15 @@
     <div class="flex flex-col text-start px-3">
       <div class="flex flex-col text-start">
         <label for="store">Склад</label>
-        <input type="text" id="store" class="input">
+        <mat-select id="store" class="py-2 border border-gray-400 rounded-md px-2"
+                    formControlName="store"
+                    required
+                    [value]="settingService.setting?.storeId"
+        >
+          @for (store of storeService.stores; track store.id) {
+            <mat-option [value]="store.id">{{ store.title }}</mat-option>
+          }
+        </mat-select>
       </div>
       <div class="flex flex-col text-start">
         <label for="check">Счет</label>
@@ -39,7 +53,16 @@
       </div>
       <div class="flex flex-col text-start">
         <label for="currency">Валюта</label>
-        <input type="text" id="currency" class="input">
+        <!--        <input type="text" id="currency" class="input">-->
+        <mat-select id="currency" class="py-2 border border-gray-400 rounded-md px-2"
+                    formControlName="currency"
+                    required
+                    [value]="settingService.setting?.currencyId"
+        >
+          @for (currency of currencyService.currencies; track currency.id) {
+            <mat-option [value]="currency.id">{{ currency.name }}</mat-option>
+          }
+        </mat-select>
       </div>
     </div>
     <div class="flex flex-col text-start px-3">
