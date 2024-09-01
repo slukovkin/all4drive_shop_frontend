@@ -29,12 +29,7 @@ export class IncomingInvoiceComponent {
   editIcon = faPenToSquare
   deleteIcon = faTrash
 
-  incomingForm = new FormGroup({
-    number_doc: new FormControl('ER-'),
-    data_doc: new FormControl(Date.now()),
-    store: new FormControl(1, [Validators.required]),
-    currency: new FormControl(2, [Validators.required]),
-  })
+  incomingForm: FormGroup
 
   constructor(
     public readonly productService: ProductService,
@@ -46,6 +41,13 @@ export class IncomingInvoiceComponent {
     this.productService.getAllProduct()
     this.storeService.getAllStore()
     this.currencyService.getAllCurrencies()
+
+    this.incomingForm = new FormGroup({
+      number_doc: new FormControl('ER-'),
+      data_doc: new FormControl(Date.now()),
+      store: new FormControl(this.settingService.setting?.storeId, [Validators.required]),
+      currency: new FormControl(this.settingService.setting?.currencyId, [Validators.required]),
+    })
   }
 
   submit() {
