@@ -15,6 +15,8 @@ export class AuthService {
   isAuthSig = signal<boolean>(false)
   isAdminSig = signal<boolean>(false)
 
+  token: string | null = null
+
   constructor(
     private readonly http: HttpClient,
     private readonly router: Router,
@@ -30,11 +32,14 @@ export class AuthService {
         if (response.user.roles[0].value === 'ADMIN') {
           this.isAdminSig.set(true)
           localStorage.setItem('token', response.token)
+          localStorage.setItem('admin', response.user.roles[0].value)
+          this.token = response.token
           this.isAuthSig.set(true)
           this.router.navigate(['home'])
         } else {
           this.isAdminSig.set(false)
           localStorage.setItem('token', response.token)
+          this.token = response.token
           this.isAuthSig.set(true)
           this.router.navigate([''])
         }
@@ -65,9 +70,10 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token')
+    localStorage.clear()
     this.isAuthSig.set(false)
     this.isAdminSig.set(false)
+    this.token = null
     this.router.navigate([''])
     this.toast.success('Logout', '', { timeOut: 500 })
   }

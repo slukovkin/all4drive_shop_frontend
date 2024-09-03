@@ -31,6 +31,14 @@ export class AppComponent {
     private settingService: SettingService,
   ) {
     this.settingService.getAllSettings()
+    const token = localStorage.getItem('token')
+    const admin = localStorage.getItem('admin')
+    if (token && admin) {
+      this.authService.token = token
+      this.authService.isAdminSig.set(true)
+    } else if (token) {
+      this.authService.token = token
+    }
   }
 
   menuIcon = faBars
