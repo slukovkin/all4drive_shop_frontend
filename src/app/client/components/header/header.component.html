@@ -1,0 +1,31 @@
+<div class="flex items-center justify-between px-2 border-b h-14">
+  <a href="#" class="uppercase font-bold text-pink-800">All4drive</a>
+  <nav class="hidden md:flex items-center">
+    <ul class="inline-flex items-center">
+      <li><a href="#" class="header-link">Home</a></li>
+      <li><a href="#" class="header-link">About</a></li>
+      <li><a href="#" class="header-link">Contact</a></li>
+    </ul>
+
+    <ul class="inline-flex items-center">
+      <li>
+        @if (authService.isAuthSig()) {
+          <a class="header-btn" (click)="authService.logout()">Выход</a>
+        } @else {
+          <a class="header-btn" routerLink="login">Войти</a>
+        }
+      </li>
+      @if (!authService.isAuthSig()) {
+        <li>
+          <a class="header-btn" routerLink="registration">Регистрация</a>
+        </li>
+      }
+    </ul>
+  </nav>
+  <button class="md:hidden inline-block">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+         class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  </button>
+</div>

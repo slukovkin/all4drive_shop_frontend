@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { HeaderComponent } from '../../components/header/header.component'
 import { ProductCardComponent } from '../../../modules/product/components/product-card/product-card.component'
 import { ProductService } from '../../../modules/product/service/product.service'
 import { RouterLink } from '@angular/router'
-import { AuthService } from '../../../modules/auth/service/auth.service'
-import { HttpClient } from '@angular/common/http'
+import { PromotionComponent } from '../../components/promotion/promotion.component'
+import { FooterComponent } from '../../components/footer/footer.component'
 
 @Component({
   selector: 'app-base',
@@ -13,26 +13,17 @@ import { HttpClient } from '@angular/common/http'
     HeaderComponent,
     ProductCardComponent,
     RouterLink,
+    PromotionComponent,
+    FooterComponent,
   ],
   templateUrl: './base.component.html',
   styleUrl: './base.component.scss',
 })
-export class BaseComponent implements OnInit {
-
-  isAdmin: boolean = false
-  isAuthenticated: boolean = false
+export class BaseComponent {
 
   constructor(
-    private readonly http: HttpClient,
     public readonly productService: ProductService,
-    public readonly authService: AuthService,
   ) {
     this.productService.getAllProduct()
-    // this.http.post<any>('http://localhost:5000/auth/role', localStorage.getItem('token')).subscribe()
-  }
-
-  ngOnInit(): void {
-    this.isAuthenticated = !!localStorage.getItem('token')
-    this.isAdmin = this.authService.isAdminSig()
   }
 }
