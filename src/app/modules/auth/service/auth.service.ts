@@ -31,7 +31,7 @@ export class AuthService {
           this.isAdminSig.set(true)
           localStorage.setItem('token', response.token)
           this.isAuthSig.set(true)
-          this.router.navigate(['products'])
+          this.router.navigate(['home'])
         } else {
           this.isAdminSig.set(false)
           localStorage.setItem('token', response.token)
