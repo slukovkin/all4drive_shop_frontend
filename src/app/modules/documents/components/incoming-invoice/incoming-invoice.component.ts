@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { NgForOf } from '@angular/common'
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common'
 import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
@@ -9,6 +9,11 @@ import { ProductService } from '../../../product/service/product.service'
 import { SettingService } from '../../../settings/service/setting.service'
 import { StoreService } from '../../../store/store.service'
 import { CurrencyService } from '../../../currency/components/services/currency.service'
+import { ModalService } from '../../../modal/service/modal.service'
+import { ModalComponent } from '../../../modal/components/modal.component'
+import { ProductFormComponent } from '../../../product/components/product-form/product-form.component'
+import { SelectProductComponent } from '../select-product/select-product.component'
+import { IncomingService } from '../../services/incoming.service'
 
 @Component({
   selector: 'app-incoming-invoice',
@@ -21,11 +26,17 @@ import { CurrencyService } from '../../../currency/components/services/currency.
     MatOption,
     MatSelect,
     FormsModule,
+    AsyncPipe,
+    ModalComponent,
+    NgIf,
+    ProductFormComponent,
+    SelectProductComponent,
   ],
   templateUrl: './incoming-invoice.component.html',
   styleUrl: './incoming-invoice.component.scss',
 })
 export class IncomingInvoiceComponent {
+
   editIcon = faPenToSquare
   deleteIcon = faTrash
 
@@ -36,6 +47,8 @@ export class IncomingInvoiceComponent {
     public readonly settingService: SettingService,
     public readonly storeService: StoreService,
     public readonly currencyService: CurrencyService,
+    public readonly modalService: ModalService,
+    public readonly incomingService: IncomingService,
   ) {
     this.settingService.getAllSettings()
     this.productService.getAllProduct()
@@ -57,4 +70,10 @@ export class IncomingInvoiceComponent {
       console.log('Form invalid')
     }
   }
+
+  sum(): number {
+    const products = this.incomingService.productsSign()
+    return products.reduce((prev, curr) => prev += curr.price * curr.qty, 0)
+  }
+
 }

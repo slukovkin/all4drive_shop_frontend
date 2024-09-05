@@ -83,7 +83,7 @@
   <div class="grid mt-2 w-full px-2 py-2 ">
     <nav>
       <div class="w-full mb-2 text-start px-1">
-        <button class="btn btn-action mr-1">Добавить</button>
+        <button class="btn btn-action mr-1" (click)="modalService.openModal('Выбор номенклатуры')">Добавить</button>
         <button class="btn btn-action mr-1">Сохранить</button>
         <button class="btn btn-action mr-1">Провести</button>
         <button class="btn btn-red mr-1">Очистить</button>
@@ -100,8 +100,8 @@
         <th>Сумма</th>
         <th></th>
       </tr>
-
-      <ng-container *ngFor="let product of productService.products">
+      <!--      *ngFor="let product of productService.products"-->
+      <ng-container *ngFor="let product of incomingService.productsSign()">
         <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-center border border-slate-500">
           <td>{{ product.title }}</td>
           <td>{{ product.article }}</td>
@@ -120,7 +120,7 @@
 
       <tr class="grid grid-cols-7  mt-2 px-2 py-2 justify-between text-end border border-slate-500">
         <td class="col-span-5 text-end">Сумма:</td>
-        <td>0</td>
+        <td>{{ sum() }}</td>
       </tr>
       <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-end border border-slate-500">
         <td class="col-span-5 text-end">Оплачено:</td>
@@ -129,3 +129,10 @@
     </table>
   </div>
 </form>
+
+
+<ng-container *ngIf="modalService.isVisible | async">
+  <app-modal [title]="modalService.titleSing()">
+    <app-select-product></app-select-product>
+  </app-modal>
+</ng-container>

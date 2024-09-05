@@ -9,6 +9,9 @@ import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { faCloudUpload } from '@fortawesome/free-solid-svg-icons/faCloudUpload'
 import { HttpClient } from '@angular/common/http'
+import { CurrencyService } from '../../../currency/components/services/currency.service'
+import { SettingService } from '../../../settings/service/setting.service'
+import { ICurrency } from '../../../currency/types/currency.interface'
 
 
 @Component({
@@ -30,6 +33,7 @@ export class ProductFormComponent {
   previewImage = signal<string>('')
   productImage: any
   pathFile: any
+  currentCurrency: ICurrency
 
   uploadIcon = faCloudUpload
 
@@ -37,7 +41,11 @@ export class ProductFormComponent {
     private readonly http: HttpClient,
     public readonly modalService: ModalService,
     public readonly productService: ProductService,
+    private readonly currencyService: CurrencyService,
+    private readonly settingService: SettingService,
   ) {
+    this.currencyService.getCurrencyById(this.settingService.setting!.currencyId)
+    this.currentCurrency = this.currencyService.currencyDefault!
     this.product = this.modalService.itemSign()
     this.productForm = new FormGroup({
       code: new FormControl(this.product?.code,
