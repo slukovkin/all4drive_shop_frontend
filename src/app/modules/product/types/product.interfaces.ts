@@ -3,6 +3,7 @@ export interface ProductCreationAttributes {
   article: string
   title: string
   brand: string
+  categoryId: number
   price: number
   qty: number
   imageUrl: string
@@ -15,6 +16,7 @@ export interface IProduct {
   article: string
   title: string
   brand: string
+  categoryId: number
   price: number
   qty: number
   imageUrl: string

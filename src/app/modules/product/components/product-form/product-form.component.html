@@ -67,7 +67,7 @@
 
     <!--  Brand product-->
     <div class="flex flex-col">
-      <label for="brand" class="text-start  text-sm mt-2">Производитель</label>
+      <label for="brand" class="text-start mt-2">Производитель</label>
       <input
         formControlName="brand"
         required
@@ -75,9 +75,23 @@
         type="text" id="brand" class="input" placeholder="Brand:">
     </div>
 
+    <!-- Category product -->
+    <div class="flex flex-col">
+      <label for="category" class="text-start mt-2">Категория по умолчанию</label>
+      <mat-select id="category" class="py-1 border border-gray-400 rounded-md px-2 text-start"
+                  formControlName="category"
+                  value="{{product?.categoryId}}"
+      >
+        @for (category of categoryService.categories; track category.id) {
+          <mat-option [value]="category.id">{{ category.title }}</mat-option>
+        }
+      </mat-select>
+
+    </div>
+
     <!--  Price-->
     <div class="flex flex-col">
-      <label for="price" class="text-start text-sm mt-2">Цена в {{ currentCurrency.name }}</label>
+      <label for="price" class="text-start mt-2">Цена в {{ currentCurrency.name }}</label>
       <input
         formControlName="price"
         required

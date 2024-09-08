@@ -12,6 +12,7 @@ import { AuthService } from '../../../auth/service/auth.service'
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { GetCategoryTitleByIdPipe } from '../../../../shared/pipes/get-category-title-by-id.pipe'
 
 @Component({
   selector: 'app-products',
@@ -31,6 +32,7 @@ import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
     NgClass,
     FilterPipe,
     FaIconComponent,
+    GetCategoryTitleByIdPipe,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',

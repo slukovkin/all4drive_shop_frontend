@@ -1,18 +1,21 @@
-<!--<main>-->
 <div>
-  <button class="btn btn-action w-full my-1" (click)="modalService.openModal('Новый товар')">Добавить товар
+  <button class="btn btn-action w-full my-1"
+          (click)="modalService.openModal('Добавить номенклатуру')">
+    Добавить номенклатуру
   </button>
 </div>
 <table class="mx-auto w-full" *ngIf="productService.products">
   <tr [ngClass]="{
       admin_table__header: isAdmin,
       user_table__header: !isAdmin
-    }">
+    }"
+      class="grid grid-cols-9">
     <th>Изображение</th>
     <th>Код</th>
     <th>Артикул</th>
     <th>Наименование</th>
     <th>Производитель</th>
+    <th>Категория</th>
     <th>Количество</th>
     <th>Цена</th>
     <th></th>
@@ -20,11 +23,12 @@
 
 
   <tr stopPropagation *ngFor="let product of productService.products | filter: productService.searchByArticle()"
-      (click)="modalService.openModal('Создать')"
+      (click)="modalService.openModal('Добавить номенклатуру')"
       [ngClass]="{
       admin_table__body: isAdmin,
       user_table__body: !isAdmin
     }"
+      class="grid grid-cols-9"
   >
     <td stopPropagation (click)="modalService.openModal('Image')">
       <!--        // TODO открытие изображения в модальном окне-->
@@ -36,13 +40,14 @@
     <td>{{ product.article }}</td>
     <td>{{ product.title }}</td>
     <td>{{ product.brand }}</td>
+    <td>{{ product.categoryId | getCategoryTitleById }}</td>
     <td>{{ product.qty }}</td>
     <td>{{ product.price | currency: 'EUR ' }}</td>
     <td>
       <div *ngIf="isAdmin">
         <fa-icon stopPropagation class="btn btn-orange mr-2 px-2"
                  [icon]="editIcon"
-                 (click)="modalService.openModal('Редактировать',product)">
+                 (click)="modalService.openModal('Редактировать номенклатуру',product)">
           update
         </fa-icon>
         <fa-icon stopPropagation class="btn btn-red px-2" (click)="delete(product.id)"
@@ -59,8 +64,3 @@
     <app-product-form></app-product-form>
   </app-modal>
 </ng-container>
-
-<!--[product]="modalService.productSign()"-->
-
-<!--</main>-->
-

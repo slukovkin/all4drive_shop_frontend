@@ -12,6 +12,9 @@ import { HttpClient } from '@angular/common/http'
 import { CurrencyService } from '../../../currency/components/services/currency.service'
 import { SettingService } from '../../../settings/service/setting.service'
 import { ICurrency } from '../../../currency/types/currency.interface'
+import { MatOption } from '@angular/material/core'
+import { MatSelect } from '@angular/material/select'
+import { CategoryService } from '../../../category/services/category.service'
 
 
 @Component({
@@ -23,6 +26,8 @@ import { ICurrency } from '../../../currency/types/currency.interface'
     ReactiveFormsModule,
     RouterLink,
     FaIconComponent,
+    MatOption,
+    MatSelect,
   ],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
@@ -31,7 +36,6 @@ export class ProductFormComponent {
   product?: IProduct
   productForm: FormGroup
   previewImage = signal<string>('')
-  productImage: any
   pathFile: any
   currentCurrency: ICurrency
 
@@ -43,7 +47,9 @@ export class ProductFormComponent {
     public readonly productService: ProductService,
     private readonly currencyService: CurrencyService,
     private readonly settingService: SettingService,
+    public readonly categoryService: CategoryService,
   ) {
+    this.categoryService.getAllCategories()
     this.currencyService.getCurrencyById(this.settingService.setting!.currencyId)
     this.currentCurrency = this.currencyService.currencyDefault!
     this.product = this.modalService.itemSign()
@@ -56,6 +62,7 @@ export class ProductFormComponent {
       article: new FormControl(this.product?.article, [Validators.required]),
       title: new FormControl(this.product?.title, [Validators.required]),
       brand: new FormControl(this.product?.brand),
+      category: new FormControl(this.product?.categoryId),
       price: new FormControl(this.product?.price),
       qty: new FormControl(this.product?.qty),
       picture: new FormControl(this.product?.imageUrl),
@@ -82,12 +89,12 @@ export class ProductFormComponent {
 
   submit() {
     if (this.productForm.valid) {
-
       const newProduct: ProductCreationAttributes = {
         code: Number(this.productForm.controls['code'].value),
         article: this.productForm.controls['article'].value.toUpperCase(),
         title: firstCharToUpperCase(this.productForm.controls['title'].value),
         brand: firstCharToUpperCase(this.productForm.controls['brand'].value),
+        categoryId: Number(this.productForm.controls['category'].value),
         price: Number(this.productForm.controls['price'].value),
         qty: Number(this.productForm.controls['qty'].value),
         imageUrl: this.pathFile,
