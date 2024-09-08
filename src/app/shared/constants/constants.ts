@@ -33,5 +33,10 @@ export const Constants = {
     GET_SETTING_BY_ID: 'settings/',
     UPDATE_SETTING_BY_ID: 'settings/',
     DELETE_SETTING_BY_ID: 'settings/',
+    CREATE_CATEGORY: 'categories',
+    GET_ALL_CATEGORIES: 'categories',
+    GET_CATEGORY_BY_ID: 'categories/',
+    UPDATE_CATEGORY_BY_ID: 'categories/',
+    DELETE_CATEGORY_BY_ID: 'categories/',
   },
 }

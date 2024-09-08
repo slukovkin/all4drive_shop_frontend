@@ -50,6 +50,10 @@ export class SidebarComponent {
       label: 'Валюты',
     },
     {
+      routerLink: 'categories',
+      label: 'Категории',
+    },
+    {
       routerLink: 'settings',
       label: 'Настройки',
     },

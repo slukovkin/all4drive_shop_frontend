@@ -14,6 +14,7 @@ import { StoresComponent } from './modules/store/components/stores/stores.compon
 import { BaseComponent } from './client/pages/base/base.component'
 import { CurrencyComponent } from './modules/currency/components/currency/currency.component'
 import { ReportComponent } from './modules/report/components/report/report.component'
+import { CategoryComponent } from './modules/category/components/category/category.component'
 
 export const routes: Routes = [
   {
@@ -87,6 +88,12 @@ export const routes: Routes = [
   {
     path: 'reports',
     component: ReportComponent,
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'categories',
+    component: CategoryComponent,
+    canActivate: [authGuard()],
   },
   {
     path: '**',
