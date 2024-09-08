@@ -76,4 +76,7 @@ export class IncomingInvoiceComponent {
     return products.reduce((prev, curr) => prev += curr.price * curr.qty, 0)
   }
 
+  clearProducts() {
+    this.incomingService.productsSign.set([])
+  }
 }
