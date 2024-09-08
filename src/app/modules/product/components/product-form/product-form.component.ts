@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { NgIf } from '@angular/common'
+import { NgClass, NgIf } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import { ProductService } from '../../service/product.service'
 import { IProduct, ProductCreationAttributes } from '../../types/product.interfaces'
@@ -28,6 +28,7 @@ import { CategoryService } from '../../../category/services/category.service'
     FaIconComponent,
     MatOption,
     MatSelect,
+    NgClass,
   ],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
@@ -62,13 +63,15 @@ export class ProductFormComponent {
       article: new FormControl(this.product?.article, [Validators.required]),
       title: new FormControl(this.product?.title, [Validators.required]),
       brand: new FormControl(this.product?.brand),
-      category: new FormControl(this.product?.categoryId),
+      category: new FormControl(this.product?.categoryId ?? 1),
       price: new FormControl(this.product?.price),
       qty: new FormControl(this.product?.qty),
       picture: new FormControl(this.product?.imageUrl),
     })
   }
 
+
+  // TODO #5: Переделать сохранение изображения. Сохранение должно быть при сохранении номенклатуры
   fileHandler(event: Event) {
     const file = (event.target as HTMLInputElement)?.files?.[0]
 
@@ -78,13 +81,13 @@ export class ProductFormComponent {
       // @ts-ignore
       const formData = new FormData()
       formData.append('file', file)
-      this.http.post('http://localhost:5000/files', formData).subscribe((path) => {
-        this.pathFile = path
-      })
+      this.http.post('http://localhost:5000/files', formData)
+        .subscribe((path) => {
+          this.pathFile = path
+        })
       this.previewImage.set(event.target?.result?.toString() ?? '')
     }
     reader.readAsDataURL(file)
-
   }
 
   submit() {

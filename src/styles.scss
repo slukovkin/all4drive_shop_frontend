@@ -67,6 +67,17 @@ main {
   grid-area: cont;
 }
 
+.upload_image {
+  text-align: center;
+  width: 80px;
+  height: 80px;
+  border: none;
+}
+
+.none_image {
+  display: none;
+}
+
 @layer components {
 
   .admin_table__header {
