@@ -9,7 +9,6 @@ export interface ProductCreationAttributes {
   imageUrl: string
 }
 
-
 export interface IProduct {
   id: number
   code: number
@@ -18,6 +17,20 @@ export interface IProduct {
   brand: string
   categoryId: number
   price: number
+  qty: number
+  imageUrl: string
+  cross: number
+  updatedAt: string,
+  createdAt: string
+}
+
+export interface IProductInStockAttributes {
+  id: number
+  code: number
+  article: string
+  title: string
+  brand: string
+  categoryId: number
   qty: number
   imageUrl: string
   cross: number

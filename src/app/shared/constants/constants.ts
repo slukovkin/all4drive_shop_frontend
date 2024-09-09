@@ -38,5 +38,9 @@ export const Constants = {
     GET_CATEGORY_BY_ID: 'categories/',
     UPDATE_CATEGORY_BY_ID: 'categories/',
     DELETE_CATEGORY_BY_ID: 'categories/',
+    ADD_PRODUCTS_IN_STORE: 'product_store',
+    GET_ALL_PRODUCTS_FROM_STORE: 'product_store',
+    GET_PRODUCT_FROM_STORE_BY_ID: 'product_store/search/',
+    DELETE_PRODUCT_FROM_STORE_BY_ID: 'product_store/remove/',
   },
 }

@@ -71,9 +71,13 @@ export class IncomingInvoiceComponent {
     }
   }
 
+  saveProductInStore() {
+    this.incomingService.saveProductInStore()
+  }
+
   sum(): number {
     const products = this.incomingService.productsSign()
-    return products.reduce((prev, curr) => prev += curr.price * curr.qty, 0)
+    return products.reduce((prev, curr) => prev += curr.priceIn * curr.qty, 0)
   }
 
   clearProducts() {
