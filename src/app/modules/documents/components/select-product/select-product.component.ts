@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ProductService } from '../../../product/service/product.service'
 import { IProduct } from '../../../product/types/product.interfaces'
@@ -29,6 +29,8 @@ import { IProductSelect } from '../../types/product-in-store.interface'
   styleUrl: './select-product.component.scss',
 })
 export class SelectProductComponent {
+  @Input() product?: IProductSelect
+
   selectForm: FormGroup
   selectedProduct!: IProduct
   search: string = ''

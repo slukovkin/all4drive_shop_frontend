@@ -102,6 +102,7 @@
       </tr>
       <!--      *ngFor="let product of productService.products"-->
       <ng-container *ngFor="let product of incomingService.productsSign()">
+
         <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-center border border-slate-500">
           <td>{{ product.code }}</td>
           <td>{{ product.article }}</td>
@@ -111,8 +112,9 @@
           <td>{{ product.qty * product.priceIn }}</td>
           <td>
             <div>
-              <fa-icon [icon]="editIcon" class="text-amber-500 mr-2"></fa-icon>
-              <fa-icon [icon]="deleteIcon" class="text-red-500"></fa-icon>
+              <fa-icon [icon]="deleteIcon" class="text-red-500"
+                       (click)="unselectProduct(product.productId)"
+              ></fa-icon>
             </div>
           </td>
         </tr>
@@ -130,9 +132,9 @@
   </div>
 </form>
 
-
 <ng-container *ngIf="modalService.isVisible | async">
   <app-modal [title]="modalService.titleSing()">
     <app-select-product></app-select-product>
   </app-modal>
 </ng-container>
+

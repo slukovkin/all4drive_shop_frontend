@@ -14,6 +14,9 @@ import { ModalComponent } from '../../../modal/components/modal.component'
 import { ProductFormComponent } from '../../../product/components/product-form/product-form.component'
 import { SelectProductComponent } from '../select-product/select-product.component'
 import { IncomingService } from '../../services/incoming.service'
+import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
+import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
+import { SelectEditProductComponent } from '../select-edit-product/select-edit-product.component'
 
 @Component({
   selector: 'app-incoming-invoice',
@@ -31,6 +34,9 @@ import { IncomingService } from '../../services/incoming.service'
     NgIf,
     ProductFormComponent,
     SelectProductComponent,
+    FilterPipe,
+    StopPropagationDirective,
+    SelectEditProductComponent,
   ],
   templateUrl: './incoming-invoice.component.html',
   styleUrl: './incoming-invoice.component.scss',
@@ -69,6 +75,10 @@ export class IncomingInvoiceComponent {
     } else {
       console.log('Form invalid')
     }
+  }
+
+  unselectProduct(id: number) {
+    this.incomingService.productsSign.set(this.incomingService.productsSign().filter(product => product.productId !== id))
   }
 
   saveProductInStore() {
