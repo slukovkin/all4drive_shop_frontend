@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core'
-import { IProductInStore } from '../types/product-in-store.interface'
+import { IProductInStore, IProductSelect } from '../types/product-in-store.interface'
 import { HttpClient } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
 
@@ -8,7 +8,7 @@ import { Constants } from '../../../shared/constants/constants'
 })
 export class IncomingService {
 
-  productsSign = signal<IProductInStore[]>([])
+  productsSign = signal<IProductSelect[]>([])
 
   constructor(private readonly http: HttpClient) {
   }
@@ -22,7 +22,7 @@ export class IncomingService {
     this.productsSign.set([])
   }
 
-  addSelectProductToArray(product: IProductInStore) {
+  addSelectProductToArray(product: IProductSelect) {
     this.productsSign.set([...this.productsSign(), product])
     console.log(this.productsSign())
   }

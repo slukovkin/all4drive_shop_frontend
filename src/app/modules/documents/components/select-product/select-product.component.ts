@@ -9,7 +9,7 @@ import { ModalService } from '../../../modal/service/modal.service'
 import { SelectEditProductComponent } from '../select-edit-product/select-edit-product.component'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 import { IncomingService } from '../../services/incoming.service'
-import { IProductInStore } from '../../types/product-in-store.interface'
+import { IProductSelect } from '../../types/product-in-store.interface'
 
 @Component({
   selector: 'app-select-product',
@@ -47,14 +47,18 @@ export class SelectProductComponent {
 
   onSubmit() {
     if (this.selectForm.valid) {
-      const product: IProductInStore = {
+      const product: IProductSelect = {
         productId: this.selectedProduct.id,
+        code: this.selectedProduct.code,
+        article: this.selectedProduct.article,
+        title: this.selectedProduct.title,
+        brand: this.selectedProduct.brand,
+        categoryId: this.selectedProduct.categoryId,
         storeId: 1,
         qty: Number(this.selectForm.value.selectQty),
         priceIn: Number(this.selectForm.value.selectPriceIn),
         priceOut: Number(this.selectForm.value.selectPriceOut),
       }
-      // this.addSelectProductToArray(product)
       this.incomingService.addSelectProductToArray(product)
     }
   }
