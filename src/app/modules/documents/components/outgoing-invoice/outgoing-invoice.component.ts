@@ -10,7 +10,7 @@ import { SettingService } from '../../../settings/service/setting.service'
 import { StoreService } from '../../../store/store.service'
 import { CurrencyService } from '../../../currency/components/services/currency.service'
 import { ModalService } from '../../../modal/service/modal.service'
-import { IncomingService } from '../../services/incoming.service'
+import { InvoiceService } from '../../services/invoice.service'
 import { ModalComponent } from '../../../modal/components/modal.component'
 import { SelectProductComponent } from '../select-product/select-product.component'
 
@@ -34,7 +34,7 @@ export class OutgoingInvoiceComponent {
     public readonly storeService: StoreService,
     public readonly currencyService: CurrencyService,
     public readonly modalService: ModalService,
-    public readonly incomingService: IncomingService,
+    public readonly invoiceService: InvoiceService,
   ) {
     this.settingService.getAllSettings()
     this.productService.getAllProduct()
@@ -58,20 +58,20 @@ export class OutgoingInvoiceComponent {
   }
 
   unselectProduct(id: number) {
-    this.incomingService.productsSign.set(this.incomingService.productsSign().filter(product => product.productId !== id))
+    this.invoiceService.productsSign.set(this.invoiceService.productsSign().filter(product => product.productId !== id))
   }
 
   saveProductInStore() {
-    this.incomingService.changeInvoiceSign.set(true)
-    this.incomingService.saveProductInStore()
+    this.invoiceService.changeInvoiceSign.set(true)
+    this.invoiceService.saveProductInStore()
   }
 
   sum(): number {
-    const products = this.incomingService.productsSign()
+    const products = this.invoiceService.productsSign()
     return products.reduce((prev, curr) => prev += curr.priceIn * curr.qty, 0)
   }
 
   clearProducts() {
-    this.incomingService.productsSign.set([])
+    this.invoiceService.productsSign.set([])
   }
 }

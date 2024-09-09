@@ -4,18 +4,20 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
 import { catchError } from 'rxjs'
 import { ToastrService } from 'ngx-toastr'
+import { Router } from '@angular/router'
 
 @Injectable({
   providedIn: 'root',
 })
-export class IncomingService {
+export class InvoiceService {
 
   changeInvoiceSign = signal(false)
   productsSign = signal<IProductSelect[]>([])
 
   constructor(
     private readonly http: HttpClient,
-    private readonly toast: ToastrService) {
+    private readonly toast: ToastrService,
+    private readonly router: Router) {
   }
 
   saveProductInStore() {
@@ -36,6 +38,7 @@ export class IncomingService {
           ).subscribe(() => {
           this.toast.success('Products successfully saved')
           this.productsSign.set([])
+          this.router.navigate(['products'])
         })
       })
     } else {
@@ -50,6 +53,7 @@ export class IncomingService {
           ).subscribe(() => {
           this.toast.success('Products successfully saved')
           this.productsSign.set([])
+          this.router.navigate(['products'])
         })
       })
     }

@@ -13,7 +13,7 @@ import { ModalService } from '../../../modal/service/modal.service'
 import { ModalComponent } from '../../../modal/components/modal.component'
 import { ProductFormComponent } from '../../../product/components/product-form/product-form.component'
 import { SelectProductComponent } from '../select-product/select-product.component'
-import { IncomingService } from '../../services/incoming.service'
+import { InvoiceService } from '../../services/invoice.service'
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 import { SelectEditProductComponent } from '../select-edit-product/select-edit-product.component'
@@ -54,7 +54,7 @@ export class IncomingInvoiceComponent {
     public readonly storeService: StoreService,
     public readonly currencyService: CurrencyService,
     public readonly modalService: ModalService,
-    public readonly incomingService: IncomingService,
+    public readonly invoiceService: InvoiceService,
   ) {
     this.settingService.getAllSettings()
     this.productService.getAllProduct()
@@ -78,20 +78,20 @@ export class IncomingInvoiceComponent {
   }
 
   unselectProduct(id: number) {
-    this.incomingService.productsSign.set(this.incomingService.productsSign().filter(product => product.productId !== id))
+    this.invoiceService.productsSign.set(this.invoiceService.productsSign().filter(product => product.productId !== id))
   }
 
   saveProductInStore() {
-    this.incomingService.changeInvoiceSign.set(false)
-    this.incomingService.saveProductInStore()
+    this.invoiceService.changeInvoiceSign.set(false)
+    this.invoiceService.saveProductInStore()
   }
 
   sum(): number {
-    const products = this.incomingService.productsSign()
+    const products = this.invoiceService.productsSign()
     return products.reduce((prev, curr) => prev += curr.priceIn * curr.qty, 0)
   }
 
   clearProducts() {
-    this.incomingService.productsSign.set([])
+    this.invoiceService.productsSign.set([])
   }
 }

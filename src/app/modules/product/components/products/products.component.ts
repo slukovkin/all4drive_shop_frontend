@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ProductService } from '../../service/product.service'
 import { AsyncPipe, CurrencyPipe, NgClass, NgForOf, NgIf, TitleCasePipe } from '@angular/common'
 import { ProductCardComponent } from '../product-card/product-card.component'
@@ -37,7 +37,7 @@ import { GetCategoryTitleByIdPipe } from '../../../../shared/pipes/get-category-
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
 
   editIcon = faPenToSquare
   deleteIcon = faTrash
@@ -50,10 +50,13 @@ export class ProductsComponent {
     public readonly modalService: ModalService,
   ) {
     this.isAdmin = this.authService.isAdminSig()
-    this.productService.getAllProduct()
   }
 
   delete(id: number) {
     this.productService.remove(id)
+  }
+
+  ngOnInit(): void {
+    this.productService.getAllProduct()
   }
 }
