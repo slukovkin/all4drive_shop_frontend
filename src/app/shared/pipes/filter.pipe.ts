@@ -9,9 +9,10 @@ export class FilterPipe implements PipeTransform {
 
   transform(products: IProduct[], param: string): IProduct[] {
     if (param === '') return products
-    if (parseInt(param)) {
-      return products.filter(product => product.code.toString().includes(param))
-    }
-    return products.filter(product => product.article.toLowerCase().includes(param.toLowerCase()))
+    return products.filter(product =>
+      product.article.toLowerCase().includes(param.toLowerCase())
+      || product.title.toLowerCase().includes(param.toLowerCase())
+      || product.code.toString().toLowerCase().includes(param.toLowerCase()),
+    )
   }
 }
