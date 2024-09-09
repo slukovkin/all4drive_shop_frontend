@@ -82,6 +82,7 @@ export class IncomingInvoiceComponent {
   }
 
   saveProductInStore() {
+    this.incomingService.changeInvoiceSign.set(false)
     this.incomingService.saveProductInStore()
   }
 

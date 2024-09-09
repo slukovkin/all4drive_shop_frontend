@@ -1,4 +1,7 @@
-<form class="mx-auto text-center">
+<form class="mx-auto text-center"
+      (ngSubmit)="submit()"
+      [formGroup]="outgoingForm"
+>
   <div class="mt-2">
     <h4 class="text-center">Расходная накладная</h4>
   </div>
@@ -6,10 +9,13 @@
     <div class="flex flex-col text-start px-3">
       <div class="flex flex-col">
         <label for="number_doc">Номер документа</label>
-        <input type="text" id="number_doc" class="input">
+        <input
+          formControlName="number_doc"
+          required
+          type="text" id="number_doc" class="input">
       </div>
       <div class="flex flex-col text-start">
-        <label for="data_doc">Дата докумета</label>
+        <label for="data_doc">Дата документа</label>
         <input type="date" id="data_doc" class="input">
       </div>
       <div class="flex flex-col text-start">
@@ -31,7 +37,15 @@
     <div class="flex flex-col text-start px-3">
       <div class="flex flex-col text-start">
         <label for="store">Склад</label>
-        <input type="text" id="store" class="input">
+        <mat-select id="store" class="py-2 border border-gray-400 rounded-md px-2"
+                    formControlName="store"
+                    required
+                    [value]="settingService.setting?.storeId"
+        >
+          @for (store of storeService.stores; track store.id) {
+            <mat-option [value]="store.id">{{ store.title }}</mat-option>
+          }
+        </mat-select>
       </div>
       <div class="flex flex-col text-start">
         <label for="check">Счет</label>
@@ -39,7 +53,16 @@
       </div>
       <div class="flex flex-col text-start">
         <label for="currency">Валюта</label>
-        <input type="text" id="currency" class="input">
+        <!--        <input type="text" id="currency" class="input">-->
+        <mat-select id="currency" class="py-2 border border-gray-400 rounded-md px-2"
+                    formControlName="currency"
+                    required
+                    [value]="settingService.setting?.currencyId"
+        >
+          @for (currency of currencyService.currencies; track currency.id) {
+            <mat-option [value]="currency.id">{{ currency.name }}</mat-option>
+          }
+        </mat-select>
       </div>
     </div>
     <div class="flex flex-col text-start px-3">
@@ -60,10 +83,10 @@
   <div class="grid mt-2 w-full px-2 py-2 ">
     <nav>
       <div class="w-full mb-2 text-start px-1">
-        <button class="btn btn-action mr-1">Добавить</button>
+        <button class="btn btn-action mr-1" (click)="modalService.openModal('Выбор номенклатуры')">Добавить</button>
         <button class="btn btn-action mr-1">Сохранить</button>
-        <button class="btn btn-action mr-1">Провести</button>
-        <button class="btn btn-red mr-1">Очистить</button>
+        <button class="btn btn-action mr-1" (click)="saveProductInStore()">Провести</button>
+        <button class="btn btn-red mr-1" (click)="clearProducts()">Очистить</button>
       </div>
     </nav>
     <table class="grid grid-cols-1 px-1 py-1 w-full justify-center items-center mx-auto">
@@ -77,19 +100,21 @@
         <th>Сумма</th>
         <th></th>
       </tr>
+      <!--      *ngFor="let product of productService.products"-->
+      <ng-container *ngFor="let product of incomingService.productsSign()">
 
-      <ng-container *ngFor="let product of productService.products">
         <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-center border border-slate-500">
-          <td>{{ product.title }}</td>
+          <td>{{ product.code }}</td>
           <td>{{ product.article }}</td>
           <td>шт</td>
           <td>{{ product.qty }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ product.qty * product.price }}</td>
+          <td>{{ product.priceIn }}</td>
+          <td>{{ product.qty * product.priceIn }}</td>
           <td>
             <div>
-              <fa-icon [icon]="editIcon" class="text-amber-500 mr-2"></fa-icon>
-              <fa-icon [icon]="deleteIcon" class="text-red-500"></fa-icon>
+              <fa-icon [icon]="deleteIcon" class="text-red-500"
+                       (click)="unselectProduct(product.productId)"
+              ></fa-icon>
             </div>
           </td>
         </tr>
@@ -97,7 +122,7 @@
 
       <tr class="grid grid-cols-7  mt-2 px-2 py-2 justify-between text-end border border-slate-500">
         <td class="col-span-5 text-end">Сумма:</td>
-        <td>0</td>
+        <td>{{ sum() }}</td>
       </tr>
       <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-end border border-slate-500">
         <td class="col-span-5 text-end">Оплачено:</td>
@@ -106,3 +131,10 @@
     </table>
   </div>
 </form>
+
+<ng-container *ngIf="modalService.isVisible | async">
+  <app-modal [title]="modalService.titleSing()">
+    <app-select-product></app-select-product>
+  </app-modal>
+</ng-container>
+
