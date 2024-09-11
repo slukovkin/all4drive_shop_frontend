@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
-import { IProduct, ProductCreationAttributes } from '../types/product.interfaces'
+import { IProduct, IProductInStockAttributes, ProductCreationAttributes } from '../types/product.interfaces'
 import { catchError, tap } from 'rxjs'
 import { ToastrService } from 'ngx-toastr'
 
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr'
 })
 export class ProductService {
 
-  products: IProduct[] = []
+  products: IProductInStockAttributes[] = []
   searchByArticle = signal<string>('')
 
   constructor(
@@ -19,9 +19,9 @@ export class ProductService {
   }
 
   getAllProduct() {
-    this.http.get<IProduct[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_PRODUCTS)
+    this.http.get<IProductInStockAttributes[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_PRODUCTS)
       .pipe(
-        tap((products: IProduct[]) => {
+        tap((products: IProductInStockAttributes[]) => {
           this.products = products
         }),
       )
@@ -33,7 +33,7 @@ export class ProductService {
   }
 
   create(product: ProductCreationAttributes) {
-    return this.http.post<IProduct>(Constants.BASE_URL + Constants.METHODS.CREATE_PRODUCT, product)
+    return this.http.post<IProductInStockAttributes>(Constants.BASE_URL + Constants.METHODS.CREATE_PRODUCT, product)
       .pipe(
         tap((product) => this.products.push(product)),
         catchError((err) => {

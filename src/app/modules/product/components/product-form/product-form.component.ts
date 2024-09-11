@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { NgClass, NgIf } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import { ProductService } from '../../service/product.service'
-import { IProduct, ProductCreationAttributes } from '../../types/product.interfaces'
+import { IProductInStockAttributes, ProductCreationAttributes } from '../../types/product.interfaces'
 import { ModalService } from '../../../modal/service/modal.service'
 import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
@@ -34,7 +34,7 @@ import { CategoryService } from '../../../category/services/category.service'
   styleUrl: './product-form.component.scss',
 })
 export class ProductFormComponent {
-  product?: IProduct
+  product?: IProductInStockAttributes
   productForm: FormGroup
   previewImage = signal<string>('')
   pathFile: any

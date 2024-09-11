@@ -12,9 +12,10 @@
              class="size-5 font-bold stroke-green-600 stroke-2">
           <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
         </svg>
-        <span class='ml-2'>в наличии</span>
+        <span class='ml-2'>в наличии : {{ product?.stores?.[0]?.ProductStore?.qty }} шт.</span>
       } @else {
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+             stroke="currentColor"
              class="size-6">
           <path stroke-linecap="round" stroke-linejoin="round"
                 d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
@@ -23,7 +24,7 @@
       }
     </div>
     <div>
-      <span>{{ product!.price | eurToUah }} грн</span>
+      <span>{{ product?.stores?.[0]?.ProductStore?.priceOut!  | eurToUah }} грн</span>
     </div>
     <div>
       <span>
@@ -32,3 +33,5 @@
     </div>
   </div>
 </div>
+
+

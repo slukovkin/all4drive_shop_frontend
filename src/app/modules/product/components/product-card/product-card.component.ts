@@ -3,7 +3,7 @@ import { EurToUahPipe } from '../../../../shared/pipes/eur-to-uah.pipe'
 import { UahToEurPipe } from '../../../../shared/pipes/uah-to-eur.pipe'
 import { OrderService } from '../../../order/service/order.service'
 import { IProductFullDataInStore } from '../../types/product-in-store'
-import { IProduct } from '../../types/product.interfaces'
+import { IProductInStockAttributes } from '../../types/product.interfaces'
 
 @Component({
   selector: 'app-product-card',
@@ -16,7 +16,7 @@ import { IProduct } from '../../types/product.interfaces'
   styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
-  @Input() product?: IProduct
+  @Input() product?: IProductInStockAttributes
 
   constructor(
     private readonly orderService: OrderService,
