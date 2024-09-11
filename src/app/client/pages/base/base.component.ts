@@ -5,6 +5,7 @@ import { ProductService } from '../../../modules/product/service/product.service
 import { RouterLink } from '@angular/router'
 import { PromotionComponent } from '../../components/promotion/promotion.component'
 import { FooterComponent } from '../../components/footer/footer.component'
+import { IProduct } from '../../../modules/product/types/product.interfaces'
 
 @Component({
   selector: 'app-base',
@@ -20,6 +21,8 @@ import { FooterComponent } from '../../components/footer/footer.component'
   styleUrl: './base.component.scss',
 })
 export class BaseComponent {
+
+  product?: IProduct
 
   constructor(
     public readonly productService: ProductService,

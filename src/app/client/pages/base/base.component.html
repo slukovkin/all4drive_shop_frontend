@@ -12,7 +12,7 @@
       <section class="px-2">
         <div
           class="md:grid-cols-5 content-center lg:grid items-center space-x-2 overflow-y-auto whitespace-pre-wrap">
-          @for (product of productService.products; track product.id) {
+          @for (product of this.productService.products; track product.id) {
             <app-product-card [product]="product"></app-product-card>
           }
         </div>

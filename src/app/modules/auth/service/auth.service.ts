@@ -6,6 +6,7 @@ import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { catchError, tap } from 'rxjs'
 import { IResponseUser } from '../types/response-user.interface'
+import { TokenService } from '../../../shared/token/token.service'
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class AuthService {
   constructor(
     private readonly http: HttpClient,
     private readonly router: Router,
+    private readonly tokenService: TokenService,
     private readonly toast: ToastrService) {
     const token = localStorage.getItem('token')
     this.isAuthSig.set(!!token)
@@ -73,6 +75,7 @@ export class AuthService {
     localStorage.clear()
     this.isAuthSig.set(false)
     this.isAdminSig.set(false)
+    this.tokenService.userInSystem.set(null)
     this.token = null
     this.router.navigate([''])
     this.toast.success('Logout', '', { timeOut: 500 })

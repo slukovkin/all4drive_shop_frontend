@@ -53,9 +53,9 @@ export class ProductService {
           this.handleError(err)
           throw (`Error => ${err.message}`)
         }),
-      ).subscribe((product) => {
-        this.toast.success('Product update successfully')
-      })
+      ).subscribe(() =>
+        this.toast.success('Product update successfully'),
+      )
   }
 
   remove(id: number) {
@@ -66,9 +66,9 @@ export class ProductService {
           this.handleError(err)
           throw (`Error => ${err.message}`)
         }),
-      ).subscribe((product) => {
-        this.toast.success('Product deleted successfully')
-      })
+      ).subscribe(() =>
+        this.toast.success('Product deleted successfully'),
+      )
   }
 
   private handleError(err: HttpErrorResponse) {
