@@ -15,6 +15,7 @@ export class AuthService {
 
   isAuthSig = signal<boolean>(false)
   isAdminSig = signal<boolean>(false)
+  userId: number | null = null
 
   token: string | null = null
 
@@ -36,12 +37,16 @@ export class AuthService {
           localStorage.setItem('token', response.token)
           localStorage.setItem('admin', response.user.roles[0].value)
           this.token = response.token
+          this.userId = response.user.id
+          console.log(response.user.id)
           this.isAuthSig.set(true)
           this.router.navigate(['home'])
         } else {
           this.isAdminSig.set(false)
           localStorage.setItem('token', response.token)
           this.token = response.token
+          this.userId = response.user.id
+          console.log(response.user.id)
           this.isAuthSig.set(true)
           this.router.navigate([''])
         }
@@ -77,6 +82,7 @@ export class AuthService {
     this.isAdminSig.set(false)
     this.tokenService.userInSystem.set(null)
     this.token = null
+    this.userId = null
     this.router.navigate([''])
     this.toast.success('Logout', '', { timeOut: 500 })
   }

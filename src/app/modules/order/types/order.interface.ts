@@ -1,10 +1,11 @@
+import { IProductInStockAttributes } from '../../product/types/product.interfaces'
+
 export interface IOrder {
-  'userId': number,
-  'productList': IProductOrder[]
+  products: IProductInStockAttributes[]
 }
 
 export interface IProductOrder {
-  'id': number,
-  'qty': number,
-  'price': number
+  id: number
+  qty: number
+  price: number
 }

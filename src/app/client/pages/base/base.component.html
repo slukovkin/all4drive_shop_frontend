@@ -13,7 +13,7 @@
         <div
           class="md:grid-cols-5 content-center lg:grid items-center space-x-2 overflow-y-auto whitespace-pre-wrap">
           @for (product of this.productService.products; track product.id) {
-            @for (pr of product.stores; track pr.id) {
+            @for (pr of product?.stores; track pr.id) {
               <app-product-card [product]="product"></app-product-card>
             }
           }

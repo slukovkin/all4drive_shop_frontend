@@ -15,12 +15,17 @@ import { BaseComponent } from './client/pages/base/base.component'
 import { CurrencyComponent } from './modules/currency/components/currency/currency.component'
 import { ReportComponent } from './modules/report/components/report/report.component'
 import { CategoryComponent } from './modules/category/components/category/category.component'
+import { BasketComponent } from './client/components/basket/basket.component'
 
 export const routes: Routes = [
   {
     path: '',
     component: BaseComponent,
     title: 'Welcome',
+  },
+  {
+    path: 'basket',
+    component: BasketComponent,
   },
   {
     path: 'login',

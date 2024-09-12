@@ -1,1 +1,61 @@
-<p>basket works!</p>
+<form (ngSubmit)="submit()" [formGroup]="basketForm">
+  <div class="flex flex-col text-center mx-auto my-6">
+    <div>
+      <div>
+        <img [src]="product?.imageUrl" alt="{{product?.title}}" class="w-[150px] h-[150px]">
+      </div>
+      <div class="grid mx-auto mt-2 text-start">
+        <label for="title">Наименование</label>
+        <input
+          class="input"
+          formControlName="title"
+          [defaultValue]="product?.title"
+          [readOnly]="true"
+          required
+          type="text" id="title">
+      </div>
+
+      <div class="grid mx-auto  mt-2 text-start">
+        <label for="article">Артикул</label>
+        <input
+          formControlName="article"
+          [defaultValue]="product?.article"
+          [readOnly]="true"
+          class="input"
+          type="text" id="article">
+      </div>
+      <div class="grid mx-auto  mt-2 text-start">
+        <label for="qty">Количество</label>
+        <input
+          formControlName="qty"
+          [defaultValue]="product?.stores?.[0]?.ProductStore?.qty"
+          class="input"
+          type="number" id="qty">
+      </div>
+
+      <div class="grid mx-auto  mt-2 text-start">
+        <label for="price">Цена за единицу:</label>
+        <input
+          [defaultValue]="sum()"
+          [readOnly]="true"
+          class="input"
+          type="text" id="price">
+      </div>
+
+      <div class="text-center mt-3 mx-auto">
+        <button
+          stopPropagation
+          class="btn btn-action my-1 py-3 w-full"
+          [disabled]="this.basketForm.invalid"
+          type="submit"
+        >Сохранить
+        </button>
+        @if (!product?.id) {
+          <button stopPropagation class="btn btn-orange my-1 py-3 w-full" (click)="exit()">Отменить
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</form>
+

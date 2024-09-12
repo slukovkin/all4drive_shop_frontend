@@ -1,39 +1,29 @@
-import { Injectable, OnInit } from '@angular/core'
-import { IOrder, IProductOrder } from '../types/order.interface'
-import { HttpClient } from '@angular/common/http'
-import { TokenService } from '../../../shared/token/token.service'
-import { IUserResponse } from '../../auth/types/response.interface'
+import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
+import { IProductInBasket, IProductInStockAttributes } from '../../product/types/product.interfaces'
+import { AuthService } from '../../auth/service/auth.service'
 
 @Injectable({
   providedIn: 'root',
 })
-export class OrderService implements OnInit {
+export class OrderService {
 
-  productList?: IOrder
-  user?: IUserResponse | null
+  order: IProductInBasket[] = []
+  currentProduct?: IProductInStockAttributes
 
   constructor(
-    private http: HttpClient,
-    private tokenService: TokenService,
+    private readonly authService: AuthService,
     private readonly router: Router,
   ) {
   }
 
-  addProductInOrder(product: IProductOrder) {
-    if (this.productList?.userId === null) {
+  addProductInOrder(product: IProductInStockAttributes) {
+    if (!this.authService.userId) {
       console.log('userId not found')
       this.router.navigate(['login'])
-    }
-    this.productList?.productList.push(product)
-    console.log(this.productList)
-  }
-
-  ngOnInit(): void {
-    const token = localStorage.getItem('token')
-    if (token) {
-      this.tokenService.checkToken(token)
-      this.user = this.tokenService.userInSystem()
+    } else {
+      this.currentProduct = product
+      this.router.navigate(['basket'])
     }
   }
 }

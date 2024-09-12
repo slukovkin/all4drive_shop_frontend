@@ -21,7 +21,7 @@ export class LoginComponent {
 
   constructor(private readonly authService: AuthService) {
     this.user = new FormGroup({
-      email: new FormControl('admin@gmail.com', [Validators.required, Validators.email]),
+      email: new FormControl('user@gmail.com', [Validators.required, Validators.email]),
       password: new FormControl('111111', [Validators.required, Validators.minLength(6)]),
     })
   }
