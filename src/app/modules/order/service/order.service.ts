@@ -22,7 +22,7 @@ export class OrderService {
   }
 
   create(order: IOrder) {
-    return this.http.post<IOrder>(Constants.BASE_URL + Constants.METHODS.CREATE_ORDER, order)
+    return this.http.post<IOrder>(Constants.BASE_URL + Constants.METHODS.CREATE_ORDER, order).subscribe()
   }
 
   addProductInOrder(product: IProductInStockAttributes) {

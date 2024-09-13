@@ -1,11 +1,8 @@
+import { IProductInBasket } from '../../product/types/product.interfaces'
+
 export interface IOrder {
   id?: number
   userId: number
-  productList: IProductOrderInterface[]
+  productList: IProductInBasket[]
 }
 
-export interface IProductOrderInterface {
-  id: number
-  qty: number
-  price: number
-}

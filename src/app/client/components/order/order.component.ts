@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { CurrencyPipe, NgForOf, NgIf } from '@angular/common'
+import { CurrencyPipe, Location, NgForOf, NgIf } from '@angular/common'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { FilterPipe } from '../../../shared/pipes/filter.pipe'
 import { GetCategoryTitleByIdPipe } from '../../../shared/pipes/get-category-title-by-id.pipe'
@@ -13,6 +13,7 @@ import { RouterLink } from '@angular/router'
 import { AuthService } from '../../../modules/auth/service/auth.service'
 import { CustomerService } from '../../../modules/customer/services/customer.service'
 import { ICustomer } from '../../../modules/customer/components/customer/types/customer.interface'
+import { IOrder } from '../../../modules/order/types/order.interface'
 
 @Component({
   selector: 'app-order',
@@ -44,6 +45,7 @@ export class OrderComponent {
     public readonly modalService: ModalService,
     private readonly authService: AuthService,
     private readonly customerService: CustomerService,
+    private readonly _location: Location,
   ) {
     this.customerService.getAllCustomers()
     if (this.authService.user?.user.id) {
@@ -76,12 +78,17 @@ export class OrderComponent {
         this.customerService.update(user)
       }
       console.log('Заказ => ', this.orderService.order, 'Пользователь => ', user)
-      // const order: IOrder = {
-      //   userId: user.id!,
-      //   productList: this.orderService.order,
-      // }
-      // this.orderService.create(order)
+      const order: IOrder = {
+        userId: user.id!,
+        productList: this.orderService.order,
+      }
+      this.orderService.create(order)
+      console.log(order)
     }
+  }
+
+  back() {
+    this._location.back()
   }
 
 }
