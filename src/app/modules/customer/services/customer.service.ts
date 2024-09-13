@@ -19,6 +19,10 @@ export class CustomerService {
   ) {
   }
 
+  getCustomerById(id: number) {
+    return this.customers.filter(customer => customer.id === id)[0]
+  }
+
   create(customer: ICustomer) {
     return this.http.post<ICustomer>(Constants.BASE_URL + Constants.METHODS.CREATE_CUSTOMERS, customer)
       .pipe(

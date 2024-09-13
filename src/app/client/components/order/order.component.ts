@@ -35,15 +35,9 @@ import { ICustomer } from '../../../modules/customer/components/customer/types/c
 export class OrderComponent {
   deleteIcon = faTrash
   isOrder = false
+  user: ICustomer | null = null
+  orderForm: FormGroup
 
-  orderForm = new FormGroup(({
-    name: new FormControl('', [Validators.required]),
-    lastname: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required]),
-    // email: new FormControl('', [Validators.required, Validators.email]),
-    city: new FormControl('', [Validators.required]),
-    post: new FormControl('', [Validators.required]),
-  }))
 
   constructor(
     public readonly orderService: OrderService,
@@ -51,6 +45,18 @@ export class OrderComponent {
     private readonly authService: AuthService,
     private readonly customerService: CustomerService,
   ) {
+    this.customerService.getAllCustomers()
+    if (this.authService.user?.user.id) {
+      this.user = this.customerService.getCustomerById(this.authService.user.user.id)
+    }
+
+    this.orderForm = new FormGroup(({
+      firstname: new FormControl(this.user?.firstname ?? '', [Validators.required]),
+      lastname: new FormControl(this.user?.lastname ?? '', [Validators.required]),
+      phone: new FormControl(this.user?.phone ?? '', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
+      post: new FormControl('', [Validators.required]),
+    }))
   }
 
   delete(id: number) {
@@ -61,14 +67,20 @@ export class OrderComponent {
     if (this.orderForm.valid) {
       const user: ICustomer = {
         id: this.authService.user?.user.id!,
-        firstname: this.orderForm.value.name!,
+        firstname: this.orderForm.value.firstname!,
         lastname: this.orderForm.value.lastname!,
         email: this.authService.user?.user.email!,
         phone: this.orderForm.value.phone!,
       }
-      this.customerService.update(user)
-      console.log(this.orderForm.value)
-      console.log(user)
+      if (!this.user?.firstname) {
+        this.customerService.update(user)
+      }
+      console.log('Заказ => ', this.orderService.order, 'Пользователь => ', user)
+      // const order: IOrder = {
+      //   userId: user.id!,
+      //   productList: this.orderService.order,
+      // }
+      // this.orderService.create(order)
     }
   }
 

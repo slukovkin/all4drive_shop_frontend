@@ -1,10 +1,10 @@
-import { IProductInStockAttributes } from '../../product/types/product.interfaces'
-
 export interface IOrder {
-  products: IProductInStockAttributes[]
+  id?: number
+  userId: number
+  productList: IProductOrderInterface[]
 }
 
-export interface IProductOrder {
+export interface IProductOrderInterface {
   id: number
   qty: number
   price: number

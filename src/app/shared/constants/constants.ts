@@ -14,6 +14,7 @@ export const Constants = {
     UPDATE_PRODUCT_BY_ID: 'products/',
     DELETE_PRODUCT_BY_ID: 'products/',
     GET_ALL_CUSTOMERS: 'users',
+    GET_CUSTOMER_BY_ID: 'users/',
     CREATE_CUSTOMERS: 'customers',
     UPDATE_CUSTOMERS_BY_ID: 'users/profile/',
     DELETE_CUSTOMERS_BY_ID: 'customers/',
@@ -44,5 +45,6 @@ export const Constants = {
     GET_PRODUCT_FROM_STORE_BY_ID: 'product_store/search/',
     DELETE_PRODUCT_FROM_STORE_BY_ID: 'product_store/remove/',
     CHECK_TOKEN: 'auth/',
+    CREATE_ORDER: 'orders',
   },
 }
