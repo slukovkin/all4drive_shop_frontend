@@ -83,7 +83,8 @@ export class OrderComponent {
         productList: this.orderService.order,
       }
       this.orderService.create(order)
-      console.log(order)
+      this.orderService.order = []
+      this.back()
     }
   }
 
