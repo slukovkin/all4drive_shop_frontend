@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { AuthService } from '../../../modules/auth/service/auth.service'
+import { DataRowOutlet } from '@angular/cdk/table'
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
     RouterLink,
+    DataRowOutlet,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

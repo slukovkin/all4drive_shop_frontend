@@ -16,6 +16,7 @@ import { CurrencyComponent } from './modules/currency/components/currency/curren
 import { ReportComponent } from './modules/report/components/report/report.component'
 import { CategoryComponent } from './modules/category/components/category/category.component'
 import { BasketComponent } from './client/components/basket/basket.component'
+import { OrderComponent } from './client/components/order/order.component'
 
 export const routes: Routes = [
   {
@@ -26,6 +27,10 @@ export const routes: Routes = [
   {
     path: 'basket',
     component: BasketComponent,
+  },
+  {
+    path: 'order',
+    component: OrderComponent,
   },
   {
     path: 'login',

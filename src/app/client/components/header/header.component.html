@@ -10,14 +10,19 @@
     <ul class="inline-flex items-center">
       <li>
         @if (authService.isAuthSig()) {
-          <a class="header-btn" (click)="authService.logout()">Выход</a>
+          <a class="header-btn cursor-pointer" (click)="authService.logout()">Выход</a>
         } @else {
-          <a class="header-btn" routerLink="login">Войти</a>
+          <a class="header-btn cursor-pointer" routerLink="login">Войти</a>
         }
       </li>
       @if (!authService.isAuthSig()) {
         <li>
-          <a class="header-btn" routerLink="registration">Регистрация</a>
+          <a class="header-btn cursor-pointer" routerLink="registration">Регистрация</a>
+        </li>
+      }
+      @if (authService.isAuthSig()) {
+        <li>
+          <a class="header-btn cursor-pointer" routerLink="order">Корзина</a>
         </li>
       }
     </ul>
