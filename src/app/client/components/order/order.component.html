@@ -25,13 +25,117 @@
     <td>{{ product.qty }}</td>
     <td>{{ product.priceOut * product.qty | eurToUah }}</td>
     <td>
-      <fa-icon stopPropagation class="btn btn-red px-2" (click)="delete(product.id)"
-               [icon]="deleteIcon"
-      >delete
-      </fa-icon>
+      @if (!isOrder) {
+        <fa-icon stopPropagation class="btn btn-red px-2" (click)="delete(product.id)"
+                 [icon]="deleteIcon"
+        >delete
+        </fa-icon>
+      }
     </td>
   </tr>
-  <button class="btn btn-action w-full mt-2" [disabled]="orderService.order.length === 0">Оформить заказ</button>
+  <button class="btn btn-action w-full mt-2" [disabled]="orderService.order.length === 0 || isOrder"
+          (click)="isOrder = true"
+  >Оформить заказ
+  </button>
 </table>
+
+
+@if (isOrder) {
+  <form class="flex flex-col w-2/3 mx-auto p-4 rounded border border-slate-500 mt-10"
+        [formGroup]="orderForm"
+        (ngSubmit)="onSubmit()">
+    <div class="flex flex-col mt-5">
+      <label for="name" class="text-slate-400 text-sm mt-2">Имя</label>
+      <input
+        formControlName="name"
+        required
+        type="text" id="name" class="input" placeholder="Введите имя:">
+    </div>
+    <div *ngIf="orderForm.controls['name'].invalid &&
+    (orderForm.controls['name'].dirty || orderForm.controls['name'].touched)">
+      <span class="text-red-600 mt-1 text-sm"
+            *ngIf=" orderForm.controls['name'].hasError('required')">Поле обязательное для заполнения</span>
+    </div>
+
+    <div class="flex flex-col mt-2">
+      <label for="lastname" class="text-slate-400 text-sm mt-2">Фамилия</label>
+      <input
+        formControlName="lastname"
+        required
+        type="text" id="lastname" class="input" placeholder="Введите фамилию:">
+    </div>
+    <div *ngIf="orderForm.controls['lastname'].invalid &&
+    (orderForm.controls['lastname'].dirty || orderForm.controls['lastname'].touched)">
+      <span class="text-red-600 mt-1 text-sm"
+            *ngIf=" orderForm.controls['lastname'].hasError('required')">Поле обязательное для заполнения</span>
+    </div>
+    <div class="flex flex-col mt-2">
+      <label for="phone" class="text-slate-400 text-sm mt-2">Телефон</label>
+      <input
+        formControlName="phone"
+        required
+        type="text" id="phone" class="input" placeholder=" Введите телефон:">
+    </div>
+    <div *ngIf="orderForm.controls['phone'].invalid &&
+    (orderForm.controls['phone'].dirty || orderForm.controls['phone'].touched)">
+      <span class="text-red-600 mt-1 text-sm"
+            *ngIf=" orderForm.controls['phone'].hasError('required')">Поле обязательное для заполнения</span>
+    </div>
+
+    <!--    <div class="flex flex-col mt-2">-->
+    <!--      <label for="email" class="text-slate-400 text-sm mt-2">Электронная почта</label>-->
+    <!--      <input-->
+    <!--        formControlName="email"-->
+    <!--        required-->
+    <!--        type="text" id="email" class="input" placeholder=" Введите email:">-->
+    <!--    </div>-->
+    <!--    <div *ngIf="orderForm.controls['email'].invalid &&-->
+    <!--    (orderForm.controls['email'].dirty || orderForm.controls['email'].touched)">-->
+    <!--      <span class="text-red-600 mt-1 text-sm"-->
+    <!--            *ngIf=" orderForm.controls['email'].hasError('required')">Поле обязательное для заполнения-->
+    <!--      </span>-->
+    <!--      <span class="text-red-600 mt-1 text-sm"-->
+    <!--            *ngIf=" orderForm.controls['email'].hasError('email')">Введите корректный email-->
+    <!--      </span>-->
+    <!--    </div>-->
+
+    <div class="flex flex-col mt-2">
+      <label for="city" class="text-slate-400 text-sm mt-2">Город</label>
+      <input
+        formControlName="city"
+        required
+        type="text" id="city" class="input" placeholder=" Введите город:">
+    </div>
+    <div *ngIf="orderForm.controls['city'].invalid &&
+    (orderForm.controls['city'].dirty || orderForm.controls['city'].touched)">
+      <span class="text-red-600 mt-1 text-sm"
+            *ngIf=" orderForm.controls['city'].hasError('required')">Поле обязательное для заполнения</span>
+    </div>
+
+    <div class="flex flex-col mt-2">
+      <label for="post" class="text-slate-400 text-sm mt-2">Отделение Новой почты</label>
+      <input
+        formControlName="post"
+        required
+        type="text" id="post" class="input" placeholder=" Введите номер отделения:">
+    </div>
+    <div *ngIf="orderForm.controls['post'].invalid &&
+    (orderForm.controls['post'].dirty || orderForm.controls['post'].touched)">
+      <span class="text-red-600 mt-1 text-sm"
+            *ngIf=" orderForm.controls['post'].hasError('required')">Поле обязательное для заполнения</span>
+    </div>
+    <div class="mt-5">
+      <span>
+        <button class="btn btn-action w-full" [disabled]="orderForm.invalid" type="submit">Отправить</button>
+      </span>
+      <span>
+        <button class="btn btn-orange w-full">Отменить</button>
+      </span>
+    </div>
+  </form>
+}
+
+
+
 
 

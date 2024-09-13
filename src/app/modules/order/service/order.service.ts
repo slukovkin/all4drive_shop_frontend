@@ -18,7 +18,7 @@ export class OrderService {
   }
 
   addProductInOrder(product: IProductInStockAttributes) {
-    if (!this.authService.userId) {
+    if (!this.authService.user?.user.id) {
       console.log('userId not found')
       this.router.navigate(['login'])
     } else {

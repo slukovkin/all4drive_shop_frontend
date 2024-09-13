@@ -51,7 +51,7 @@ export class CustomerService {
           this.handleError(err)
           throw (`Error => ${err.message}`)
         }),
-      ).subscribe((product) => {
+      ).subscribe(() => {
         this.toast.success('Customer updated successfully')
       })
   }
@@ -64,7 +64,7 @@ export class CustomerService {
           this.handleError(err)
           throw (`Error => ${err.message}`)
         }),
-      ).subscribe((product) => {
+      ).subscribe(() => {
         this.toast.success('Customer deleted successfully')
       })
   }

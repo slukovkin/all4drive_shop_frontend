@@ -1,7 +1,7 @@
 <div class="flex flex-row gap-2">
   <div class="w-full">
     <div>
-      <button class="btn btn-action w-full my-1" (click)="modalService.openModal('Новый клиент')">Добавить клиента
+      <button class="btn btn-action w-full my-1" (click)="modalService.openModal('Новый контрагент')">Добавить клиента
       </button>
     </div>
     <table class="mx-auto w-full items-center">
@@ -19,10 +19,10 @@
           <tr stopPropagation
               class="grid grid-cols-6 mt-1 px-4 py-2 text-lg text-center
         items-center cursor-pointer select-none border border-slate-500"
-              (click)="modalService.openModal('Новый клиент')"
+              (click)="modalService.openModal('Новый контрагент')"
           >
-            <td>{{ customer.name }}</td>
-            <td>{{ customer.surname ? customer.surname : '' }}</td>
+            <td>{{ customer.firstname }}</td>
+            <td>{{ customer.lastname ? customer.lastname : '' }}</td>
             <td>{{ customer.email }}</td>
             <td>{{ customer.phone }}</td>
             <td>{{ customer.description }}</td>

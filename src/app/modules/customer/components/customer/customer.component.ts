@@ -47,9 +47,7 @@ export class CustomerComponent {
   }
 
   update(customer: ICustomer) {
-    // this.customerService.customerSign.set(customer)
     this.modalService.openModal('Редактирование', customer)
-    // this.customerService.isShowCustomerForm.set(true)
   }
 
   delete(id: number) {

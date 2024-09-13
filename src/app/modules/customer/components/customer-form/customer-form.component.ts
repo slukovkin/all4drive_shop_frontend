@@ -32,8 +32,8 @@ export class CustomerFormComponent {
   ) {
     this.customer = this.modalService.itemSign()
     this.customerForm = new FormGroup({
-      name: new FormControl(this.customer?.name, [Validators.required]),
-      surname: new FormControl(this.customer?.surname),
+      firstname: new FormControl(this.customer?.firstname, [Validators.required]),
+      lastname: new FormControl(this.customer?.lastname),
       email: new FormControl(this.customer?.email, [Validators.required, Validators.email]),
       phone: new FormControl(this.customer?.phone, [Validators.required]),
       description: new FormControl(this.customer?.description),
@@ -44,11 +44,11 @@ export class CustomerFormComponent {
     if (this.customerForm.valid) {
       const customer: ICustomer = {
         id: this.customer?.id,
-        name: firstCharToUpperCase(this.customerForm.controls['name'].value),
-        surname: firstCharToUpperCase(this.customerForm.controls['surname'].value),
+        firstname: firstCharToUpperCase(this.customerForm.controls['firstname'].value),
+        lastname: firstCharToUpperCase(this.customerForm.controls['lastname'].value),
         email: this.customerForm.controls['email'].value,
         phone: this.customerForm.controls['phone'].value,
-        description: firstCharToUpperCase(this.customerForm.controls['description'].value),
+        description: firstCharToUpperCase(this.customerForm.controls['description'].value ?? ''),
       }
       if (this.customer?.id) {
         this.customerService.update(customer)
@@ -63,5 +63,6 @@ export class CustomerFormComponent {
     this.customerForm.reset()
     this.customerService.customerSign.set('')
     this.customerService.isShowCustomerForm.set(false)
+    this.modalService.closeModal()
   }
 }

@@ -1,8 +1,8 @@
 export interface ICustomer {
   id?: number;
-  name: string;
-  surname: string;
+  firstname?: string;
+  lastname?: string;
   email: string;
-  phone: string;
-  description: string;
+  phone?: string;
+  description?: string;
 }

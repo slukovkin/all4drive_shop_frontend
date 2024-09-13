@@ -39,7 +39,7 @@ export class SidebarComponent {
     },
     {
       routerLink: 'customer',
-      label: 'Клиенты',
+      label: 'Контрагенты',
     },
     {
       routerLink: 'stores',

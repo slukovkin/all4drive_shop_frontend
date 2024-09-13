@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr'
 import { catchError, tap } from 'rxjs'
 import { IResponseUser } from '../types/response-user.interface'
 import { TokenService } from '../../../shared/token/token.service'
+import { IUserProfile } from '../types/user-profile'
+import { CustomerService } from '../../customer/services/customer.service'
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +17,7 @@ export class AuthService {
 
   isAuthSig = signal<boolean>(false)
   isAdminSig = signal<boolean>(false)
-  userId: number | null = null
+  user: IResponseUser | null = null
 
   token: string | null = null
 
@@ -23,6 +25,7 @@ export class AuthService {
     private readonly http: HttpClient,
     private readonly router: Router,
     private readonly tokenService: TokenService,
+    private readonly customerService: CustomerService,
     private readonly toast: ToastrService) {
     const token = localStorage.getItem('token')
     this.isAuthSig.set(!!token)
@@ -37,16 +40,14 @@ export class AuthService {
           localStorage.setItem('token', response.token)
           localStorage.setItem('admin', response.user.roles[0].value)
           this.token = response.token
-          this.userId = response.user.id
-          console.log(response.user.id)
+          this.user = response
           this.isAuthSig.set(true)
           this.router.navigate(['home'])
         } else {
           this.isAdminSig.set(false)
           localStorage.setItem('token', response.token)
           this.token = response.token
-          this.userId = response.user.id
-          console.log(response.user.id)
+          this.user = response
           this.isAuthSig.set(true)
           this.router.navigate([''])
         }
@@ -76,13 +77,17 @@ export class AuthService {
       })
   }
 
+  update(user: IUserProfile) {
+    return this.http.patch(Constants.BASE_URL + Constants.METHODS.UPDATE_USER_BY_ID + user.id, user).subscribe()
+  }
+
   logout() {
     localStorage.clear()
     this.isAuthSig.set(false)
     this.isAdminSig.set(false)
     this.tokenService.userInSystem.set(null)
     this.token = null
-    this.userId = null
+    this.user = null
     this.router.navigate([''])
     this.toast.success('Logout', '', { timeOut: 500 })
   }
