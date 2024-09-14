@@ -34,6 +34,10 @@ export class SidebarComponent {
       label: 'Журнал документов',
     },
     {
+      routerLink: 'orders',
+      label: 'Журнал заказов',
+    },
+    {
       routerLink: 'reports',
       label: 'Отчёты',
     },

@@ -1,0 +1,8 @@
+@for (prod of this.documentService.products; track prod.id) {
+  <h5>Код: {{ prod.code }}</h5>
+  <h5>Артикул: {{ prod.article }}</h5>
+  <h5>Наименование: {{ prod.title }}</h5>
+  <h5>Количство: {{ prod.qty }}</h5>
+  <h5>Цена: {{ prod.priceOut }}</h5>
+}
+

@@ -46,5 +46,6 @@ export const Constants = {
     DELETE_PRODUCT_FROM_STORE_BY_ID: 'product_store/remove/',
     CHECK_TOKEN: 'auth/',
     CREATE_ORDER: 'orders',
+    GET_ALL_ORDERS: 'orders',
   },
 }

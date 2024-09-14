@@ -8,7 +8,6 @@ import { catchError, tap } from 'rxjs'
 import { IResponseUser } from '../types/response-user.interface'
 import { TokenService } from '../../../shared/token/token.service'
 import { IUserProfile } from '../types/user-profile'
-import { CustomerService } from '../../customer/services/customer.service'
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +24,6 @@ export class AuthService {
     private readonly http: HttpClient,
     private readonly router: Router,
     private readonly tokenService: TokenService,
-    private readonly customerService: CustomerService,
     private readonly toast: ToastrService) {
     const token = localStorage.getItem('token')
     this.isAuthSig.set(!!token)

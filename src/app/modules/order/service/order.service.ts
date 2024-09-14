@@ -25,6 +25,10 @@ export class OrderService {
     return this.http.post<IOrder>(Constants.BASE_URL + Constants.METHODS.CREATE_ORDER, order).subscribe()
   }
 
+  getAllOrders() {
+    return this.http.get<IOrder[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_ORDERS)
+  }
+
   addProductInOrder(product: IProductInStockAttributes) {
     if (!this.authService.user?.user.id) {
       console.log('userId not found')
