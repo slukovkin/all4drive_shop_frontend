@@ -19,7 +19,7 @@ export class GetCategoryTitleByIdPipe implements PipeTransform {
 
   transform(id: number): string {
     const category = this.categories.filter(category => category.id === id)[0]
-    return category.title
+    return category?.title
   }
 
 }

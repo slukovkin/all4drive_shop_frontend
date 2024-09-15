@@ -1,25 +1,25 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { SettingService } from '../../modules/settings/service/setting.service'
 import { CurrencyService } from '../../modules/currency/components/services/currency.service'
-import { ICurrency } from '../../modules/currency/types/currency.interface'
 
 @Pipe({
   name: 'uahToEur',
   standalone: true,
 })
 export class UahToEurPipe implements PipeTransform {
-  currentCurrency?: ICurrency
+  currentCurrency: number = 0
 
   constructor(
     private readonly settingService: SettingService,
     private readonly currencyService: CurrencyService,
   ) {
-    this.currencyService.getCurrencyById(this.settingService.setting!.currencyId)
-    this.currentCurrency = this.currencyService.currencyDefault
+    if (this.settingService.setting) {
+      this.currencyService.getCurrencyById(this.settingService.setting.currencyId)
+      this.currentCurrency = this.currencyService.currencyDefault?.rate ?? 0
+    }
   }
 
-
-  transform(value: number, exchangeRete: number = this.currentCurrency!.rate): number {
+  transform(value: number, exchangeRete: number = this.currentCurrency): number {
     return Math.floor(value / exchangeRete)
   }
 

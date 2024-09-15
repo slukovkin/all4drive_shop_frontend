@@ -8,16 +8,17 @@ import { CurrencyService } from '../../modules/currency/components/services/curr
 })
 export class EurToUahPipe implements PipeTransform {
 
-  currentCurrency: number
+  currentCurrency: number = 0
 
   constructor(
     private readonly settingService: SettingService,
     private readonly currencyService: CurrencyService,
   ) {
-    this.currencyService.getCurrencyById(this.settingService.setting!.currencyId)
-    this.currentCurrency = this.currencyService.currencyDefault!.rate
+    if (this.settingService.setting) {
+      this.currencyService.getCurrencyById(this.settingService.setting.currencyId)
+      this.currentCurrency = this.currencyService.currencyDefault?.rate ?? 0
+    }
   }
-
 
   transform(value: number, exchangeRate: number = this.currentCurrency): number {
     return Math.floor(value * exchangeRate)
