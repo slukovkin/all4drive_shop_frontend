@@ -18,6 +18,7 @@ import { CategoryComponent } from './modules/category/components/category/catego
 import { BasketComponent } from './client/components/basket/basket.component'
 import { OrderListComponent } from './modules/documents/components/order-list/order-list.component'
 import { OrderComponent } from './client/components/order/order.component'
+import { OrderDetailComponent } from './modules/documents/components/order-detail/order-detail.component'
 
 export const routes: Routes = [
   {
@@ -32,6 +33,10 @@ export const routes: Routes = [
   {
     path: 'order',
     component: OrderComponent,
+  },
+  {
+    path: 'order-detail',
+    component: OrderDetailComponent,
   },
   {
     path: 'orders',

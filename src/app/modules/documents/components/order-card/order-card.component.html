@@ -1,0 +1,25 @@
+<table class="w-full">
+  <tr stopPropagation
+      class="grid grid-cols-5 mt-1 px-4 py-2 text-lg text-center
+        items-center cursor-pointer select-none border border-slate-500"
+  >
+    <td>{{ order?.id }}</td>
+    <td>{{ findCustomer(order?.userId ?? 0) }}</td>
+
+    <td>{{ sumOrder(order?.productList ?? []) }}</td>
+
+    <td>
+      <fa-icon [icon]="visible" class="px-2 text-green-600"
+               stopPropagation
+               (click)="detail(order?.productList ?? [])"
+      ></fa-icon>
+      <fa-icon [icon]="editIcon" class="px-2 text-amber-600"
+               stopPropagation
+
+      ></fa-icon>
+      <fa-icon [icon]="deleteIcon" class="px-2 text-red-600"
+               stopPropagation
+      ></fa-icon>
+    </td>
+  </tr>
+</table>

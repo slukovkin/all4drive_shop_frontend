@@ -24,7 +24,7 @@ export class DocumentService {
       .pipe(
         tap((orders: IOrder[]) => {
           this.orders = orders
-          this.orders.map(order => order.productList.forEach(prod => this.products.push(prod)))
+          // this.orders.map(order => order.productList.forEach(prod => this.products.push(prod)))
         }),
       )
       .subscribe()

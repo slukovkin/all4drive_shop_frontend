@@ -4,7 +4,6 @@ import { IProductInBasket, IProductInStockAttributes } from '../../../modules/pr
 import { OrderService } from '../../../modules/order/service/order.service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { StopPropagationDirective } from '../../../shared/directives/stop-propagation.directive'
-import { AuthService } from '../../../modules/auth/service/auth.service'
 import { EurToUahPipe } from '../../../shared/pipes/eur-to-uah.pipe'
 
 @Component({
@@ -28,15 +27,9 @@ export class BasketComponent {
 
   constructor(
     private readonly orderService: OrderService,
-    private readonly authService: AuthService,
     private _location: Location,
   ) {
     this.product = this.orderService.currentProduct
-    // this.basketForm = new FormGroup({
-    //   title: new FormControl(this.product?.title),
-    //   article: new FormControl(this.product?.article),
-    //   qty: new FormControl(1),
-    // })
   }
 
   increment() {
@@ -56,7 +49,6 @@ export class BasketComponent {
   }
 
   submit() {
-    // if (this.basketForm.valid) {
     const productOrder: IProductInBasket = {
       id: this.product?.id ?? 0,
       code: this.product?.code ?? 0,
@@ -71,7 +63,6 @@ export class BasketComponent {
       priceIn: this.product?.stores?.[0]?.ProductStore?.priceIn!,
       priceOut: this.product?.stores?.[0]?.ProductStore?.priceOut!,
     }
-
     const products = this.orderService.order
 
     if (products.length > 0 && products.find(pr => pr.id === productOrder.id)) {
@@ -82,7 +73,6 @@ export class BasketComponent {
     } else {
       this.orderService.order.push(productOrder)
     }
-    console.log(this.orderService.order)
     this._location.back()
   }
 
