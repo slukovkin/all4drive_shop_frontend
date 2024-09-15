@@ -83,7 +83,7 @@
                   value="{{product?.categoryId}}"
       >
         @for (category of categoryService.categories; track category.id) {
-          <mat-option [value]="category.id">{{ category.title }}</mat-option>
+          <mat-option [value]="category.id">{{ category?.title }}</mat-option>
         }
       </mat-select>
 

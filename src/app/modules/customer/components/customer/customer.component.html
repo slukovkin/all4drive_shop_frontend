@@ -1,9 +1,9 @@
 <div class="flex flex-row gap-2">
   <div class="w-full">
-    <div>
-      <button class="btn btn-action w-full my-1" (click)="modalService.openModal('Новый контрагент')">Добавить клиента
-      </button>
-    </div>
+    <!--    <div>-->
+    <!--      <button class="btn btn-action w-full my-1" (click)="modalService.openModal('Новый контрагент')">Добавить клиента-->
+    <!--      </button>-->
+    <!--    </div>-->
     <table class="mx-auto w-full items-center">
       <tr class="w-full grid grid-cols-6 px-4 py-1 justify-between
     border border-slate-500 h-[50px] items-center">
@@ -16,10 +16,10 @@
       </tr>
       @for (customer of customerService.customers; track customer.id) {
         @if (customer) {
+          <!--              (click)="modalService.openModal('Новый контрагент')"-->
           <tr stopPropagation
               class="grid grid-cols-6 mt-1 px-4 py-2 text-lg text-center
         items-center cursor-pointer select-none border border-slate-500"
-              (click)="modalService.openModal('Новый контрагент')"
           >
             <td>{{ customer.firstname }}</td>
             <td>{{ customer.lastname ? customer.lastname : '' }}</td>

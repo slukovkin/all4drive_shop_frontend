@@ -1,10 +1,13 @@
 import { Component } from '@angular/core'
 import { DocumentService } from '../../services/document.service'
+import { JsonPipe } from '@angular/common'
 
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [],
+  imports: [
+    JsonPipe,
+  ],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.scss',
 })

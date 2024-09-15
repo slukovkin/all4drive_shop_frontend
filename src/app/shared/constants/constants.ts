@@ -17,7 +17,7 @@ export const Constants = {
     GET_CUSTOMER_BY_ID: 'users/',
     CREATE_CUSTOMERS: 'customers',
     UPDATE_CUSTOMERS_BY_ID: 'users/profile/',
-    DELETE_CUSTOMERS_BY_ID: 'customers/',
+    DELETE_CUSTOMERS_BY_ID: 'users/',
     UPLOAD_IMAGE: 'storage',
     GET_IMAGE_BY_FILENAME: 'storage/',
     GET_ALL_STORES: 'stores',
