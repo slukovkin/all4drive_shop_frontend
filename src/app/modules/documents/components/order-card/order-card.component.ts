@@ -37,7 +37,6 @@ export class OrderCardComponent {
   }
 
   detail(products: IProductInBasket[]) {
-    console.log(products)
     this.documentService.products = products
     this.router.navigate(['order-detail'])
   }
