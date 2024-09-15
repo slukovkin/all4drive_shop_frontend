@@ -31,10 +31,10 @@ export class CurrencyService {
 
   getCurrencyById(id: number) {
     return this.http.get<ICurrency>(Constants.BASE_URL + Constants.METHODS.GET_CURRENCY_BY_ID + id)
-      .pipe(
-        tap((currency) => this.currencyDefault = currency),
-      )
-      .subscribe()
+      // .pipe(
+      //   tap((currency) => this.currencyDefault = currency),
+      // )
+      .subscribe((currency) => this.currencyDefault = currency)
   }
 
   create(currency: ICurrency) {

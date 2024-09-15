@@ -7,7 +7,7 @@
     <div>Индекс: {{ product?.code }}</div>
     <div>Производитель: <strong>{{ product?.brand }}</strong></div>
     <div class="flex">
-      @if (product?.qty != 0) {
+      @if (product?.stores?.[0]?.ProductStore?.qty !== 0) {
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="green"
              class="size-5 font-bold stroke-green-600 stroke-2">
           <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -24,7 +24,7 @@
       }
     </div>
     <div>
-      <span>{{ product?.stores?.[0]?.ProductStore?.priceOut!  | eurToUah }} грн</span>
+      <span>{{ product?.stores?.[0]?.ProductStore?.priceOut! | eurToUah }} грн</span>
     </div>
     <div>
       <span>
@@ -33,6 +33,4 @@
     </div>
   </div>
 </div>
-
-
 

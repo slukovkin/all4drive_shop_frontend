@@ -5,7 +5,7 @@ import { ProductService } from '../../../modules/product/service/product.service
 import { RouterLink } from '@angular/router'
 import { PromotionComponent } from '../../components/promotion/promotion.component'
 import { FooterComponent } from '../../components/footer/footer.component'
-import { IProduct } from '../../../modules/product/types/product.interfaces'
+import { IProductInStockAttributes } from '../../../modules/product/types/product.interfaces'
 import { AsyncPipe, NgIf } from '@angular/common'
 import { ModalComponent } from '../../../modules/modal/components/modal.component'
 import { ProductFormComponent } from '../../../modules/product/components/product-form/product-form.component'
@@ -31,7 +31,7 @@ import { BasketComponent } from '../../components/basket/basket.component'
 })
 export class BaseComponent {
 
-  product?: IProduct
+  product?: IProductInStockAttributes[]
 
   constructor(
     public readonly productService: ProductService,

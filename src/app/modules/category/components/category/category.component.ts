@@ -8,7 +8,7 @@ import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { CategoryService } from '../../services/category.service'
 import { ICategory } from '../../types/category.interface'
 import { ModalService } from '../../../modal/service/modal.service'
-import { CategoryFormComponent } from './category-form/category-form.component'
+import { CategoryFormComponent } from '../category-form/category-form.component'
 
 @Component({
   selector: 'app-category',

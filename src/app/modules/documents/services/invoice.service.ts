@@ -5,6 +5,7 @@ import { Constants } from '../../../shared/constants/constants'
 import { catchError } from 'rxjs'
 import { ToastrService } from 'ngx-toastr'
 import { Router } from '@angular/router'
+import { DocumentService } from './document.service'
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,34 @@ export class InvoiceService {
   constructor(
     private readonly http: HttpClient,
     private readonly toast: ToastrService,
-    private readonly router: Router) {
+    private readonly documentService: DocumentService,
+    private readonly router: Router,
+  ) {
+  }
+
+  removeProductFromStore() {
+    const products = this.documentService.productsToInvoice()
+    products.forEach((product) => {
+      const payload: IProductInStore = {
+        productId: product.id,
+        storeId: product.storeId,
+        qty: product.qty / -1,
+        priceIn: product.priceIn,
+        priceOut: product.priceOut,
+      }
+      this.http.post(Constants.BASE_URL + Constants.METHODS.ADD_PRODUCTS_IN_STORE,
+        payload)
+        .pipe(
+          catchError((err) => {
+            this.handleError(err)
+            throw (`Error => ${err.message}`)
+          }),
+        ).subscribe(() => {
+        this.toast.success('Products successfully saved')
+        this.documentService.productsToInvoice.set([])
+        this.router.navigate(['products'])
+      })
+    })
   }
 
   saveProductInStore() {

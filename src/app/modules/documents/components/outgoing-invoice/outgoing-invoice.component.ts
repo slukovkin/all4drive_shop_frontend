@@ -13,6 +13,7 @@ import { ModalService } from '../../../modal/service/modal.service'
 import { InvoiceService } from '../../services/invoice.service'
 import { ModalComponent } from '../../../modal/components/modal.component'
 import { SelectProductComponent } from '../select-product/select-product.component'
+import { DocumentService } from '../../services/document.service'
 
 @Component({
   selector: 'app-outgoing-invoice',
@@ -35,6 +36,7 @@ export class OutgoingInvoiceComponent {
     public readonly currencyService: CurrencyService,
     public readonly modalService: ModalService,
     public readonly invoiceService: InvoiceService,
+    public documentService: DocumentService,
   ) {
     this.settingService.getAllSettings()
     this.productService.getAllProduct()
@@ -63,11 +65,11 @@ export class OutgoingInvoiceComponent {
 
   saveProductInStore() {
     this.invoiceService.changeInvoiceSign.set(true)
-    this.invoiceService.saveProductInStore()
+    this.invoiceService.removeProductFromStore()
   }
 
   sum(): number {
-    const products = this.invoiceService.productsSign()
+    const products = this.documentService.productsToInvoice()
     return products.reduce((prev, curr) => prev += curr.priceIn * curr.qty, 0)
   }
 

@@ -21,7 +21,7 @@ export class ProductService {
   getAllProduct() {
     this.http.get<IProductInStockAttributes[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_PRODUCTS)
       .pipe(
-        tap((products: IProductInStockAttributes[]) => {
+        tap((products) => {
           this.products = products
         }),
       )

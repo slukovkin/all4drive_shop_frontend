@@ -9,6 +9,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { BaseComponent } from './client/pages/base/base.component'
 import { SettingService } from './modules/settings/service/setting.service'
+import { CurrencyService } from './modules/currency/components/services/currency.service'
 
 @Component({
   selector: 'app-root',
@@ -29,8 +30,10 @@ export class AppComponent {
   constructor(
     public authService: AuthService,
     private settingService: SettingService,
+    private currencyService: CurrencyService,
   ) {
     this.settingService.getAllSettings()
+    this.currencyService.getCurrencyById(this.settingService.setting?.currencyId ?? 2)
     const token = localStorage.getItem('token')
     const admin = localStorage.getItem('admin')
     if (token && admin) {

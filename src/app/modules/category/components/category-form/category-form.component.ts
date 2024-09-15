@@ -1,11 +1,11 @@
 import { Component } from '@angular/core'
 import { NgIf } from '@angular/common'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { StopPropagationDirective } from '../../../../../shared/directives/stop-propagation.directive'
-import { ModalService } from '../../../../modal/service/modal.service'
-import { firstCharToUpperCase } from '../../../../../shared/utils/transformString'
-import { ICategory } from '../../../types/category.interface'
-import { CategoryService } from '../../../services/category.service'
+import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
+import { ModalService } from '../../../modal/service/modal.service'
+import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
+import { ICategory } from '../../types/category.interface'
+import { CategoryService } from '../../services/category.service'
 
 @Component({
   selector: 'app-category-form',
