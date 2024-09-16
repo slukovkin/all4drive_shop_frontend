@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ProductService } from '../../service/product.service'
-import { AsyncPipe, CurrencyPipe, NgClass, NgForOf, NgIf, TitleCasePipe } from '@angular/common'
+import { AsyncPipe, CurrencyPipe, JsonPipe, NgClass, NgForOf, NgIf, TitleCasePipe } from '@angular/common'
 import { ProductCardComponent } from '../product-card/product-card.component'
 import { ModalService } from '../../../modal/service/modal.service'
 import { ModalComponent } from '../../../modal/components/modal.component'
@@ -33,6 +33,7 @@ import { GetCategoryTitleByIdPipe } from '../../../../shared/pipes/get-category-
     FilterPipe,
     FaIconComponent,
     GetCategoryTitleByIdPipe,
+    JsonPipe,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',

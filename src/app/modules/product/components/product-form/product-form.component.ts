@@ -98,8 +98,10 @@ export class ProductFormComponent {
         title: firstCharToUpperCase(this.productForm.controls['title'].value),
         brand: firstCharToUpperCase(this.productForm.controls['brand'].value),
         categoryId: Number(this.productForm.controls['category'].value),
-        price: Number(this.productForm.controls['price'].value),
-        qty: Number(this.productForm.controls['qty'].value),
+        price: 0,
+        qty: 0,
+        // price: Number(this.productForm.controls['price'].value),
+        // qty: Number(this.productForm.controls['qty'].value),
         imageUrl: this.pathFile,
       }
       if (this.product?.id) {

@@ -90,21 +90,21 @@
     </div>
 
     <!--  Price-->
-    <div class="flex flex-col">
+    <div class="flex flex-col hidden">
       <label for="price" class="text-start mt-2">Цена в {{ currentCurrency.name }}</label>
       <input
         formControlName="price"
-        required
+        [readOnly]="true"
         [defaultValue]="product?.price"
         type="text" id="price" class="input" placeholder="Price:">
     </div>
 
     <!--  Qty-->
-    <div class="flex flex-col">
+    <div class="flex flex-col hidden">
       <label for="qty" class="text-start text-sm mt-2">Количество</label>
       <input
         formControlName="qty"
-        required
+        [readOnly]="true"
         [defaultValue]="product?.qty"
         type="text" id="qty" class="input" placeholder="Qty:">
     </div>
