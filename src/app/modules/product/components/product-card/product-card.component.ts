@@ -7,6 +7,7 @@ import { AsyncPipe, NgIf } from '@angular/common'
 import { BasketComponent } from '../../../../client/components/basket/basket.component'
 import { ModalComponent } from '../../../modal/components/modal.component'
 import { ModalService } from '../../../modal/service/modal.service'
+import { ProductService } from '../../service/product.service'
 
 @Component({
   selector: 'app-product-card',
@@ -27,6 +28,7 @@ export class ProductCardComponent {
 
   constructor(
     private readonly orderService: OrderService,
+    public readonly productService: ProductService,
     public readonly modalService: ModalService,
   ) {
   }

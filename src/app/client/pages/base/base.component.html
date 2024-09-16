@@ -5,16 +5,29 @@
   <!-- promotion -->
   <app-promotion></app-promotion>
 
-  <main class="">
-    <div class="w-full">
+  <main class="w-full">
+    <div class="flex w-screen-xl gap-1">
+
+      <!-- categories -->
+      <section class="px-2 w-1/5">
+        <div>
+          <app-sidebar [categories]="categoryService.categories"></app-sidebar>
+        </div>
+      </section>
 
       <!-- products -->
-      <section class="px-2">
+      <section class="px-2 w-4/5">
         <div
           class="md:grid-cols-5 content-center lg:grid items-center space-x-2 overflow-y-auto whitespace-pre-wrap">
           @for (product of this.productService.products; track product.id) {
-            @for (pr of product.stores; track pr.id) {
-              <app-product-card [product]="product"></app-product-card>
+            @if (!productService.isSelectFilter) {
+              @for (pr of product.stores; track pr.id) {
+                <app-product-card [product]="product"></app-product-card>
+              }
+            } @else if (product.categoryId === productService.selectCategory) {
+              @for (pr of product.stores; track pr.id) {
+                <app-product-card [product]="product"></app-product-card>
+              }
             }
           }
         </div>
@@ -33,7 +46,6 @@
         </div>
       </section>
     </div>
-
   </main>
 
   <!-- footer -->

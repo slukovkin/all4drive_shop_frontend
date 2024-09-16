@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr'
 })
 export class ProductService {
 
+  selectCategory: number | null = null
+  isSelectFilter = false
   products: IProductInStockAttributes[] = []
   searchByArticle = signal<string>('')
 

@@ -51,7 +51,6 @@ export class AppComponent {
     this.isSideBarShow.set(!this.isSideBarShow())
   }
 
-
   exit() {
     this.authService.logout()
   }

@@ -22,7 +22,7 @@
       }
       @if (authService.isAuthSig()) {
         <li>
-          <a class="header-btn cursor-pointer" routerLink="order">Корзина</a>
+          <a class="header-btn cursor-pointer" (click)="clientService.openModal()">Корзина</a>
         </li>
       }
     </ul>
@@ -34,3 +34,10 @@
     </svg>
   </button>
 </div>
+
+
+<ng-container *ngIf="clientService.isVisible | async">
+  <app-basket-modal>
+    <app-order></app-order>
+  </app-basket-modal>
+</ng-container>

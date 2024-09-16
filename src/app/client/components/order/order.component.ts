@@ -14,6 +14,7 @@ import { AuthService } from '../../../modules/auth/service/auth.service'
 import { CustomerService } from '../../../modules/customer/services/customer.service'
 import { ICustomer } from '../../../modules/customer/components/customer/types/customer.interface'
 import { IOrder } from '../../../modules/order/types/order.interface'
+import { ClientService } from '../../service/client.service'
 
 @Component({
   selector: 'app-order',
@@ -45,6 +46,7 @@ export class OrderComponent {
     public readonly modalService: ModalService,
     private readonly authService: AuthService,
     private readonly customerService: CustomerService,
+    private readonly clientService: ClientService,
     private readonly _location: Location,
   ) {
     this.customerService.getAllCustomers()
@@ -77,7 +79,6 @@ export class OrderComponent {
       if (!this.user?.firstname) {
         this.customerService.update(user)
       }
-      console.log('Заказ => ', this.orderService.order, 'Пользователь => ', user)
       const order: IOrder = {
         userId: user.id!,
         productList: this.orderService.order,
@@ -89,7 +90,7 @@ export class OrderComponent {
   }
 
   back() {
-    this._location.back()
+    // this._location.back()
+    this.clientService.closeModal()
   }
-
 }

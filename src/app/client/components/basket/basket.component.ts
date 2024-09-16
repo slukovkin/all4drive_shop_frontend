@@ -22,7 +22,6 @@ import { EurToUahPipe } from '../../../shared/pipes/eur-to-uah.pipe'
 })
 export class BasketComponent {
   product?: IProductInStockAttributes
-  // basketForm: FormGroup
   qty = 1
 
   constructor(

@@ -1,1 +1,15 @@
-<p>sidebar works!</p>
+<div>
+  <div class="flex flex-col items-center p-2">
+    <ul>
+      @for (category of categories; track category.id) {
+        <li class="flex w-full my-1 ">
+          <button
+            (click)="showProductsWithCategory(category.id ?? null)"
+            class="btn w-full text-lg text-start border border-b-teal-800 text-teal-800 py-1 rounded-b-md">
+            {{ category.title }}
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+</div>
