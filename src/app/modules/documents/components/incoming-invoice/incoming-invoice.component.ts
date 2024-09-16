@@ -17,6 +17,8 @@ import { InvoiceService } from '../../services/invoice.service'
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 import { SelectEditProductComponent } from '../select-edit-product/select-edit-product.component'
+import { ICustomer } from '../../../customer/components/customer/types/customer.interface'
+import { CustomerService } from '../../../customer/services/customer.service'
 
 @Component({
   selector: 'app-incoming-invoice',
@@ -53,6 +55,7 @@ export class IncomingInvoiceComponent {
     public readonly settingService: SettingService,
     public readonly storeService: StoreService,
     public readonly currencyService: CurrencyService,
+    public readonly customerService: CustomerService,
     public readonly modalService: ModalService,
     public readonly invoiceService: InvoiceService,
   ) {
@@ -60,6 +63,7 @@ export class IncomingInvoiceComponent {
     this.productService.getAllProduct()
     this.storeService.getAllStore()
     this.currencyService.getAllCurrencies()
+    this.customerService.getAllCustomers()
 
     this.incomingForm = new FormGroup({
       number_doc: new FormControl('ER-'),
@@ -67,6 +71,10 @@ export class IncomingInvoiceComponent {
       store: new FormControl(this.settingService.setting?.storeId, [Validators.required]),
       currency: new FormControl(this.settingService.setting?.currencyId, [Validators.required]),
     })
+  }
+
+  getCustomer(customer: ICustomer): string {
+    return `${customer.firstname} ${customer.lastname}`
   }
 
   submit() {

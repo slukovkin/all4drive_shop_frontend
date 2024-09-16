@@ -14,11 +14,14 @@ import { InvoiceService } from '../../services/invoice.service'
 import { ModalComponent } from '../../../modal/components/modal.component'
 import { SelectProductComponent } from '../select-product/select-product.component'
 import { DocumentService } from '../../services/document.service'
+import { CustomerService } from '../../../customer/services/customer.service'
+import { ICustomer } from '../../../customer/components/customer/types/customer.interface'
+import { EurToUahPipe } from '../../../../shared/pipes/eur-to-uah.pipe'
 
 @Component({
   selector: 'app-outgoing-invoice',
   standalone: true,
-  imports: [FaIconComponent, FormsModule, NgForOf, MatOption, MatSelect, AsyncPipe, ModalComponent, NgIf, ReactiveFormsModule, SelectProductComponent],
+  imports: [FaIconComponent, FormsModule, NgForOf, MatOption, MatSelect, AsyncPipe, ModalComponent, NgIf, ReactiveFormsModule, SelectProductComponent, EurToUahPipe],
   templateUrl: './outgoing-invoice.component.html',
   styleUrl: './outgoing-invoice.component.scss',
 })
@@ -36,6 +39,7 @@ export class OutgoingInvoiceComponent {
     public readonly currencyService: CurrencyService,
     public readonly modalService: ModalService,
     public readonly invoiceService: InvoiceService,
+    public readonly customerService: CustomerService,
     public documentService: DocumentService,
   ) {
     this.settingService.getAllSettings()
@@ -51,6 +55,18 @@ export class OutgoingInvoiceComponent {
     })
   }
 
+  getCustomer(customer: ICustomer): string {
+    return `${customer.firstname} ${customer.lastname}`
+  }
+
+  searchClient(id: number | null): string {
+    if (id) {
+      const customer = this.customerService.getCustomerById(id)
+      return `${customer.firstname} ${customer.lastname}`
+    }
+    return ''
+  }
+
   submit() {
     if (this.outgoingForm.valid) {
       console.log(this.outgoingForm.value)
@@ -60,7 +76,7 @@ export class OutgoingInvoiceComponent {
   }
 
   unselectProduct(id: number) {
-    this.invoiceService.productsSign.set(this.invoiceService.productsSign().filter(product => product.productId !== id))
+    this.documentService.productsToInvoice.set(this.documentService.productsToInvoice().filter(product => product.id !== id))
   }
 
   saveProductInStore() {
@@ -70,10 +86,10 @@ export class OutgoingInvoiceComponent {
 
   sum(): number {
     const products = this.documentService.productsToInvoice()
-    return products.reduce((prev, curr) => prev += curr.priceIn * curr.qty, 0)
+    return products.reduce((prev, curr) => prev += curr.priceOut * curr.qty, 0)
   }
 
   clearProducts() {
-    this.invoiceService.productsSign.set([])
+    this.documentService.productsToInvoice.set([])
   }
 }

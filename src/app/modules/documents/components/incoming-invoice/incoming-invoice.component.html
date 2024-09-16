@@ -27,10 +27,9 @@
       <div class="flex flex-col text-start">
         <label for="supplier-select">Поставщик</label>
         <mat-select id="supplier-select" class="py-2 border border-gray-400 rounded-md px-2" value="0">
-          <mat-option value="0">Поставщик 1</mat-option>
-          <mat-option value="1">Поставщик 2</mat-option>
-          <mat-option value="2">Поставщик 3</mat-option>
-          <mat-option value="3">Поставщик 4</mat-option>
+          @for (customer of customerService.customers; track customer.id) {
+            <mat-option [value]=customer.id>{{ getCustomer(customer) }}</mat-option>
+          }
         </mat-select>
       </div>
     </div>

@@ -23,11 +23,11 @@ export class SidebarComponent {
     },
     {
       routerLink: 'incoming_invoice',
-      label: 'Приходные накладные',
+      label: 'Приходная накладная',
     },
     {
       routerLink: 'outgoing_invoice',
-      label: 'Расходные накладные',
+      label: 'Расходная накладная',
     },
     {
       routerLink: 'documents',
