@@ -5,12 +5,14 @@ import { AuthService } from '../../auth/service/auth.service'
 import { HttpClient } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
 import { IOrder } from '../types/order.interface'
+import { ITokenResponse } from '../../auth/types/user.interface'
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
 
+  isLogin: ITokenResponse | null = null
   order: IProductInBasket[] = []
   currentProduct?: IProductInStockAttributes
 
@@ -30,12 +32,18 @@ export class OrderService {
   }
 
   addProductInOrder(product: IProductInStockAttributes) {
-    if (!this.authService.user?.user.id) {
-      console.log('userId not found')
-      this.router.navigate(['login'])
+    const token = localStorage.getItem('token')
+    if (token) {
+      this.authService.checkToken(token)
+        .subscribe()
+      if (this.authService.isAuth$()) {
+        this.currentProduct = product
+        this.router.navigate(['basket'])
+      } else {
+        this.router.navigate(['login'])
+      }
     } else {
-      this.currentProduct = product
-      this.router.navigate(['basket'])
+      this.router.navigate(['login'])
     }
   }
 }

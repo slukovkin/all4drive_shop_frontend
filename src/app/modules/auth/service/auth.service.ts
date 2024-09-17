@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { UserInterface } from '../types/user.interface'
+import { ITokenResponse, UserInterface } from '../types/user.interface'
 import { Constants } from '../../../shared/constants/constants'
 import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
@@ -14,8 +14,8 @@ import { IUserProfile } from '../types/user-profile'
 })
 export class AuthService {
 
-  isAuthSig = signal<boolean>(false)
-  isAdminSig = signal<boolean>(false)
+  isAuth$ = signal<boolean>(false)
+  isAdmin$ = signal<boolean>(false)
   user: IResponseUser | null = null
 
   token: string | null = null
@@ -26,37 +26,45 @@ export class AuthService {
     private readonly tokenService: TokenService,
     private readonly toast: ToastrService) {
     const token = localStorage.getItem('token')
-    this.isAuthSig.set(!!token)
+    this.isAuth$.set(!!token)
+  }
+
+  checkAuth() {
+    const token = localStorage.getItem('token')
+    if (token) {
+      this.checkToken(token).subscribe()
+    }
   }
 
   login(user: UserInterface) {
     return this.http.post<IResponseUser>(Constants.BASE_URL + Constants.METHODS.LOGIN,
-      user).pipe(
-      tap((response: IResponseUser) => {
-        if (response.user.roles[0].value === 'ADMIN') {
-          this.isAdminSig.set(true)
-          localStorage.setItem('token', response.token)
-          localStorage.setItem('admin', response.user.roles[0].value)
-          this.token = response.token
-          this.user = response
-          this.isAuthSig.set(true)
-          this.router.navigate(['home'])
-        } else {
-          this.isAdminSig.set(false)
-          localStorage.setItem('token', response.token)
-          this.token = response.token
-          this.user = response
-          this.isAuthSig.set(true)
-          this.router.navigate([''])
-        }
-      }),
-      catchError((err) => {
-        this.handleError(err)
-        throw new Error(err.error.message)
-      }),
-    ).subscribe(() => {
-      this.toast.success('Login successfully', '', { timeOut: 500 })
-    })
+      user)
+      .pipe(
+        tap((response: IResponseUser) => {
+          console.log(response.user.roles[0].value)
+          if (response.user.roles[0].value === 'ADMIN') {
+            this.isAdmin$.set(true)
+            this.isAuth$.set(true)
+            localStorage.setItem('token', response.token)
+            this.token = response.token
+            this.user = response
+            this.router.navigate(['home'])
+          } else {
+            this.isAdmin$.set(false)
+            this.isAuth$.set(true)
+            localStorage.setItem('token', response.token)
+            this.token = response.token
+            this.user = response
+            this.router.navigate([''])
+          }
+        }),
+        catchError((err) => {
+          this.handleError(err)
+          throw new Error(err.error.message)
+        }),
+      ).subscribe(() => {
+        this.toast.success('Login successfully', '', { timeOut: 500 })
+      })
   }
 
   registration(user: UserInterface) {
@@ -75,15 +83,33 @@ export class AuthService {
       })
   }
 
+  checkToken(token: string) {
+    return this.http.get<ITokenResponse>(Constants.BASE_URL + Constants.METHODS.CHECK_TOKEN + token)
+      .pipe(
+        tap((response) => {
+          if (response.roles[0].value === 'ADMIN') {
+            this.isAuth$.set(true)
+            this.isAdmin$.set(true)
+          } else if (response.roles[0].value === 'USER') {
+            this.isAuth$.set(true)
+            this.isAdmin$.set(false)
+          } else {
+            this.isAuth$.set(false)
+            this.isAdmin$.set(false)
+          }
+        }),
+      )
+  }
+
   update(user: IUserProfile) {
     return this.http.patch(Constants.BASE_URL + Constants.METHODS.UPDATE_USER_BY_ID + user.id, user).subscribe()
   }
 
   logout() {
     localStorage.clear()
-    this.isAuthSig.set(false)
-    this.isAdminSig.set(false)
-    this.tokenService.userInSystem.set(null)
+    this.isAuth$.set(false)
+    this.isAdmin$.set(false)
+    // this.tokenService.userInSystem.set(null)
     this.token = null
     this.user = null
     this.router.navigate([''])

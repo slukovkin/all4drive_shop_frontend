@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { HeaderComponent } from '../../components/header/header.component'
-import { ProductCardComponent } from '../../../modules/product/components/product-card/product-card.component'
+import { ProductCardComponent } from '../../components/product-card/product-card.component'
 import { ProductService } from '../../../modules/product/service/product.service'
 import { RouterLink } from '@angular/router'
 import { PromotionComponent } from '../../components/promotion/promotion.component'
@@ -12,6 +12,7 @@ import { ProductFormComponent } from '../../../modules/product/components/produc
 import { BasketComponent } from '../../components/basket/basket.component'
 import { CategoryService } from '../../../modules/category/services/category.service'
 import { SidebarComponent } from '../../components/sidebar/sidebar.component'
+import { AuthService } from '../../../modules/auth/service/auth.service'
 
 @Component({
   selector: 'app-base',
@@ -33,18 +34,22 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component'
   templateUrl: './base.component.html',
   styleUrl: './base.component.scss',
 })
-export class BaseComponent implements OnInit {
+export class BaseComponent {
 
   product?: IProductInStockAttributes[]
 
   constructor(
+    private readonly authService: AuthService,
     public readonly productService: ProductService,
     public readonly categoryService: CategoryService,
   ) {
+    const token = localStorage.getItem('token')
+    if (token) {
+      this.authService.checkToken(token).subscribe()
+      // console.log('isLogin => ', this.authService.isAuth$())
+      // console.log('isAdmin -> ', this.authService.isAdmin$())
+    }
     this.productService.getAllProduct()
-  }
-
-  ngOnInit(): void {
     this.categoryService.getAllCategories()
   }
 }

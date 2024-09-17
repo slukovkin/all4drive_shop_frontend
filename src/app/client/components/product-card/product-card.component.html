@@ -32,9 +32,14 @@
     </div>
     <div>
       <span>
-    <button class="btn btn-action w-full py-2" (click)="addProduct(product!)">В корзину</button>
+<!--    <button class="btn btn-action w-full py-2" (click)="addProduct(product!)">В корзину</button>-->
+    <button class="btn btn-action w-full py-2"
+            (click)="addProduct(product)"
+            [disabled]="product?.stores?.[0]?.ProductStore?.qty === 0"
+    >В корзину</button>
     </span>
     </div>
   </div>
 </div>
+
 

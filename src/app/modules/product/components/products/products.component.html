@@ -50,10 +50,12 @@
                  (click)="modalService.openModal('Редактировать номенклатуру',product)">
           update
         </fa-icon>
-        <fa-icon stopPropagation class="btn btn-red px-2" (click)="delete(product.id)"
-                 [icon]="deleteIcon"
-        >delete
-        </fa-icon>
+        @if (product?.stores?.[0]?.ProductStore?.qty === 0) {
+          <fa-icon stopPropagation class="btn btn-red px-2" (click)="delete(product.id)"
+                   [icon]="deleteIcon"
+          >delete
+          </fa-icon>
+        }
       </div>
     </td>
   </tr>

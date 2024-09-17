@@ -32,7 +32,9 @@ export class BasketComponent {
   }
 
   increment() {
-    this.qty += 1
+    if (this.product && (this.product.stores[0].ProductStore.qty - this.qty) > 0) {
+      this.qty += 1
+    }
   }
 
   decrement() {

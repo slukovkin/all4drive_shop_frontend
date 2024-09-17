@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common'
+import { AsyncPipe, Location, NgForOf, NgIf } from '@angular/common'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { MatOption } from '@angular/material/core'
 import { MatSelect } from '@angular/material/select'
@@ -41,6 +41,7 @@ export class OutgoingInvoiceComponent {
     public readonly invoiceService: InvoiceService,
     public readonly customerService: CustomerService,
     public documentService: DocumentService,
+    private readonly _location: Location,
   ) {
     this.settingService.getAllSettings()
     this.productService.getAllProduct()
@@ -91,5 +92,6 @@ export class OutgoingInvoiceComponent {
 
   clearProducts() {
     this.documentService.productsToInvoice.set([])
+    this._location.back()
   }
 }

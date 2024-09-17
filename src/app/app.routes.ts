@@ -2,9 +2,7 @@ import { Routes } from '@angular/router'
 import { LoginComponent } from './modules/auth/components/login/login.component'
 import { RegistrationComponent } from './modules/auth/components/registration/registration.component'
 import { ProductsComponent } from './modules/product/components/products/products.component'
-import { authGuard } from './shared/guards/auth.guard'
 import { ProductFormComponent } from './modules/product/components/product-form/product-form.component'
-import { HomeComponent } from './modules/home/components/home/home.component'
 import { DocumentsComponent } from './modules/documents/components/documents/documents.component'
 import { SettingsComponent } from './modules/settings/components/settings/settings.component'
 import { IncomingInvoiceComponent } from './modules/documents/components/incoming-invoice/incoming-invoice.component'
@@ -19,6 +17,8 @@ import { BasketComponent } from './client/components/basket/basket.component'
 import { OrderListComponent } from './modules/documents/components/order-list/order-list.component'
 import { OrderComponent } from './client/components/order/order.component'
 import { OrderDetailComponent } from './modules/documents/components/order-detail/order-detail.component'
+import { authGuard } from './shared/guards/auth.guard'
+import { HomeComponent } from './modules/home/components/home/home.component'
 
 export const routes: Routes = [
   {
@@ -67,7 +67,7 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    title: 'Home',
+    title: 'Statistic',
     canActivate: [authGuard()],
   },
   {

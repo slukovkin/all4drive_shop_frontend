@@ -3,15 +3,23 @@ import { inject } from '@angular/core'
 import { AuthService } from '../../modules/auth/service/auth.service'
 
 export function authGuard(): CanActivateFn {
+
   return () => {
     const router = inject(Router)
     const authService = inject(AuthService)
+    let isAdmin = false
 
-    if (authService.isAdminSig()) {
-      return true
+    const token = localStorage.getItem('token')
+    if (token) {
+      authService.checkToken(token).subscribe()
+      isAdmin = authService.isAuth$()
     }
 
-    router.navigate([''])
-    return false
+    if (isAdmin) {
+      return true
+    } else {
+      router.navigate([''])
+      return false
+    }
   }
 }

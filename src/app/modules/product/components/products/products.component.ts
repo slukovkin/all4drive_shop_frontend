@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ProductService } from '../../service/product.service'
 import { AsyncPipe, CurrencyPipe, JsonPipe, NgClass, NgForOf, NgIf, TitleCasePipe } from '@angular/common'
-import { ProductCardComponent } from '../product-card/product-card.component'
+import { ProductCardComponent } from '../../../../client/components/product-card/product-card.component'
 import { ModalService } from '../../../modal/service/modal.service'
 import { ModalComponent } from '../../../modal/components/modal.component'
 import { ProductFormComponent } from '../product-form/product-form.component'
@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit {
     public readonly productService: ProductService,
     public readonly modalService: ModalService,
   ) {
-    this.isAdmin = this.authService.isAdminSig()
+    this.isAdmin = this.authService.isAdmin$()
   }
 
   delete(id: number) {

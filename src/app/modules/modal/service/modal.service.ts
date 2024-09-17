@@ -17,7 +17,7 @@ export class ModalService {
   }
 
   openModal(title: string, item?: Object) {
-    if (this.authService.isAdminSig()) {
+    if (this.authService.isAdmin$()) {
       this.titleSing.set(title)
       this.itemSign.set(item)
       this.isVisible.next(true)

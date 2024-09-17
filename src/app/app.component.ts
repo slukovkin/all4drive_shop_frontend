@@ -10,6 +10,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { BaseComponent } from './client/pages/base/base.component'
 import { SettingService } from './modules/settings/service/setting.service'
 import { CurrencyService } from './modules/currency/components/services/currency.service'
+import { HomeComponent } from './modules/home/components/home/home.component'
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { CurrencyService } from './modules/currency/components/services/currency
     MainComponent,
     FaIconComponent,
     BaseComponent,
+    HomeComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -32,20 +34,14 @@ export class AppComponent {
     private settingService: SettingService,
     private currencyService: CurrencyService,
   ) {
+    this.authService.checkAuth()
     this.settingService.getAllSettings()
     this.currencyService.getCurrencyById(this.settingService.setting?.currencyId ?? 2)
-    const token = localStorage.getItem('token')
-    const admin = localStorage.getItem('admin')
-    if (token && admin) {
-      this.authService.token = token
-      this.authService.isAdminSig.set(true)
-    } else if (token) {
-      this.authService.token = token
-    }
   }
 
   menuIcon = faBars
   isSideBarShow = signal<boolean>(true)
+  isAdmin = false
 
   showSideBar() {
     this.isSideBarShow.set(!this.isSideBarShow())

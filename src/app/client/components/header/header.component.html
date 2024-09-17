@@ -9,18 +9,18 @@
 
     <ul class="inline-flex items-center">
       <li>
-        @if (authService.isAuthSig()) {
+        @if (isAuthenticated) {
           <a class="header-btn cursor-pointer" (click)="authService.logout()">Выход</a>
         } @else {
           <a class="header-btn cursor-pointer" routerLink="login">Войти</a>
         }
       </li>
-      @if (!authService.isAuthSig()) {
+      @if (!isAuthenticated) {
         <li>
           <a class="header-btn cursor-pointer" routerLink="registration">Регистрация</a>
         </li>
       }
-      @if (authService.isAuthSig()) {
+      @if (isAuthenticated) {
         <li>
           <a class="header-btn cursor-pointer" (click)="clientService.openModal()">Корзина</a>
         </li>

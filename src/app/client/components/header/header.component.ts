@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { AuthService } from '../../../modules/auth/service/auth.service'
 import { DataRowOutlet } from '@angular/cdk/table'
@@ -28,19 +28,21 @@ import { OrderComponent } from '../order/order.component'
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+
+  isAuthenticated: boolean = false
+
   constructor(
     public readonly authService: AuthService,
     public readonly modalService: ModalService,
     public readonly clientService: ClientService,
   ) {
-  }
-
-  isAdmin: boolean = false
-  isAuthenticated: boolean = false
-
-  ngOnInit(): void {
-    this.isAuthenticated = !!localStorage.getItem('token')
-    this.isAdmin = this.authService.isAdminSig()
+    const token = localStorage.getItem('token')
+    if (token) {
+      this.authService.checkToken(token).subscribe()
+      this.isAuthenticated = this.authService.isAuth$()
+      // console.log('isLogin => ', this.authService.isAuth$())
+      // console.log('isAdmin -> ', this.authService.isAdmin$())
+    }
   }
 }

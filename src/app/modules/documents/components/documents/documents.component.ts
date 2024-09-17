@@ -24,6 +24,6 @@ export class DocumentsComponent {
     public readonly modalService: ModalService,
     private readonly authService: AuthService,
   ) {
-    this.isAdmin = this.authService.isAdminSig()
+    this.isAdmin = this.authService.isAdmin$()
   }
 }
