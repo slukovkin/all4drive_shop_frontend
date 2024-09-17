@@ -29,9 +29,7 @@ import { OrderComponent } from '../order/order.component'
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-
-  isAuthenticated: boolean = false
-
+  
   constructor(
     public readonly authService: AuthService,
     public readonly modalService: ModalService,
@@ -39,10 +37,8 @@ export class HeaderComponent {
   ) {
     const token = localStorage.getItem('token')
     if (token) {
-      this.authService.checkToken(token).subscribe()
-      this.isAuthenticated = this.authService.isAuth$()
-      // console.log('isLogin => ', this.authService.isAuth$())
-      // console.log('isAdmin -> ', this.authService.isAdmin$())
+      this.authService.checkToken(token)
+        .subscribe()
     }
   }
 }
