@@ -38,15 +38,8 @@ export class BasketComponent {
   }
 
   decrement() {
-    if (this.qty === 1)
-      this.qty
-    else
+    if (this.qty > 1)
       this.qty -= 1
-  }
-
-  sum(): number {
-    return this.product?.stores?.[0]?.ProductStore?.qty!
-      * this.product?.stores?.[0]?.ProductStore?.priceOut!
   }
 
   submit() {

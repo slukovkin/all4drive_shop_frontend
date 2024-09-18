@@ -46,8 +46,6 @@ export class BaseComponent {
     const token = localStorage.getItem('token')
     if (token) {
       this.authService.checkToken(token).subscribe()
-      // console.log('isLogin => ', this.authService.isAuth$())
-      // console.log('isAdmin -> ', this.authService.isAdmin$())
     }
     this.productService.getAllProduct()
     this.categoryService.getAllCategories()

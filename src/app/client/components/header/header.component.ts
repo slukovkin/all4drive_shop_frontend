@@ -10,6 +10,7 @@ import { ModalService } from '../../../modules/modal/service/modal.service'
 import { BasketModalComponent } from '../basket-modal/basket-modal.component'
 import { ClientService } from '../../service/client.service'
 import { OrderComponent } from '../order/order.component'
+import { FormsModule } from '@angular/forms'
 
 @Component({
   selector: 'app-header',
@@ -24,12 +25,13 @@ import { OrderComponent } from '../order/order.component'
     BasketComponent,
     BasketModalComponent,
     OrderComponent,
+    FormsModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  
+
   constructor(
     public readonly authService: AuthService,
     public readonly modalService: ModalService,

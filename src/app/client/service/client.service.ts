@@ -1,18 +1,17 @@
-import { Injectable } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { Injectable, signal } from '@angular/core'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientService {
 
-  isVisible = new BehaviorSubject(false)
+  isVisible$ = signal(false)
 
   openModal() {
-    this.isVisible.next(true)
+    this.isVisible$.set(true)
   }
 
   closeModal() {
-    this.isVisible.next(false)
+    this.isVisible$.set(false)
   }
 }

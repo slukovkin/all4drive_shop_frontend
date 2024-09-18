@@ -39,7 +39,6 @@ export class AuthService {
       user)
       .pipe(
         tap((response: IResponseUser) => {
-          console.log(response.user.roles[0].value)
           if (response.user.roles[0].value === 'ADMIN') {
             this.isAdmin$.set(true)
             this.isAuth$.set(true)
