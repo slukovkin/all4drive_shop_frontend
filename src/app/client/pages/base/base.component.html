@@ -1,6 +1,9 @@
-<div class="max-w-screen-xl mx-auto">
+<div class="max-w-screen-2xl mx-auto">
   <!-- Header -->
   <app-header></app-header>
+
+  <!-- navigation -->
+  <app-navigation></app-navigation>
 
   <!-- promotion -->
   <app-promotion></app-promotion>
@@ -10,41 +13,16 @@
 
       <!-- categories -->
       <section class="px-2 w-1/5">
+        <div class="bg-blue-900">
+          <h6 class="text-white font-semibold px-2 py-4">Категории</h6>
+        </div>
         <div>
           <app-sidebar [categories]="categoryService.categories"></app-sidebar>
         </div>
       </section>
 
-      <!-- products -->
-      <section class="px-2 w-4/5">
-        <div
-          class="md:grid-cols-5 content-center lg:grid items-center space-x-2 overflow-y-auto whitespace-pre-wrap">
-          @for (product of this.productService.products; track product.id) {
-            @if (!productService.isSelectFilter) {
-              @for (pr of product.stores; track pr.id) {
-                <app-product-card [product]="product"></app-product-card>
-              }
-            } @else if (product.categoryId === productService.selectCategory) {
-              @for (pr of product.stores; track pr.id) {
-                <app-product-card [product]="product"></app-product-card>
-              }
-            }
-          }
-        </div>
+      <app-shop></app-shop>
 
-        <!-- pagination -->
-        <!--        <div class="mt-20 mb-10">-->
-        <!--          <ul class="flex justify-center">-->
-        <!--            <li><a href="#" class="pagination-item rounded-l-2xl">Previous</a></li>-->
-        <!--            <li><a href="#" class="pagination-item text-blue-500 hover:bg-blue-100">1</a></li>-->
-        <!--            <li><a href="#" class="pagination-item">2</a></li>-->
-        <!--            <li><a href="#" class="pagination-item">3</a></li>-->
-        <!--            <li><a href="#" class="pagination-item">4</a></li>-->
-        <!--            <li><a href="#" class="pagination-item">5</a></li>-->
-        <!--            <li><a href="#" class="pagination-item rounded-r-2xl">Next</a></li>-->
-        <!--          </ul>-->
-        <!--        </div>-->
-      </section>
     </div>
   </main>
 

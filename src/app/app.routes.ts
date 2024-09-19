@@ -9,7 +9,6 @@ import { IncomingInvoiceComponent } from './modules/documents/components/incomin
 import { OutgoingInvoiceComponent } from './modules/documents/components/outgoing-invoice/outgoing-invoice.component'
 import { CustomerComponent } from './modules/customer/components/customer/customer.component'
 import { StoresComponent } from './modules/store/components/stores/stores.component'
-import { BaseComponent } from './client/pages/base/base.component'
 import { CurrencyComponent } from './modules/currency/components/currency/currency.component'
 import { ReportComponent } from './modules/report/components/report/report.component'
 import { CategoryComponent } from './modules/category/components/category/category.component'
@@ -19,12 +18,18 @@ import { OrderComponent } from './client/components/order/order.component'
 import { OrderDetailComponent } from './modules/documents/components/order-detail/order-detail.component'
 import { authGuard } from './shared/guards/auth.guard'
 import { HomeComponent } from './modules/home/components/home/home.component'
+import { ShopComponent } from './client/components/shop/shop.component'
+import { BaseComponent } from './client/pages/base/base.component'
 
 export const routes: Routes = [
   {
     path: '',
     component: BaseComponent,
     title: 'Welcome',
+  },
+  {
+    path: 'goods',
+    component: ShopComponent,
   },
   {
     path: 'basket',

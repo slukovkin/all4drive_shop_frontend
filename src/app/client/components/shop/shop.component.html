@@ -1,0 +1,17 @@
+<!-- products -->
+<section class="px-2 w-full">
+  <div
+    class="md:grid-cols-6 content-around lg:grid items-center space-x-2 overflow-y-auto whitespace-pre-wrap">
+    @for (product of this.productService.products; track product.id) {
+      @if (!productService.isSelectFilter) {
+        @for (pr of product.stores; track pr.id) {
+          <app-product-card [product]="product"></app-product-card>
+        }
+      } @else if (product.categoryId === productService.selectCategory) {
+        @for (pr of product.stores; track pr.id) {
+          <app-product-card [product]="product"></app-product-card>
+        }
+      }
+    }
+  </div>
+</section>

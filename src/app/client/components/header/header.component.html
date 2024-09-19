@@ -1,7 +1,8 @@
-<div class="flex items-center justify-between px-2 border-b h-14">
+<div class="container-fluid">
   <a routerLink="" class="uppercase font-bold text-pink-800">All4drive</a>
-  <nav class="hidden md:flex items-center">
+  <div class="mx-2">
     <div class="flex items-center">
+      <input type="text" class="input w-[300px] mr-2" placeholder="Поиск товара...">
       <span class="mr-2">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
              class="size-6">
@@ -9,8 +10,20 @@
               d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
       </svg>
       </span>
-      <input type="text" class="input mr-2" placeholder="Поиск товара...">
+
     </div>
+  </div>
+
+  <div class="phone-number">
+    <div>
+      <img src="/assets/images/phone.png" alt="phone" class="mr-2.5">
+    </div>
+    <div class="flex flex-col">
+      <span class="text-gray-800 font-semibold m-0 tracking-widest">+380679423431</span>
+      <span class="m-0 font-light">Интернет магазин</span>
+    </div>
+  </div>
+  <nav class="hidden md:flex items-center">
     <ul class="inline-flex items-center">
       <li><a href="#" class="header-link">О нас</a></li>
       <li><a href="#" class="header-link">Контакты</a></li>

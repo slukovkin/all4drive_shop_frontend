@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import { HeaderComponent } from '../../components/header/header.component'
 import { ProductCardComponent } from '../../components/product-card/product-card.component'
 import { ProductService } from '../../../modules/product/service/product.service'
-import { RouterLink } from '@angular/router'
+import { RouterLink, RouterOutlet } from '@angular/router'
 import { PromotionComponent } from '../../components/promotion/promotion.component'
 import { FooterComponent } from '../../components/footer/footer.component'
 import { IProductInStockAttributes } from '../../../modules/product/types/product.interfaces'
@@ -13,6 +13,8 @@ import { BasketComponent } from '../../components/basket/basket.component'
 import { CategoryService } from '../../../modules/category/services/category.service'
 import { SidebarComponent } from '../../components/sidebar/sidebar.component'
 import { AuthService } from '../../../modules/auth/service/auth.service'
+import { NavigationComponent } from '../../components/navigation/navigation.component'
+import { ShopComponent } from '../../components/shop/shop.component'
 
 @Component({
   selector: 'app-base',
@@ -30,6 +32,9 @@ import { AuthService } from '../../../modules/auth/service/auth.service'
     BasketComponent,
     SidebarComponent,
     SidebarComponent,
+    NavigationComponent,
+    ShopComponent,
+    RouterOutlet,
   ],
   templateUrl: './base.component.html',
   styleUrl: './base.component.scss',
