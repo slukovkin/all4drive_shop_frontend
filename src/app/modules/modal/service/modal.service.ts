@@ -1,12 +1,11 @@
 import { Injectable, signal } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
 import { AuthService } from '../../auth/service/auth.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModalService {
-  isVisible = new BehaviorSubject(false)
+  isVisible$ = signal(false)
 
   titleSing = signal<string>('')
   itemSign = signal<any>('')
@@ -20,11 +19,11 @@ export class ModalService {
     if (this.authService.isAdmin$()) {
       this.titleSing.set(title)
       this.itemSign.set(item)
-      this.isVisible.next(true)
+      this.isVisible$.set(true)
     }
   }
 
   closeModal() {
-    this.isVisible.next(false)
+    this.isVisible$.set(false)
   }
 }

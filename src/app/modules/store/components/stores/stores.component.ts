@@ -46,5 +46,4 @@ export class StoresComponent {
   delete(id: number) {
     this.storeService.delete(id)
   }
-
 }

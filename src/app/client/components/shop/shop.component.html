@@ -1,17 +1,34 @@
 <!-- products -->
-<section class="px-2 w-full">
-  <div
-    class="md:grid-cols-6 content-around lg:grid items-center space-x-2 overflow-y-auto whitespace-pre-wrap">
-    @for (product of this.productService.products; track product.id) {
-      @if (!productService.isSelectFilter) {
-        @for (pr of product.stores; track pr.id) {
-          <app-product-card [product]="product"></app-product-card>
+<main class="w-full">
+  <div class="flex w-screen-xl gap-1">
+
+    <!-- categories -->
+    <section class="px-2 w-1/5">
+      <div class="bg-blue-900">
+        <h6 class="text-white font-semibold px-2 py-4">Категории</h6>
+      </div>
+      <div>
+        <app-sidebar [categories]="categoryService.categories"></app-sidebar>
+      </div>
+    </section>
+
+    <section class="px-2 w-full">
+      <div
+        class="md:grid-cols-6 content-around lg:grid items-center space-x-2 overflow-y-auto whitespace-pre-wrap">
+        @for (product of this.productService.products; track product.id) {
+          @if (!productService.isSelectFilter) {
+            @for (pr of product.stores; track pr.id) {
+              <app-product-card [product]="product"></app-product-card>
+            }
+          } @else if (product.categoryId === productService.selectCategory) {
+            @for (pr of product.stores; track pr.id) {
+              <app-product-card [product]="product"></app-product-card>
+            }
+          }
         }
-      } @else if (product.categoryId === productService.selectCategory) {
-        @for (pr of product.stores; track pr.id) {
-          <app-product-card [product]="product"></app-product-card>
-        }
-      }
-    }
+      </div>
+    </section>
+
   </div>
-</section>
+</main>
+

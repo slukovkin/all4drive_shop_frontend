@@ -19,14 +19,8 @@ import { OrderDetailComponent } from './modules/documents/components/order-detai
 import { authGuard } from './shared/guards/auth.guard'
 import { HomeComponent } from './modules/home/components/home/home.component'
 import { ShopComponent } from './client/components/shop/shop.component'
-import { BaseComponent } from './client/pages/base/base.component'
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: BaseComponent,
-    title: 'Welcome',
-  },
   {
     path: 'goods',
     component: ShopComponent,

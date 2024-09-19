@@ -1,4 +1,4 @@
-<div class="border border-gray-200 rounded-md p-2 hover:border-gray-500 hover:outline-1">
+<div class="border border-gray-200 rounded-md py-2 hover:border-indigo-500 hover:outline-1">
   <div class="hover:cursor-pointer">
     <div class="flex justify-center">
       <img class="w-[170px] h-[170px]" [src]='product?.imageUrl' alt="{{product?.title}}">
@@ -31,15 +31,16 @@
       <div class="p-1 bg-yellow-300 my-1 text-center rounded-md">
         <span>{{ product?.stores?.[0]?.ProductStore?.priceOut! | eurToUah }} грн</span>
       </div>
-    </div>
-    <div>
+      <div>
       <span>
     <button class="btn btn-action w-full py-2"
             (click)="addProduct(product)"
             [disabled]="product?.stores?.[0]?.ProductStore?.qty === 0"
     >В корзину</button>
     </span>
+      </div>
     </div>
+
   </div>
 </div>
 

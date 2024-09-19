@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
-import { HeaderComponent } from './shared/components/header/header.component'
 import { AuthService } from './modules/auth/service/auth.service'
 import { NgIf } from '@angular/common'
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
@@ -11,19 +10,26 @@ import { BaseComponent } from './client/pages/base/base.component'
 import { SettingService } from './modules/settings/service/setting.service'
 import { CurrencyService } from './modules/currency/components/services/currency.service'
 import { HomeComponent } from './modules/home/components/home/home.component'
+import { HeaderComponent } from './client/components/header/header.component'
+import { NavigationComponent } from './client/components/navigation/navigation.component'
+import { FooterComponent } from './client/components/footer/footer.component'
+import { PromotionComponent } from './client/components/promotion/promotion.component'
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    HeaderComponent,
     NgIf,
     SidebarComponent,
     MainComponent,
     FaIconComponent,
     BaseComponent,
     HomeComponent,
+    HeaderComponent,
+    NavigationComponent,
+    FooterComponent,
+    PromotionComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
