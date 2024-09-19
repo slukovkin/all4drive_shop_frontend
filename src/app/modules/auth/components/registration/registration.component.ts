@@ -47,4 +47,8 @@ export class RegistrationComponent {
       ? null
       : { mismatch: true }
   }
+
+  back() {
+    this.authService.back()
+  }
 }

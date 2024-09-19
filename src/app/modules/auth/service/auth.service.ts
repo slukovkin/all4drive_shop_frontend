@@ -113,6 +113,10 @@ export class AuthService {
     this.toast.success('Logout', '', { timeOut: 500 })
   }
 
+  back() {
+    this.router.navigate([''])
+  }
+
   private handleError(err: HttpErrorResponse) {
     this.toast.error(err.error.message)
   }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { JsonPipe, Location, NgIf } from '@angular/common'
+import { JsonPipe, NgIf } from '@angular/common'
 import { AuthService } from '../../service/auth.service'
 
 @Component({
@@ -19,7 +19,7 @@ import { AuthService } from '../../service/auth.service'
 export class LoginComponent {
   user: FormGroup
 
-  constructor(private readonly authService: AuthService, private readonly _location: Location) {
+  constructor(private readonly authService: AuthService) {
     this.user = new FormGroup({
       email: new FormControl('user@gmail.com', [Validators.required, Validators.email]),
       password: new FormControl('111111', [Validators.required, Validators.minLength(6)]),
@@ -33,6 +33,6 @@ export class LoginComponent {
   }
 
   back() {
-    this._location.back()
+    this.authService.back()
   }
 }
