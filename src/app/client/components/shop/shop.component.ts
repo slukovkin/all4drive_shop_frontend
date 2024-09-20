@@ -4,6 +4,7 @@ import { IProductInStockAttributes } from '../../../modules/product/types/produc
 import { ProductService } from '../../../modules/product/service/product.service'
 import { CategoryService } from '../../../modules/category/services/category.service'
 import { SidebarComponent } from '../sidebar/sidebar.component'
+import { PromotionComponent } from '../promotion/promotion.component'
 
 @Component({
   selector: 'app-shop',
@@ -11,6 +12,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component'
   imports: [
     ProductCardComponent,
     SidebarComponent,
+    PromotionComponent,
   ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',

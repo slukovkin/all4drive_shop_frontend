@@ -19,15 +19,20 @@ import { OrderDetailComponent } from './modules/documents/components/order-detai
 import { authGuard } from './shared/guards/auth.guard'
 import { HomeComponent } from './modules/home/components/home/home.component'
 import { ShopComponent } from './client/components/shop/shop.component'
+import { StockComponent } from './client/components/stock/stock.component'
 
 export const routes: Routes = [
   {
-    path: 'goods',
+    path: '',
     component: ShopComponent,
   },
   {
     path: 'basket',
     component: BasketComponent,
+  },
+  {
+    path: 'stock',
+    component: StockComponent,
   },
   {
     path: 'order',

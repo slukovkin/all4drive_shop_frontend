@@ -17,11 +17,11 @@ export class NavigationComponent {
   navigation = [
     {
       label: 'Номенклатура',
-      route: 'goods',
+      route: '',
     },
     {
       label: 'Акции',
-      route: '',
+      route: 'stock',
     },
     {
       label: 'Распродажа',

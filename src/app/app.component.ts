@@ -14,6 +14,7 @@ import { HeaderComponent } from './client/components/header/header.component'
 import { NavigationComponent } from './client/components/navigation/navigation.component'
 import { FooterComponent } from './client/components/footer/footer.component'
 import { PromotionComponent } from './client/components/promotion/promotion.component'
+import { ShopComponent } from './client/components/shop/shop.component'
 
 @Component({
   selector: 'app-root',
@@ -30,6 +31,7 @@ import { PromotionComponent } from './client/components/promotion/promotion.comp
     NavigationComponent,
     FooterComponent,
     PromotionComponent,
+    ShopComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
