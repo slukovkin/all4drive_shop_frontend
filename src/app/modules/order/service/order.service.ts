@@ -5,14 +5,12 @@ import { AuthService } from '../../auth/service/auth.service'
 import { HttpClient } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
 import { IOrder } from '../types/order.interface'
-import { ITokenResponse } from '../../auth/types/user.interface'
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
 
-  isLogin: ITokenResponse | null = null
   order: IProductInBasket[] = []
   currentProduct?: IProductInStockAttributes
 
@@ -45,5 +43,9 @@ export class OrderService {
     } else {
       this.router.navigate(['login'])
     }
+  }
+
+  deleteOrder(id: number) {
+    return this.http.delete(Constants.BASE_URL + Constants.METHODS.DELETE_ORDER_BY_ID + id)
   }
 }

@@ -20,6 +20,7 @@
       ></fa-icon>
       <fa-icon [icon]="deleteIcon" class="px-2 text-red-600"
                stopPropagation
+               (click)="delete(order?.id!)"
       ></fa-icon>
     </td>
   </tr>

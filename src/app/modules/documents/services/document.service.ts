@@ -29,4 +29,12 @@ export class DocumentService {
       )
       .subscribe()
   }
+
+  deleteOrder(id: number) {
+    this.orderService.deleteOrder(id)
+      .pipe(
+        tap(() => this.getAllOrder()),
+      )
+      .subscribe()
+  }
 }

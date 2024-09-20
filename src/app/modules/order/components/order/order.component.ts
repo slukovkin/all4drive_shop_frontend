@@ -9,7 +9,6 @@ import { StopPropagationDirective } from '../../../../shared/directives/stop-pro
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { ProductService } from '../../../product/service/product.service'
 import { ModalService } from '../../../modal/service/modal.service'
-import { TokenService } from '../../../../shared/token/token.service'
 
 @Component({
   selector: 'app-order',
@@ -38,7 +37,6 @@ export class OrderComponent implements OnInit {
   constructor(
     public readonly productService: ProductService,
     public readonly modalService: ModalService,
-    private readonly tokenService: TokenService,
   ) {
   }
 

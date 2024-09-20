@@ -59,4 +59,8 @@ export class OrderCardComponent {
     this.documentService.productsToInvoice.set(products)
     this.router.navigate(['outgoing_invoice'])
   }
+
+  delete(id: number) {
+    this.documentService.deleteOrder(id)
+  }
 }
