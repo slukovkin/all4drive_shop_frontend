@@ -18,27 +18,25 @@ export class NavigationComponent {
     {
       label: 'Номенклатура',
       route: '',
-    },
-    {
+    }, {
       label: 'Акции',
       route: 'stock',
-    },
-    {
+    }, {
       label: 'Распродажа',
-      route: '',
+      route: 'sale',
     }, {
       label: 'Избранные',
-      route: '',
+      route: 'favorites',
     }, {
-      label: 'Новинки',
-      route: '',
+      label: 'Новости',
+      route: 'news',
     }, {
       label: 'Бренды',
-      route: '',
+      route: 'brands',
     },
     {
       label: 'Каталоги',
-      route: '',
+      route: 'catalogs',
     },
   ]
 }

@@ -20,19 +20,53 @@ import { authGuard } from './shared/guards/auth.guard'
 import { HomeComponent } from './modules/home/components/home/home.component'
 import { ShopComponent } from './client/components/shop/shop.component'
 import { StockComponent } from './client/components/stock/stock.component'
+import { SaleComponent } from './client/components/sale/sale.component'
+import { FavoritesComponent } from './client/components/favorites/favorites.component'
+import { NewsComponent } from './client/components/news/news.component'
+import { CatalogsComponent } from './client/components/catalogs/catalogs.component'
+import { BrandsComponent } from './client/components/brands/brands.component'
 
 export const routes: Routes = [
+
   {
     path: '',
     component: ShopComponent,
+    title: 'Номенклатура',
   },
   {
     path: 'basket',
     component: BasketComponent,
+    title: 'Корзина',
   },
   {
     path: 'stock',
     component: StockComponent,
+    title: 'Акции',
+  },
+  {
+    path: 'sale',
+    component: SaleComponent,
+    title: 'Распродажа',
+  },
+  {
+    path: 'favorites',
+    component: FavoritesComponent,
+    title: 'Избранные',
+  },
+  {
+    path: 'news',
+    component: NewsComponent,
+    title: 'Новости',
+  },
+  {
+    path: 'brands',
+    component: BrandsComponent,
+    title: 'Производители',
+  },
+  {
+    path: 'catalogs',
+    component: CatalogsComponent,
+    title: 'Каталоги',
   },
   {
     path: 'order',
