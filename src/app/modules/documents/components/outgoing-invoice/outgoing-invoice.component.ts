@@ -77,21 +77,21 @@ export class OutgoingInvoiceComponent {
   }
 
   unselectProduct(id: number) {
-    this.documentService.productsToInvoice.set(this.documentService.productsToInvoice().filter(product => product.id !== id))
+    this.documentService.productsToInvoice$.set(this.documentService.productsToInvoice$().filter(product => product.id !== id))
   }
 
   saveProductInStore() {
-    this.invoiceService.changeInvoiceSign.set(true)
+    this.invoiceService.changeInvoice$.set(true)
     this.invoiceService.removeProductFromStore()
   }
 
   sum(): number {
-    const products = this.documentService.productsToInvoice()
+    const products = this.documentService.productsToInvoice$()
     return products.reduce((prev, curr) => prev += curr.priceOut * curr.qty, 0)
   }
 
   clearProducts() {
-    this.documentService.productsToInvoice.set([])
+    this.documentService.productsToInvoice$.set([])
     this._location.back()
   }
 }

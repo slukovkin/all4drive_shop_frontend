@@ -49,5 +49,8 @@ export const Constants = {
     DELETE_ORDER_BY_ID: 'orders/',
     GET_ALL_ORDERS: 'orders',
     SEND_EMAIL: 'email',
+    CREATE_INVOICE: 'invoices',
+    GET_ALL_INVOICES: 'invoices/',
+    GET_LAST_INVOICE_NUMBER: 'invoices/last',
   },
 }

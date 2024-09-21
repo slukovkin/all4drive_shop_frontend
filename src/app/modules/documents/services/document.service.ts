@@ -3,19 +3,28 @@ import { OrderService } from '../../order/service/order.service'
 import { IOrder } from '../../order/types/order.interface'
 import { tap } from 'rxjs'
 import { IProductInBasket } from '../../product/types/product.interfaces'
+import { IInvoice } from '../types/invoice.interface'
+import { HttpClient } from '@angular/common/http'
+import { Constants } from '../../../shared/constants/constants'
 
 @Injectable({
   providedIn: 'root',
 })
 export class DocumentService {
 
-  orders?: IOrder[]
+  orders: IOrder[] = []
   products: IProductInBasket[] = []
-  productsToInvoice = signal<IProductInBasket[]>([])
+  productsToInvoice$ = signal<IProductInBasket[]>([])
+  invoice$ = signal<IInvoice | null>(null)
 
   constructor(
     private readonly orderService: OrderService,
+    private readonly http: HttpClient,
   ) {
+  }
+
+  getAllInvoices() {
+    return this.http.get<IInvoice[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_INVOICES)
   }
 
   getAllOrder() {

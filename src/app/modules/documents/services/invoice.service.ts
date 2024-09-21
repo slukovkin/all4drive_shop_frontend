@@ -2,18 +2,19 @@ import { Injectable, signal } from '@angular/core'
 import { IProductInStore, IProductSelect } from '../types/product-in-store.interface'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
-import { catchError } from 'rxjs'
+import { catchError, tap } from 'rxjs'
 import { ToastrService } from 'ngx-toastr'
 import { Router } from '@angular/router'
 import { DocumentService } from './document.service'
+import { IInvoice } from '../types/invoice.interface'
 
 @Injectable({
   providedIn: 'root',
 })
 export class InvoiceService {
-
-  changeInvoiceSign = signal(false)
-  productsSign = signal<IProductSelect[]>([])
+  changeInvoice$ = signal(false)
+  products$ = signal<IProductSelect[]>([])
+  lastInvoiceNumber$ = signal<string | null>(null)
 
   constructor(
     private readonly http: HttpClient,
@@ -21,10 +22,28 @@ export class InvoiceService {
     private readonly documentService: DocumentService,
     private readonly router: Router,
   ) {
+    this.getLastInvoiceNumber()
+  }
+
+  getLastInvoiceNumber() {
+    return this.http.get<string | null>(Constants.BASE_URL + Constants.METHODS.GET_LAST_INVOICE_NUMBER)
+      .pipe(
+        catchError((err) => {
+          this.lastInvoiceNumber$.set(err.error.text)
+          throw 'Не понятная ошибка при парсинге номера накладной'
+        }),
+        tap(i => {
+          if (i === null) {
+            this.lastInvoiceNumber$.set(null)
+          } else {
+            this.lastInvoiceNumber$.set(i)
+          }
+        }),
+      ).subscribe()
   }
 
   removeProductFromStore() {
-    const products = this.documentService.productsToInvoice()
+    const products = this.documentService.productsToInvoice$()
     products.forEach((product) => {
       const payload: IProductInStore = {
         productId: product.id,
@@ -42,15 +61,15 @@ export class InvoiceService {
           }),
         ).subscribe(() => {
         this.toast.success('Products successfully saved')
-        this.documentService.productsToInvoice.set([])
+        this.documentService.productsToInvoice$.set([])
         this.router.navigate(['products'])
       })
     })
   }
 
   saveProductInStore() {
-    if (this.changeInvoiceSign()) {
-      const products = this.productsSign()
+    if (this.changeInvoice$()) {
+      const products = this.products$()
       products.forEach((product: IProductInStore) => {
         const payload: IProductInStore = {
           ...product,
@@ -65,12 +84,15 @@ export class InvoiceService {
             }),
           ).subscribe(() => {
           this.toast.success('Products successfully saved')
-          this.productsSign.set([])
+          this.products$.set([])
           this.router.navigate(['products'])
         })
       })
     } else {
-      const products = this.productsSign()
+      const products = this.products$()
+      if (this.documentService.invoice$()) {
+
+      }
       products.forEach((product: IProductInStore) => {
         this.http.post(Constants.BASE_URL + Constants.METHODS.ADD_PRODUCTS_IN_STORE, product)
           .pipe(
@@ -79,17 +101,26 @@ export class InvoiceService {
               throw (`Error => ${err.message}`)
             }),
           ).subscribe(() => {
-          this.toast.success('Products successfully saved')
-          this.productsSign.set([])
-          this.router.navigate(['products'])
+          this.saveInvoice()
         })
       })
     }
   }
 
+  saveInvoice() {
+    this.http.post<IInvoice>(Constants.BASE_URL + Constants.METHODS.CREATE_INVOICE,
+      this.documentService.invoice$())
+      .subscribe(() => {
+        this.documentService.invoice$.set(null)
+
+        this.toast.success('Products successfully saved')
+        this.products$.set([])
+        this.router.navigate(['products'])
+      })
+  }
+
   addSelectProductToArray(product: IProductSelect) {
-    this.productsSign.set([...this.productsSign(), product])
-    console.log(this.productsSign())
+    this.products$.set([...this.products$(), product])
   }
 
   private handleError(err: HttpErrorResponse) {

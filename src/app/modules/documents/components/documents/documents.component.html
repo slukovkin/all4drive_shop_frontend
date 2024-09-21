@@ -1,34 +1,42 @@
 <main>
   <table class="mx-auto w-full justify-between">
-    <tr class="w-full grid grid-cols-5 px-4 py-1 justify-between
+    <tr class="w-full grid grid-cols-6 px-4 py-1 justify-between
     border border-slate-500 h-[50px] items-center">
       <th>Дата</th>
       <th>Номер</th>
       <th>Тип документа</th>
+      <th>Контрагент</th>
       <th>Сумма</th>
-      <th></th>
+      <th>Действие</th>
     </tr>
 
-    <tr stopPropagation
-        class="grid grid-cols-5 mt-1 px-4 py-1 text-center
+    @for (invoice of invoices; track invoice.date) {
+      <tr stopPropagation
+          class="grid grid-cols-6 mt-1 px-4 py-1 text-center
         items-center cursor-pointer select-none border border-slate-500"
-    >
-      <td>{{ currentDate | date }}</td>
-      <td>№ ER-000010</td>
-      <td>Приходная накладная</td>
-      <td>15676.09</td>
-      <!--      <td> product.price | uahToEur: 40 | currency: 'EUR ' </td>-->
-      <td>
-        <div *ngIf="isAdmin">
-          <button stopPropagation class="btn btn-orange mr-1">
-            <!--                  (click)="modalService.openModal('Редактирование')" -->
-            update
-          </button>
-          <!--          (click)="delete(product.id)"-->
-          <button stopPropagation class="btn btn-red">Удаление</button>
-        </div>
-      </td>
-    </tr>
+      >
+        <td>{{ invoice.date | date }}</td>
+        <td>№ {{ invoice.doc_number }}</td>
+        @if (invoice.type === 'in') {
+          <td>Приходная накладная</td>
+        } @else {
+          <td>Расходная накладная</td>
+        }
+        <td>{{ invoice.customer?.firstname + " " + invoice.customer?.lastname }}</td>
+        <td>{{ invoice.amount }} EUR</td>
+        <!--      <td> product.price | uahToEur: 40 | currency: 'EUR ' </td>-->
+        <td>
+          <div *ngIf="isAdmin">
+            <button stopPropagation class="btn btn-orange mr-1">
+              <!--                  (click)="modalService.openModal('Редактирование')" -->
+              update
+            </button>
+            <!--          (click)="delete(product.id)"-->
+            <button stopPropagation class="btn btn-red">Удаление</button>
+          </div>
+        </td>
+      </tr>
+    }
   </table>
 </main>
 

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core'
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common'
+import { AsyncPipe, DatePipe, JsonPipe, NgForOf, NgIf } from '@angular/common'
 import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { MatOption } from '@angular/material/core'
-import { MatSelect } from '@angular/material/select'
+import { MatFormField, MatSelect } from '@angular/material/select'
 import { ProductService } from '../../../product/service/product.service'
 import { SettingService } from '../../../settings/service/setting.service'
 import { StoreService } from '../../../store/store.service'
@@ -19,6 +19,9 @@ import { StopPropagationDirective } from '../../../../shared/directives/stop-pro
 import { SelectEditProductComponent } from '../select-edit-product/select-edit-product.component'
 import { ICustomer } from '../../../customer/components/customer/types/customer.interface'
 import { CustomerService } from '../../../customer/services/customer.service'
+import { OrderService } from '../../../order/service/order.service'
+import { IInvoice } from '../../types/invoice.interface'
+import { DocumentService } from '../../services/document.service'
 
 @Component({
   selector: 'app-incoming-invoice',
@@ -39,6 +42,9 @@ import { CustomerService } from '../../../customer/services/customer.service'
     FilterPipe,
     StopPropagationDirective,
     SelectEditProductComponent,
+    MatFormField,
+    DatePipe,
+    JsonPipe,
   ],
   templateUrl: './incoming-invoice.component.html',
   styleUrl: './incoming-invoice.component.scss',
@@ -47,6 +53,7 @@ export class IncomingInvoiceComponent {
 
   editIcon = faPenToSquare
   deleteIcon = faTrash
+  data = Date.now().toString()
 
   incomingForm: FormGroup
 
@@ -57,17 +64,24 @@ export class IncomingInvoiceComponent {
     public readonly currencyService: CurrencyService,
     public readonly customerService: CustomerService,
     public readonly modalService: ModalService,
+    public readonly orderService: OrderService,
     public readonly invoiceService: InvoiceService,
+    private readonly documentService: DocumentService,
   ) {
     this.settingService.getAllSettings()
     this.productService.getAllProduct()
     this.storeService.getAllStore()
+    this.invoiceService.getLastInvoiceNumber()
     this.currencyService.getAllCurrencies()
     this.customerService.getAllCustomers()
+    this.orderService.getAllOrders().subscribe()
 
     this.incomingForm = new FormGroup({
-      number_doc: new FormControl('ER-'),
-      data_doc: new FormControl(Date.now()),
+      invoice: new FormControl(this.invoiceService.lastInvoiceNumber$() ?? 'ПН-0000001', [Validators.required]),
+      data_doc: new FormControl(this.data),
+      firm: new FormControl('', [Validators.required]),
+      customer: new FormControl('', [Validators.required]),
+      note: new FormControl(''),
       store: new FormControl(this.settingService.setting?.storeId, [Validators.required]),
       currency: new FormControl(this.settingService.setting?.currencyId, [Validators.required]),
     })
@@ -79,27 +93,36 @@ export class IncomingInvoiceComponent {
 
   submit() {
     if (this.incomingForm.valid) {
-      console.log(this.incomingForm.value)
+      const invoice: IInvoice = {
+        doc_number: this.incomingForm.controls['invoice'].value,
+        type: 'in',
+        customerId: this.incomingForm.controls['customer'].value,
+        date: this.incomingForm.controls['data_doc'].value,
+        amount: this.sum(),
+        status: false,
+      }
+      this.documentService.invoice$.set(invoice)
+      this.saveProductInStore()
     } else {
-      console.log('Form invalid')
+      console.log('Form invalid', this.incomingForm.value)
     }
   }
 
   unselectProduct(id: number) {
-    this.invoiceService.productsSign.set(this.invoiceService.productsSign().filter(product => product.productId !== id))
+    this.invoiceService.products$.set(this.invoiceService.products$().filter(product => product.productId !== id))
   }
 
   saveProductInStore() {
-    this.invoiceService.changeInvoiceSign.set(false)
+    this.invoiceService.changeInvoice$.set(false)
     this.invoiceService.saveProductInStore()
   }
 
   sum(): number {
-    const products = this.invoiceService.productsSign()
-    return products.reduce((prev, curr) => prev += curr.priceIn * curr.qty, 0)
+    const products = this.invoiceService.products$()
+    return products.reduce((_, curr) => curr.priceIn * curr.qty, 0)
   }
 
   clearProducts() {
-    this.invoiceService.productsSign.set([])
+    this.invoiceService.products$.set([])
   }
 }

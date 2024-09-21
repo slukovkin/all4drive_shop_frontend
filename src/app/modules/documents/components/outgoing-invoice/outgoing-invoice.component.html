@@ -20,7 +20,6 @@
       <div class="flex flex-col text-start">
         <label>Покупатель</label>
         <mat-select class="py-2 border border-gray-400 rounded-md px-2" value="0">
-          <mat-option value="0">{{ searchClient(documentService.orders?.[0]?.userId ?? 0) }}</mat-option>
           @for (customer of customerService.customers; track customer.id) {
             <mat-option [value]=customer.id>{{ getCustomer(customer) }}</mat-option>
           }
@@ -98,7 +97,7 @@
         <th></th>
       </tr>
       <!--      *ngFor="let product of productService.products"-->
-      <ng-container *ngFor="let product of documentService.productsToInvoice()">
+      <ng-container *ngFor="let product of documentService.productsToInvoice$()">
         <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-center border border-slate-500">
           <td>{{ product.code }}</td>
           <td>{{ product.article }}</td>
