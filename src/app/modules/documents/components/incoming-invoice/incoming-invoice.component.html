@@ -124,9 +124,11 @@
   </div>
 </form>
 <table class="grid grid-cols-1 px-1 py-1 w-full justify-center items-center mx-auto">
-  <button stopPropagation class="btn btn-action mr-1" (click)="modalService.openModal('Выбор номенклатуры')">
-    Добавить
-  </button>
+  <div>
+    <button stopPropagation class="btn btn-action mr-1 my-2 w-full"
+            (click)="modalService.openModal('Выбор номенклатуры')">Добавить
+    </button>
+  </div>
 
   <tr class="grid grid-cols-7 justify-between border border-slate-500">
     <th>Наименование</th>

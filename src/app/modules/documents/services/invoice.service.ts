@@ -82,17 +82,12 @@ export class InvoiceService {
               this.handleError(err)
               throw (`Error => ${err.message}`)
             }),
-          ).subscribe(() => {
-          this.toast.success('Products successfully saved')
-          this.products$.set([])
-          this.router.navigate(['products'])
-        })
+          )
+        this.saveInvoice()
       })
     } else {
       const products = this.products$()
-      if (this.documentService.invoice$()) {
 
-      }
       products.forEach((product: IProductInStore) => {
         this.http.post(Constants.BASE_URL + Constants.METHODS.ADD_PRODUCTS_IN_STORE, product)
           .pipe(

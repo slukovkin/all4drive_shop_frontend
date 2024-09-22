@@ -17,6 +17,7 @@ import { DocumentService } from '../../services/document.service'
 import { CustomerService } from '../../../customer/services/customer.service'
 import { ICustomer } from '../../../customer/components/customer/types/customer.interface'
 import { EurToUahPipe } from '../../../../shared/pipes/eur-to-uah.pipe'
+import { IInvoice } from '../../types/invoice.interface'
 
 @Component({
   selector: 'app-outgoing-invoice',
@@ -29,6 +30,7 @@ export class OutgoingInvoiceComponent {
 
   editIcon = faPenToSquare
   deleteIcon = faTrash
+  data = Date.now().toString()
 
   outgoingForm: FormGroup
 
@@ -49,8 +51,11 @@ export class OutgoingInvoiceComponent {
     this.currencyService.getAllCurrencies()
 
     this.outgoingForm = new FormGroup({
-      number_doc: new FormControl('ER-'),
-      data_doc: new FormControl(Date.now()),
+      invoice: new FormControl(this.invoiceService.lastInvoiceNumber$() ?? 'РН-0000001', [Validators.required]),
+      data_doc: new FormControl(this.data),
+      firm: new FormControl('', [Validators.required]),
+      customer: new FormControl('', [Validators.required]),
+      note: new FormControl(''),
       store: new FormControl(this.settingService.setting?.storeId, [Validators.required]),
       currency: new FormControl(this.settingService.setting?.currencyId, [Validators.required]),
     })
@@ -70,9 +75,18 @@ export class OutgoingInvoiceComponent {
 
   submit() {
     if (this.outgoingForm.valid) {
-      console.log(this.outgoingForm.value)
+      const invoice: IInvoice = {
+        doc_number: this.outgoingForm.controls['invoice'].value,
+        type: 'in',
+        customerId: this.outgoingForm.controls['customer'].value,
+        date: this.outgoingForm.controls['data_doc'].value,
+        amount: this.sum(),
+        status: false,
+      }
+      this.documentService.invoice$.set(invoice)
+      this.saveProductInStore()
     } else {
-      console.log('Form invalid')
+      console.log('Form invalid', this.outgoingForm.value)
     }
   }
 
@@ -87,7 +101,7 @@ export class OutgoingInvoiceComponent {
 
   sum(): number {
     const products = this.documentService.productsToInvoice$()
-    return products.reduce((prev, curr) => prev += curr.priceOut * curr.qty, 0)
+    return products.reduce((sum, curr) => sum += curr.priceOut * curr.qty, 0)
   }
 
   clearProducts() {
