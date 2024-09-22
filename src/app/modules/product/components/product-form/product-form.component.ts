@@ -119,8 +119,6 @@ export class ProductFormComponent {
       }
       this.productForm.reset()
       this.modalService.closeModal()
-    } else {
-      console.log('Not valid')
     }
   }
 

@@ -50,8 +50,6 @@ export class CategoryFormComponent {
         this.categoryService.create(category)
       }
       this.exit()
-    } else {
-      console.log('The form is don`t valid')
     }
   }
 

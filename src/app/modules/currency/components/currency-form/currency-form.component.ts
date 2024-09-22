@@ -53,8 +53,6 @@ export class CurrencyFormComponent {
         this.currencyService.create(currency)
       }
       this.exit()
-    } else {
-      console.log('The form is don`t valid')
     }
   }
 

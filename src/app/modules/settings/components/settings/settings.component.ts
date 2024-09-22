@@ -75,8 +75,6 @@ export class SettingsComponent {
       } else {
         this.settingService.create(setting)
       }
-    } else {
-      console.log('Form invalid')
     }
   }
 }

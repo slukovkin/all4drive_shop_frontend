@@ -104,8 +104,6 @@ export class IncomingInvoiceComponent {
       }
       this.documentService.invoice$.set(invoice)
       this.saveProductInStore()
-    } else {
-      console.log('Form invalid', this.incomingForm.value)
     }
   }
 

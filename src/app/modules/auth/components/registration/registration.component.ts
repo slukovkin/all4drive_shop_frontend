@@ -34,11 +34,8 @@ export class RegistrationComponent {
 
   submit() {
     if (this.user.valid) {
-      console.log(`User: ${this.user.value.email}, ${this.user.value.password}`)
       const user: UserInterface = { email: this.user.value.email, password: this.user.value.password }
       this.authService.registration(user)
-    } else {
-      console.log('Not valid')
     }
   }
 
