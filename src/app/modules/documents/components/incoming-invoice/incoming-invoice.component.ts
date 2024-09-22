@@ -119,7 +119,7 @@ export class IncomingInvoiceComponent {
   }
 
   sum(): number {
-    const products = this.incomingInvoiceService.products$()
+    const products = this.documentService.products$()
     return products.reduce((sum, curr) => sum += curr.priceIn * curr.qty, 0)
   }
 
