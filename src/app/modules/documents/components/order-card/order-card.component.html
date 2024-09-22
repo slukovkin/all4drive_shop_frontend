@@ -14,7 +14,7 @@
                (click)="detail(order?.productList ?? [])"></fa-icon>
       <fa-icon [icon]="editIcon" class="px-2 text-amber-600"
                stopPropagation
-               (click)="addOrderInOutgoingInvoice(order?.productList ?? [])"></fa-icon>
+               (click)="addOrderInOutgoingInvoice(order!)"></fa-icon>
       <fa-icon [icon]="deleteIcon" class="px-2 text-red-600"
                stopPropagation
                (click)="delete(order?.id!)"></fa-icon>

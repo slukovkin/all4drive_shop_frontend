@@ -73,6 +73,7 @@ export class OutgoingInvoiceComponent {
       const invoice: IInvoice = {
         doc_number: this.outgoingForm.controls['invoice'].value,
         type: 'out',
+        orderId: this.documentService.productsToInvoice$()?.id,
         customerId: this.outgoingForm.controls['customer'].value,
         date: this.outgoingForm.controls['data_doc'].value,
         amount: this.sum(),
@@ -99,7 +100,11 @@ export class OutgoingInvoiceComponent {
       return products.reduce((_, curr) => curr.priceOut * curr.qty, 0)
     } else {
       const products = this.documentService.productsToInvoice$()
-      return products.reduce((_, curr) => curr.priceOut * curr.qty, 0)
+      if (products) {
+        return products.productList.reduce((_, curr) => curr.priceOut * curr.qty, 0)
+      } else {
+        return 0
+      }
     }
   }
 
@@ -114,7 +119,7 @@ export class OutgoingInvoiceComponent {
   }
 
   clearProducts() {
-    this.documentService.productsToInvoice$.set([])
+    this.documentService.productsToInvoice$.set(null)
     this.documentService.products$.set([])
     this._location.back()
   }

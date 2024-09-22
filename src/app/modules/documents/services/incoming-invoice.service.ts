@@ -63,7 +63,7 @@ export class IncomingInvoiceService {
       this.documentService.invoice$())
       .subscribe(() => {
         this.documentService.invoice$.set(null)
-        this.documentService.productsToInvoice$.set([])
+        this.documentService.productsToInvoice$.set(null)
         this.products$.set([])
         this.getLastInvoiceNumber()
         this.toast.success('Products successfully saved')

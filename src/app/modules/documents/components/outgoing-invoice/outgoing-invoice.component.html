@@ -97,8 +97,8 @@
   <div class="grid mt-2 w-full px-2 py-2 ">
     <nav>
       <div class="w-full mb-2 text-start px-1">
-        <button class="btn btn-action mr-1" (click)="saveProductInStore()">Провести</button>
-        <button class="btn btn-red mr-1" (click)="clearProducts()">Очистить</button>
+        <button stopPropagation class="btn btn-action mr-1" (click)="saveProductInStore()">Провести</button>
+        <button stopPropagation class="btn btn-red mr-1" (click)="clearProducts()">Очистить</button>
       </div>
     </nav>
 
@@ -142,7 +142,7 @@
       </tr>
     </ng-container>
   } @else {
-    <ng-container *ngFor="let product of documentService.productsToInvoice$()">
+    <ng-container *ngFor="let product of documentService.productsToInvoice$()?.productList">
       <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-center border border-slate-500">
         <td>{{ product.code }}</td>
         <td>{{ product.article }}</td>

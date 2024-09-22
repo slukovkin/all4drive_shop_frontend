@@ -57,10 +57,10 @@ export class OrderCardComponent {
       , 0)
   }
 
-  addOrderInOutgoingInvoice(products: IProductInBasket[]) {
+  addOrderInOutgoingInvoice(order: IOrder) {
     this.documentService.isOrder$.set(true)
     this.outgoingInvoiceService.getLastOutgoingInvoiceNumber()
-    this.documentService.productsToInvoice$.set(products)
+    this.documentService.productsToInvoice$.set(order)
     this.router.navigate(['outgoing_invoice'])
   }
 

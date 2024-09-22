@@ -15,7 +15,7 @@ export class DocumentService {
 
   orders: IOrder[] = []
   products: IProductInBasket[] = []
-  productsToInvoice$ = signal<IProductInBasket[]>([])
+  productsToInvoice$ = signal<IOrder | null>(null)
   invoice$ = signal<IInvoice | null>(null)
   products$ = signal<IProductSelect[]>([])
   isOrder$ = signal(false)

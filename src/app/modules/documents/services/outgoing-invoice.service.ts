@@ -64,7 +64,7 @@ export class OutgoingInvoiceService {
       })
     } else {
       const products = this.documentService.productsToInvoice$()
-      products.forEach((product) => {
+      products?.productList.forEach((product) => {
         const payload: IProductInStore = {
           productId: product.id,
           storeId: product.storeId,
@@ -91,7 +91,7 @@ export class OutgoingInvoiceService {
       this.documentService.invoice$())
       .subscribe(() => {
         this.documentService.invoice$.set(null)
-        this.documentService.productsToInvoice$.set([])
+        this.documentService.productsToInvoice$.set(null)
         this.documentService.products$.set([])
         this.getLastOutgoingInvoiceNumber()
         this.toast.success('Products successfully saved')
