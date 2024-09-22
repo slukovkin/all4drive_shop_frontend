@@ -71,7 +71,6 @@ export class IncomingInvoiceComponent {
     this.settingService.getAllSettings()
     this.productService.getAllProduct()
     this.storeService.getAllStore()
-    this.invoiceService.getLastInvoiceNumber()
     this.currencyService.getAllCurrencies()
     this.customerService.getAllCustomers()
     this.orderService.getAllOrders().subscribe()
@@ -119,7 +118,7 @@ export class IncomingInvoiceComponent {
 
   sum(): number {
     const products = this.invoiceService.products$()
-    return products.reduce((_, curr) => curr.priceIn * curr.qty, 0)
+    return products.reduce((sum, curr) => sum += curr.priceIn * curr.qty, 0)
   }
 
   clearProducts() {

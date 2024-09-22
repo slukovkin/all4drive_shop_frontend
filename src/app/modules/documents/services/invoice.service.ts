@@ -100,10 +100,9 @@ export class InvoiceService {
               this.handleError(err)
               throw (`Error => ${err.message}`)
             }),
-          ).subscribe(() => {
-          this.saveInvoice()
-        })
+          ).subscribe()
       })
+      this.saveInvoice()
     }
   }
 
@@ -112,7 +111,7 @@ export class InvoiceService {
       this.documentService.invoice$())
       .subscribe(() => {
         this.documentService.invoice$.set(null)
-
+        this.getLastInvoiceNumber()
         this.toast.success('Products successfully saved')
         this.products$.set([])
         this.router.navigate(['products'])
