@@ -65,7 +65,7 @@ export class IncomingInvoiceComponent {
     public readonly customerService: CustomerService,
     public readonly modalService: ModalService,
     public readonly orderService: OrderService,
-    public readonly invoiceService: IncomingInvoiceService,
+    public readonly incomingInvoiceService: IncomingInvoiceService,
     private readonly documentService: DocumentService,
   ) {
     this.settingService.getAllSettings()
@@ -76,7 +76,7 @@ export class IncomingInvoiceComponent {
     this.orderService.getAllOrders().subscribe()
 
     this.incomingForm = new FormGroup({
-      invoice: new FormControl(this.invoiceService.lastInvoiceNumber$() ?? 'ПН-0000001', [Validators.required]),
+      invoice: new FormControl(this.incomingInvoiceService.lastInvoiceNumber$() ?? 'ПН-0000001', [Validators.required]),
       data_doc: new FormControl(this.data),
       firm: new FormControl('', [Validators.required]),
       customer: new FormControl('', [Validators.required]),
@@ -108,20 +108,20 @@ export class IncomingInvoiceComponent {
   }
 
   unselectProduct(id: number) {
-    this.invoiceService.products$.set(this.invoiceService.products$().filter(product => product.productId !== id))
+    this.incomingInvoiceService.products$.set(this.incomingInvoiceService.products$().filter(product => product.productId !== id))
   }
 
   saveProductInStore() {
-    this.invoiceService.changeInvoice$.set(false)
-    this.invoiceService.saveProductInStore()
+    this.incomingInvoiceService.changeInvoice$.set(false)
+    this.incomingInvoiceService.saveProductInStore()
   }
 
   sum(): number {
-    const products = this.invoiceService.products$()
+    const products = this.incomingInvoiceService.products$()
     return products.reduce((sum, curr) => sum += curr.priceIn * curr.qty, 0)
   }
 
   clearProducts() {
-    this.invoiceService.products$.set([])
+    this.incomingInvoiceService.products$.set([])
   }
 }
