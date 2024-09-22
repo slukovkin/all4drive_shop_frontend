@@ -45,14 +45,14 @@ export class AuthService {
             localStorage.setItem('token', response.token)
             this.token = response.token
             this.user = response
-            this.router.navigate(['home'])
+            this.router.navigate(['home']).then()
           } else {
             this.isAdmin$.set(false)
             this.isAuth$.set(true)
             localStorage.setItem('token', response.token)
             this.token = response.token
             this.user = response
-            this.router.navigate([''])
+            this.router.navigate(['']).then()
           }
         }),
         catchError((err) => {
@@ -109,12 +109,12 @@ export class AuthService {
     // this.tokenService.userInSystem.set(null)
     this.token = null
     this.user = null
-    this.router.navigate([''])
+    this.router.navigate(['']).then()
     this.toast.success('Logout', '', { timeOut: 500 })
   }
 
   back() {
-    this.router.navigate([''])
+    this.router.navigate(['']).then()
   }
 
   private handleError(err: HttpErrorResponse) {

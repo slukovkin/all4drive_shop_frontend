@@ -67,7 +67,7 @@ export class IncomingInvoiceService {
         this.products$.set([])
         this.getLastInvoiceNumber()
         this.toast.success('Products successfully saved')
-        this.router.navigate(['products'])
+        this.router.navigate(['products']).then()
       })
   }
 

@@ -36,12 +36,12 @@ export class OrderService {
         .subscribe()
       if (this.authService.isAuth$()) {
         this.currentProduct = product
-        this.router.navigate(['basket'])
+        this.router.navigate(['basket']).then()
       } else {
-        this.router.navigate(['login'])
+        this.router.navigate(['login']).then()
       }
     } else {
-      this.router.navigate(['login'])
+      this.router.navigate(['login']).then()
     }
   }
 

@@ -110,12 +110,12 @@ export class OutgoingInvoiceComponent {
 
   addProduct() {
     this.documentService.isOrder$.set(false)
-    this.router.navigate(['select_product'])
+    this.router.navigate(['select_product']).then()
   }
 
   order() {
     this.documentService.isOrder$.set(true)
-    this.router.navigate(['orders'])
+    this.router.navigate(['orders']).then()
   }
 
   clearProducts() {

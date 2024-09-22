@@ -40,7 +40,7 @@ export class OrderCardComponent {
 
   detail(products: IProductInBasket[]) {
     this.documentService.products = products
-    this.router.navigate(['order-detail'])
+    this.router.navigate(['order-detail']).then()
   }
 
   findCustomer(userId: number) {
@@ -52,16 +52,15 @@ export class OrderCardComponent {
   }
 
   sumOrder(prodList: IProductInBasket[]): number {
-    return prodList.reduce((sum, next) =>
-        sum += next.qty * next.priceOut
-      , 0)
+    return prodList.reduce((_, next) =>
+      next.qty * next.priceOut, 0)
   }
 
   addOrderInOutgoingInvoice(order: IOrder) {
     this.documentService.isOrder$.set(true)
     this.outgoingInvoiceService.getLastOutgoingInvoiceNumber()
     this.documentService.productsToInvoice$.set(order)
-    this.router.navigate(['outgoing_invoice'])
+    this.router.navigate(['outgoing_invoice']).then()
   }
 
   delete(id: number) {
