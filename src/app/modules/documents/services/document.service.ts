@@ -18,6 +18,7 @@ export class DocumentService {
   productsToInvoice$ = signal<IProductInBasket[]>([])
   invoice$ = signal<IInvoice | null>(null)
   products$ = signal<IProductSelect[]>([])
+  isOrder$ = signal(false)
 
   constructor(
     private readonly orderService: OrderService,

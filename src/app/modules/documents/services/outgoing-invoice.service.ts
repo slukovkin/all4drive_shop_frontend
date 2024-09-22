@@ -43,24 +43,46 @@ export class OutgoingInvoiceService {
   }
 
   removeProductFromStore() {
-    const products = this.documentService.productsToInvoice$()
-    products.forEach((product) => {
-      const payload: IProductInStore = {
-        productId: product.id,
-        storeId: product.storeId,
-        qty: product.qty / -1,
-        priceIn: product.priceIn,
-        priceOut: product.priceOut,
-      }
-      this.http.post(Constants.BASE_URL + Constants.METHODS.ADD_PRODUCTS_IN_STORE,
-        payload)
-        .pipe(
-          catchError((err) => {
-            this.handleError(err)
-            throw (`Error => ${err.message}`)
-          }),
-        ).subscribe()
-    })
+    if (!this.documentService.isOrder$()) {
+      const products = this.documentService.products$()
+      products.forEach((product) => {
+        const payload: IProductInStore = {
+          productId: product.productId,
+          storeId: product.storeId,
+          qty: product.qty / -1,
+          priceIn: product.priceIn,
+          priceOut: product.priceOut,
+        }
+        this.http.post(Constants.BASE_URL + Constants.METHODS.ADD_PRODUCTS_IN_STORE,
+          payload)
+          .pipe(
+            catchError((err) => {
+              this.handleError(err)
+              throw (`Error => ${err.message}`)
+            }),
+          ).subscribe()
+      })
+    } else {
+      const products = this.documentService.productsToInvoice$()
+      products.forEach((product) => {
+        const payload: IProductInStore = {
+          productId: product.id,
+          storeId: product.storeId,
+          qty: product.qty / -1,
+          priceIn: product.priceIn,
+          priceOut: product.priceOut,
+        }
+        this.http.post(Constants.BASE_URL + Constants.METHODS.ADD_PRODUCTS_IN_STORE,
+          payload)
+          .pipe(
+            catchError((err) => {
+              this.handleError(err)
+              throw (`Error => ${err.message}`)
+            }),
+          ).subscribe()
+      })
+    }
+
     this.saveInvoice()
   }
 
@@ -70,7 +92,7 @@ export class OutgoingInvoiceService {
       .subscribe(() => {
         this.documentService.invoice$.set(null)
         this.documentService.productsToInvoice$.set([])
-        this.products$.set([])
+        this.documentService.products$.set([])
         this.getLastOutgoingInvoiceNumber()
         this.toast.success('Products successfully saved')
         this.router.navigate(['products'])

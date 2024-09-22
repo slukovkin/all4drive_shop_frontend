@@ -19,7 +19,7 @@ import { EurToUahPipe } from '../../../../shared/pipes/eur-to-uah.pipe'
 import { IInvoice } from '../../types/invoice.interface'
 import { OutgoingInvoiceService } from '../../services/outgoing-invoice.service'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
-import { RouterLink } from '@angular/router'
+import { Router, RouterLink } from '@angular/router'
 
 @Component({
   selector: 'app-outgoing-invoice',
@@ -45,6 +45,7 @@ export class OutgoingInvoiceComponent {
     public readonly outgoingInvoiceService: OutgoingInvoiceService,
     public readonly customerService: CustomerService,
     public documentService: DocumentService,
+    private readonly router: Router,
     private readonly _location: Location,
   ) {
     this.settingService.getAllSettings()
@@ -67,14 +68,6 @@ export class OutgoingInvoiceComponent {
     return `${customer.firstname} ${customer.lastname}`
   }
 
-  searchClient(id: number | null): string {
-    if (id) {
-      const customer = this.customerService.getCustomerById(id)
-      return `${customer.firstname} ${customer.lastname}`
-    }
-    return ''
-  }
-
   submit() {
     if (this.outgoingForm.valid) {
       const invoice: IInvoice = {
@@ -87,13 +80,12 @@ export class OutgoingInvoiceComponent {
       }
       this.documentService.invoice$.set(invoice)
       this.saveProductInStore()
-    } else {
-      console.log('Form invalid', this.outgoingForm.value)
     }
   }
 
   unselectProduct(id: number) {
-    this.documentService.productsToInvoice$.set(this.documentService.productsToInvoice$().filter(product => product.id !== id))
+    this.documentService.products$.set(this.documentService.products$().filter(product => product.productId !== id))
+    // this.documentService.productsToInvoice$.set(this.documentService.productsToInvoice$().filter(product => product.id !== id))
   }
 
   saveProductInStore() {
@@ -102,12 +94,28 @@ export class OutgoingInvoiceComponent {
   }
 
   sum(): number {
-    const products = this.documentService.productsToInvoice$()
-    return products.reduce((sum, curr) => sum += curr.priceOut * curr.qty, 0)
+    if (!this.documentService.isOrder$()) {
+      const products = this.documentService.products$()
+      return products.reduce((_, curr) => curr.priceOut * curr.qty, 0)
+    } else {
+      const products = this.documentService.productsToInvoice$()
+      return products.reduce((_, curr) => curr.priceOut * curr.qty, 0)
+    }
+  }
+
+  addProduct() {
+    this.documentService.isOrder$.set(false)
+    this.router.navigate(['select_product'])
+  }
+
+  order() {
+    this.documentService.isOrder$.set(true)
+    this.router.navigate(['orders'])
   }
 
   clearProducts() {
     this.documentService.productsToInvoice$.set([])
+    this.documentService.products$.set([])
     this._location.back()
   }
 }
