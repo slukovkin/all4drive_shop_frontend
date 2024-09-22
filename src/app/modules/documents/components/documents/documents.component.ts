@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { CurrencyPipe, DatePipe, NgIf } from '@angular/common'
+import { CurrencyPipe, DatePipe, formatDate, NgIf } from '@angular/common'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 import { ModalService } from '../../../modal/service/modal.service'
 import { AuthService } from '../../../auth/service/auth.service'
@@ -35,9 +35,22 @@ export class DocumentsComponent {
       .pipe(
         tap(invoices => this.invoices = invoices),
       ).subscribe()
-    // this.documentService.getAllOutgoingInvoices()
-    //   .pipe(
-    //     tap(invoices => this.invoices = invoices),
-    //   ).subscribe()
   }
+
+  showIncomingInvoice() {
+    this.documentService.getAllIncomingInvoices()
+      .pipe(
+        tap(invoices => this.invoices = invoices),
+      ).subscribe()
+  }
+
+  showOutgoingInvoice() {
+    this.documentService.getAllOutgoingInvoices()
+      .pipe(
+        tap(invoices => this.invoices = invoices),
+      ).subscribe()
+  }
+
+  protected readonly location = location
+  protected readonly formatDate = formatDate
 }
