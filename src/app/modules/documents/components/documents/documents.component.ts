@@ -31,9 +31,13 @@ export class DocumentsComponent {
     private readonly authService: AuthService,
   ) {
     this.isAdmin = this.authService.isAdmin$()
-    this.documentService.getAllInvoices()
+    this.documentService.getAllIncomingInvoices()
       .pipe(
         tap(invoices => this.invoices = invoices),
       ).subscribe()
+    // this.documentService.getAllOutgoingInvoices()
+    //   .pipe(
+    //     tap(invoices => this.invoices = invoices),
+    //   ).subscribe()
   }
 }

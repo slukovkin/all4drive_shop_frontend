@@ -13,7 +13,7 @@ import { ModalService } from '../../../modal/service/modal.service'
 import { ModalComponent } from '../../../modal/components/modal.component'
 import { ProductFormComponent } from '../../../product/components/product-form/product-form.component'
 import { SelectProductComponent } from '../select-product/select-product.component'
-import { InvoiceService } from '../../services/invoice.service'
+import { IncomingInvoiceService } from '../../services/incoming-invoice.service'
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 import { SelectEditProductComponent } from '../select-edit-product/select-edit-product.component'
@@ -65,7 +65,7 @@ export class IncomingInvoiceComponent {
     public readonly customerService: CustomerService,
     public readonly modalService: ModalService,
     public readonly orderService: OrderService,
-    public readonly invoiceService: InvoiceService,
+    public readonly invoiceService: IncomingInvoiceService,
     private readonly documentService: DocumentService,
   ) {
     this.settingService.getAllSettings()

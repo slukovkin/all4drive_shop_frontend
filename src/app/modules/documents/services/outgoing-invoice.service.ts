@@ -11,10 +11,10 @@ import { IInvoice } from '../types/invoice.interface'
 @Injectable({
   providedIn: 'root',
 })
-export class InvoiceService {
+export class OutgoingInvoiceService {
   changeInvoice$ = signal(false)
   products$ = signal<IProductSelect[]>([])
-  lastInvoiceNumber$ = signal<string | null>(null)
+  lastOutgoingInvoiceNumber$ = signal<string | null>(null)
 
   constructor(
     private readonly http: HttpClient,
@@ -22,21 +22,21 @@ export class InvoiceService {
     private readonly documentService: DocumentService,
     private readonly router: Router,
   ) {
-    this.getLastInvoiceNumber()
+    this.getLastOutgoingInvoiceNumber()
   }
 
-  getLastInvoiceNumber() {
-    return this.http.get<string | null>(Constants.BASE_URL + Constants.METHODS.GET_LAST_INVOICE_NUMBER)
+  getLastOutgoingInvoiceNumber() {
+    return this.http.get<string | null>(Constants.BASE_URL + Constants.METHODS.GET_LAST_OUTGOING_INVOICE_NUMBER)
       .pipe(
         catchError((err) => {
-          this.lastInvoiceNumber$.set(err.error.text)
+          this.lastOutgoingInvoiceNumber$.set(err.error.text)
           throw 'Не понятная ошибка при парсинге номера накладной'
         }),
         tap(i => {
           if (i === null) {
-            this.lastInvoiceNumber$.set(null)
+            this.lastOutgoingInvoiceNumber$.set(null)
           } else {
-            this.lastInvoiceNumber$.set(i)
+            this.lastOutgoingInvoiceNumber$.set(i)
           }
         }),
       ).subscribe()
@@ -59,56 +59,20 @@ export class InvoiceService {
             this.handleError(err)
             throw (`Error => ${err.message}`)
           }),
-        ).subscribe(() => {
-        this.toast.success('Products successfully saved')
-        this.documentService.productsToInvoice$.set([])
-        this.router.navigate(['products'])
-      })
+        ).subscribe()
     })
-  }
-
-  saveProductInStore() {
-    if (this.changeInvoice$()) {
-      const products = this.products$()
-      products.forEach((product: IProductInStore) => {
-        const payload: IProductInStore = {
-          ...product,
-          qty: product.qty / -1,
-        }
-        this.http.post(Constants.BASE_URL + Constants.METHODS.ADD_PRODUCTS_IN_STORE,
-          payload)
-          .pipe(
-            catchError((err) => {
-              this.handleError(err)
-              throw (`Error => ${err.message}`)
-            }),
-          )
-        this.saveInvoice()
-      })
-    } else {
-      const products = this.products$()
-
-      products.forEach((product: IProductInStore) => {
-        this.http.post(Constants.BASE_URL + Constants.METHODS.ADD_PRODUCTS_IN_STORE, product)
-          .pipe(
-            catchError((err) => {
-              this.handleError(err)
-              throw (`Error => ${err.message}`)
-            }),
-          ).subscribe()
-      })
-      this.saveInvoice()
-    }
+    this.saveInvoice()
   }
 
   saveInvoice() {
-    this.http.post<IInvoice>(Constants.BASE_URL + Constants.METHODS.CREATE_INVOICE,
+    this.http.post<IInvoice>(Constants.BASE_URL + Constants.METHODS.CREATE_OUTGOING_INVOICE,
       this.documentService.invoice$())
       .subscribe(() => {
         this.documentService.invoice$.set(null)
-        this.getLastInvoiceNumber()
-        this.toast.success('Products successfully saved')
+        this.documentService.productsToInvoice$.set([])
         this.products$.set([])
+        this.getLastOutgoingInvoiceNumber()
+        this.toast.success('Products successfully saved')
         this.router.navigate(['products'])
       })
   }

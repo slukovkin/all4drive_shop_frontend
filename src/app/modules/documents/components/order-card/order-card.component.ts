@@ -9,6 +9,7 @@ import { CustomerService } from '../../../customer/services/customer.service'
 import { ICustomer } from '../../../customer/components/customer/types/customer.interface'
 import { Router } from '@angular/router'
 import { DocumentService } from '../../services/document.service'
+import { OutgoingInvoiceService } from '../../services/outgoing-invoice.service'
 
 @Component({
   selector: 'app-order-card',
@@ -32,6 +33,7 @@ export class OrderCardComponent {
   constructor(
     private customerService: CustomerService,
     private documentService: DocumentService,
+    private outgoingInvoiceService: OutgoingInvoiceService,
     private router: Router) {
     this.customerService.getAllCustomers()
   }
@@ -56,6 +58,7 @@ export class OrderCardComponent {
   }
 
   addOrderInOutgoingInvoice(products: IProductInBasket[]) {
+    this.outgoingInvoiceService.getLastOutgoingInvoiceNumber()
     this.documentService.productsToInvoice$.set(products)
     this.router.navigate(['outgoing_invoice'])
   }

@@ -23,8 +23,12 @@ export class DocumentService {
   ) {
   }
 
-  getAllInvoices() {
-    return this.http.get<IInvoice[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_INVOICES)
+  getAllIncomingInvoices() {
+    return this.http.get<IInvoice[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_INCOMING_INVOICES)
+  }
+
+  getAllOutgoingInvoices() {
+    return this.http.get<IInvoice[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_OUTGOING_INVOICES)
   }
 
   getAllOrder() {

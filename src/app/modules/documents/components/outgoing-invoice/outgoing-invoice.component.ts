@@ -10,7 +10,6 @@ import { SettingService } from '../../../settings/service/setting.service'
 import { StoreService } from '../../../store/store.service'
 import { CurrencyService } from '../../../currency/components/services/currency.service'
 import { ModalService } from '../../../modal/service/modal.service'
-import { InvoiceService } from '../../services/invoice.service'
 import { ModalComponent } from '../../../modal/components/modal.component'
 import { SelectProductComponent } from '../select-product/select-product.component'
 import { DocumentService } from '../../services/document.service'
@@ -18,11 +17,13 @@ import { CustomerService } from '../../../customer/services/customer.service'
 import { ICustomer } from '../../../customer/components/customer/types/customer.interface'
 import { EurToUahPipe } from '../../../../shared/pipes/eur-to-uah.pipe'
 import { IInvoice } from '../../types/invoice.interface'
+import { OutgoingInvoiceService } from '../../services/outgoing-invoice.service'
+import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 
 @Component({
   selector: 'app-outgoing-invoice',
   standalone: true,
-  imports: [FaIconComponent, FormsModule, NgForOf, MatOption, MatSelect, AsyncPipe, ModalComponent, NgIf, ReactiveFormsModule, SelectProductComponent, EurToUahPipe],
+  imports: [FaIconComponent, FormsModule, NgForOf, MatOption, MatSelect, AsyncPipe, ModalComponent, NgIf, ReactiveFormsModule, SelectProductComponent, EurToUahPipe, StopPropagationDirective],
   templateUrl: './outgoing-invoice.component.html',
   styleUrl: './outgoing-invoice.component.scss',
 })
@@ -40,7 +41,7 @@ export class OutgoingInvoiceComponent {
     public readonly storeService: StoreService,
     public readonly currencyService: CurrencyService,
     public readonly modalService: ModalService,
-    public readonly invoiceService: InvoiceService,
+    public readonly outgoingInvoiceService: OutgoingInvoiceService,
     public readonly customerService: CustomerService,
     public documentService: DocumentService,
     private readonly _location: Location,
@@ -51,7 +52,7 @@ export class OutgoingInvoiceComponent {
     this.currencyService.getAllCurrencies()
 
     this.outgoingForm = new FormGroup({
-      invoice: new FormControl(this.invoiceService.lastInvoiceNumber$() ?? 'РН-0000001', [Validators.required]),
+      invoice: new FormControl(this.outgoingInvoiceService.lastOutgoingInvoiceNumber$() ?? 'РН-0000001', [Validators.required]),
       data_doc: new FormControl(this.data),
       firm: new FormControl('', [Validators.required]),
       customer: new FormControl('', [Validators.required]),
@@ -77,7 +78,7 @@ export class OutgoingInvoiceComponent {
     if (this.outgoingForm.valid) {
       const invoice: IInvoice = {
         doc_number: this.outgoingForm.controls['invoice'].value,
-        type: 'in',
+        type: 'out',
         customerId: this.outgoingForm.controls['customer'].value,
         date: this.outgoingForm.controls['data_doc'].value,
         amount: this.sum(),
@@ -95,8 +96,8 @@ export class OutgoingInvoiceComponent {
   }
 
   saveProductInStore() {
-    this.invoiceService.changeInvoice$.set(true)
-    this.invoiceService.removeProductFromStore()
+    this.outgoingInvoiceService.changeInvoice$.set(true)
+    this.outgoingInvoiceService.removeProductFromStore()
   }
 
   sum(): number {

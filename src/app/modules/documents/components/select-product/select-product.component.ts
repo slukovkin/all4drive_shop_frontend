@@ -8,7 +8,7 @@ import { ModalComponent } from '../../../modal/components/modal.component'
 import { ModalService } from '../../../modal/service/modal.service'
 import { SelectEditProductComponent } from '../select-edit-product/select-edit-product.component'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
-import { InvoiceService } from '../../services/invoice.service'
+import { IncomingInvoiceService } from '../../services/incoming-invoice.service'
 import { IProductSelect } from '../../types/product-in-store.interface'
 
 @Component({
@@ -38,7 +38,7 @@ export class SelectProductComponent {
   constructor(
     public readonly productService: ProductService,
     public readonly modalService: ModalService,
-    private readonly incomingService: InvoiceService,
+    private readonly incomingService: IncomingInvoiceService,
   ) {
     this.selectForm = new FormGroup({
       selectQty: new FormControl(null, [Validators.required]),
