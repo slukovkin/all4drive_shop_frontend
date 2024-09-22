@@ -44,7 +44,7 @@ export class IncomingInvoiceService {
 
 
   saveProductInStore() {
-    const products = this.products$()
+    const products = this.documentService.products$()
 
     products.forEach((product: IProductInStore) => {
       this.http.post(Constants.BASE_URL + Constants.METHODS.ADD_PRODUCTS_IN_STORE, product)
@@ -69,10 +69,6 @@ export class IncomingInvoiceService {
         this.toast.success('Products successfully saved')
         this.router.navigate(['products'])
       })
-  }
-
-  addSelectProductToArray(product: IProductSelect) {
-    this.products$.set([...this.products$(), product])
   }
 
   private handleError(err: HttpErrorResponse) {

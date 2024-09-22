@@ -125,8 +125,11 @@
 </form>
 <table class="grid grid-cols-1 px-1 py-1 w-full justify-center items-center mx-auto">
   <div>
+    <!--    <button stopPropagation class="btn btn-action mr-1 my-2 w-full"-->
+    <!--            (click)="modalService.openModal('Выбор номенклатуры')">Добавить-->
+    <!--    </button>-->
     <button stopPropagation class="btn btn-action mr-1 my-2 w-full"
-            (click)="modalService.openModal('Выбор номенклатуры')">Добавить
+            routerLink="/select_product">Добавить
     </button>
   </div>
 
@@ -140,7 +143,7 @@
     <th></th>
   </tr>
   <!--      *ngFor="let product of productService.products"-->
-  <ng-container *ngFor="let product of incomingInvoiceService.products$()">
+  <ng-container *ngFor="let product of documentService.products$()">
 
     <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-center border border-slate-500">
       <td>{{ product.code }}</td>

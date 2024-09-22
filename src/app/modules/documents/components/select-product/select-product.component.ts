@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { ProductService } from '../../../product/service/product.service'
 import { IProduct } from '../../../product/types/product.interfaces'
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common'
+import { AsyncPipe, Location, NgForOf, NgIf } from '@angular/common'
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
 import { ModalComponent } from '../../../modal/components/modal.component'
 import { ModalService } from '../../../modal/service/modal.service'
@@ -10,6 +10,7 @@ import { SelectEditProductComponent } from '../select-edit-product/select-edit-p
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 import { IncomingInvoiceService } from '../../services/incoming-invoice.service'
 import { IProductSelect } from '../../types/product-in-store.interface'
+import { DocumentService } from '../../services/document.service'
 
 @Component({
   selector: 'app-select-product',
@@ -38,7 +39,9 @@ export class SelectProductComponent {
   constructor(
     public readonly productService: ProductService,
     public readonly modalService: ModalService,
+    private readonly documentService: DocumentService,
     private readonly incomingService: IncomingInvoiceService,
+    private readonly _location: Location,
   ) {
     this.selectForm = new FormGroup({
       selectQty: new FormControl(null, [Validators.required]),
@@ -61,12 +64,13 @@ export class SelectProductComponent {
         priceIn: Number(this.selectForm.value.selectPriceIn),
         priceOut: Number(this.selectForm.value.selectPriceOut),
       }
-      this.incomingService.addSelectProductToArray(product)
+      this.documentService.addSelectProductToArray(product)
     }
   }
 
   select(product: IProduct) {
     this.selectedProduct = product
-    this.modalService.closeModal()
+    this._location.back()
+    // this.modalService.closeModal()
   }
 }

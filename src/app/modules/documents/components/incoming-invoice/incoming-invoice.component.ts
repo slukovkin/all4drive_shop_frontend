@@ -22,6 +22,7 @@ import { CustomerService } from '../../../customer/services/customer.service'
 import { OrderService } from '../../../order/service/order.service'
 import { IInvoice } from '../../types/invoice.interface'
 import { DocumentService } from '../../services/document.service'
+import { RouterLink } from '@angular/router'
 
 @Component({
   selector: 'app-incoming-invoice',
@@ -45,6 +46,7 @@ import { DocumentService } from '../../services/document.service'
     MatFormField,
     DatePipe,
     JsonPipe,
+    RouterLink,
   ],
   templateUrl: './incoming-invoice.component.html',
   styleUrl: './incoming-invoice.component.scss',
@@ -66,7 +68,7 @@ export class IncomingInvoiceComponent {
     public readonly modalService: ModalService,
     public readonly orderService: OrderService,
     public readonly incomingInvoiceService: IncomingInvoiceService,
-    private readonly documentService: DocumentService,
+    public readonly documentService: DocumentService,
   ) {
     this.settingService.getAllSettings()
     this.productService.getAllProduct()
@@ -108,7 +110,7 @@ export class IncomingInvoiceComponent {
   }
 
   unselectProduct(id: number) {
-    this.incomingInvoiceService.products$.set(this.incomingInvoiceService.products$().filter(product => product.productId !== id))
+    this.documentService.products$.set(this.documentService.products$().filter(product => product.productId !== id))
   }
 
   saveProductInStore() {
@@ -122,6 +124,6 @@ export class IncomingInvoiceComponent {
   }
 
   clearProducts() {
-    this.incomingInvoiceService.products$.set([])
+    this.documentService.products$.set([])
   }
 }

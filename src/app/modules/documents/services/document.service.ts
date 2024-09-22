@@ -6,6 +6,7 @@ import { IProductInBasket } from '../../product/types/product.interfaces'
 import { IInvoice } from '../types/invoice.interface'
 import { HttpClient } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
+import { IProductSelect } from '../types/product-in-store.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +17,16 @@ export class DocumentService {
   products: IProductInBasket[] = []
   productsToInvoice$ = signal<IProductInBasket[]>([])
   invoice$ = signal<IInvoice | null>(null)
+  products$ = signal<IProductSelect[]>([])
 
   constructor(
     private readonly orderService: OrderService,
     private readonly http: HttpClient,
   ) {
+  }
+
+  addSelectProductToArray(product: IProductSelect) {
+    this.products$.set([...this.products$(), product])
   }
 
   getAllIncomingInvoices() {

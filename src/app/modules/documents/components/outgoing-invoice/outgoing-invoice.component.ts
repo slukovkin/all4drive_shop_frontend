@@ -19,11 +19,12 @@ import { EurToUahPipe } from '../../../../shared/pipes/eur-to-uah.pipe'
 import { IInvoice } from '../../types/invoice.interface'
 import { OutgoingInvoiceService } from '../../services/outgoing-invoice.service'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
+import { RouterLink } from '@angular/router'
 
 @Component({
   selector: 'app-outgoing-invoice',
   standalone: true,
-  imports: [FaIconComponent, FormsModule, NgForOf, MatOption, MatSelect, AsyncPipe, ModalComponent, NgIf, ReactiveFormsModule, SelectProductComponent, EurToUahPipe, StopPropagationDirective],
+  imports: [FaIconComponent, FormsModule, NgForOf, MatOption, MatSelect, AsyncPipe, ModalComponent, NgIf, ReactiveFormsModule, SelectProductComponent, EurToUahPipe, StopPropagationDirective, RouterLink],
   templateUrl: './outgoing-invoice.component.html',
   styleUrl: './outgoing-invoice.component.scss',
 })

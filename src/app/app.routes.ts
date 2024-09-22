@@ -25,6 +25,7 @@ import { FavoritesComponent } from './client/components/favorites/favorites.comp
 import { NewsComponent } from './client/components/news/news.component'
 import { CatalogsComponent } from './client/components/catalogs/catalogs.component'
 import { BrandsComponent } from './client/components/brands/brands.component'
+import { SelectProductComponent } from './modules/documents/components/select-product/select-product.component'
 
 export const routes: Routes = [
 
@@ -37,6 +38,11 @@ export const routes: Routes = [
     path: 'basket',
     component: BasketComponent,
     title: 'Корзина',
+  },
+  {
+    path: 'select_product',
+    component: SelectProductComponent,
+    title: 'Выбор товара',
   },
   {
     path: 'stock',
