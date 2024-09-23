@@ -1,5 +1,5 @@
 <table class="mx-auto w-full">
-  <tr class="grid grid-cols-8">
+  <tr class="grid grid-cols-8 border border-gray-500 py-2 text-lg font-serif">
     <th>Изображение</th>
     <th>Код</th>
     <th>Артикул</th>
@@ -12,8 +12,7 @@
 
 
   <tr stopPropagation *ngFor="let product of orderService.order"
-      class="grid grid-cols-8 text-center items-center"
-  >
+      class="grid grid-cols-8 text-center items-center border border-gray-300 my-1 py-1">
     <td>
       <img [src]="product.imageUrl" alt="{{product.title}}"
            class="mx-auto image-circle">
@@ -33,19 +32,26 @@
       }
     </td>
   </tr>
-  <button class="btn btn-action w-full mt-2" [disabled]="orderService.order.length === 0 || isOrder"
-          (click)="isOrder = true"
-  >Оформить заказ
+  <tr class="flex items-center my-2 justify-end mr-2">
+    <td class="text-lg font-serif">
+      Сумма заказа: <span class="text-xl">{{ total | eurToUah }}</span> грн.
+      <span>
+        <button class="btn btn-action mx-2 my-2" (click)="sum()">Пересчитать</button>
+      </span>
+    </td>
+  </tr>
+  <button class="btn btn-action w-full mt-2 py-2" [disabled]="orderService.order.length === 0 || isOrder"
+          (click)="isOrder = true">Оформить заказ
   </button>
   <div>
-    <button class="btn btn-orange w-full" (click)="back()">Назад</button>
+    <button class="btn btn-orange w-full mt-2 py-2" (click)="back()">Назад</button>
   </div>
 </table>
 
 
 
 @if (isOrder) {
-  <form class="flex flex-col w-2/3 mx-auto p-4 rounded border border-slate-500 mt-10"
+  <form class="flex flex-col w-full mx-auto p-4 rounded border border-slate-500 mt-10"
         [formGroup]="orderForm"
         (ngSubmit)="onSubmit()">
     <div class="flex flex-col mt-5">
@@ -116,10 +122,11 @@
     </div>
     <div class="mt-5">
       <span>
-        <button class="btn btn-action w-full" [disabled]="orderForm.invalid" type="submit">Отправить</button>
+        <button class="btn btn-action w-full my-2 py-2" [disabled]="orderForm.invalid"
+                type="submit">Отправить</button>
       </span>
       <span>
-        <button class="btn btn-orange w-full" (click)="isOrder = false">Отменить</button>
+        <button class="btn btn-orange w-full py-2" (click)="isOrder = false">Отменить</button>
       </span>
     </div>
   </form>
