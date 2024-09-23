@@ -29,6 +29,7 @@ import { SelectProductComponent } from './modules/documents/components/select-pr
 import {
   SelectEditProductComponent,
 } from './modules/documents/components/select-edit-product/select-edit-product.component'
+import { UploadComponent } from './modules/upload/components/upload/upload.component'
 
 export const routes: Routes = [
 
@@ -103,6 +104,11 @@ export const routes: Routes = [
   {
     path: 'orders',
     component: OrderListComponent,
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'upload',
+    component: UploadComponent,
     canActivate: [authGuard()],
   },
   {

@@ -61,6 +61,10 @@ export class SidebarComponent {
       routerLink: 'settings',
       label: 'Настройки',
     },
+    {
+      routerLink: 'upload',
+      label: 'Загрузки',
+    },
 
   ]
 }

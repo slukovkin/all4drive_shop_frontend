@@ -57,5 +57,6 @@ export const Constants = {
     CREATE_OUTGOING_INVOICE: 'outgoing_invoices',
     GET_ALL_OUTGOING_INVOICES: 'outgoing_invoices/',
     GET_LAST_OUTGOING_INVOICE_NUMBER: 'outgoing_invoices/last',
+    UPLOAD_CROSS_TABLE: 'cross',
   },
 }
