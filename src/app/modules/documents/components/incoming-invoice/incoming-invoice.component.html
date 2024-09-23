@@ -117,7 +117,9 @@
   <div class="grid mt-2 w-full px-2 py-2 ">
     <nav>
       <div class="w-full mb-2 text-start px-1">
-        <button stopPropagation class="btn btn-action mr-1" type="submit">Провести</button>
+        <button stopPropagation class="btn btn-action mr-1" type="submit" [disabled]="this.incomingForm.invalid">
+          Провести
+        </button>
         <button stopPropagation class="btn btn-red mr-1" (click)="clearProducts()">Очистить</button>
       </div>
     </nav>

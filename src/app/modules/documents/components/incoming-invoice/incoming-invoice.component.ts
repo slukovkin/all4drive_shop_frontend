@@ -76,6 +76,7 @@ export class IncomingInvoiceComponent {
     this.currencyService.getAllCurrencies()
     this.customerService.getAllCustomers()
     this.orderService.getAllOrders().subscribe()
+    this.documentService.isOutInvoice$.set(false)
 
     this.incomingForm = new FormGroup({
       invoice: new FormControl(this.incomingInvoiceService.lastInvoiceNumber$() ?? 'ПН-0000001', [Validators.required]),
@@ -118,7 +119,7 @@ export class IncomingInvoiceComponent {
 
   sum(): number {
     const products = this.documentService.products$()
-    return products.reduce((sum, curr) => sum += curr.priceIn * curr.qty, 0)
+    return products.reduce((_, curr) => curr.priceIn * curr.qty, 0)
   }
 
   clearProducts() {

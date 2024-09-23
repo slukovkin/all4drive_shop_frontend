@@ -37,9 +37,9 @@
         <label>Поставщик</label>
         <mat-select
           formControlName="firm"
-          [value]="settingService.setting?.firmName"
           class="py-2 border border-gray-400 rounded-md px-2">
-          <mat-option [value]="0">{{ settingService.setting?.firmName }}</mat-option>
+          <mat-option [value]="0">{{ settingService.setting?.firmName }}
+          </mat-option>
         </mat-select>
         <div class="inline-flex"
              *ngIf="outgoingForm.controls['firm'].invalid">
@@ -97,7 +97,9 @@
   <div class="grid mt-2 w-full px-2 py-2 ">
     <nav>
       <div class="w-full mb-2 text-start px-1">
-        <button stopPropagation class="btn btn-action mr-1" (click)="saveProductInStore()">Провести</button>
+        <button stopPropagation class="btn btn-action mr-1" type="submit"
+                [disabled]="this.outgoingForm.invalid">Провести
+        </button>
         <button stopPropagation class="btn btn-red mr-1" (click)="clearProducts()">Очистить</button>
       </div>
     </nav>

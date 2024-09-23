@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { AsyncPipe, Location, NgForOf, NgIf } from '@angular/common'
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { MatOption } from '@angular/material/core'
 import { MatSelect } from '@angular/material/select'
@@ -46,17 +46,18 @@ export class OutgoingInvoiceComponent {
     public readonly customerService: CustomerService,
     public documentService: DocumentService,
     private readonly router: Router,
-    private readonly _location: Location,
   ) {
     this.settingService.getAllSettings()
     this.productService.getAllProduct()
     this.storeService.getAllStore()
+    this.customerService.getAllCustomers()
     this.currencyService.getAllCurrencies()
+    this.documentService.isOutInvoice$.set(true)
 
     this.outgoingForm = new FormGroup({
       invoice: new FormControl(this.outgoingInvoiceService.lastOutgoingInvoiceNumber$() ?? 'РН-0000001', [Validators.required]),
       data_doc: new FormControl(this.data),
-      firm: new FormControl('', [Validators.required]),
+      firm: new FormControl(this.settingService.setting?.firmName, [Validators.required]),
       customer: new FormControl('', [Validators.required]),
       note: new FormControl(''),
       store: new FormControl(this.settingService.setting?.storeId, [Validators.required]),
@@ -121,6 +122,5 @@ export class OutgoingInvoiceComponent {
   clearProducts() {
     this.documentService.productsToInvoice$.set(null)
     this.documentService.products$.set([])
-    this._location.back()
   }
 }

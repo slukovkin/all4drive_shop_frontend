@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core'
 import { OrderService } from '../../order/service/order.service'
 import { IOrder } from '../../order/types/order.interface'
 import { tap } from 'rxjs'
-import { IProductInBasket } from '../../product/types/product.interfaces'
+import { IProduct, IProductInBasket } from '../../product/types/product.interfaces'
 import { IInvoice } from '../types/invoice.interface'
 import { HttpClient } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
@@ -15,10 +15,12 @@ export class DocumentService {
 
   orders: IOrder[] = []
   products: IProductInBasket[] = []
+  selectProduct$ = signal<IProduct | null>(null)
   productsToInvoice$ = signal<IOrder | null>(null)
   invoice$ = signal<IInvoice | null>(null)
   products$ = signal<IProductSelect[]>([])
   isOrder$ = signal(false)
+  isOutInvoice$ = signal(true)
 
   constructor(
     private readonly orderService: OrderService,

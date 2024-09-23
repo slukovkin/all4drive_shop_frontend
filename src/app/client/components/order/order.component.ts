@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { CurrencyPipe, NgForOf, NgIf } from '@angular/common'
+import { CurrencyPipe, Location, NgForOf, NgIf } from '@angular/common'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { FilterPipe } from '../../../shared/pipes/filter.pipe'
 import { GetCategoryTitleByIdPipe } from '../../../shared/pipes/get-category-title-by-id.pipe'
@@ -14,7 +14,6 @@ import { AuthService } from '../../../modules/auth/service/auth.service'
 import { CustomerService } from '../../../modules/customer/services/customer.service'
 import { ICustomer } from '../../../modules/customer/components/customer/types/customer.interface'
 import { IOrder } from '../../../modules/order/types/order.interface'
-import { ClientService } from '../../service/client.service'
 
 @Component({
   selector: 'app-order',
@@ -46,7 +45,7 @@ export class OrderComponent {
     public readonly modalService: ModalService,
     private readonly authService: AuthService,
     private readonly customerService: CustomerService,
-    private readonly clientService: ClientService,
+    private readonly _location: Location,
   ) {
     this.customerService.getAllCustomers()
     if (this.authService.user?.user.id) {
@@ -89,6 +88,6 @@ export class OrderComponent {
   }
 
   back() {
-    this.clientService.closeModal()
+    this._location.back()
   }
 }

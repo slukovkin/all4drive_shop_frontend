@@ -26,6 +26,9 @@ import { NewsComponent } from './client/components/news/news.component'
 import { CatalogsComponent } from './client/components/catalogs/catalogs.component'
 import { BrandsComponent } from './client/components/brands/brands.component'
 import { SelectProductComponent } from './modules/documents/components/select-product/select-product.component'
+import {
+  SelectEditProductComponent,
+} from './modules/documents/components/select-edit-product/select-edit-product.component'
 
 export const routes: Routes = [
 
@@ -42,6 +45,11 @@ export const routes: Routes = [
   {
     path: 'select_product',
     component: SelectProductComponent,
+    title: 'Выбор товара',
+  },
+  {
+    path: 'select_edit_product',
+    component: SelectEditProductComponent,
     title: 'Выбор товара',
   },
   {
@@ -83,10 +91,6 @@ export const routes: Routes = [
     component: OrderDetailComponent,
   },
   {
-    path: 'orders',
-    component: OrderListComponent,
-  },
-  {
     path: 'login',
     component: LoginComponent,
     title: 'Login',
@@ -95,6 +99,11 @@ export const routes: Routes = [
     path: 'registration',
     component: RegistrationComponent,
     title: 'Registration',
+  },
+  {
+    path: 'orders',
+    component: OrderListComponent,
+    canActivate: [authGuard()],
   },
   {
     path: 'products',

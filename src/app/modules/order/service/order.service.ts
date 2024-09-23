@@ -5,6 +5,7 @@ import { AuthService } from '../../auth/service/auth.service'
 import { HttpClient } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
 import { IOrder } from '../types/order.interface'
+import { ToastrService } from 'ngx-toastr'
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +19,16 @@ export class OrderService {
     private readonly authService: AuthService,
     private readonly http: HttpClient,
     private readonly router: Router,
+    private readonly toast: ToastrService,
   ) {
   }
 
   create(order: IOrder) {
-    return this.http.post<IOrder>(Constants.BASE_URL + Constants.METHODS.CREATE_ORDER, order).subscribe()
+    return this.http.post<IOrder>(Constants.BASE_URL + Constants.METHODS.CREATE_ORDER, order)
+      .subscribe((order) => {
+        this.toast.success('Заказ успешно создан')
+        console.warn('Создан заказ', order)
+      })
   }
 
   getAllOrders() {

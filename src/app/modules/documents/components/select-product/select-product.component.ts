@@ -1,16 +1,17 @@
-import { Component, Input } from '@angular/core'
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { Component, Input, OnInit } from '@angular/core'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ProductService } from '../../../product/service/product.service'
-import { IProduct } from '../../../product/types/product.interfaces'
-import { AsyncPipe, Location, NgForOf, NgIf } from '@angular/common'
+import { IProduct, IProductInStockAttributes } from '../../../product/types/product.interfaces'
+import { AsyncPipe, JsonPipe, Location, NgForOf, NgIf } from '@angular/common'
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
 import { ModalComponent } from '../../../modal/components/modal.component'
 import { ModalService } from '../../../modal/service/modal.service'
 import { SelectEditProductComponent } from '../select-edit-product/select-edit-product.component'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
-import { IncomingInvoiceService } from '../../services/incoming-invoice.service'
 import { IProductSelect } from '../../types/product-in-store.interface'
 import { DocumentService } from '../../services/document.service'
+import { ProductsComponent } from '../../../product/components/products/products.component'
+import { Router, RouterLink } from '@angular/router'
 
 @Component({
   selector: 'app-select-product',
@@ -25,52 +26,45 @@ import { DocumentService } from '../../services/document.service'
     SelectEditProductComponent,
     StopPropagationDirective,
     ReactiveFormsModule,
+    JsonPipe,
+    ProductsComponent,
+    RouterLink,
   ],
   templateUrl: './select-product.component.html',
   styleUrl: './select-product.component.scss',
 })
-export class SelectProductComponent {
+export class SelectProductComponent implements OnInit {
   @Input() product?: IProductSelect
 
-  selectForm: FormGroup
   selectedProduct!: IProduct
   search: string = ''
+  productInStock: IProductInStockAttributes[] = []
 
   constructor(
     public readonly productService: ProductService,
     public readonly modalService: ModalService,
     private readonly documentService: DocumentService,
-    private readonly incomingService: IncomingInvoiceService,
+    private readonly router: Router,
     private readonly _location: Location,
   ) {
-    this.selectForm = new FormGroup({
-      selectQty: new FormControl(null, [Validators.required]),
-      selectPriceIn: new FormControl(null, [Validators.required]),
-      selectPriceOut: new FormControl(null, [Validators.required]),
-    })
-  }
-
-  onSubmit() {
-    if (this.selectForm.valid) {
-      const product: IProductSelect = {
-        productId: this.selectedProduct.id,
-        code: this.selectedProduct.code,
-        article: this.selectedProduct.article,
-        title: this.selectedProduct.title,
-        brand: this.selectedProduct.brand,
-        categoryId: this.selectedProduct.categoryId,
-        storeId: 1,
-        qty: Number(this.selectForm.value.selectQty),
-        priceIn: Number(this.selectForm.value.selectPriceIn),
-        priceOut: Number(this.selectForm.value.selectPriceOut),
-      }
-      this.documentService.addSelectProductToArray(product)
-    }
   }
 
   select(product: IProduct) {
     this.selectedProduct = product
     this._location.back()
-    // this.modalService.closeModal()
+  }
+
+  editProduct(product: IProduct) {
+    this.documentService.selectProduct$.set(product)
+    this.router.navigate(['select_edit_product']).then()
+  }
+
+  ngOnInit(): void {
+    this.productService.getAllProduct()
+    this.productInStock = this.productService.products
+  }
+
+  back() {
+    this._location.back()
   }
 }

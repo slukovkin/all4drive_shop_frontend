@@ -44,7 +44,7 @@
       }
       @if (authService.isAuth$()) {
         <li>
-          <a class="header-btn cursor-pointer" (click)="clientService.openModal()">Корзина</a>
+          <a class="header-btn cursor-pointer" routerLink="order">Корзина</a>
         </li>
       }
     </ul>
