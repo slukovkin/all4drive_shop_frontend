@@ -123,4 +123,6 @@ export class OutgoingInvoiceComponent {
     this.documentService.productsToInvoice$.set(null)
     this.documentService.products$.set([])
   }
+
+  protected readonly faTrash = faTrash
 }

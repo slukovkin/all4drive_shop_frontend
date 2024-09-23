@@ -23,9 +23,8 @@
         <label>Покупатель</label>
         <mat-select
           formControlName="firm"
-          [value]="settingService.setting?.firmName"
           class="py-2 border border-gray-400 rounded-md px-2">
-          <mat-option [value]="0">{{ settingService.setting?.firmName }}</mat-option>
+          <mat-option [value]="settingService.setting?.firmName">{{ settingService.setting?.firmName }}</mat-option>
         </mat-select>
         <div class="inline-flex"
              *ngIf="incomingForm.controls['firm'].invalid">
@@ -40,7 +39,7 @@
           formControlName="customer"
           id="customer" class="py-2 border border-gray-400 rounded-md px-2" value="0">
           @for (customer of customerService.customers; track customer.id) {
-            <mat-option [value]=customer.id>{{ getCustomer(customer) }}</mat-option>
+            <mat-option [value]='customer.id'>{{ getCustomer(customer) }}</mat-option>
           }
         </mat-select>
         <div class="inline-flex"

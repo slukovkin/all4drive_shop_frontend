@@ -81,7 +81,7 @@ export class IncomingInvoiceComponent {
     this.incomingForm = new FormGroup({
       invoice: new FormControl(this.incomingInvoiceService.lastInvoiceNumber$() ?? 'ПН-0000001', [Validators.required]),
       data_doc: new FormControl(this.data),
-      firm: new FormControl('', [Validators.required]),
+      firm: new FormControl(this.settingService.setting?.firmName, [Validators.required]),
       customer: new FormControl('', [Validators.required]),
       note: new FormControl(''),
       store: new FormControl(this.settingService.setting?.storeId, [Validators.required]),
