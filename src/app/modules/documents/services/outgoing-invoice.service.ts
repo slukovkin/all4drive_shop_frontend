@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core'
-import { IProductInStore, IProductSelect } from '../types/product-in-store.interface'
+import { IProductInStore } from '../types/product-in-store.interface'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
 import { catchError, tap } from 'rxjs'
@@ -13,7 +13,6 @@ import { IInvoice } from '../types/invoice.interface'
 })
 export class OutgoingInvoiceService {
   changeInvoice$ = signal(false)
-  products$ = signal<IProductSelect[]>([])
   lastOutgoingInvoiceNumber$ = signal<string | null>(null)
 
   constructor(
@@ -97,10 +96,6 @@ export class OutgoingInvoiceService {
         this.toast.success('Products successfully saved')
         this.router.navigate(['products']).then()
       })
-  }
-
-  addSelectProductToArray(product: IProductSelect) {
-    this.products$.set([...this.products$(), product])
   }
 
   private handleError(err: HttpErrorResponse) {

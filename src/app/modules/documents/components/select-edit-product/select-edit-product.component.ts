@@ -6,7 +6,6 @@ import { IProductSelect } from '../../types/product-in-store.interface'
 import { EurToUahPipe } from '../../../../shared/pipes/eur-to-uah.pipe'
 import { IProduct } from '../../../product/types/product.interfaces'
 import { Location } from '@angular/common'
-import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-select-edit-product',
@@ -24,7 +23,9 @@ export class SelectEditProductComponent {
   selectForm: FormGroup
   product: IProduct | null
 
-  constructor(public readonly documentService: DocumentService, private _location: Location, private router: Router) {
+  constructor(
+    public readonly documentService: DocumentService,
+    private _location: Location) {
     this.product = this.documentService.selectProduct$()
     this.selectForm = new FormGroup({
       selectQty: new FormControl(null, [Validators.required]),
@@ -49,7 +50,7 @@ export class SelectEditProductComponent {
         priceOut: Number(this.selectForm.value.selectPriceOut),
       }
       this.documentService.addSelectProductToArray(product)
-      this.router.navigate(['outgoing_invoice']).then()
+      this._location.back()
     }
   }
 

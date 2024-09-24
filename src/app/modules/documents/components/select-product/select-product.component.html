@@ -30,20 +30,14 @@
         <td>{{ product.code }}</td>
         <td>{{ product.title }}</td>
         <td>{{ product.article }}</td>
-        <td stopPropagation>
-          <!--                          formControlName="selectQty"-->
+        <td>
           <span class="mr-2">{{ product.stores![0].ProductStore.qty }}</span>
-
         </td>
-        <td stopPropagation>
-          <!--              [defaultValue]="product.stores![0].ProductStore.priceIn"-->
+        <td>
           <span class="mr-2">{{ product.stores![0].ProductStore.priceIn }}</span>
-
         </td>
-        <td stopPropagation>
-          <!--              [defaultValue]="product.stores![0].ProductStore.priceOut"-->
+        <td>
           <span class="mr-2">{{ product.stores![0].ProductStore.priceOut }}</span>
-
         </td>
         <td>
           <button (click)="select(product)">
