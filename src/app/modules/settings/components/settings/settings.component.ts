@@ -40,10 +40,10 @@ export class SettingsComponent {
     public readonly storeService: StoreService,
     public readonly settingService: SettingService,
   ) {
-    this.currencyService.getAllCurrencies()
-    this.storeService.getAllStore()
     this.settingService.getAllSettings()
     this.setting = this.settingService.setting
+    this.currencyService.getAllCurrencies()
+    this.storeService.getAllStore()
 
     this.settingForm = new FormGroup({
       title: new FormControl(this.setting?.firmName, Validators.required),

@@ -7,14 +7,14 @@ import { MainComponent } from './shared/components/main/main.component'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { BaseComponent } from './client/pages/base/base.component'
-import { SettingService } from './modules/settings/service/setting.service'
-import { CurrencyService } from './modules/currency/components/services/currency.service'
 import { HomeComponent } from './modules/home/components/home/home.component'
 import { HeaderComponent } from './client/components/header/header.component'
 import { NavigationComponent } from './client/components/navigation/navigation.component'
 import { FooterComponent } from './client/components/footer/footer.component'
 import { PromotionComponent } from './client/components/promotion/promotion.component'
 import { ShopComponent } from './client/components/shop/shop.component'
+import { CurrencyService } from './modules/currency/components/services/currency.service'
+import { SettingService } from './modules/settings/service/setting.service'
 
 @Component({
   selector: 'app-root',
