@@ -1,17 +1,14 @@
-import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
-import { Constants } from '../constants/constants'
+import { HttpInterceptorFn } from '@angular/common/http'
 
-export class AuthInterceptor implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const token = localStorage.getItem('token')
-    if (token) {
-      req = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
-        url: Constants.BASE_URL + req.url,
-      })
-    }
-    return next.handle(req)
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    const authReq = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return next(authReq)
   }
+  return next(req)
 }

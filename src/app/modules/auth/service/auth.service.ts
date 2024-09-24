@@ -27,13 +27,6 @@ export class AuthService {
     this.isAuth$.set(!!token)
   }
 
-  checkAuth() {
-    const token = localStorage.getItem('token')
-    if (token) {
-      this.checkToken(token).subscribe()
-    }
-  }
-
   login(user: UserInterface) {
     return this.http.post<IResponseUser>(Constants.BASE_URL + Constants.METHODS.LOGIN,
       user)
@@ -80,6 +73,13 @@ export class AuthService {
       })
   }
 
+  checkAuth() {
+    const token = localStorage.getItem('token')
+    if (token) {
+      this.checkToken(token).subscribe()
+    }
+  }
+
   checkToken(token: string) {
     return this.http.get<ITokenResponse>(Constants.BASE_URL + Constants.METHODS.CHECK_TOKEN + token)
       .pipe(
@@ -106,7 +106,6 @@ export class AuthService {
     localStorage.clear()
     this.isAuth$.set(false)
     this.isAdmin$.set(false)
-    // this.tokenService.userInSystem.set(null)
     this.token = null
     this.user = null
     this.router.navigate(['']).then()
