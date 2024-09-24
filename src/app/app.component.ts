@@ -6,7 +6,6 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { MainComponent } from './shared/components/main/main.component'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { BaseComponent } from './client/pages/base/base.component'
 import { HomeComponent } from './modules/home/components/home/home.component'
 import { HeaderComponent } from './client/components/header/header.component'
 import { NavigationComponent } from './client/components/navigation/navigation.component'
@@ -25,7 +24,6 @@ import { SettingService } from './modules/settings/service/setting.service'
     SidebarComponent,
     MainComponent,
     FaIconComponent,
-    BaseComponent,
     HomeComponent,
     HeaderComponent,
     NavigationComponent,
@@ -49,7 +47,6 @@ export class AppComponent {
 
   menuIcon = faBars
   isSideBarShow = signal<boolean>(true)
-  isAdmin = false
 
   showSideBar() {
     this.isSideBarShow.set(!this.isSideBarShow())
