@@ -44,6 +44,7 @@ export const Constants = {
     ADD_PRODUCTS_IN_STORE: 'product_store',
     GET_ALL_PRODUCTS_FROM_STORE: 'product_store/',
     GET_PRODUCT_FROM_STORE_BY_ID: 'product_store/search/',
+    GET_PRODUCTS_FROM_STORE_BY_ID: 'products/findProductById',
     DELETE_PRODUCT_FROM_STORE_BY_ID: 'product_store/remove/',
     CHECK_TOKEN: 'auth/',
     CREATE_ORDER: 'orders',

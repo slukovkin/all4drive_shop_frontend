@@ -1,10 +1,10 @@
 import { Injectable, signal } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { Constants } from '../../../shared/constants/constants'
-import { IProduct, IProductInStockAttributes, ProductCreationAttributes } from '../types/product.interfaces'
-import { catchError, tap } from 'rxjs'
 import { ToastrService } from 'ngx-toastr'
+import { catchError, tap } from 'rxjs'
+import { IProduct, IProductInStockAttributes, ProductCreationAttributes } from '../types/product.interfaces'
 import { IProductInStore } from '../../documents/types/product-in-store.interface'
+import { Constants } from '../../../shared/constants/constants'
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class ProductService {
   selectCategory: number | null = null
   isSelectFilter = false
   products: IProductInStockAttributes[] = []
-  foundProducts$ = signal<IProduct[]>([])
+  foundProducts$ = signal<IProductInStockAttributes[]>([])
   searchByArticle = signal<string>('')
 
   constructor(
@@ -28,8 +28,20 @@ export class ProductService {
         tap((products) => {
           this.products = products
         }),
-      )
-      .subscribe()
+      ).subscribe()
+  }
+
+  getProductsFromStore(products: IProduct[]) {
+    const payload: number[] = []
+    products.forEach(product => payload.push(product.id))
+    const ids = { ids: payload }
+
+    this.http.post<IProductInStockAttributes[]>(Constants.BASE_URL + Constants.METHODS.GET_PRODUCTS_FROM_STORE_BY_ID, ids)
+      .pipe(
+        tap((products: IProductInStockAttributes[]) => {
+          this.foundProducts$.set(products)
+        }),
+      ).subscribe()
   }
 
   getProductById(id: number) {

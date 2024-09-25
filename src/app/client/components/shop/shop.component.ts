@@ -5,6 +5,7 @@ import { ProductService } from '../../../modules/product/service/product.service
 import { CategoryService } from '../../../modules/category/services/category.service'
 import { SidebarComponent } from '../sidebar/sidebar.component'
 import { PromotionComponent } from '../promotion/promotion.component'
+import { JsonPipe } from '@angular/common'
 
 @Component({
   selector: 'app-shop',
@@ -13,6 +14,7 @@ import { PromotionComponent } from '../promotion/promotion.component'
     ProductCardComponent,
     SidebarComponent,
     PromotionComponent,
+    JsonPipe,
   ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss',
@@ -26,5 +28,9 @@ export class ShopComponent {
   ) {
     this.productService.getAllProduct()
     this.categoryService.getAllCategories()
+  }
+
+  clearFoundProducts() {
+    this.productService.foundProducts$.set([])
   }
 }
