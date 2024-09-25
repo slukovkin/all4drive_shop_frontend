@@ -13,10 +13,10 @@ import { RouterLink } from '@angular/router'
 export class SidebarComponent {
 
   items = [
-    {
-      routerLink: 'home',
-      label: 'Главная',
-    },
+    // {
+    //   routerLink: 'home',
+    //   label: 'Дашбоард',
+    // },
     {
       routerLink: 'products',
       label: 'Номенклатура',

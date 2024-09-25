@@ -38,7 +38,7 @@ export class AuthService {
             localStorage.setItem('token', response.token)
             this.token = response.token
             this.user = response
-            this.router.navigate(['home']).then()
+            this.router.navigate(['products']).then()
           } else {
             this.isAdmin$.set(false)
             this.isAuth$.set(true)
