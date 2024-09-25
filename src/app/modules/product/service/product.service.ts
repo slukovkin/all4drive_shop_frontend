@@ -4,6 +4,7 @@ import { Constants } from '../../../shared/constants/constants'
 import { IProduct, IProductInStockAttributes, ProductCreationAttributes } from '../types/product.interfaces'
 import { catchError, tap } from 'rxjs'
 import { ToastrService } from 'ngx-toastr'
+import { IProductInStore } from '../../documents/types/product-in-store.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class ProductService {
   selectCategory: number | null = null
   isSelectFilter = false
   products: IProductInStockAttributes[] = []
+  foundProducts$ = signal<IProduct[]>([])
   searchByArticle = signal<string>('')
 
   constructor(
@@ -37,7 +39,17 @@ export class ProductService {
   create(product: ProductCreationAttributes) {
     return this.http.post<IProductInStockAttributes>(Constants.BASE_URL + Constants.METHODS.CREATE_PRODUCT, product)
       .pipe(
-        tap((product) => this.products.push(product)),
+        tap((product: IProductInStockAttributes) => {
+          this.products.push(product)
+          const payload: IProductInStore = {
+            productId: product.id,
+            storeId: 1,
+            qty: product.qty,
+            priceIn: 0,
+            priceOut: 0,
+          }
+          this.http.post(Constants.BASE_URL + Constants.METHODS.ADD_PRODUCTS_IN_STORE, payload).subscribe()
+        }),
         catchError((err) => {
           this.handleError(err)
           throw (`Error => ${err.message}`)

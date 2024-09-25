@@ -64,8 +64,8 @@ export class ProductFormComponent {
       title: new FormControl(this.product?.title, [Validators.required]),
       brand: new FormControl(this.product?.brand),
       category: new FormControl(this.product?.categoryId ?? 1),
-      price: new FormControl(this.product?.price),
-      qty: new FormControl(this.product?.qty),
+      price: new FormControl(this.product?.price ?? 0),
+      qty: new FormControl(this.product?.qty ?? 0),
       picture: new FormControl(this.product?.imageUrl),
     })
   }
@@ -100,8 +100,6 @@ export class ProductFormComponent {
         categoryId: Number(this.productForm.controls['category'].value),
         price: 0,
         qty: 0,
-        // price: Number(this.productForm.controls['price'].value),
-        // qty: Number(this.productForm.controls['qty'].value),
         imageUrl: this.pathFile,
       }
       if (this.product?.id) {

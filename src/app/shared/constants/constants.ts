@@ -9,6 +9,9 @@ export const Constants = {
     GET_ALL_PRODUCTS: 'products',
     CREATE_PRODUCT: 'products',
     GET_PRODUCT_BY_ID: 'products/',
+    GET_PRODUCT_BY_CODE: 'products/search',
+    GET_PRODUCT_BY_CROSS: 'products/search/cross/',
+    GET_PRODUCTS_BY_ORIGIN: 'products/search/origin/',
     UPDATE_PRODUCT_BY_ID: 'products/',
     DELETE_PRODUCT_BY_ID: 'products/',
     GET_ALL_CUSTOMERS: 'users',
@@ -56,5 +59,7 @@ export const Constants = {
     GET_ALL_OUTGOING_INVOICES: 'outgoing_invoices/',
     GET_LAST_OUTGOING_INVOICE_NUMBER: 'outgoing_invoices/last',
     UPLOAD_CROSS_TABLE: 'cross',
+    SEARCH_PRODUCT_BY_ORIGIN_IN_CROSSTABLE: 'cross/origin/',
+    SEARCH_PRODUCTS_BY_CODE_IN_CROSSTABLE: 'cross/code/',
   },
 }
