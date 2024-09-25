@@ -31,6 +31,6 @@ export class ShopComponent {
   }
 
   clearFoundProducts() {
-    this.productService.foundProducts$.set([])
+    this.productService.foundProducts = []
   }
 }

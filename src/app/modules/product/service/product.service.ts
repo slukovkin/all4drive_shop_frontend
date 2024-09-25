@@ -14,7 +14,7 @@ export class ProductService {
   selectCategory: number | null = null
   isSelectFilter = false
   products: IProductInStockAttributes[] = []
-  foundProducts$ = signal<IProductInStockAttributes[]>([])
+  foundProducts: IProductInStockAttributes[] = []
   searchByArticle = signal<string>('')
 
   constructor(
@@ -36,10 +36,10 @@ export class ProductService {
     products.forEach(product => payload.push(product.id))
     const ids = { ids: payload }
 
-    this.http.post<IProductInStockAttributes[]>(Constants.BASE_URL + Constants.METHODS.GET_PRODUCTS_FROM_STORE_BY_ID, ids)
+    this.http.post<IProductInStockAttributes[]>(Constants.BASE_URL + Constants.METHODS.FIND_PRODUCTS_BY_ARRAY_ID, ids)
       .pipe(
         tap((products: IProductInStockAttributes[]) => {
-          this.foundProducts$.set(products)
+          this.foundProducts = products
         }),
       ).subscribe()
   }
