@@ -12,7 +12,7 @@
 
 
   <tr stopPropagation *ngFor="let product of orderService.order"
-      class="grid grid-cols-8 text-center items-center border border-gray-300 my-1 py-1">
+      class="grid grid-cols-8 text-center items-center border-b border-gray-300 my-1 py-1">
     <td>
       <img [src]="product.imageUrl" alt="{{product.title}}"
            class="mx-auto image-circle">
