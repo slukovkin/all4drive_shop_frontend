@@ -30,9 +30,7 @@
     }"
       class="grid grid-cols-9"
   >
-    <td stopPropagation (click)="modalService.openModal('Image')">
-      <!--        // TODO открытие изображения в модальном окне-->
-
+    <td>
       <img [src]="product.imageUrl" alt="{{product.title}}"
            class="mx-auto image-circle">
     </td>

@@ -21,7 +21,6 @@ export class IncomingInvoiceService {
     private readonly documentService: DocumentService,
     private readonly router: Router,
   ) {
-    this.getLastInvoiceNumber()
   }
 
   getLastInvoiceNumber() {

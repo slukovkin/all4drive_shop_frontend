@@ -52,6 +52,7 @@ export class OutgoingInvoiceComponent {
     this.storeService.getAllStore()
     this.customerService.getAllCustomers()
     this.currencyService.getAllCurrencies()
+    this.outgoingInvoiceService.getLastOutgoingInvoiceNumber()
     this.documentService.isOutInvoice$.set(true)
 
     this.outgoingForm = new FormGroup({

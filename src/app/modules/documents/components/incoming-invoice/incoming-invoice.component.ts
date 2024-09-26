@@ -75,6 +75,7 @@ export class IncomingInvoiceComponent {
     this.storeService.getAllStore()
     this.currencyService.getAllCurrencies()
     this.customerService.getAllCustomers()
+    this.incomingInvoiceService.getLastInvoiceNumber()
     this.orderService.getAllOrders().subscribe()
     this.documentService.isOutInvoice$.set(false)
 

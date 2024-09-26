@@ -37,10 +37,10 @@ export class SidebarComponent {
       routerLink: 'orders',
       label: 'Журнал заказов',
     },
-    {
-      routerLink: 'reports',
-      label: 'Отчёты',
-    },
+    // {
+    //   routerLink: 'reports',
+    //   label: 'Отчёты',
+    // },
     {
       routerLink: 'customer',
       label: 'Контрагенты',
@@ -65,9 +65,13 @@ export class SidebarComponent {
       routerLink: 'cross',
       label: 'Кросс таблица',
     },
+    // {
+    //   routerLink: 'upload',
+    //   label: 'Загрузки',
+    // },
     {
-      routerLink: 'upload',
-      label: 'Загрузки',
+      routerLink: '',
+      label: 'Сайт',
     },
 
   ]
