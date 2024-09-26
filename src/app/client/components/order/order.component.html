@@ -25,7 +25,7 @@
     <td>{{ product.priceOut * product.qty | eurToUah }}</td>
     <td>
       @if (!isOrder) {
-        <fa-icon stopPropagation class="btn btn-red px-2" (click)="delete(product.id)"
+        <fa-icon stopPropagation class="px-2 text-red-600 cursor-pointer" (click)="delete(product.id)"
                  [icon]="deleteIcon"
         >delete
         </fa-icon>

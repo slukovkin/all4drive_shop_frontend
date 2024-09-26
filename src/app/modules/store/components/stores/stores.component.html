@@ -21,11 +21,11 @@
             <td>{{ store.title }}</td>
             <td>{{ store.description }}</td>
             <td>
-              <fa-icon [icon]="editIcon" class="px-2 text-amber-600"
+              <fa-icon [icon]="editIcon" class="px-2 text-amber-600 cursor-pointer"
                        stopPropagation
                        (click)="this.update(store)"
               ></fa-icon>
-              <fa-icon [icon]="deleteIcon" class="px-2 text-red-600"
+              <fa-icon [icon]="deleteIcon" class="px-2 text-red-600 cursor-pointer"
                        stopPropagation
                        (click)="delete(store.id!)"
               ></fa-icon>

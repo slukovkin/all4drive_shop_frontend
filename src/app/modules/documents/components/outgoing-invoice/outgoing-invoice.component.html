@@ -138,7 +138,7 @@
         <td>{{ product.qty * product.priceOut | eurToUah }}</td>
         <td>
           <div>
-            <fa-icon [icon]="deleteIcon" class="text-red-500"
+            <fa-icon [icon]="deleteIcon" class="text-red-600 cursor-pointer"
                      (click)="unselectProduct(product.productId)"
             ></fa-icon>
           </div>
@@ -156,7 +156,7 @@
         <td>{{ product.qty * product.priceOut | eurToUah }}</td>
         <td>
           <div>
-            <fa-icon [icon]="deleteIcon" class="text-red-500"
+            <fa-icon [icon]="deleteIcon" class="text-red-500 cursor-pointer"
                      (click)="unselectProduct(product.id)"
             ></fa-icon>
           </div>
