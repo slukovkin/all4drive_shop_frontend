@@ -62,6 +62,10 @@ export class SidebarComponent {
       label: 'Настройки',
     },
     {
+      routerLink: 'cross',
+      label: 'Кросс таблица',
+    },
+    {
       routerLink: 'upload',
       label: 'Загрузки',
     },

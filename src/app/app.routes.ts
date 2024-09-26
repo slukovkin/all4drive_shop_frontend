@@ -30,6 +30,7 @@ import {
   SelectEditProductComponent,
 } from './modules/documents/components/select-edit-product/select-edit-product.component'
 import { UploadComponent } from './modules/upload/components/upload/upload.component'
+import { CrossComponent } from './modules/cross/components/cross/cross.component'
 
 export const routes: Routes = [
 
@@ -173,6 +174,10 @@ export const routes: Routes = [
     path: 'categories',
     component: CategoryComponent,
     canActivate: [authGuard()],
+  },
+  {
+    path: 'cross',
+    component: CrossComponent,
   },
   {
     path: '**',
