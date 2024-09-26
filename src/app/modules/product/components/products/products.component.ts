@@ -13,6 +13,7 @@ import { FilterPipe } from '../../../../shared/pipes/filter.pipe'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { GetCategoryTitleByIdPipe } from '../../../../shared/pipes/get-category-title-by-id.pipe'
+import { MatButton } from '@angular/material/button'
 
 @Component({
   selector: 'app-products',
@@ -34,6 +35,7 @@ import { GetCategoryTitleByIdPipe } from '../../../../shared/pipes/get-category-
     FaIconComponent,
     GetCategoryTitleByIdPipe,
     JsonPipe,
+    MatButton,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',

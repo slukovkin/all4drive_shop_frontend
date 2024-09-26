@@ -45,13 +45,13 @@
     <td>{{ product?.stores?.[0]?.ProductStore?.priceIn | currency: 'EUR ' }}</td>
     <td>
       <div *ngIf="isAdmin">
-        <fa-icon stopPropagation class="btn btn-orange mr-2 px-2"
+        <fa-icon stopPropagation class="px-2 text-orange-600"
                  [icon]="editIcon"
                  (click)="modalService.openModal('Редактировать номенклатуру',product)">
           update
         </fa-icon>
         @if (product?.stores?.[0]?.ProductStore?.qty === 0) {
-          <fa-icon stopPropagation class="btn btn-red px-2" (click)="delete(product.id)"
+          <fa-icon stopPropagation class="px-2 text-red-600" (click)="delete(product.id)"
                    [icon]="deleteIcon"
           >delete
           </fa-icon>
