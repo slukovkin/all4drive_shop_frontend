@@ -13,8 +13,9 @@ import { CurrencyService } from '../../../currency/components/services/currency.
 import { SettingService } from '../../../settings/service/setting.service'
 import { ICurrency } from '../../../currency/types/currency.interface'
 import { MatOption } from '@angular/material/core'
-import { MatSelect } from '@angular/material/select'
+import { MatError, MatFormField, MatLabel, MatSelect } from '@angular/material/select'
 import { CategoryService } from '../../../category/services/category.service'
+import { MatInput } from '@angular/material/input'
 
 
 @Component({
@@ -29,6 +30,10 @@ import { CategoryService } from '../../../category/services/category.service'
     MatOption,
     MatSelect,
     NgClass,
+    MatError,
+    MatFormField,
+    MatInput,
+    MatLabel,
   ],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
@@ -62,7 +67,7 @@ export class ProductFormComponent {
         ]),
       article: new FormControl(this.product?.article, [Validators.required]),
       title: new FormControl(this.product?.title, [Validators.required]),
-      brand: new FormControl(this.product?.brand),
+      brand: new FormControl(this.product?.brand, [Validators.required]),
       category: new FormControl(this.product?.categoryId ?? 1),
       price: new FormControl(this.product?.price ?? 0),
       qty: new FormControl(this.product?.qty ?? 0),
@@ -122,5 +127,6 @@ export class ProductFormComponent {
 
   resetForm() {
     this.productForm.reset()
+    this.modalService.closeModal()
   }
 }
