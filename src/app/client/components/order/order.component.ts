@@ -12,7 +12,7 @@ import { EurToUahPipe } from '../../../shared/pipes/eur-to-uah.pipe'
 import { RouterLink } from '@angular/router'
 import { AuthService } from '../../../modules/auth/service/auth.service'
 import { CustomerService } from '../../../modules/customer/services/customer.service'
-import { ICustomer } from '../../../modules/customer/components/customer/types/customer.interface'
+import { ICustomer } from '../../../modules/customer/types/customer.interface'
 import { IOrder } from '../../../modules/order/types/order.interface'
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { AsyncPipe, CurrencyPipe, JsonPipe, Location, NgForOf, NgIf } from '@angular/common'
-import { DocumentService } from '../../services/document.service'
+import { DocumentService } from '../../../documents/services/document.service'
 import { IProductInBasket } from '../../../product/types/product.interfaces'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe'

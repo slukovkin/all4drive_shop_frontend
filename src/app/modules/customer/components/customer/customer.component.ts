@@ -9,7 +9,7 @@ import { MatSelect } from '@angular/material/select'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 import { CustomerService } from '../../services/customer.service'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { ICustomer } from './types/customer.interface'
+import { ICustomer } from '../../types/customer.interface'
 import { ProductFormComponent } from '../../../product/components/product-form/product-form.component'
 import { ModalService } from '../../../modal/service/modal.service'
 

@@ -4,7 +4,7 @@ import { AsyncPipe, NgIf } from '@angular/common'
 import { ProductFormComponent } from '../../../product/components/product-form/product-form.component'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { CustomerService } from '../../services/customer.service'
-import { ICustomer } from '../customer/types/customer.interface'
+import { ICustomer } from '../../types/customer.interface'
 import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
 import { ModalService } from '../../../modal/service/modal.service'
 

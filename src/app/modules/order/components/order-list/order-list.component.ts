@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { DocumentService } from '../../services/document.service'
+import { DocumentService } from '../../../documents/services/document.service'
 import { JsonPipe } from '@angular/common'
 import { OrderCardComponent } from '../order-card/order-card.component'
 

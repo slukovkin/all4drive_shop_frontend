@@ -1,4 +1,4 @@
-import { ICustomer } from '../../customer/components/customer/types/customer.interface'
+import { ICustomer } from '../../customer/types/customer.interface'
 
 export interface IInvoice {
   id?: number;

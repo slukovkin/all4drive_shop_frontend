@@ -2,14 +2,14 @@ import { Component, Input } from '@angular/core'
 import { faEye, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
-import { IOrder } from '../../../order/types/order.interface'
+import { IOrder } from '../../types/order.interface'
 import { JsonPipe } from '@angular/common'
 import { IProductInBasket } from '../../../product/types/product.interfaces'
 import { CustomerService } from '../../../customer/services/customer.service'
-import { ICustomer } from '../../../customer/components/customer/types/customer.interface'
+import { ICustomer } from '../../../customer/types/customer.interface'
 import { Router } from '@angular/router'
-import { DocumentService } from '../../services/document.service'
-import { OutgoingInvoiceService } from '../../services/outgoing-invoice.service'
+import { DocumentService } from '../../../documents/services/document.service'
+import { OutgoingInvoiceService } from '../../../documents/services/outgoing-invoice.service'
 
 @Component({
   selector: 'app-order-card',
