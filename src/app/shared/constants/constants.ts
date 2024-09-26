@@ -64,5 +64,6 @@ export const Constants = {
     GET_ALL_CROSSTABLE: 'cross',
     SEARCH_PRODUCT_BY_ORIGIN_IN_CROSSTABLE: 'cross/origin/',
     SEARCH_PRODUCTS_BY_CODE_IN_CROSSTABLE: 'cross/code/',
+    SEND_MESSAGE_TO_TELEGRAM: 'telegram/send-message',
   },
 }

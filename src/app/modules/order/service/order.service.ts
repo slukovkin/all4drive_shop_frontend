@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
 import { IOrder } from '../types/order.interface'
 import { ToastrService } from 'ngx-toastr'
+import { TelegramService } from '../../telegram/telegram.service'
 
 @Injectable({
   providedIn: 'root',
@@ -19,15 +20,16 @@ export class OrderService {
     private readonly authService: AuthService,
     private readonly http: HttpClient,
     private readonly router: Router,
+    private readonly telegramService: TelegramService,
     private readonly toast: ToastrService,
   ) {
   }
 
   create(order: IOrder) {
     return this.http.post<IOrder>(Constants.BASE_URL + Constants.METHODS.CREATE_ORDER, order)
-      .subscribe((order) => {
+      .subscribe(() => {
         this.toast.success('Заказ успешно создан')
-        console.warn('Создан заказ', order)
+        this.telegramService.sendMessage('Поступил новый заказ!')
       })
   }
 
