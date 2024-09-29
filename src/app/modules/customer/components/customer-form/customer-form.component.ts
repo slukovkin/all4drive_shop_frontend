@@ -7,6 +7,8 @@ import { CustomerService } from '../../services/customer.service'
 import { ICustomer } from '../../types/customer.interface'
 import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
 import { ModalService } from '../../../modal/service/modal.service'
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field'
+import { MatInput } from '@angular/material/input'
 
 @Component({
   selector: 'app-customer-form',
@@ -18,6 +20,10 @@ import { ModalService } from '../../../modal/service/modal.service'
     ProductFormComponent,
     FormsModule,
     ReactiveFormsModule,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatError,
   ],
   templateUrl: './customer-form.component.html',
   styleUrl: './customer-form.component.scss',
@@ -35,6 +41,7 @@ export class CustomerFormComponent {
       firstname: new FormControl(this.customer?.firstname, [Validators.required]),
       lastname: new FormControl(this.customer?.lastname),
       email: new FormControl(this.customer?.email, [Validators.required, Validators.email]),
+      password: new FormControl(this.customer?.password),
       phone: new FormControl(this.customer?.phone, [Validators.required]),
       description: new FormControl(this.customer?.description),
     })
@@ -47,6 +54,7 @@ export class CustomerFormComponent {
         firstname: firstCharToUpperCase(this.customerForm.controls['firstname'].value),
         lastname: firstCharToUpperCase(this.customerForm.controls['lastname'].value),
         email: this.customerForm.controls['email'].value,
+        password: this.customerForm.controls['password'].value,
         phone: this.customerForm.controls['phone'].value,
         description: firstCharToUpperCase(this.customerForm.controls['description'].value ?? ''),
       }
