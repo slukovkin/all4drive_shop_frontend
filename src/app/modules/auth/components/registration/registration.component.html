@@ -10,14 +10,12 @@
       type="email" id="email" class="input" placeholder="Enter your email:">
   </div>
   <div class="inline-flex"
-       *ngIf="user.controls['email'].invalid &&
-(user.controls['email'].dirty || user.controls['email'].touched)"
-  >
-    <div class="text-red-600 mt-1 text-sm" *ngIf="user.controls['password'].hasError('required')">
-      Password is required
+       *ngIf="user.controls['email'].invalid && (user.controls['email'].dirty || user.controls['email'].touched)">
+    <div class="text-red-600 mt-1 text-sm" *ngIf="user.controls['email'].hasError('required')">
+      Email is required
     </div>
-    <div class="text-red-600 mt-1 text-sm" *ngIf="user.controls['password'].hasError('minlength')">
-      Password have be more 6 chars
+    <div class="text-red-600 mt-1 text-sm" *ngIf="user.controls['email'].hasError('email')">
+      Введите валидный адрес эл. почты
     </div>
   </div>
   <div class="flex flex-col">

@@ -9,20 +9,17 @@
         <input
           [readonly]="!!product?.id"
           matInput formControlName="code" placeholder="Код должен содержать 8 знаков">
+      </mat-form-field>
+      @if (productForm.controls['code'].dirty || productForm.controls['code'].touched) {
         <mat-error
           *ngIf="productForm.hasError('required', 'code')">
           Поле обязательное
         </mat-error>
         <mat-error
-          *ngIf="productForm.hasError('maxlength', 'code')">
+          *ngIf="productForm.hasError('minlength', 'code') || productForm.hasError('maxlength', 'code')">
           Поле дожно содержать 8 знаков
         </mat-error>
-        <mat-error
-          *ngIf="productForm.hasError('minlength', 'code')">
-          Поле дожно содержать 8 знаков
-        </mat-error>
-
-      </mat-form-field>
+      }
     </div>
 
     <div class="mb-1 flex flex-col">
