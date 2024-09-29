@@ -29,7 +29,7 @@ export class OrderService {
     return this.http.post<IOrder>(Constants.BASE_URL + Constants.METHODS.CREATE_ORDER, order)
       .subscribe(() => {
         this.toast.success('Заказ успешно создан')
-        this.telegramService.sendMessage('Поступил новый заказ!')
+        this.telegramService.sendMessage('Поступил новый заказ!').then()
       })
   }
 

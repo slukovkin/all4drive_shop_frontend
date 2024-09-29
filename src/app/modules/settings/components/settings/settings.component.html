@@ -118,7 +118,9 @@
       <h5>Настройка коммуникаций</h5>
       <div class="col-12  col-md-5 col-xl-4  ">
         <app-setting-sms></app-setting-sms>
-        <app-setting-telegram></app-setting-telegram>
+        <app-setting-telegram
+          (telegramSetting)="onChangeTelegramSetting($event)"
+        ></app-setting-telegram>
       </div>
     </div>
   </div>

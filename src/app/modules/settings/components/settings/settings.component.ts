@@ -10,6 +10,7 @@ import { SettingService } from '../../service/setting.service'
 import { ISetting } from '../../types/setting.interface'
 import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
 import { NgFor } from '@angular/common'
+import { ITelegramSetting } from '../../types/telegram-setting.interface'
 
 @Component({
   selector: 'app-settings',
@@ -32,6 +33,7 @@ import { NgFor } from '@angular/common'
 export class SettingsComponent {
 
   settingForm: FormGroup
+  telegramDataSetting?: ITelegramSetting
 
   setting?: ISetting | undefined
 
@@ -56,6 +58,12 @@ export class SettingsComponent {
     })
   }
 
+  onChangeTelegramSetting(value: ITelegramSetting) {
+
+    console.log('onChangeTelegramSetting =>', value)
+    this.telegramDataSetting = value
+  }
+
   submit() {
     if (this.settingForm.valid) {
       const setting: ISetting = {
@@ -67,13 +75,20 @@ export class SettingsComponent {
         priceTypeTwo: Number(this.settingForm.value.typePriceTwo),
         priceTypeThree: Number(this.settingForm.value.typePriceThree),
         markup: Number(this.settingForm.value.markup),
-        employeeId: null,
-        telegramKey: '',
       }
       if (this.setting?.id) {
-        this.settingService.updateSettingByID(setting)
+        this.settingService.updateSettingByID(
+          {
+            ...setting,
+            telegramBotId: this.telegramDataSetting?.telegramBotId,
+            telegramKey: this.telegramDataSetting?.telegramToken,
+          })
       } else {
-        this.settingService.create(setting)
+        this.settingService.create({
+          ...setting,
+          telegramBotId: this.telegramDataSetting?.telegramBotId,
+          telegramKey: this.telegramDataSetting?.telegramToken,
+        })
       }
     }
   }

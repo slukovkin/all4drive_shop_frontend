@@ -8,7 +8,11 @@
         <mat-form-field>
           <mat-label>ID Пользователя</mat-label>
           <input
-            matInput formControlName="telegramId">
+            matInput formControlName="telegramBotId">
+          <mat-error
+            *ngIf="telegramForm.hasError('required', 'telegramBotId')">
+            Поле обязательное
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -16,6 +20,10 @@
         <mat-form-field>
           <mat-label>Token</mat-label>
           <input matInput formControlName="telegramToken">
+          <mat-error
+            *ngIf="telegramForm.hasError('required', 'telegramToken')">
+            Поле обязательное
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="text-center mx-auto w-full">
