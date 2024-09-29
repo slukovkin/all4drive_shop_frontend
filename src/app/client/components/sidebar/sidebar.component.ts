@@ -21,4 +21,9 @@ export class SidebarComponent {
     this.productService.selectCategory = (id === 1 ? null : id)
     this.productService.isSelectFilter = !!this.productService.selectCategory
   }
+
+  showAllProduct() {
+    this.productService.selectCategory = null
+    this.productService.isSelectFilter = false
+  }
 }

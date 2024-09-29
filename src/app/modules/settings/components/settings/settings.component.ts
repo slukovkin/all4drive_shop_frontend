@@ -8,7 +8,6 @@ import { CurrencyService } from '../../../currency/components/services/currency.
 import { StoreService } from '../../../store/store.service'
 import { SettingService } from '../../service/setting.service'
 import { ISetting } from '../../types/setting.interface'
-import { firstCharToUpperCase } from '../../../../shared/utils/transformString'
 import { NgFor } from '@angular/common'
 import { ITelegramSetting } from '../../types/telegram-setting.interface'
 
@@ -59,8 +58,6 @@ export class SettingsComponent {
   }
 
   onChangeTelegramSetting(value: ITelegramSetting) {
-
-    console.log('onChangeTelegramSetting =>', value)
     this.telegramDataSetting = value
   }
 
@@ -68,7 +65,7 @@ export class SettingsComponent {
     if (this.settingForm.valid) {
       const setting: ISetting = {
         id: this.setting?.id,
-        firmName: firstCharToUpperCase(this.settingForm.value.title),
+        firmName: this.settingForm.value.title.toUpperCase(),
         currencyId: Number(this.settingForm.value.currency),
         storeId: Number(this.settingForm.value.store),
         priceTypeOne: Number(this.settingForm.value.typePriceOne),

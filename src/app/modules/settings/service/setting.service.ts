@@ -22,8 +22,12 @@ export class SettingService {
     this.http.post<ISetting>(Constants.BASE_URL + Constants.METHODS.CREATE_SETTING, setting)
       .pipe(
         tap((setting) => this.setting = setting),
+        catchError((err) => {
+          this.handleError(err)
+          throw (`Error => ${err.message}`)
+        }),
       )
-      .subscribe()
+      .subscribe(() => this.toast.success('Setting saved successfully'))
   }
 
   getAllSettings() {
