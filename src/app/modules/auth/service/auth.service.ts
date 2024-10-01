@@ -31,23 +31,7 @@ export class AuthService {
     return this.http.post<IResponseUser>(Constants.BASE_URL + Constants.METHODS.LOGIN,
       user)
       .pipe(
-        tap((response: IResponseUser) => {
-          if (response.user.roles[0].value === 'ADMIN') {
-            this.isAdmin$.set(true)
-            this.isAuth$.set(true)
-            localStorage.setItem('token', response.token)
-            this.token = response.token
-            this.user = response
-            this.router.navigate(['products']).then()
-          } else {
-            this.isAdmin$.set(false)
-            this.isAuth$.set(true)
-            localStorage.setItem('token', response.token)
-            this.token = response.token
-            this.user = response
-            this.router.navigate(['']).then()
-          }
-        }),
+        tap((response: IResponseUser) => this.handleAuthSuccess(response)),
         catchError((err) => {
           this.handleError(err)
           throw new Error(err.error.message)
@@ -100,6 +84,16 @@ export class AuthService {
 
   update(user: IUserProfile) {
     return this.http.patch(Constants.BASE_URL + Constants.METHODS.UPDATE_USER_BY_ID + user.id, user).subscribe()
+  }
+
+  private handleAuthSuccess(response: IResponseUser) {
+    localStorage.setItem('token', response.token)
+    this.token = response.token
+    this.user = response
+    const isAdmin = response.user.roles[0].value === 'ADMIN'
+    this.isAdmin$.set(isAdmin)
+    this.isAuth$.set(true)
+    this.router.navigate([isAdmin ? 'products' : '']).then()
   }
 
   logout() {

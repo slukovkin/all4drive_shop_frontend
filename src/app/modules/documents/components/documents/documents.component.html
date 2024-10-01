@@ -18,9 +18,9 @@
 
     @for (invoice of invoices; track invoice.date) {
       <tr stopPropagation
+          (click)="viewInvoice(invoice.id)"
           class="grid grid-cols-6 mt-0.5 px-4 py-2 text-center
-        items-center cursor-pointer select-none border-b border-slate-500"
-      >
+        items-center cursor-pointer select-none border-b border-slate-500">
         <td>{{ invoice.date | date:  'd/M/y' }}</td>
         <td>№ {{ invoice.doc_number }}</td>
         @if (invoice.type === 'in') {

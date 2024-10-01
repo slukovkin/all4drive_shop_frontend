@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { AsyncPipe, DatePipe, JsonPipe, NgForOf, NgIf } from '@angular/common'
 import { FaIconComponent, FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -51,13 +51,15 @@ import { RouterLink } from '@angular/router'
   templateUrl: './incoming-invoice.component.html',
   styleUrl: './incoming-invoice.component.scss',
 })
-export class IncomingInvoiceComponent {
+export class IncomingInvoiceComponent implements OnInit {
 
   editIcon = faPenToSquare
   deleteIcon = faTrash
   data = Date.now().toString()
 
-  incomingForm: FormGroup
+  incomingForm!: FormGroup
+  invoiceNumber!: string | null
+  initNumber = 'ПН-0000001'
 
   constructor(
     public readonly productService: ProductService,
@@ -76,11 +78,13 @@ export class IncomingInvoiceComponent {
     this.currencyService.getAllCurrencies()
     this.customerService.getAllCustomers()
     this.incomingInvoiceService.getLastInvoiceNumber()
+    this.invoiceNumber = this.incomingInvoiceService.lastInvoiceNumber
+
     this.orderService.getAllOrders().subscribe()
     this.documentService.isOutInvoice$.set(false)
 
     this.incomingForm = new FormGroup({
-      invoice: new FormControl(this.incomingInvoiceService.lastInvoiceNumber$() ?? 'ПН-0000001', [Validators.required]),
+      invoice: new FormControl(this.invoiceNumber ?? this.initNumber, [Validators.required]),
       data_doc: new FormControl(this.data),
       firm: new FormControl(this.settingService.setting?.firmName, [Validators.required]),
       customer: new FormControl('', [Validators.required]),
@@ -120,10 +124,15 @@ export class IncomingInvoiceComponent {
 
   sum(): number {
     const products = this.documentService.products$()
-    return products.reduce((_, curr) => curr.priceIn * curr.qty, 0)
+    return products.reduce((sum, curr) => sum += curr.priceIn * curr.qty, 0)
   }
 
   clearProducts() {
     this.documentService.products$.set([])
   }
+
+  ngOnInit() {
+
+  }
+
 }

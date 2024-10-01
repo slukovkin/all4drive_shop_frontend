@@ -35,6 +35,8 @@ export class OutgoingInvoiceComponent {
   data = Date.now().toString()
 
   outgoingForm: FormGroup
+  invoiceNumber!: string | null
+  initNumber = 'РН-0000001'
 
   constructor(
     public readonly productService: ProductService,
@@ -53,10 +55,11 @@ export class OutgoingInvoiceComponent {
     this.customerService.getAllCustomers()
     this.currencyService.getAllCurrencies()
     this.outgoingInvoiceService.getLastOutgoingInvoiceNumber()
+    this.invoiceNumber = this.outgoingInvoiceService.lastOutgoingInvoiceNumber
     this.documentService.isOutInvoice$.set(true)
 
     this.outgoingForm = new FormGroup({
-      invoice: new FormControl(this.outgoingInvoiceService.lastOutgoingInvoiceNumber$() ?? 'РН-0000001', [Validators.required]),
+      invoice: new FormControl(this.invoiceNumber ?? this.initNumber, [Validators.required]),
       data_doc: new FormControl(this.data),
       firm: new FormControl(this.settingService.setting?.firmName, [Validators.required]),
       customer: new FormControl('', [Validators.required]),

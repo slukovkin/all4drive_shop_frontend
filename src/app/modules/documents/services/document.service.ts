@@ -21,6 +21,7 @@ export class DocumentService {
   products$ = signal<IProductSelect[]>([])
   isOrder$ = signal(false)
   isOutInvoice$ = signal(true)
+  selectIncomingId$ = signal(0)
 
   constructor(
     private readonly orderService: OrderService,
@@ -38,6 +39,11 @@ export class DocumentService {
 
   getAllOutgoingInvoices() {
     return this.http.get<IInvoice[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_OUTGOING_INVOICES)
+  }
+
+  getInComingInvoiceById(invoiceId: number) {
+    return this.http.get<IInvoice>(Constants.BASE_URL + Constants.METHODS.GET_INGOING_INVOICE_BY_ID + invoiceId)
+    // .subscribe((invoice) => this.invoice$.set(invoice))
   }
 
   getAllOrder() {

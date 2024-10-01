@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core'
 import { IProductInStore } from '../types/product-in-store.interface'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Constants } from '../../../shared/constants/constants'
-import { catchError, tap } from 'rxjs'
+import { catchError } from 'rxjs'
 import { ToastrService } from 'ngx-toastr'
 import { Router } from '@angular/router'
 import { DocumentService } from './document.service'
@@ -13,7 +13,7 @@ import { IInvoice } from '../types/invoice.interface'
 })
 export class OutgoingInvoiceService {
   changeInvoice$ = signal(false)
-  lastOutgoingInvoiceNumber$ = signal<string | null>(null)
+  lastOutgoingInvoiceNumber!: string | null
 
   constructor(
     private readonly http: HttpClient,
@@ -28,17 +28,10 @@ export class OutgoingInvoiceService {
     return this.http.get<string | null>(Constants.BASE_URL + Constants.METHODS.GET_LAST_OUTGOING_INVOICE_NUMBER)
       .pipe(
         catchError((err) => {
-          this.lastOutgoingInvoiceNumber$.set(err.error.text)
+          this.lastOutgoingInvoiceNumber = err.error.text
           throw 'Не понятная ошибка при парсинге номера накладной'
         }),
-        tap(i => {
-          if (i === null) {
-            this.lastOutgoingInvoiceNumber$.set(null)
-          } else {
-            this.lastOutgoingInvoiceNumber$.set(i)
-          }
-        }),
-      ).subscribe()
+      ).subscribe(i => this.lastOutgoingInvoiceNumber = i)
   }
 
   removeProductFromStore() {
@@ -87,7 +80,7 @@ export class OutgoingInvoiceService {
 
   saveInvoice() {
     this.http.post<IInvoice>(Constants.BASE_URL + Constants.METHODS.CREATE_OUTGOING_INVOICE,
-      this.documentService.invoice$())
+      { ...this.documentService.invoice$(), products: this.documentService.products$() })
       .subscribe(() => {
         this.documentService.invoice$.set(null)
         this.documentService.productsToInvoice$.set(null)

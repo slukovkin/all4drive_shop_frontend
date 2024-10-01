@@ -32,15 +32,19 @@ export class CrossComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort
 
   error = ''
-  cross_table?: ICross[]
+  cross_table: ICross[] = []
   showCrossEdit = false
 
   constructor(
     private crossService: CrossService,
   ) {
+    // this.crossService.getAllCross()
+    // this.cross_table = this.crossService.cross_table$()
+    // this.dataSource = new MatTableDataSource(this.cross_table)
     this.crossService.getAllCross()
-    this.cross_table = this.crossService.cross_table$()
-    this.dataSource = new MatTableDataSource(this.cross_table)
+    this.dataSource = new MatTableDataSource(this.crossService.cross_table$())
+    this.dataSource.paginator = this.paginator
+    this.dataSource.sort = this.sort
   }
 
   onCrossDataFromForm(value: ICrossCreateData) {

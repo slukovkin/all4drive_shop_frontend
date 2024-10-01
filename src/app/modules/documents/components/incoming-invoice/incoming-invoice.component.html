@@ -11,6 +11,7 @@
         <label for="invoice">Номер документа</label>
         <input
           formControlName="invoice"
+          [value]="incomingInvoiceService.lastInvoiceNumber ?? initNumber"
           type="text" id="invoice" class="input">
       </div>
       <div class="flex flex-col text-start">

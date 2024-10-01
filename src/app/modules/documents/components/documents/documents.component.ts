@@ -8,6 +8,7 @@ import { IInvoice } from '../../types/invoice.interface'
 import { tap } from 'rxjs'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-documents',
@@ -33,6 +34,7 @@ export class DocumentsComponent {
     public readonly documentService: DocumentService,
     public readonly modalService: ModalService,
     private readonly authService: AuthService,
+    private readonly router: Router,
   ) {
     this.isAdmin = this.authService.isAdmin$()
     this.documentService.getAllIncomingInvoices()
@@ -53,5 +55,10 @@ export class DocumentsComponent {
       .pipe(
         tap(invoices => this.invoices = invoices),
       ).subscribe()
+  }
+
+  viewInvoice(id: any) {
+    this.documentService.selectIncomingId$.set(id)
+    this.router.navigate(['view_incoming']).then()
   }
 }

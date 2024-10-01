@@ -4,7 +4,7 @@ import { Constants } from '../../../shared/constants/constants'
 import { ICross } from '../types/cross.interface'
 import { IProduct } from '../../product/types/product.interfaces'
 import { ProductService } from '../../product/service/product.service'
-import { catchError, delay, tap } from 'rxjs'
+import { catchError, tap } from 'rxjs'
 import { ToastrService } from 'ngx-toastr'
 
 @Injectable({
@@ -28,7 +28,6 @@ export class CrossService {
         tap((cross) => {
           this.cross_table$.set(cross)
         }),
-        delay(500),
       ).subscribe()
   }
 

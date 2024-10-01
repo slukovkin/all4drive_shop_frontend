@@ -31,6 +31,7 @@ import {
 } from './modules/documents/components/select-edit-product/select-edit-product.component'
 import { UploadComponent } from './modules/upload/components/upload/upload.component'
 import { CrossComponent } from './modules/cross/components/cross/cross.component'
+import { ViewIncomingComponent } from './modules/documents/components/view-incoming/view-incoming.component'
 
 export const routes: Routes = [
 
@@ -38,6 +39,10 @@ export const routes: Routes = [
     path: '',
     component: ShopComponent,
     title: 'Номенклатура',
+  },
+  {
+    path: 'view_incoming',
+    component: ViewIncomingComponent,
   },
   {
     path: 'basket',
