@@ -26,7 +26,7 @@ export interface ICross {
 export class CrossComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['id', 'group', 'code', 'origin']
-  dataSource: MatTableDataSource<ICross>
+  dataSource!: MatTableDataSource<ICross>
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
@@ -38,13 +38,7 @@ export class CrossComponent implements AfterViewInit {
   constructor(
     private crossService: CrossService,
   ) {
-    // this.crossService.getAllCross()
-    // this.cross_table = this.crossService.cross_table$()
-    // this.dataSource = new MatTableDataSource(this.cross_table)
-    this.crossService.getAllCross()
-    this.dataSource = new MatTableDataSource(this.crossService.cross_table$())
-    this.dataSource.paginator = this.paginator
-    this.dataSource.sort = this.sort
+
   }
 
   onCrossDataFromForm(value: ICrossCreateData) {
@@ -58,6 +52,8 @@ export class CrossComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.crossService.getAllCross()
+    this.dataSource = new MatTableDataSource(this.crossService.cross_table$())
     this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
   }

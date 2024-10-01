@@ -4,7 +4,7 @@ import { Constants } from '../../../shared/constants/constants'
 import { ICross } from '../types/cross.interface'
 import { IProduct } from '../../product/types/product.interfaces'
 import { ProductService } from '../../product/service/product.service'
-import { catchError, tap } from 'rxjs'
+import { catchError } from 'rxjs'
 import { ToastrService } from 'ngx-toastr'
 
 @Injectable({
@@ -25,10 +25,7 @@ export class CrossService {
   getAllCross() {
     this.http.get<ICross[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_CROSSTABLE)
       .pipe(
-        tap((cross) => {
-          this.cross_table$.set(cross)
-        }),
-      ).subscribe()
+      ).subscribe((cross) => this.cross_table$.set(cross))
   }
 
   createNewCross(cross: ICross) {

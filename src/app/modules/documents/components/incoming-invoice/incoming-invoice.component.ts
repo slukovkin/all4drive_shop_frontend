@@ -57,7 +57,7 @@ export class IncomingInvoiceComponent implements OnInit {
   deleteIcon = faTrash
   data = Date.now().toString()
 
-  incomingForm!: FormGroup
+  incomingForm: FormGroup
   invoiceNumber!: string | null
   initNumber = 'ПН-0000001'
 
@@ -124,7 +124,7 @@ export class IncomingInvoiceComponent implements OnInit {
 
   sum(): number {
     const products = this.documentService.products$()
-    return products.reduce((sum, curr) => sum += curr.priceIn * curr.qty, 0)
+    return products.reduce((_, curr) => curr.priceIn * curr.qty, 0)
   }
 
   clearProducts() {
