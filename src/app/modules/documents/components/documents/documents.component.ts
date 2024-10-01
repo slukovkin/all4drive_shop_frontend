@@ -57,8 +57,12 @@ export class DocumentsComponent {
       ).subscribe()
   }
 
-  viewInvoice(id: any) {
-    this.documentService.selectIncomingId$.set(id)
-    this.router.navigate(['view_incoming']).then()
+  viewInvoice(invoice: IInvoice) {
+    this.documentService.selectIncomingId$.set(invoice.id!)
+    if (invoice.type === 'in') {
+      this.router.navigate(['view_incoming']).then()
+    } else {
+      this.router.navigate(['view_outgoing']).then()
+    }
   }
 }

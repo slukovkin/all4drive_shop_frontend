@@ -74,21 +74,32 @@ export class OutgoingInvoiceService {
           ).subscribe()
       })
     }
-
     this.saveInvoice()
   }
 
   saveInvoice() {
-    this.http.post<IInvoice>(Constants.BASE_URL + Constants.METHODS.CREATE_OUTGOING_INVOICE,
-      { ...this.documentService.invoice$(), products: this.documentService.products$() })
-      .subscribe(() => {
-        this.documentService.invoice$.set(null)
-        this.documentService.productsToInvoice$.set(null)
-        this.documentService.products$.set([])
-        this.getLastOutgoingInvoiceNumber()
-        this.toast.success('Products successfully saved')
-        this.router.navigate(['products']).then()
-      })
+    !this.documentService.isOrder$()
+      ? this.http.post<IInvoice>(Constants.BASE_URL + Constants.METHODS.CREATE_OUTGOING_INVOICE,
+        { ...this.documentService.invoice$(), products: this.documentService.products$() })
+        .subscribe(() => {
+          this.resetState()
+        })
+      :
+
+      this.http.post<IInvoice>(Constants.BASE_URL + Constants.METHODS.CREATE_OUTGOING_INVOICE,
+        { ...this.documentService.invoice$(), products: this.documentService.productsToInvoice$()?.productList })
+        .subscribe(() => {
+          this.resetState()
+        })
+  }
+
+  resetState() {
+    this.documentService.invoice$.set(null)
+    this.documentService.productsToInvoice$.set(null)
+    this.documentService.products$.set([])
+    this.getLastOutgoingInvoiceNumber()
+    this.toast.success('Products successfully saved')
+    this.router.navigate(['products']).then()
   }
 
   private handleError(err: HttpErrorResponse) {

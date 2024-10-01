@@ -54,6 +54,7 @@ export const Constants = {
     SEND_EMAIL: 'email',
     CREATE_INCOMING_INVOICE: 'incoming_invoices',
     GET_INGOING_INVOICE_BY_ID: 'incoming_invoices/',
+    GET_OUTGOING_INVOICE_BY_ID: 'outgoing_invoices/',
     GET_ALL__INVOICES: 'invoices/',
     GET_ALL_INCOMING_INVOICES: 'incoming_invoices/',
     GET_LAST_INCOMING_INVOICE_NUMBER: 'incoming_invoices/last',

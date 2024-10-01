@@ -43,7 +43,10 @@ export class DocumentService {
 
   getInComingInvoiceById(invoiceId: number) {
     return this.http.get<IInvoice>(Constants.BASE_URL + Constants.METHODS.GET_INGOING_INVOICE_BY_ID + invoiceId)
-    // .subscribe((invoice) => this.invoice$.set(invoice))
+  }
+
+  getOutgoingInvoiceById(invoiceId: number) {
+    return this.http.get<IInvoice>(Constants.BASE_URL + Constants.METHODS.GET_OUTGOING_INVOICE_BY_ID + invoiceId)
   }
 
   getAllOrder() {

@@ -32,6 +32,7 @@ import {
 import { UploadComponent } from './modules/upload/components/upload/upload.component'
 import { CrossComponent } from './modules/cross/components/cross/cross.component'
 import { ViewIncomingComponent } from './modules/documents/components/view-incoming/view-incoming.component'
+import { ViewOutgoingComponent } from './modules/documents/components/view-outgoing/view-outgoing.component'
 
 export const routes: Routes = [
 
@@ -43,6 +44,10 @@ export const routes: Routes = [
   {
     path: 'view_incoming',
     component: ViewIncomingComponent,
+  },
+  {
+    path: 'view_outgoing',
+    component: ViewOutgoingComponent,
   },
   {
     path: 'basket',
