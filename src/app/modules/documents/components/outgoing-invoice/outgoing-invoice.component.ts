@@ -89,9 +89,16 @@ export class OutgoingInvoiceComponent {
     }
   }
 
-  unselectProduct(id: number) {
-    this.documentService.products$.set(this.documentService.products$().filter(product => product.productId !== id))
-    // this.documentService.productsToInvoice$.set(this.documentService.productsToInvoice$().filter(product => product.id !== id))
+  unselectProduct(id: number, withOrder: number) {
+    if (!withOrder) {
+      this.documentService.products$.set(this.documentService.products$().filter(product => product.productId !== id))
+    } else {
+      const products = this.documentService.productsToInvoice$()!.productList.filter(product => product.id !== id)
+      this.documentService.productsToInvoice$.set({
+        ...this.documentService.productsToInvoice$()!,
+        productList: products,
+      })
+    }
   }
 
   saveProductInStore() {
@@ -102,11 +109,11 @@ export class OutgoingInvoiceComponent {
   sum(): number {
     if (!this.documentService.isOrder$()) {
       const products = this.documentService.products$()
-      return products.reduce((_, curr) => curr.priceOut * curr.qty, 0)
+      return products.reduce((sum, curr) => sum += curr.priceOut * curr.qty, 0)
     } else {
-      const products = this.documentService.productsToInvoice$()
+      const products = this.documentService.productsToInvoice$()?.productList
       if (products) {
-        return products.productList.reduce((_, curr) => curr.priceOut * curr.qty, 0)
+        return products.reduce((sum, curr) => sum += curr.priceOut * curr.qty, 0)
       } else {
         return 0
       }

@@ -138,8 +138,9 @@
         <td>{{ product.qty * product.priceOut | eurToUah }}</td>
         <td>
           <div>
+            <!-- Если 0, то накладная без заказа -->
             <fa-icon [icon]="deleteIcon" class="text-red-600 cursor-pointer"
-                     (click)="unselectProduct(product.productId)"
+                     (click)="unselectProduct(product.productId, 0)"
             ></fa-icon>
           </div>
         </td>
@@ -156,8 +157,9 @@
         <td>{{ product.qty * product.priceOut | eurToUah }}</td>
         <td>
           <div>
+            <!-- Если 0, то накладная на основании заказа -->
             <fa-icon [icon]="deleteIcon" class="text-red-500 cursor-pointer"
-                     (click)="unselectProduct(product.id)"
+                     (click)="unselectProduct(product.id, 1)"
             ></fa-icon>
           </div>
         </td>

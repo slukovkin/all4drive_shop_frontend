@@ -50,6 +50,7 @@ export const Constants = {
     CREATE_ORDER: 'orders',
     GET_ALL_ORDERS: 'orders',
     GET_ORDER_BY_ID: 'orders/',
+    UPDATE_ORDER_BY_ID: 'orders/',
     DELETE_ORDER_BY_ID: 'orders/',
     SEND_EMAIL: 'email',
     CREATE_INCOMING_INVOICE: 'incoming_invoices',

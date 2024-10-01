@@ -8,7 +8,7 @@
     <td>{{ order?.city }}</td>
     <td>{{ order?.post }}</td>
 
-    <td>{{ sumOrder(order?.productList ?? []) }}</td>
+    <td>{{ sumOrder(order?.productList ?? []) | eurToUah }} грн</td>
 
     <td>
       <fa-icon [icon]="visible" class="px-2 text-green-600 cursor-pointer"

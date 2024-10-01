@@ -27,17 +27,17 @@
       <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between
       items-center text-center border border-slate-500 cursor-pointer"
           (click)="editProduct(product)">
-        <td>{{ product.code }}</td>
-        <td>{{ product.title }}</td>
-        <td>{{ product.article }}</td>
+        <td>{{ product?.code }}</td>
+        <td>{{ product?.title }}</td>
+        <td>{{ product?.article }}</td>
         <td>
-          <span class="mr-2">{{ product.stores![0].ProductStore.qty }}</span>
+          <span class="mr-2">{{ product.stores?.[0]?.ProductStore?.qty }}</span>
         </td>
         <td>
-          <span class="mr-2">{{ product.stores![0].ProductStore.priceIn }}</span>
+          <span class="mr-2">{{ product.stores?.[0]?.ProductStore?.priceIn }}</span>
         </td>
         <td>
-          <span class="mr-2">{{ product.stores![0].ProductStore.priceOut }}</span>
+          <span class="mr-2">{{ product.stores?.[0]?.ProductStore?.priceOut }}</span>
         </td>
         <td>
           <button (click)="select(product)">

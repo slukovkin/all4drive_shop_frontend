@@ -1,5 +1,5 @@
 <table class="w-full mx-auto">
-  <tr class="grid grid-cols-9 border border-gray-500 py-2 mx-1">
+  <tr class="grid grid-cols-10 border border-gray-500 py-2 mx-1">
     <th>Изображение</th>
     <th>Код</th>
     <th>Артикул</th>
@@ -8,12 +8,13 @@
     <th>Категория</th>
     <th>Количество</th>
     <th>Цена</th>
+    <th>Сумма</th>
     <th>Действие</th>
   </tr>
 
 
   <tr stopPropagation *ngFor="let product of products"
-      class="grid grid-cols-9 items-center text-center border-b border-gray-300 py-1 m-1"
+      class="grid grid-cols-10 items-center text-center border-b border-gray-300 py-1 m-1"
   >
     <td>
       <img [src]="product.imageUrl" alt="{{product.title}}"
@@ -25,7 +26,8 @@
     <td>{{ product.brand }}</td>
     <td>{{ product.categoryId | getCategoryTitleById }}</td>
     <td>{{ product.qty }}</td>
-    <td>{{ product.priceOut | currency: 'EUR ' }}</td>
+    <td>{{ product.priceOut | eurToUah }} грн</td>
+    <td>{{ product.priceOut * product.qty | eurToUah }} грн</td>
     <td>
       <div>
         <fa-icon stopPropagation class="px-2 text-amber-600 cursor-pointer"

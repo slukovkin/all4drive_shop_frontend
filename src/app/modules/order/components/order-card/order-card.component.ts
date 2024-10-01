@@ -3,13 +3,14 @@ import { faEye, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 import { IOrder } from '../../types/order.interface'
-import { JsonPipe } from '@angular/common'
+import { CurrencyPipe, JsonPipe } from '@angular/common'
 import { IProductInBasket } from '../../../product/types/product.interfaces'
 import { CustomerService } from '../../../customer/services/customer.service'
 import { ICustomer } from '../../../customer/types/customer.interface'
 import { Router } from '@angular/router'
 import { DocumentService } from '../../../documents/services/document.service'
 import { OutgoingInvoiceService } from '../../../documents/services/outgoing-invoice.service'
+import { EurToUahPipe } from '../../../../shared/pipes/eur-to-uah.pipe'
 
 @Component({
   selector: 'app-order-card',
@@ -18,6 +19,8 @@ import { OutgoingInvoiceService } from '../../../documents/services/outgoing-inv
     FaIconComponent,
     StopPropagationDirective,
     JsonPipe,
+    CurrencyPipe,
+    EurToUahPipe,
   ],
   templateUrl: './order-card.component.html',
   styleUrl: './order-card.component.scss',
@@ -52,8 +55,8 @@ export class OrderCardComponent {
   }
 
   sumOrder(prodList: IProductInBasket[]): number {
-    return prodList.reduce((_, next) =>
-      next.qty * next.priceOut, 0)
+    return prodList.reduce((sum, next) =>
+      sum += next.priceOut * next.qty, 0)
   }
 
   addOrderInOutgoingInvoice(order: IOrder) {
