@@ -25,7 +25,7 @@ export interface ICross {
 })
 export class CrossComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'group', 'code', 'origin']
+  displayedColumns: string[] = ['group', 'code', 'origin']
   dataSource!: MatTableDataSource<ICross>
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
@@ -38,7 +38,6 @@ export class CrossComponent implements AfterViewInit {
   constructor(
     private crossService: CrossService,
   ) {
-
   }
 
   onCrossDataFromForm(value: ICrossCreateData) {
