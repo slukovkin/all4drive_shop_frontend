@@ -1,5 +1,4 @@
-export interface IResponseUser {
-  user: IUser
+export interface IResponseToken {
   token: string
 }
 

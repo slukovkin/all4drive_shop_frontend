@@ -50,8 +50,8 @@ export class OrderComponent implements OnInit {
     private readonly _location: Location,
   ) {
     this.customerService.getAllCustomers()
-    if (this.authService.user?.user.id) {
-      this.user = this.customerService.getCustomerById(this.authService.user.user.id)
+    if (this.authService.userId) {
+      this.user = this.customerService.getCustomerById(this.authService.userId)
     }
 
     this.orderForm = new FormGroup(({
@@ -70,10 +70,10 @@ export class OrderComponent implements OnInit {
   onSubmit() {
     if (this.orderForm.valid) {
       const user: ICustomer = {
-        id: this.authService.user?.user.id!,
+        id: this.authService.userId!,
         firstname: this.orderForm.value.firstname!,
         lastname: this.orderForm.value.lastname!,
-        email: this.authService.user?.user.email!,
+        email: this.user?.email!,
         phone: this.orderForm.value.phone!,
       }
       if (!this.user?.firstname) {

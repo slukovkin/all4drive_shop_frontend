@@ -37,7 +37,6 @@ export class HeaderComponent {
     const token = localStorage.getItem('token')
     if (token) {
       this.authService.checkToken(token)
-        .subscribe()
     }
 
     this.searchForm = new FormGroup({

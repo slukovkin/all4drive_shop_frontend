@@ -11,14 +11,14 @@ export function authGuard(): CanActivateFn {
 
     const token = localStorage.getItem('token')
     if (token) {
-      authService.checkToken(token).subscribe()
+      authService.checkToken(token)
       isAdmin = authService.isAdmin$()
     }
 
     if (isAdmin) {
       return true
     } else {
-      router.navigate([''])
+      router.navigate(['']).then()
       return false
     }
   }

@@ -5,7 +5,7 @@ import { Constants } from '../../../shared/constants/constants'
 import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { catchError, tap } from 'rxjs'
-import { IResponseUser } from '../types/response-user.interface'
+import { IResponseToken } from '../types/response-user.interface'
 import { IUserProfile } from '../types/user-profile'
 
 @Injectable({
@@ -15,8 +15,7 @@ export class AuthService {
 
   isAuth$ = signal<boolean>(false)
   isAdmin$ = signal<boolean>(false)
-  user: IResponseUser | null = null
-
+  userId: number | null = null
   token: string | null = null
 
   constructor(
@@ -28,10 +27,12 @@ export class AuthService {
   }
 
   login(user: UserInterface) {
-    return this.http.post<IResponseUser>(Constants.BASE_URL + Constants.METHODS.LOGIN,
+    return this.http.post<IResponseToken>(Constants.BASE_URL + Constants.METHODS.LOGIN,
       user)
       .pipe(
-        tap((response: IResponseUser) => this.handleAuthSuccess(response)),
+        tap((response: IResponseToken) => {
+          this.handleAuthSuccess(response)
+        }),
         catchError((err) => {
           this.handleError(err)
           throw new Error(err.error.message)
@@ -60,7 +61,7 @@ export class AuthService {
   checkAuth() {
     const token = localStorage.getItem('token')
     if (token) {
-      this.checkToken(token).subscribe()
+      this.checkToken(token)
     }
   }
 
@@ -78,22 +79,20 @@ export class AuthService {
             this.isAuth$.set(false)
             this.isAdmin$.set(false)
           }
+          this.userId = response.id
         }),
-      )
+      ).subscribe()
   }
 
   update(user: IUserProfile) {
     return this.http.patch(Constants.BASE_URL + Constants.METHODS.UPDATE_USER_BY_ID + user.id, user).subscribe()
   }
 
-  private handleAuthSuccess(response: IResponseUser) {
+  private handleAuthSuccess(response: IResponseToken) {
     localStorage.setItem('token', response.token)
     this.token = response.token
-    this.user = response
-    const isAdmin = response.user.roles[0].value === 'ADMIN'
-    this.isAdmin$.set(isAdmin)
-    this.isAuth$.set(true)
-    this.router.navigate([isAdmin ? 'products' : '']).then()
+    this.checkToken(response.token)
+    this.router.navigate(['']).then()
   }
 
   logout() {
@@ -101,7 +100,7 @@ export class AuthService {
     this.isAuth$.set(false)
     this.isAdmin$.set(false)
     this.token = null
-    this.user = null
+    this.userId = null
     this.router.navigate(['']).then()
     this.toast.success('Logout', '', { timeOut: 500 })
   }

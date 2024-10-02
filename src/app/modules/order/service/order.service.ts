@@ -41,7 +41,6 @@ export class OrderService {
     const token = localStorage.getItem('token')
     if (token) {
       this.authService.checkToken(token)
-        .subscribe()
       if (this.authService.isAuth$()) {
         this.currentProduct = product
         this.router.navigate(['basket']).then()
