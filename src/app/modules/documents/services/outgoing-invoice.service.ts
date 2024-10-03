@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr'
 import { Router } from '@angular/router'
 import { DocumentService } from './document.service'
 import { IInvoice } from '../types/invoice.interface'
+import { OrderService } from '../../order/service/order.service'
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class OutgoingInvoiceService {
     private readonly http: HttpClient,
     private readonly toast: ToastrService,
     private readonly documentService: DocumentService,
+    private readonly orderService: OrderService,
     private readonly router: Router,
   ) {
     this.getLastOutgoingInvoiceNumber()
@@ -84,11 +86,10 @@ export class OutgoingInvoiceService {
         .subscribe(() => {
           this.resetState()
         })
-      :
-
-      this.http.post<IInvoice>(Constants.BASE_URL + Constants.METHODS.CREATE_OUTGOING_INVOICE,
+      : this.http.post<IInvoice>(Constants.BASE_URL + Constants.METHODS.CREATE_OUTGOING_INVOICE,
         { ...this.documentService.invoice$(), products: this.documentService.productsToInvoice$()?.productList })
         .subscribe(() => {
+          this.orderService.updateStatusOrderById(this.documentService.invoice$()?.orderId!)
           this.resetState()
         })
   }

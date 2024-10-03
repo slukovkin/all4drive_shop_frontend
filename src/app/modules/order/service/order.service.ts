@@ -52,6 +52,11 @@ export class OrderService {
     }
   }
 
+  updateStatusOrderById(id: number) {
+    this.http.get(Constants.BASE_URL + Constants.METHODS.UPDATE_STATUS_ORDER_BY_ID + id)
+      .subscribe()
+  }
+
   deleteOrder(id: number) {
     return this.http.delete(Constants.BASE_URL + Constants.METHODS.DELETE_ORDER_BY_ID + id)
   }

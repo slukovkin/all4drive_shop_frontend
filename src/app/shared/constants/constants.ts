@@ -51,6 +51,7 @@ export const Constants = {
     GET_ALL_ORDERS: 'orders',
     GET_ORDER_BY_ID: 'orders/',
     UPDATE_ORDER_BY_ID: 'orders/',
+    UPDATE_STATUS_ORDER_BY_ID: 'orders/status/',
     DELETE_ORDER_BY_ID: 'orders/',
     SEND_EMAIL: 'email',
     CREATE_INCOMING_INVOICE: 'incoming_invoices',
