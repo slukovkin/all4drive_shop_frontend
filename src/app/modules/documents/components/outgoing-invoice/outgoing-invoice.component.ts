@@ -32,10 +32,10 @@ export class OutgoingInvoiceComponent {
 
   editIcon = faPenToSquare
   deleteIcon = faTrash
-  data = Date.now().toString()
+  data = Date.now()
 
   outgoingForm: FormGroup
-  invoiceNumber!: string | null
+  invoiceNumber?: string | null
   initNumber = 'РН-0000001'
 
   constructor(

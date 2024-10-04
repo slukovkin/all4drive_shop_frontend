@@ -17,6 +17,7 @@
       <div class="flex flex-col text-start">
         <label for="data_doc">Дата документа</label>
         <input
+          [value]="data | date: 'yyyy-MM-dd'"
           formControlName="data_doc"
           type="date" id="data_doc" class="input">
       </div>

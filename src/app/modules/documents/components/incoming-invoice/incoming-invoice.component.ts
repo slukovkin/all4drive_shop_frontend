@@ -55,10 +55,10 @@ export class IncomingInvoiceComponent implements OnInit {
 
   editIcon = faPenToSquare
   deleteIcon = faTrash
-  data = Date.now().toString()
+  data = Date.now()
 
   incomingForm: FormGroup
-  invoiceNumber!: string | null
+  invoiceNumber?: string | null
   initNumber = 'ПН-0000001'
 
   constructor(

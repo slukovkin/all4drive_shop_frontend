@@ -14,7 +14,7 @@ import { OrderService } from '../../order/service/order.service'
 })
 export class OutgoingInvoiceService {
   changeInvoice$ = signal(false)
-  lastOutgoingInvoiceNumber!: string | null
+  lastOutgoingInvoiceNumber?: string | null
 
   constructor(
     private readonly http: HttpClient,

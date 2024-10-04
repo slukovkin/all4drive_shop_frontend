@@ -13,7 +13,7 @@ import { IInvoice } from '../types/invoice.interface'
 })
 export class IncomingInvoiceService {
   changeInvoice$ = signal(false)
-  lastInvoiceNumber!: string | null
+  lastInvoiceNumber?: string | null
 
   constructor(
     private readonly http: HttpClient,
@@ -30,7 +30,7 @@ export class IncomingInvoiceService {
           this.lastInvoiceNumber = err.error.text
           throw 'Не понятная ошибка при парсинге номера накладной'
         }),
-      ).subscribe(i => this.lastInvoiceNumber = i)
+      ).subscribe((i) => this.lastInvoiceNumber = i)
   }
 
 
