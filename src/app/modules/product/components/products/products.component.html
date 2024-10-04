@@ -1,15 +1,10 @@
 <div>
-  <button class="btn btn-action w-full my-1"
-          (click)="modalService.openModal('Добавить номенклатуру')">
+  <button class="btn btn-action w-full my-1" routerLink="/new_product">
     Добавить номенклатуру
   </button>
 </div>
 <table class="mx-auto w-full" *ngIf="productService.products">
-  <tr [ngClass]="{
-      admin_table__header: isAdmin,
-      user_table__header: !isAdmin
-    }"
-      class="grid grid-cols-9">
+  <tr class="grid grid-cols-9 admin_table__header">
     <th>Изображение</th>
     <th>Код</th>
     <th>Артикул</th>
@@ -21,14 +16,9 @@
     <th>Действие</th>
   </tr>
 
-
-  <tr stopPropagation *ngFor="let product of productService.products "
-      (click)="modalService.openModal('Добавить номенклатуру')"
-      [ngClass]="{
-      admin_table__body: isAdmin,
-      user_table__body: !isAdmin
-    }"
-      class="grid grid-cols-9"
+  <tr *ngFor="let product of productService.products "
+      routerLink="/new_product"
+      class="grid grid-cols-9 admin_table__body"
   >
     <td>
       <img [src]="product.imageUrl" alt="{{product.title}}"
@@ -45,22 +35,14 @@
       <div *ngIf="isAdmin">
         <fa-icon stopPropagation class="px-2 text-amber-600 cursor-pointer"
                  [icon]="editIcon"
-                 (click)="modalService.openModal('Редактировать номенклатуру',product)">
-          update
+                 (click)="update(product)">update
         </fa-icon>
         @if (product?.stores?.[0]?.ProductStore?.qty === 0) {
           <fa-icon stopPropagation class="px-2 text-red-600 cursor-pointer" (click)="delete(product.id)"
-                   [icon]="deleteIcon"
-          >delete
+                   [icon]="deleteIcon">delete
           </fa-icon>
         }
       </div>
     </td>
   </tr>
 </table>
-
-<ng-container *ngIf="modalService.isVisible$()">
-  <app-modal [title]="modalService.titleSing()">
-    <app-product-form></app-product-form>
-  </app-modal>
-</ng-container>

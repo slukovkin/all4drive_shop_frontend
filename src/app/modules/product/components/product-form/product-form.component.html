@@ -100,10 +100,11 @@
     </div>
 
     <div class="text-center mt-3 mx-auto w-full">
-      <button [disabled]="this.productForm.invalid" class="btn btn-action my-1 py-3 w-full" type="submit">Сохранить
+      <button stopPropagation [disabled]="this.productForm.invalid" class="btn btn-action my-1 py-3 w-full"
+              type="submit">Сохранить
       </button>
-      <button *ngIf="!product?.id" class="btn btn-orange my-1 py-3 w-full"
-              (click)="resetForm()">Отменить
+      <button stopPropagation class="btn btn-orange my-1 py-3 w-full"
+              (click)="back()">Отменить
       </button>
     </div>
   </div>

@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { NgClass, NgIf } from '@angular/common'
+import { Location, NgClass, NgIf } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import { ProductService } from '../../service/product.service'
 import { IProductInStockAttributes, ProductCreationAttributes } from '../../types/product.interfaces'
@@ -16,6 +16,7 @@ import { MatOption } from '@angular/material/core'
 import { MatError, MatFormField, MatLabel, MatSelect } from '@angular/material/select'
 import { CategoryService } from '../../../category/services/category.service'
 import { MatInput } from '@angular/material/input'
+import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
 
 
 @Component({
@@ -34,11 +35,13 @@ import { MatInput } from '@angular/material/input'
     MatFormField,
     MatInput,
     MatLabel,
+    StopPropagationDirective,
   ],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
 })
 export class ProductFormComponent {
+
   product?: IProductInStockAttributes
   productForm: FormGroup
   previewImage = signal<string>('')
@@ -54,6 +57,7 @@ export class ProductFormComponent {
     private readonly currencyService: CurrencyService,
     private readonly settingService: SettingService,
     public readonly categoryService: CategoryService,
+    private readonly _location: Location,
   ) {
     this.categoryService.getAllCategories()
     this.currencyService.getCurrencyById(this.settingService.setting!.currencyId)
@@ -125,8 +129,9 @@ export class ProductFormComponent {
     }
   }
 
-  resetForm() {
+  back() {
+    this.modalService.itemSign.set(null)
     this.productForm.reset()
-    this.modalService.closeModal()
+    this._location.back()
   }
 }

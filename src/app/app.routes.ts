@@ -42,14 +42,6 @@ export const routes: Routes = [
     title: 'Номенклатура',
   },
   {
-    path: 'view_incoming',
-    component: ViewIncomingComponent,
-  },
-  {
-    path: 'view_outgoing',
-    component: ViewOutgoingComponent,
-  },
-  {
     path: 'basket',
     component: BasketComponent,
     title: 'Корзина',
@@ -103,14 +95,20 @@ export const routes: Routes = [
     component: OrderDetailComponent,
   },
   {
-    path: 'login',
-    component: LoginComponent,
-    title: 'Login',
+    path: 'home',
+    component: HomeComponent,
+    title: 'Statistic',
+    canActivate: [authGuard()],
   },
   {
-    path: 'registration',
-    component: RegistrationComponent,
-    title: 'Registration',
+    path: 'view_incoming',
+    component: ViewIncomingComponent,
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'view_outgoing',
+    component: ViewOutgoingComponent,
+    canActivate: [authGuard()],
   },
   {
     path: 'orders',
@@ -132,12 +130,6 @@ export const routes: Routes = [
     path: 'new_product',
     component: ProductFormComponent,
     title: 'New Product',
-    canActivate: [authGuard()],
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-    title: 'Statistic',
     canActivate: [authGuard()],
   },
   {
@@ -188,6 +180,16 @@ export const routes: Routes = [
   {
     path: 'cross',
     component: CrossComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'Login',
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent,
+    title: 'Registration',
   },
   {
     path: '**',

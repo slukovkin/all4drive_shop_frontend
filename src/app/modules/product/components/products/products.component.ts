@@ -14,6 +14,8 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { GetCategoryTitleByIdPipe } from '../../../../shared/pipes/get-category-title-by-id.pipe'
 import { MatButton } from '@angular/material/button'
+import { Router, RouterLink } from '@angular/router'
+import { IProductInStockAttributes } from '../../types/product.interfaces'
 
 @Component({
   selector: 'app-products',
@@ -36,6 +38,7 @@ import { MatButton } from '@angular/material/button'
     GetCategoryTitleByIdPipe,
     JsonPipe,
     MatButton,
+    RouterLink,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -51,12 +54,19 @@ export class ProductsComponent implements OnInit {
     private readonly authService: AuthService,
     public readonly productService: ProductService,
     public readonly modalService: ModalService,
+    private readonly router: Router,
   ) {
     this.isAdmin = this.authService.isAdmin$()
   }
 
+  update(product: IProductInStockAttributes) {
+    this.modalService.itemSign.set(product)
+    this.router.navigate(['new_product']).then()
+  }
+
   delete(id: number) {
     this.productService.remove(id)
+    this.router.navigate(['new_product']).then()
   }
 
   ngOnInit(): void {
