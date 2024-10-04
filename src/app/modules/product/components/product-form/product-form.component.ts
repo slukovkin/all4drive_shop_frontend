@@ -46,7 +46,7 @@ export class ProductFormComponent implements OnInit {
 
   product?: IProductInStockAttributes
   manufacturers: IManufacturer[] = []
-  productForm: FormGroup
+  productForm!: FormGroup
   previewImage = signal<string>('')
   pathFile: any
   currentCurrency: ICurrency
@@ -60,27 +60,12 @@ export class ProductFormComponent implements OnInit {
     private readonly currencyService: CurrencyService,
     private readonly settingService: SettingService,
     public readonly categoryService: CategoryService,
-    private readonly manufacturerService: ManufacturerService,
+    public readonly manufacturerService: ManufacturerService,
     private readonly _location: Location,
   ) {
     this.categoryService.getAllCategories()
     this.currencyService.getCurrencyById(this.settingService.setting!.currencyId)
     this.currentCurrency = this.currencyService.currencyDefault!
-    this.product = this.modalService.itemSign()
-    this.productForm = new FormGroup({
-      code: new FormControl(this.product?.code,
-        [Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(8),
-        ]),
-      article: new FormControl(this.product?.article, [Validators.required]),
-      title: new FormControl(this.product?.title, [Validators.required]),
-      brand: new FormControl(this.product?.brandId, [Validators.required]),
-      category: new FormControl(this.product?.categoryId, [Validators.required]),
-      price: new FormControl(this.product?.price ?? 0),
-      qty: new FormControl(this.product?.qty ?? 0),
-      picture: new FormControl(this.product?.imageUrl),
-    })
   }
 
 
@@ -125,22 +110,36 @@ export class ProductFormComponent implements OnInit {
             updatedAt: this.product.updatedAt,
           },
         )
+        this.back()
       } else {
         this.productService.create(newProduct)
+        this.back()
       }
-      this.productForm.reset()
-      this._location.back()
     }
   }
 
   back() {
-    this.modalService.itemSign.set(null)
+    this.productService.product = undefined
     this.productForm.reset()
     this._location.back()
   }
 
   ngOnInit(): void {
     this.manufacturerService.getAllManufacturers()
-    this.manufacturers = this.manufacturerService.manufacturers
+    this.product = this.productService.product
+    this.productForm = new FormGroup({
+      code: new FormControl(this.product?.code,
+        [Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(8),
+        ]),
+      article: new FormControl(this.product?.article, [Validators.required]),
+      title: new FormControl(this.product?.title, [Validators.required]),
+      brand: new FormControl(this.product?.manufacturer?.id, [Validators.required]),
+      category: new FormControl(this.product?.categoryId, [Validators.required]),
+      price: new FormControl(this.product?.price ?? 0),
+      qty: new FormControl(this.product?.qty ?? 0),
+      picture: new FormControl(''),
+    })
   }
 }

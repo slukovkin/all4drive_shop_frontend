@@ -11,6 +11,7 @@ import { Constants } from '../../../shared/constants/constants'
 })
 export class ProductService {
 
+  product?: IProductInStockAttributes
   selectCategory: number | null = null
   isSelectFilter = false
   products: IProductInStockAttributes[] = []

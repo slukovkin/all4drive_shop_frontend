@@ -60,7 +60,7 @@ export class ProductsComponent implements OnInit {
   }
 
   update(product: IProductInStockAttributes) {
-    this.modalService.itemSign.set(product)
+    this.productService.product = product
     this.router.navigate(['new_product']).then()
   }
 

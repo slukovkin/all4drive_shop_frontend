@@ -58,6 +58,10 @@ export class SidebarComponent {
       label: 'Валюты',
     },
     {
+      routerLink: 'country',
+      label: 'Страны',
+    },
+    {
       routerLink: 'categories',
       label: 'Категории',
     },

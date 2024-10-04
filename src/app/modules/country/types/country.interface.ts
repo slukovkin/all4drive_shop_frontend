@@ -2,5 +2,4 @@ export interface ICountry {
   id?: number
   code: number
   title: string
-  countryId?: number
 }

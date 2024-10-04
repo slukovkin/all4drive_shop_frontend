@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr'
 export class CountryService {
 
   countries: ICountry[] = []
+  country?: ICountry
 
   constructor(
     private readonly http: HttpClient,
@@ -29,6 +30,35 @@ export class CountryService {
       )
       .subscribe(() => {
         this.toast.success('Country saved successfully')
+      })
+  }
+
+  updateCountry(id: number, country: ICountry) {
+    return this.http.patch(Constants.BASE_URL + Constants.METHODS.UPDATE_COUNTRY_BY_ID + id, country)
+      .pipe(
+        tap(() => this.getAllCountries()),
+        catchError((err) => {
+          this.handleError(err)
+          throw (`Error => ${err.message}`)
+        }),
+      )
+      .subscribe(() => {
+        this.toast.success('Country updated successfully')
+      })
+  }
+
+  deleteCountryById(id: number) {
+    return this.http.delete(Constants.BASE_URL + Constants.METHODS.DELETE_COUNTRY_BY_ID + id)
+      .pipe(
+        tap(() => this.getAllCountries()),
+        catchError((err) => {
+          err.error.message = 'Удаление не возможно. Страна связана с производителями!'
+          this.handleError(err)
+          throw (`Удаление не возможно. Страна связана с производителями!`)
+        }),
+      )
+      .subscribe(() => {
+        this.toast.success('Country removed successfully')
       })
   }
 

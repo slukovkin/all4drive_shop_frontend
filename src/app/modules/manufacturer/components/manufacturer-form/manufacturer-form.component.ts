@@ -8,7 +8,6 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatOption, MatSelect } from '@angular/material/select'
 import { CountryService } from '../../../country/services/country.service'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
-import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-manufacturer-form',
@@ -29,39 +28,48 @@ import { Router } from '@angular/router'
 })
 export class ManufacturerFormComponent implements OnInit {
 
-  countryForm!: FormGroup
+  manufacturerForm!: FormGroup
+  manufacturer?: IManufacturer
 
   constructor(
     public readonly manufacturerService: ManufacturerService,
     public readonly countryService: CountryService,
-    private readonly router: Router,
     private readonly _location: Location,
   ) {
-    this.countryForm = new FormGroup({
-      code: new FormControl('',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(3)]),
-      title: new FormControl('', Validators.required),
-      countryId: new FormControl('', Validators.required),
-    })
   }
 
   ngOnInit(): void {
     this.countryService.getAllCountries()
+    this.manufacturer = this.manufacturerService.manufacturer
+    this.manufacturerForm = new FormGroup({
+      code: new FormControl(this.manufacturer?.code,
+        [Validators.required, Validators.minLength(3), Validators.maxLength(3)]),
+      title: new FormControl(this.manufacturer?.title, Validators.required),
+      countryId: new FormControl(this.manufacturer?.countryId, Validators.required),
+    })
   }
 
   onSubmit() {
-    if (this.countryForm.valid) {
+    if (this.manufacturerForm.valid) {
       const manufacturer: IManufacturer = {
-        code: Number(this.countryForm.controls['code'].value),
-        title: this.countryForm.controls['title'].value,
-        countryId: Number(this.countryForm.controls['countryId'].value),
+        id: this.manufacturer?.id,
+        code: Number(this.manufacturerForm.controls['code'].value),
+        title: this.manufacturerForm.controls['title'].value.toUpperCase(),
+        countryId: Number(this.manufacturerForm.controls['countryId'].value),
       }
-      this.manufacturerService.createManufacturer(manufacturer)
-      this.router.navigate(['manufacturer']).then()
+      if (manufacturer.id) {
+        this.manufacturerService.updateManufacturerById(manufacturer.id, manufacturer)
+        this.back()
+      } else {
+        this.manufacturerService.createManufacturer(manufacturer)
+        this.back()
+      }
     }
   }
 
   back() {
+    this.manufacturerService.manufacturer = undefined
+    this.manufacturerForm.reset()
     this._location.back()
   }
 }

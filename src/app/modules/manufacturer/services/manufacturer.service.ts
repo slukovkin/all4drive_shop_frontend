@@ -38,7 +38,32 @@ export class ManufacturerService {
       })
   }
 
+  updateManufacturerById(id: number, manufacturer: IManufacturer) {
+    return this.http.patch(Constants.BASE_URL + Constants.METHODS.UPDATE_MANUFACTURER_BY_ID + id, manufacturer)
+      .pipe(
+        tap(() => this.getAllManufacturers()),
+        catchError((err) => {
+          this.handleError(err)
+          throw (`Error => ${err.message}`)
+        }),
+      )
+      .subscribe(() => {
+        this.toast.success('Производитель успешно обновлен')
+      })
+  }
+
   deleteManufacturerById(id: number) {
+    return this.http.delete(Constants.BASE_URL + Constants.METHODS.DELETE_MANUFACTURER_BY_ID + id)
+      .pipe(
+        tap(() => this.getAllManufacturers()),
+        catchError((err) => {
+          this.handleError(err)
+          throw (`Error => ${err.message}`)
+        }),
+      )
+      .subscribe(() => {
+        this.toast.success('Производитель успешно удален')
+      })
   }
 
   private handleError(err: HttpErrorResponse) {

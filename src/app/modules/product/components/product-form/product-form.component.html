@@ -8,7 +8,9 @@
         <mat-label>Код</mat-label>
         <input
           [readonly]="!!product?.id"
-          matInput formControlName="code" placeholder="Код должен содержать 8 знаков">
+          matInput
+          formControlName="code"
+          placeholder="Код должен содержать 8 знаков">
       </mat-form-field>
       @if (productForm.controls['code'].dirty || productForm.controls['code'].touched) {
         <mat-error
@@ -25,7 +27,10 @@
     <div class="mb-1 flex flex-col">
       <mat-form-field>
         <mat-label>Артикул</mat-label>
-        <input matInput formControlName="article" placeholder="Введите артикул...">
+        <input
+          matInput
+          formControlName="article"
+          placeholder="Введите артикул...">
         <mat-error
           *ngIf="productForm.hasError('required', 'article')">
           Поле обязательное
@@ -36,7 +41,10 @@
     <div class="mb-1 flex flex-col">
       <mat-form-field>
         <mat-label>Наименование</mat-label>
-        <input matInput formControlName="title" placeholder="Введите наименование...">
+        <input
+          matInput
+          formControlName="title"
+          placeholder="Введите наименование...">
         <mat-error
           *ngIf="productForm.hasError('required', 'title')">
           Поле обязательное
@@ -48,12 +56,12 @@
       <mat-form-field>
         <mat-label>Производитель</mat-label>
         <mat-select formControlName="brand">
-          @for (manufacturer of manufacturers; track manufacturer.id) {
+          @for (manufacturer of manufacturerService.manufacturers; track manufacturer.id) {
             <mat-option [value]="manufacturer.id">{{ manufacturer.title }}</mat-option>
           }
         </mat-select>
         <mat-error
-          *ngIf="productForm.hasError('required', 'category')">
+          *ngIf="productForm.hasError('required', 'brand')">
           Поле обязательное
         </mat-error>
       </mat-form-field>
@@ -75,22 +83,20 @@
     </div>
 
     <!--  Image product-->
+
     <div
       (click)="upload.click()" tabindex="0"
-      class="flex flex-row mt-2 place-content-around items-center">
+      class="flex flex-row mt-2 place-content-around items-center border border-teal-600 cursor-pointer">
       <img [src]="this.previewImage()" alt="Изображение" [ngClass]="{
         upload_image: this.previewImage(),
         none_image: !this.previewImage()
       }">
+
       <div class="flex flex-row items-center justify-around mt-2">
         <div class="flex flex-col">
-          <fa-icon [icon]="uploadIcon" class="text-2xl text-green-600 items-center"
-          ></fa-icon>
-          @if (!previewImage()) {
-            <p>Загрузите изображение</p>
-          } @else {
-            <p>Изменить изображение</p>
-          }
+          <fa-icon [icon]="uploadIcon" class="text-2xl text-green-600 items-center"></fa-icon>
+          <p *ngIf="!previewImage() && !product?.imageUrl">Загрузите изображение</p>
+          <p *ngIf="previewImage() || product?.imageUrl">Изменить изображение</p>
         </div>
 
         <!-- Скрытое поле загрузки изображения -->
@@ -98,10 +104,10 @@
           #upload
           tabindex="-10"
           formControlName="picture"
-          [defaultValue]="product?.imageUrl"
           (change)="fileHandler($event)"
           accept="image/*,.png, .jpg"
-          type="file" id="picture" class="input opacity-0 hidden">
+          type="file"
+          class="input opacity-0 hidden">
       </div>
     </div>
 

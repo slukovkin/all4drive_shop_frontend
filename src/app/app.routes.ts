@@ -37,6 +37,8 @@ import { ManufacturerComponent } from './modules/manufacturer/components/manufac
 import {
   ManufacturerFormComponent,
 } from './modules/manufacturer/components/manufacturer-form/manufacturer-form.component'
+import { CountryComponent } from './modules/country/components/country/country.component'
+import { CountryFormComponent } from './modules/country/components/country-form/country-form.component'
 
 export const routes: Routes = [
 
@@ -191,6 +193,18 @@ export const routes: Routes = [
     path: 'new_manufacturer',
     component: ManufacturerFormComponent,
     title: 'New manufacturer',
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'country',
+    component: CountryComponent,
+    title: 'Country',
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'new_country',
+    component: CountryFormComponent,
+    title: 'New country',
     canActivate: [authGuard()],
   },
   {
