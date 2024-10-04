@@ -109,11 +109,11 @@ export class OutgoingInvoiceComponent {
   sum(): number {
     if (!this.documentService.isOrder$()) {
       const products = this.documentService.products$()
-      return products.reduce((sum, curr) => sum += curr.priceOut * curr.qty, 0)
+      return products.reduce((sum, curr) => sum + curr.priceOut * curr.qty, 0)
     } else {
       const products = this.documentService.productsToInvoice$()?.productList
       if (products) {
-        return products.reduce((sum, curr) => sum += curr.priceOut * curr.qty, 0)
+        return products.reduce((sum, curr) => sum + curr.priceOut * curr.qty, 0)
       } else {
         return 0
       }

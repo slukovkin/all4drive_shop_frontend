@@ -124,7 +124,7 @@ export class IncomingInvoiceComponent implements OnInit {
 
   sum(): number {
     const products = this.documentService.products$()
-    return products.reduce((sum, curr) => sum += curr.priceIn * curr.qty, 0)
+    return products.reduce((sum, curr) => sum + curr.priceIn * curr.qty, 0)
   }
 
   clearProducts() {
