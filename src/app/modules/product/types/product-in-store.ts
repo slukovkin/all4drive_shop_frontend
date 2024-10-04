@@ -3,7 +3,7 @@ export interface IProductFullDataInStore {
   code: number
   article: string
   title: string
-  brand: string
+  brandId: number
   imageUrl: string
   qty: number
   price: number

@@ -23,7 +23,7 @@ export class CrossService {
   cross_table$ = signal<ICross[]>([])
 
   getAllCross() {
-    this.http.get<ICross[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_CROSSTABLE)
+    this.http.get<ICross[]>(Constants.BASE_URL + Constants.METHODS.GET_ALL_CROSS_TABLE)
       .pipe(
       ).subscribe((cross) => this.cross_table$.set(cross))
   }

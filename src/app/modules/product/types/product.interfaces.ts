@@ -1,8 +1,10 @@
+import { IManufacturer } from '../../manufacturer/types/manufacturer.interface'
+
 export interface ProductCreationAttributes {
   code: number
   article: string
   title: string
-  brand: string
+  brandId: number
   categoryId: number
   price: number
   qty: number
@@ -14,7 +16,7 @@ export interface IProduct {
   code: number
   article: string
   title: string
-  brand: string
+  brandId: number
   categoryId: number
   price: number
   qty: number
@@ -39,6 +41,8 @@ export interface IProduct {
       }
     }
   ]
+  manufacturer?: IManufacturer
+
   updatedAt: string,
   createdAt: string
 }
@@ -48,7 +52,7 @@ export interface IProductInStockAttributes {
   code: number
   article: string
   title: string
-  brand: string
+  brandId: number
   categoryId: number
   price: number
   qty: number
@@ -75,6 +79,7 @@ export interface IProductInStockAttributes {
       }
     }
   ]
+  manufacturer?: IManufacturer
 }
 
 export interface IProductInBasket {
@@ -82,7 +87,7 @@ export interface IProductInBasket {
   code: number
   article: string
   title: string
-  brand: string
+  brandId: number
   categoryId: number
   imageUrl: string
   cross: number

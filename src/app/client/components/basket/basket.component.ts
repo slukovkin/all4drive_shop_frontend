@@ -48,7 +48,7 @@ export class BasketComponent {
       code: this.product?.code ?? 0,
       article: this.product?.article ?? '',
       title: this.product?.title ?? '',
-      brand: this.product?.brand ?? '',
+      brandId: this.product?.brandId ?? 0,
       categoryId: this.product?.categoryId ?? 0,
       imageUrl: this.product?.imageUrl ?? '',
       cross: this.product?.cross ?? 0,

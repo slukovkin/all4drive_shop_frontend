@@ -18,7 +18,7 @@ export interface IProductSelect {
   code: number
   article: string
   title: string
-  brand: string
+  brandId: number
   categoryId: number
   storeId: number
   qty: number

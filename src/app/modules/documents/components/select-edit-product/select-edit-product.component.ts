@@ -42,7 +42,7 @@ export class SelectEditProductComponent {
         code: this.documentService.selectProduct$()?.code!,
         article: this.documentService.selectProduct$()?.article!,
         title: this.documentService.selectProduct$()?.title!,
-        brand: this.documentService.selectProduct$()?.brand!,
+        brandId: this.documentService.selectProduct$()?.brandId!,
         categoryId: this.documentService.selectProduct$()?.categoryId!,
         storeId: 1,
         qty: Number(this.selectForm.value.selectQty),

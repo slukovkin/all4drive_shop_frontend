@@ -66,7 +66,6 @@ export class ProductsComponent implements OnInit {
 
   delete(id: number) {
     this.productService.remove(id)
-    this.router.navigate(['new_product']).then()
   }
 
   ngOnInit(): void {

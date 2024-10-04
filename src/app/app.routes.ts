@@ -33,6 +33,10 @@ import { UploadComponent } from './modules/upload/components/upload/upload.compo
 import { CrossComponent } from './modules/cross/components/cross/cross.component'
 import { ViewIncomingComponent } from './modules/documents/components/view-incoming/view-incoming.component'
 import { ViewOutgoingComponent } from './modules/documents/components/view-outgoing/view-outgoing.component'
+import { ManufacturerComponent } from './modules/manufacturer/components/manufacturer/manufacturer.component'
+import {
+  ManufacturerFormComponent,
+} from './modules/manufacturer/components/manufacturer-form/manufacturer-form.component'
 
 export const routes: Routes = [
 
@@ -175,6 +179,18 @@ export const routes: Routes = [
   {
     path: 'categories',
     component: CategoryComponent,
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'manufacturer',
+    component: ManufacturerComponent,
+    title: 'Manufacturer',
+    canActivate: [authGuard()],
+  },
+  {
+    path: 'new_manufacturer',
+    component: ManufacturerFormComponent,
+    title: 'New manufacturer',
     canActivate: [authGuard()],
   },
   {

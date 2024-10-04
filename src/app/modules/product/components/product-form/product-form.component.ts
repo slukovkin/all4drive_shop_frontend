@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core'
+import { Component, OnInit, signal } from '@angular/core'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Location, NgClass, NgIf } from '@angular/common'
 import { RouterLink } from '@angular/router'
@@ -17,6 +17,8 @@ import { MatError, MatFormField, MatLabel, MatSelect } from '@angular/material/s
 import { CategoryService } from '../../../category/services/category.service'
 import { MatInput } from '@angular/material/input'
 import { StopPropagationDirective } from '../../../../shared/directives/stop-propagation.directive'
+import { ManufacturerService } from '../../../manufacturer/services/manufacturer.service'
+import { IManufacturer } from '../../../manufacturer/types/manufacturer.interface'
 
 
 @Component({
@@ -40,9 +42,10 @@ import { StopPropagationDirective } from '../../../../shared/directives/stop-pro
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
 })
-export class ProductFormComponent {
+export class ProductFormComponent implements OnInit {
 
   product?: IProductInStockAttributes
+  manufacturers: IManufacturer[] = []
   productForm: FormGroup
   previewImage = signal<string>('')
   pathFile: any
@@ -57,6 +60,7 @@ export class ProductFormComponent {
     private readonly currencyService: CurrencyService,
     private readonly settingService: SettingService,
     public readonly categoryService: CategoryService,
+    private readonly manufacturerService: ManufacturerService,
     private readonly _location: Location,
   ) {
     this.categoryService.getAllCategories()
@@ -71,7 +75,7 @@ export class ProductFormComponent {
         ]),
       article: new FormControl(this.product?.article, [Validators.required]),
       title: new FormControl(this.product?.title, [Validators.required]),
-      brand: new FormControl(this.product?.brand, [Validators.required]),
+      brand: new FormControl(this.product?.brandId, [Validators.required]),
       category: new FormControl(this.product?.categoryId, [Validators.required]),
       price: new FormControl(this.product?.price ?? 0),
       qty: new FormControl(this.product?.qty ?? 0),
@@ -105,7 +109,7 @@ export class ProductFormComponent {
         code: Number(this.productForm.controls['code'].value),
         article: this.productForm.controls['article'].value.toUpperCase(),
         title: firstCharToUpperCase(this.productForm.controls['title'].value),
-        brand: firstCharToUpperCase(this.productForm.controls['brand'].value),
+        brandId: Number(this.productForm.controls['brand'].value),
         categoryId: Number(this.productForm.controls['category'].value),
         price: 0,
         qty: 0,
@@ -125,7 +129,7 @@ export class ProductFormComponent {
         this.productService.create(newProduct)
       }
       this.productForm.reset()
-      this.modalService.closeModal()
+      this._location.back()
     }
   }
 
@@ -133,5 +137,10 @@ export class ProductFormComponent {
     this.modalService.itemSign.set(null)
     this.productForm.reset()
     this._location.back()
+  }
+
+  ngOnInit(): void {
+    this.manufacturerService.getAllManufacturers()
+    this.manufacturers = this.manufacturerService.manufacturers
   }
 }

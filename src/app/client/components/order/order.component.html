@@ -1,10 +1,10 @@
 <table class="mx-auto w-full">
-  <tr class="grid grid-cols-8 border border-gray-500 py-2 text-lg font-serif">
+  <tr class="grid grid-cols-7 border border-gray-500 py-2 text-lg font-serif">
     <th>Изображение</th>
     <th>Код</th>
     <th>Артикул</th>
     <th>Наименование</th>
-    <th>Производитель</th>
+    <!--    <th>Производитель</th>-->
     <th>Количество</th>
     <th>Цена</th>
     <th>Действие</th>
@@ -12,7 +12,7 @@
 
 
   <tr stopPropagation *ngFor="let product of orderService.order"
-      class="grid grid-cols-8 text-center items-center border-b border-gray-300 my-1 py-1">
+      class="grid grid-cols-7 text-center items-center border-b border-gray-300 my-1 py-1">
     <td>
       <img [src]="product.imageUrl" alt="{{product.title}}"
            class="mx-auto image-circle">
@@ -20,7 +20,7 @@
     <td>{{ product.code }}</td>
     <td>{{ product.article }}</td>
     <td>{{ product.title }}</td>
-    <td>{{ product.brand }}</td>
+    <!--    <td>{{ product.brandId }}</td>-->
     <td>{{ product.qty }}</td>
     <td>{{ product.priceOut * product.qty | eurToUah }}</td>
     <td>

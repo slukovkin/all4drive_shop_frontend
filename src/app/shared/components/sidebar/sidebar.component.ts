@@ -46,6 +46,10 @@ export class SidebarComponent {
       label: 'Контрагенты',
     },
     {
+      routerLink: 'manufacturer',
+      label: 'Производители',
+    },
+    {
       routerLink: 'stores',
       label: 'Склады',
     },
