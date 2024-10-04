@@ -1,27 +1,40 @@
-# E-comerce Frontend
+# All4Drive Shop Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+## Описание
+All4Drive — это веб-приложение для онлайн-магазина, предлагающего запчасти и аксессуары для автомобилей. Проект позволяет пользователям просматривать товары, добавлять их в корзину и оформлять заказы.
 
-## Development server
+## Установка
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/slukovkin/all4drive_shop_frontend.git
+   ```
 
-## Code scaffolding
+2. Перейдите в каталог проекта:
+   ```bash
+   cd all4drive_shop_frontend
+   ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+3. Установите зависимости:
+   ```bash
+   npm install
+   ```
 
-## Build
+## Запуск
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Чтобы запустить проект, выполните команду:
+```bash
+npm start
+```
 
-## Running unit tests
+Откройте браузер и перейдите по адресу [http://localhost:3000](http://localhost:3000).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Использование
 
-## Running end-to-end tests
+- **Просмотр товаров**: Пользователи могут просматривать доступные товары.
+- **Корзина**: Товары можно добавлять в корзину и оформлять заказ.
+- **Аутентификация**: Пользователи могут регистрироваться и входить в систему.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Вклад
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Если вы хотите внести свой вклад, пожалуйста, создайте форк и отправьте пулл-реквест.
