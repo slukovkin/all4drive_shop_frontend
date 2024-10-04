@@ -29,7 +29,7 @@
         </mat-select>
         <div class="inline-flex"
              *ngIf="incomingForm.controls['firm'].invalid">
-          <div class="text-red-600 mt-1 text-sm" *ngIf="incomingForm.controls['firm'].hasError('required')">
+          <div class="text-red-600 mt-1 text-sm" *ngIf="incomingForm.controls['firm'].hasError('required', 'firm')">
             Field is required
           </div>
         </div>
@@ -45,7 +45,8 @@
         </mat-select>
         <div class="inline-flex"
              *ngIf="incomingForm.controls['customer'].invalid">
-          <div class="text-red-600 mt-1 text-sm" *ngIf="incomingForm.controls['customer'].hasError('required')">
+          <div class="text-red-600 mt-1 text-sm"
+               *ngIf="incomingForm.controls['customer'].hasError('required', 'customer')">
             Field is required
           </div>
         </div>
@@ -63,7 +64,7 @@
         </mat-select>
         <div class="inline-flex"
              *ngIf="incomingForm.controls['store'].invalid">
-          <div class="text-red-600 mt-1 text-sm" *ngIf="incomingForm.controls['store'].hasError('required')">
+          <div class="text-red-600 mt-1 text-sm" *ngIf="incomingForm.controls['store'].hasError('required', 'store')">
             Field is required
           </div>
         </div>
@@ -85,7 +86,8 @@
         </mat-select>
         <div class="inline-flex"
              *ngIf="incomingForm.controls['currency'].invalid">
-          <div class="text-red-600 mt-1 text-sm" *ngIf="incomingForm.controls['currency'].hasError('required')">
+          <div class="text-red-600 mt-1 text-sm"
+               *ngIf="incomingForm.controls['currency'].hasError('required', 'currency')">
             Field is required
           </div>
         </div>
@@ -141,9 +143,8 @@
     <th>Сумма</th>
     <th></th>
   </tr>
-  <!--      *ngFor="let product of productService.products"-->
-  <ng-container *ngFor="let product of documentService.products$()">
 
+  @for (product of documentService.products$(); track product.productId) {
     <tr class="grid grid-cols-7 mt-2 px-2 py-2 justify-between text-center border border-slate-500">
       <td>{{ product.code }}</td>
       <td>{{ product.article }}</td>
@@ -159,7 +160,7 @@
         </div>
       </td>
     </tr>
-  </ng-container>
+  }
 
   <tr class="grid grid-cols-7  mt-2 px-2 py-2 justify-between text-end border border-slate-500">
     <td class="col-span-5 text-end">Сумма:</td>

@@ -34,7 +34,7 @@ export class ViewIncomingComponent implements OnInit {
   }
 
   sum(products: IProductSelect[]): number {
-    return products.reduce((sum, curr) => sum += curr.priceIn * curr.qty, 0)
+    return products?.reduce((sum, curr) => sum += curr.priceIn * curr.qty, 0)
   }
 
   ngOnInit(): void {

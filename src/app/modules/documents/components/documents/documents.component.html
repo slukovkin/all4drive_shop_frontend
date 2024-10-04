@@ -16,7 +16,7 @@
       <div>Данных нет</div>
     }
 
-    @for (invoice of invoices; track invoice.date) {
+    @for (invoice of invoices; track invoice.id) {
       <tr stopPropagation
           (click)="viewInvoice(invoice)"
           class="grid grid-cols-6 mt-0.5 px-4 py-2 text-center

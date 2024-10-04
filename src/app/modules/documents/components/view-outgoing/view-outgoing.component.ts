@@ -34,11 +34,11 @@ export class ViewOutgoingComponent implements OnInit {
   }
 
   sum(products: IProductSelect[]): number {
-    return products?.reduce((_, curr) => curr.priceOut * curr.qty, 0)
+    return products?.reduce((sum, curr) => sum += curr.priceOut * curr.qty, 0)
   }
 
   sumIncoming(products: IProductSelect[]): number {
-    return products?.reduce((_, curr) => curr.priceIn * curr.qty, 0)
+    return products?.reduce((sum, curr) => sum += curr.priceIn * curr.qty, 0)
   }
 
   ngOnInit(): void {

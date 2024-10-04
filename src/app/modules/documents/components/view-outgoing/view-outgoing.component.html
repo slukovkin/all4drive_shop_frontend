@@ -10,7 +10,7 @@
       <th>Количество</th>
       <th>Цена</th>
     </tr>
-    @for (product of invoice?.products; track product.productId) {
+    @for (product of invoice?.products; track product.article) {
       <tr stopPropagation
           class="grid grid-cols-5 mt-0.5 px-4 py-2 text-center
         items-center cursor-pointer select-none border-b border-slate-500">
