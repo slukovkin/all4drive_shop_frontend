@@ -60,7 +60,7 @@ export class OutgoingInvoiceComponent {
 
     this.outgoingForm = new FormGroup({
       invoice: new FormControl(this.invoiceNumber ?? this.initNumber, [Validators.required]),
-      data_doc: new FormControl(this.data),
+      data_doc: new FormControl(''),
       firm: new FormControl(this.settingService.setting?.firmName, [Validators.required]),
       customer: new FormControl('', [Validators.required]),
       note: new FormControl(''),

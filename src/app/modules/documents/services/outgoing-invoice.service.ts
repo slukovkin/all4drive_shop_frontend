@@ -27,11 +27,13 @@ export class OutgoingInvoiceService {
   }
 
   getLastOutgoingInvoiceNumber() {
-    return this.http.get<string | null>(Constants.BASE_URL + Constants.METHODS.GET_LAST_OUTGOING_INVOICE_NUMBER)
+    return this.http.get(Constants.BASE_URL + Constants.METHODS.GET_LAST_OUTGOING_INVOICE_NUMBER, {
+      responseType: 'text',
+    })
       .pipe(
         catchError((err) => {
-          this.lastOutgoingInvoiceNumber = err.error.text
-          throw 'Не понятная ошибка при парсинге номера накладной'
+          this.handleError(err)
+          throw (`Error => ${err.message}`)
         }),
       ).subscribe(i => this.lastOutgoingInvoiceNumber = i)
   }
