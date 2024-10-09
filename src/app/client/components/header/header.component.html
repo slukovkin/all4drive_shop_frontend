@@ -2,31 +2,31 @@
   <a routerLink="" class="uppercase font-bold text-pink-800">All4drive</a>
   <div class="mx-1">
     <form (ngSubmit)="onSubmit()" [formGroup]="searchForm">
-      <div class="flex items-center">
+      <div class="lg:flex items-center">
         <input
           formControlName="search"
           type="text"
           class="input w-[200px] mr-2"
           placeholder="Поиск товара..."
         />
-        <span>
-          <button type="submit">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-              />
-            </svg>
-          </button>
-        </span>
+        <!--        <span>-->
+        <!--          <button type="submit">-->
+        <!--            <svg-->
+        <!--              xmlns="http://www.w3.org/2000/svg"-->
+        <!--              fill="none"-->
+        <!--              viewBox="0 0 24 24"-->
+        <!--              stroke-width="1.5"-->
+        <!--              stroke="currentColor"-->
+        <!--              class="size-5"-->
+        <!--            >-->
+        <!--              <path-->
+        <!--                stroke-linecap="round"-->
+        <!--                stroke-linejoin="round"-->
+        <!--                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"-->
+        <!--              />-->
+        <!--            </svg>-->
+        <!--          </button>-->
+        <!--        </span>-->
       </div>
     </form>
   </div>
@@ -37,7 +37,7 @@
     </div>
     <div class="flex flex-col">
       <span class="text-gray-800 font-semibold m-0 tracking-widest"
-        >+380679423431</span
+      >+380679423431</span
       >
       <span class="m-0 font-light">Интернет магазин</span>
     </div>
@@ -50,23 +50,24 @@
     <ul class="hidden lg:inline-flex items-center">
       <li>
         @if (authService.isAuth$()) {
-        <a class="header-btn cursor-pointer" (click)="authService.logout()"
+          <a class="header-btn cursor-pointer" (click)="authService.logout()"
           >Выход</a
-        >
+          >
         } @else {
-        <a class="header-btn cursor-pointer" routerLink="login">Войти</a>
+          <a class="header-btn cursor-pointer" routerLink="login">Войти</a>
         }
       </li>
       @if (!authService.isAuth$()) {
-      <li>
-        <a class="header-btn cursor-pointer" routerLink="registration"
+        <li>
+          <a class="header-btn cursor-pointer" routerLink="registration"
           >Регистрация</a
-        >
-      </li>
-      } @if (authService.isAuth$()) {
-      <li>
-        <a class="header-btn cursor-pointer" routerLink="order">Корзина</a>
-      </li>
+          >
+        </li>
+      }
+      @if (authService.isAuth$()) {
+        <li>
+          <a class="header-btn cursor-pointer" routerLink="order">Корзина</a>
+        </li>
       }
     </ul>
   </nav>
