@@ -3,9 +3,8 @@
     @for (item of items; track $index) {
       <li class="flex w-full my-1">
         <a
-          [routerLink]="item.routerLink"
-          class="btn w-full text-white text-lg text-center border border-white py-1 rounded-md"
-        >
+          (click)="onRoute(item.routerLink)"
+          class="btn w-full text-white text-lg text-center border border-white py-1 rounded-md">
           {{ item.label }}
         </a>
       </li>

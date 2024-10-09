@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
-import { RouterLink } from '@angular/router'
+import { Router, RouterLink } from '@angular/router'
+import { AppComponent } from '../../../app.component'
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,12 @@ import { RouterLink } from '@angular/router'
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
+
+  constructor(
+    private readonly router: Router,
+    private readonly app: AppComponent,
+  ) {
+  }
 
   items = [
     // {
@@ -83,4 +90,9 @@ export class SidebarComponent {
     },
 
   ]
+
+  onRoute(route: string) {
+    this.app.showSideBar()
+    this.router.navigate([route]).then()
+  }
 }

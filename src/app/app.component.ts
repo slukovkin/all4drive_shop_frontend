@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core'
-import { RouterOutlet } from '@angular/router'
+import { RouterLink, RouterOutlet } from '@angular/router'
 import { AuthService } from './modules/auth/service/auth.service'
 import { NgIf } from '@angular/common'
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
@@ -32,6 +32,7 @@ import { MatButton } from '@angular/material/button'
     PromotionComponent,
     ShopComponent,
     MatButton,
+    RouterLink,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
